@@ -1,0 +1,10 @@
+#ifndef COMPLEXE_H_INCLUDED
+#define COMPLEXE_H_INCLUDED
+
+class complexe {
+    public:
+    float re;
+    float im;
+};
+
+#endif
