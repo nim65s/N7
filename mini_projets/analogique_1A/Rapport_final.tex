@@ -270,8 +270,18 @@
    \multirow{2}*{Tension d'alimentation} & Positive & 12V & 0 & 12 & V & 12 & 12 & 12\\
    \cline{2-9} & Négative & -12V & -12 & 0 & V & -12 & -12 & -12\\
    \hline
-   Courant de collecteur & & & 0.1 & 10 & mA & OK & &\\
+   Courant de collecteur & & & 0.1 & 10 & mA & OK & & 12 mA (total)\\
    \hline
   \end{tabular}
+
+  \subsection{Remarque}
+   Notre fréquence de coupure haute correspond au cahier des charges juste parce qu'on a de la chance. S'il avait fallu l'augmenter, on aurait pu modifier la symétrie de l'amplificateur différentiel en augmentant la résistance sur le collecteur du transistor en entrée. Cette dissymétrie aurait eu très peu d'impact, et si on baisse cette résistance, on augmente la fréquence de coupure haute la plus basse de notre circuit ( cette dernière est en effet dûe à l'effet miller, donc augmenter la résistance augmente la constante de temps du passe-bas engendré par cet effet Miller).
+
+  \chapter{Photos}
+   \begin{center}
+    \includegraphics[width=\linewidth]{images/recto}
+
+    \includegraphics[width=\linewidth]{images/verso}
+   \end{center}
 
 \end{document}

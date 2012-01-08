@@ -9,9 +9,73 @@
 \usepackage{mathrsfs}
 \usepackage{multirow}
 \usepackage{url,hyperref}
+\usepackage{circuitikz}
 
 \begin{document}
 
 $(F(p))^* = F(p^*)$
+Hurwitz : coef réels à coefs dont la partie réele est positive
+Déphasage minimal : pas de zéro à partie réelle positive
+PR : p réel entraine F(p) réel et Re(p) >=0 entraine Re(F(p)) >=0
+PR => synthétisable par une immittance d'un dipole passif
+PR CNS : 
+1) F(p) est homorphe dans le demi plan droit strictement.
+2) Les pôles de F(p) sur l’axe imaginaire sont simples et les résidus de F(p) en ces pôles sont des réels positifs.
+3) Si l’infini est pôle, il est d’ordre 1 et le résidu correspondant est un réel positif :
+
+4) U(w) est positive ou nulle quelle que soit la valeur de w
+
+Forme : $H(p) = K_\infty p + \cfrac{K_0}{p} + \sum_i \cfrac{2 K_i p}{p^2+\omega_i^2}, K > 0$
+
+NON PR :
+1) Elle content des pôles ou des zéros de multiplicité supérieure à l’unité à l’infini ou sur l’axe imaginaire.
+2) Elle a des coefficients négatifs.
+
+
+III
+
+H(p) a nécessairment un pôle ou un zéro à l'origine et un pôle ou un zéro à l'infini
+Formes de Foster :
+\begin{circuitikz} \draw
+    (0,1) to[L=$A_\infty$] (3,1)
+          to[C=$\cfrac{1}{A_0}$] (5,1) -- (5,0)
+          to[C, l_=$\cfrac{1}{A_i}$] (7,0) -- (7,2)
+          to[L=$\cfrac{A_i}{\omega_i^2}$] (5,2) -- (5,1)
+          ;
+\end{circuitikz}
+\begin{circuitikz} \draw
+    (2,4) to[L=$\cfrac{1}{A_0}$] (2,0)
+    (4,4) to[C=$A_\infty$] (4,0)
+    (6,4) to[C=$\cfrac{A_i}{\omega_i^2}$] (6,2)
+          to[L=$\cfrac{1}{A_i}$] (6,0)
+    (0,0) -- (6,0)
+    (0,4) -- (6,4)
+    ;
+\end{circuitikz}
+
+Formes de Cauer : (première si pole à l'infini
+$Z(p) = L_1 p + \cfrac{1}{C_1 p + \cfrac{1}{L_2 p + \cfrac{1}{C_2 p + \cfrac{1}{\dots}}}}$
+\begin{circuitikz} \draw
+    (0,2) to[L=$L_1$] (2,2) to[C=$C_1$] (2,0)
+    (2,2) to[L=$L_i$] (4,2) to[C=$C_i$] (4,0) -- (0,0)
+    ;
+\end{circuitikz}
+
+% TODO 3p17
+
+$Z(p) = \cfrac{1}{L_1 p} + \cfrac{1}{\cfrac{1}{C_1 p} + \cfrac{1}{\cfrac{1}{L_2 p} + \cfrac{1}{\cfrac{1}{C_2 p }+ \cfrac{1}{\dots}}}}$
+\begin{circuitikz} \draw
+    (0,2) to[C=$C_1$] (2,2) to[L=$L_1$] (2,0)
+    (2,2) to[C=$C_i$] (4,2) to[L=$L_i$] (4,0) -- (0,0)
+    ;
+\end{circuitikz}
+
+HPLP : $\Omega = \cfrac{-\omega_c}{\omega}$
+BPLP : $\Omega = \cfrac{\omega}{\omega_2-\omega_1} +\cfrac{\omega_1 \omega_2}{p(\omega_2 - \omega_1)}$
+L : $ (l) L\Delta \omega / \omega_0^2 \parallel (c) 1/\Delta \omega$
+C : $ (l) 1/C \Delta \omega -- (c) C \Delta \omega / \omega_0^2$
+
+Butterworth : $g_r = 2 \sin ( \cfrac{2r-1}{2n} \pi )$
+Tchebycheff : $T_n(x) = cos(n arcos(x)) si |x| < 1 ou ch(n argch(x))$
 
 \end{document}

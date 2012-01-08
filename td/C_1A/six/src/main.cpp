@@ -165,6 +165,49 @@ int retrouverPersonne(personne & A){
     return retcode;
 }
 
+int ascendants(personne & pers){
+    cout << "---------ascendants----------" << endl;
+    personne * P[5][32];
+    P[0][0] = &pers;
+    if (P[0][0]->pere != NULL){
+        P[1][0] = P[0][0]->pere;
+        cout << "pere" << endl;
+        P[1][0]->show();
+        if (P[1][0]->pere !=NULL){
+            P[2][0] = P[1][0]->pere;
+            cout << "Grand père paternel" << endl;
+            P[2][0]->show();
+        }
+        if (P[1][0]->mere !=NULL){
+            P[2][1] = P[1][0]->mere;
+            cout << "Grand mère paternelle" << endl;
+            P[2][1]->show();
+        }
+    }
+    if (P[0][0]->mere != NULL){
+        P[1][1] = P[0][0]->mere;
+        cout << "mere" << endl;
+        P[1][1]->show();
+        if (P[1][1]->pere !=NULL){
+            P[2][2] = P[1][1]->pere;
+            cout << "Grand père maternel" << endl;
+            P[2][2]->show();
+        }
+        if (P[1][1]->mere !=NULL){
+            P[2][3] = P[1][1]->mere;
+            cout << "Grand mère maternelle" << endl;
+            P[2][3]->show();
+        }
+    }
+    return 0;
+}
+/*    for(int i=1;i<=ngene;i++){
+        pere
+*/
+
+
+
+
 int main(){
     personne * A = new personne;
     A->suivant = NULL;
@@ -270,6 +313,7 @@ int main(){
     ajpers(*A,*frerot);
 
     afficherArbre(*A);
+    ascendants(*moi);
 
     //afficherArbre(*A);
     //ajpersmanuel(*A);
