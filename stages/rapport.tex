@@ -1,0 +1,85 @@
+\documentclass[10pt]{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage{xunicode,xltxtra}
+\usepackage{graphicx}
+\usepackage{url,hyperref}
+\usepackage{soul}
+\setmainfont{DejaVu Sans}
+\title{\textbf{Rapport de stage de première année} \\~\\~\\ \includegraphics{inp-enseeiht} \\~\\~\\~\\~\\~\\Magenta Event \\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\}
+\author{Guilhem Saurel}
+\begin{document}
+ \setcounter{page}{0}
+ \maketitle
+ \thispagestyle{empty}
+ \newpage
+
+ \section*{La société}
+ Magenta Event est une jeune PME travaillant essentiellement dans l’impression numérique, moyen et grand format (\,jusqu’à 2m de large\,) sur supports souples et rigides (\,adhésifs, bâches, tissus, PVC…\,).
+
+~
+
+ La société propose également un studio graphique, un savoir-faire complémentaire (\,métallerie, sérigraphie,…\,), de la finition (\,lamination, plastification, soudure, couture,…\,) et de la pose.
+
+~
+
+ Elle emploie une dizaine de personnes à Stains (\,Seine Saint Denis\,), a moins de dix ans, et dépasse le million d’euros de chiffre d’affaire.
+
+~
+
+ Elle compte de nombreux et variés grands noms parmi ses clients, tels qu’Alstom, la BNF, le Bristol, le Louvre, Le château de Versailles, Channel, le Crédit du Nord, Dassault, Décathlon, Jivenchy, Kenzo, Lacoste, Lexmark, Nespresso, Orange, la RATP, la SNCF et le Stade de France.
+
+ \section*{Choix de ce stage}
+ J’ai choisi de travailler pour Magenta Event car j’y avais déjà effectué un job d’été (\,découpe, manutention, empaquetage,…\,), que tout s’était particulièrement bien passé, et que j’avais une bonne connaissance de cette entreprise, et donc de ses besoins.
+
+ \section*{Rôle}
+ Connaissant l’entreprise et ses besoins, j’ai proposé une candidature spontanée pour déployer un véritable réseau et un serveur informatique, afin de valider dans le milieu de l’entreprise les connaissances que j’ai acquises au club informatique de l’école (\,et bien sûr de rendre service à cette entreprise\,).
+
+  \subsection*{Réseau}
+  À mon arrivée, l’entreprise disposait déjà d’un réseau fonctionnel, mais particulièrement mal conçu, et je l’ai donc entièrement remplacé.
+
+  ~
+
+  J’ai ainsi tiré des câbles ethernet CAT 5e SSTP dans les murs et faux plafonds à la place des câbles CAT 4 courants au sol (\,et donc quasiment rompus à force de se faire marcher et rouler dessus\,) et remplacé les switchs 100M par des 1000M (\,pour un gain en débit non négligeable dans une entreprise manipulant constamment des images en très haute définition\,). J’ai également configuré un pare feu et un serveur DHCP pour différentes zones (\,les patrons ayant des permissions différentes des employés, et des machines sous windows devant pouvoir être accessibles depuis le réseau local mais ne devant surtout pas avoir accès à internet\,)
+
+  \subsection*{Serveur}
+  Le serveur de l’entreprise était initialement un simple FTP au bout d’une connexion SDSL, les employés utilisant une autre connexion ADSL.
+
+  \,
+
+  J’en ai fait un serveur plus élaboré sur les points suivants\,:
+  \begin{itemize}
+   \item Il fait office de passerelle entre le réseau interne et les box ADSL et SDSL : les débit et disponibilité de ces deux connections sont donc additionnés, ce qui est très intéressant dans la mesure où la connexion ADSL est rapide mais en bout de ligne, donc souffre de déconnexions très fréquentes, et où la connexion SDSL a un faible débit (\,même s’il est symétrique\,) mais une disponibilité proche de 1. On notera aussi le fait que la connexion SDSL dispose d’une IP fixe, contrairement à la connexion ADSL.
+   \item J’ai ajouté un serveur SSH, afin d’être en mesure de repérer voire corriger rapidement d’éventuels problèmes, même si je suis à Toulouse et le serveur à Stains.
+   \item La sécurité a été revue, avec notamment la configuration précise d’un parefeu et l’ajout de fail2ban pour éviter les attaques par bruteforce sur le SSH, le FTP et le MySQL (\,dont je parlerai plus tard\,).
+   \item Les données de l’entreprise sont sauvegardées à trois niveaux : d’abord sur un RAID0 (\,afin d’éviter les problèmes liés à une éventuelle panne au niveau d’un disque dur\,), ensuite via un rdiff-backup quotidien (\,afin d’avoir un historique en cas de mauvaise manipulation\,), et enfin ce rdiff-bakup est régulièrement sauvegardé sur des disques durs externes qui sont ensuite stockés chez les gérants (\,afin d’éviter de perdre les données en cas de problèmes majeurs sur le serveur, tels qu’un vol, un incendie, une inondation, du café,…\,).
+   \item Le serveur de fichiers a été entièrement revu, avec un couple SAMBA (\,pour un accès depuis les machines OSX et Windows sur le réseau local\,) / FTP(S) (\,pour l’accès distant\,). Les permissions sur le système de fichier et sur ces deux serveurs ont été logiquement synchronisées pour diffénts groupes d’utilisateurs, tels que les employés, les gérants, le comptable, les clients principaux, et enfin les autres clients. De plus, le serveur FTP a été couplé à une base de données MySQL afin de pouvoir modifier facilement et rapidement les comptes FTP des différents clients (\,uniquement pour les clients «\,importants\,», les autres pouvant se connecter sur un compte baptisé «\,clients\,»\,).
+   \item J’ai enfin dû mettre en place une interface web de supervision, afin de permettre aux gérants de contrôler et de visualiser l’état du serveur, notamment l’utilisation des disques, du FTP et du SAMBA, ainsi que de modifier les comptes FTP sur le MySQL et de déclencher la sauvegarde sur les disques externes.
+   \item Les gérants m’ont également demandé de mettre un serveur VPN, ce que j’ai fait, assez rapidement (\,vu qu’il ne s’agit pratiquement que d’installer le paquet openvpn-as\,).
+   \item Afin d’«\,accélérer\,» un peu le web, j’ai aussi installé SQUID, un proxy transparent servant de cache HTTP, et un serveur DNS faisant aussi du cache DNS.
+  \end{itemize}
+
+  Outre ce réseau et ce serveur, j’ai bien entendu passé une grosse partie de mon temps à réparer les différents ordinateurs de tout le monde (\,y compris de certains clients / partenaires de la société\,), à modifier les configurations réseau des différents ordinateurs de l’entreprise pour prendre en compte certains de mes changements, et à chercher les bugs dans les clients mails des gérants (\,ceux-ci ayants quelques problèmes avec le serveur SMTP associé au MX de magentaevent.fr, qui est géré par une société externe assez peu compétente\,).
+
+ \section*{Conclusion}
+
+ Ce stage m’a, comme prévu, permis de valider mes connaissances en grandeur réelle, et il m’a aussi permis de mettre un vrai pied dans le monde de l’entreprise. 
+ 
+ \,
+
+ Le plus difficile a été de travailler autant en profondeur sur un serveur en production. Autrement dit, je modifiais un outil que tous les employés étaient en train d’utiliser… L’erreur n’était donc pas envisageable.
+
+\,
+ 
+ Mon optimisme sur le temps que me prendrait ces installations et moi-même avons également été plutôt déçus de ma vitesse pour faire marcher le tout. Mais c’est un bon repère pour l’avenir.
+
+\,
+
+ Enfin, ce stage m’a permis de mettre le doigt sur une réelle demande de certaines entreprises à ce sujet, et on m’a encouragé à créer une auto-entreprise pour répondre à ce besoin. Et en effet, je me suis fait contacter par la suite par plusieurs PME différentes, plus ou moins associées à Magenta Event, pour des demandes assez variées (\,sites webs, réseau, serveurs de fichiers/FTP, sauvegarde, automatisation de certaines tâches,…\,).
+
+
+
+\end{document}
+
