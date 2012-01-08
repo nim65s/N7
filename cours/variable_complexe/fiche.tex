@@ -1,0 +1,37 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fontenc}
+\usepackage[french]{babel}
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{schemabloc}
+
+\title{Théorie des circuits}
+\date{\today}
+\author{Guilhem Saurel}
+
+\begin{document}
+%\maketitle
+
+$\mathcal{L}(f(t)) = \int \limits_{\mathbb{R}+} { f(t) e^{-pt} dt}$
+
+$\mathcal{L}^{-1}(F(p)) = \cfrac{1}{2i\pi} \lim \limits_{R \to \infty} \int \limits_{u-iR}^{u+iR} {F(p)e^{pt}dp}$
+
+Fonction holomorphe : $\exists f'(z) = \lim \limits_{\Delta z \to 0} \cfrac { f(z+ \Delta ) - f(z)}{\Delta z}$
+
+CNS : Cauchy Riemann : $f \in H(\mathbb{C}) \Leftrightarrow f(z) = f(x+iy) = u(x,y) +iv(x,y)$ ; $\cfrac{\partial u}{\partial x} = \cfrac{\partial v}{\partial y}$ \& $\cfrac{\partial u}{\partial y} = - \cfrac{\partial v}{\partial x}$ 
+
+$f \in H(\mathbb{C}) \Rightarrow $ u et v sont harmoniques : $\Delta u = \Delta v = 0$ , $\Delta = \cfrac{\partial}{\partial x^2} + \cfrac{\partial}{\partial y^2}$
+
+$\forall (a,z) \in D^2$ simplement connexe, $\int \limits_a^z f(z) dz$ est indépendante du chemin $\Leftrightarrow f \in H(\mathbb{C})$
+
+$G(z) = \int \limits_a^z f(z) dz \in H(\mathbb{C}) \Rightarrow G'(z) = f(z)$
+
+\includegraphics[width=18cm]{iv.png}
+
+\end{document}

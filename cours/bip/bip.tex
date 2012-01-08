@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\title{Le Transistor Bipolaire}
+\author{Guilhem Saurel}
+\date{3 janvier 2011}
+
+\begin{document}
+
+$$L_{p} = \sqrt{D_{p}\tau_{p}}$$
+$$\frac{D_{p}}{\mu_{p}} = \frac{kT}{q} = U_{T}$$
+$$\rho = \frac{1}{q(\bar{n}\mu_{n}+\bar{p}\mu_{p})}$$
+$$D=\mu U_{T}$$
+$$\delta=\sqrt{\frac{2\varepsilon}{qN^{*}}\left(\phi_{NP}-V\right)}$$
+$$\phi_{NP} = U_{T}\ln\left(\frac{N_{A}N_{D}}{n_{i}^{2}}\right)$$
+$$I=I_{s}\left(e^{\frac{V}{U_{T}}}-1\right)$$
+Direct : 
+$$r_{d}=\frac{U_{T}}{I}$$
+$$C_{d} = \frac{IW_{n}^{2}}{2D_{p}U{T}}$$
+$$\tau = C_{d}r_{d} = \frac{W_{n}^{2}}{2D_{p}}$$
+Inverse : 
+$$C_{T} = \frac{\varepsilon A_{j}}{\delta}$$
+$$\alpha_{N}=\gamma_{E}\alpha^{*}=\left(1-\varepsilon_{1}\right)\left(1-\varepsilon_{2}\right)\cong 1-\varepsilon_{1}-\varepsilon_{2}$$
+$$\alpha_{I}=\gamma_{C}\alpha^{*}$$
+$$\gamma_{C} = \cfrac{1}{1+\cfrac{D_{NC}N_{D}W_{B}}{D_{PB}N_{AC}W_{C}}}$$
+$$I_{sn}=\frac{Aqn_{i}^{2}D_{n}}{N_{B}W_{B}}$$
+
+$$
+\begin{matrix}
+&NPN&PNP&def\\
+\gamma_{E}&\cfrac{I_{E_{N}}}{I_{E}}=\cfrac{1}{1+\cfrac{I_{S_{P}}}{I_{S_{N}}}}&\cfrac{I_{E_{P}}}{I_{E}}&\text{rendement d'injection de l'émetteur}\\
+&1-\cfrac{D_{P_{E}}N_{A_{B}}L_{N_{B}}\tanh\cfrac{W_{P_{B}}}{L_{N_{B}}}}{D_{N_{B}}N_{D_{E}}L_{P_{E}}\tanh\cfrac{W_{N_{E}}}{L_{P_{E}}}}&1-\cfrac{D_{N_{E}}N_{D_{B}}L_{P_{B}}\tanh\cfrac{W_{B}}{L_{P_{B}}}}{D_{P_{B}}N_{A_{E}}L_{N_{E}}\tanh\cfrac{W_{E}}{L_{N_{E}}}}&\\
+\gamma_{C}&1-\cfrac{D_{P_{C}}N_{A_{B}}L_{N_{B}}\tanh\cfrac{W_{P_{B}}}{L_{N_{B}}}}{D_{N_{B}}N_{D_{C}}L_{P_{C}}\tanh\cfrac{W_{N_{C}}}{L_{P_{C}}}}&1-\cfrac{D_{N_{C}}N_{D_{B}}L_{P_{B}}\tanh\cfrac{W_{B}}{L_{P_{B}}}}{D_{P_{B}}N_{A_{C}}L_{N_{C}}\tanh\cfrac{W_{C}}{L_{N_{C}}}}&\\
+\alpha^{*}&1-\cfrac{W_{B}^{2}}{2L_{N}^{2}}&1-\cfrac{W_{B}^{2}}{2L_{N}^{2}}&\text{facteur de transport de la base}\\
+\end{matrix}
+$$
+
+$$r_{b}=\cfrac{dV_{BE}}{dI_{B}}$$
+$$i_{C}=\beta_{N}i_{B}=\beta_{N}\cfrac{v_{B}}{r_{b}}=g_{m}v_{b}$$
+Capacité de diffusion EB : $$C_{b}=\cfrac{I_{E}}{U_{T}}\cfrac{W^{2}}{2D}$$
+Capacité de jonction CB : $$C_{c}=\cfrac{A_{c}}{\delta}$$
+$$\delta=\sqrt{\cfrac{2\varepsilon}{qN^{*}}\left(\bar\phi_{CB}-V_{CB}\right)}$$
+Résistance d'accès à la base : $$R_{BB'}=\frac{Y}{3\sigma WZ}$$
+Facteur de réaction d'Early : $$\mu=\cfrac{\partial V_{BE}}{\partial V_{CB}}$$
+\end{document}

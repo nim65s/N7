@@ -1,0 +1,93 @@
+\documentclass[11pt;a4paper]{article}
+\usepackage[free-standing-units]{siunitx}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{multirow}
+\usepackage{url,hyperref}
+\usepackage{schemabloc}
+
+\begin{document}
+
+\begin{tabular}{ll}
+
+$Z_C = \sqrt{\cfrac{R+jL\omega}{G+jC\omega}}$ & $\gamma = \alpha + j \beta = \sqrt{(R+jL\omega)(G+jC\omega)}$ \\
+
+$Z_C \gamma = R+jL\omega$ & $\cfrac{\gamma}{Z_C} = G+jC\omega$\\
+
+$V(z) = V^+e^{-\gamma z} + V^-e^{+\gamma z}$ & $I(z) = \cfrac{V^+e^{-\gamma z}}{Z_C} - \cfrac{V^-e^{+\gamma z}}{Z_C}$\\
+
+$Z_A = Z_C\cfrac{Z_B+Z_C \tanh{\gamma L}}{Z_C+Z_B \tanh{\gamma L}}$ & $\beta \lambda = 2 \pi$\\
+
+$f = v_\varphi \lambda$ & $\Gamma(z)=\cfrac{V^-e^{+\gamma z}}{V^+e^{-\gamma z}} = \cfrac{V^-}{V^+}e^{+2\gamma z} = \Gamma(0) e^{+2\gamma z}$\\
+
+$\Gamma_u=\cfrac{Z_u-Z_C}{Z_u+Z_C}=\cfrac{z_u-1}{z_u+1}$ & $Z_u = Z_C \cfrac{1+\Gamma_u}{1-\Gamma_u}$\\
+
+Heaviside : $\cfrac RL=\cfrac GC \Rightarrow Im(Z_C) = 0$ & Faibles pertes : $\alpha = \cfrac R{2 Z_C} + \cfrac G{2Y_C}$\\
+
+$\beta=\omega \sqrt{LC}$ & $Z_C=\sqrt{\cfrac LC}$\\
+
+Sans pertes : $Z_C=\sqrt{\cfrac LC} = \cfrac 1{Cv_\varphi}$ & $\gamma=j\beta$ \\
+
+$v_\varphi=\cfrac\omega\beta=\cfrac 1{\sqrt{LC}}=\cfrac c n$ & $\Gamma_A=\Gamma_Be^{-2j\beta d} $\\
+
+$\beta d = \cfrac \pi 2$ & $V(z) =Z_CI(z)= V^+e^{-j\beta z}(1+\Gamma(z))$\\
+
+$ROS=\cfrac{V(z)_{max}}{V(z)_{min}}=\cfrac{1+| \Gamma|}{1-|\Gamma|}$ & $|\Gamma|=\cfrac{ROS-1}{ROS+1}$\\
+
+$Z_A=Z_C\cfrac{Z_B+jZ_C\tan{\beta L}}{Z_C+jZ_B\tan{\beta L}}$ & court-circuit : $Z_A = jZ_C\tan{\beta d}$\\
+
+$\Gamma_{cc}=-1$ & quart d'onde : $Z_A=\cfrac{{Z_C}^2}{Z_B} z_a=\cfrac{1}{z_B}$
+
+\end{tabular}
+
+
+\begin{circuitikz} \draw
+ (0,0) -- (4,0) to[R] (4,2) -- (2,2)
+ (2,0) to[C] (2,2) to[L] (0,2);
+\end{circuitikz}
+$n=\sqrt{\varepsilon_r}$
+
+\begin{tabular}{|c|c|c|}
+\hline
+ $R_L > Z_C$ & $\omega C = \sqrt{\cfrac{R_L-Z_C}{Z_CR_L^2}}$ & $\omega L = \sqrt{Z_C(R_L-Z_C)}$ \\
+ \hline
+ $R_L < Z_C$ & $\omega C = \sqrt{\cfrac{Z_C-R_L}{Z_C^2R_L}}$ & $\omega L = \sqrt{R_L(Z_C-R_L)}$ \\
+ \hline
+\end{tabular}
+$
+\begin{vmatrix}
+ b_1 \\ b_2
+\end{vmatrix}
+=
+\begin{vmatrix}
+ S_{11} & S_{12} \\ S_{21} & S_{22}
+\end{vmatrix}
+\times
+\begin{vmatrix}
+ a_1 \\ a_2
+\end{vmatrix}$
+\textcolor{blue}{$S_{11} = \left. \cfrac{b_1}{a_1}\right |_{a_2=0}$}
+\textcolor{red}{$S_{21} = \left. \cfrac{b_2}{a_1}\right |_{a_2=0}$}
+\begin{tabular}{|c|c|}
+\hline
+ $V_1=V_1^+ + V_1^-$ &$V_1=V_2^+ + V_2^-$ \\
+ \hline
+ $I_1 = I_1^+ - I_1^- = \cfrac{V_1^+}{Z_{C1}} -\cfrac{V_1^+}{Z_{C1}}{Z_{C1}}$ &  $I_2 = I_2^+ - I_2^- = \cfrac{V_2^+}{Z_{C2}} -\cfrac{V_2^+}{Z_{C2}}$ \\
+ \hline
+ $a_1 = \cfrac {V_1^+}{ \sqrt{Z_{C1}}} = \sqrt{Z_{C1}}{I_1}^+ =\cfrac{V_1+Z_{C1}I_1}{2\sqrt{Z_{C1}}} $& $a_2 = \cfrac {{V_2}^+}{ \sqrt{Z_{C2}}} = \sqrt{Z_{C2}}{I_2}^+=\cfrac{V_2+Z_{C2}I_2}{2\sqrt{Z_{C2}}}$ \\
+ \hline
+ $b_1 = \cfrac {V_1^-}{ \sqrt{Z_{C1}}} = \sqrt{Z_{C1}}{I_1}^-=\cfrac{V_1-Z_{C1}I_1}{2\sqrt{Z_{C1}}}$ & $b_2 = \cfrac {{V_2}^-}{ \sqrt{Z_{C2}}} = \sqrt{Z_{C2}}{I_2}^+=\cfrac{V_2-Z_{C2}I_2}{2\sqrt{Z_{C2}}}$ \\
+ \hline
+\end{tabular}
+\begin{tabular}{c}
+DL:$\sqrt{\cfrac{1+u}{1-u'}}=\sqrt{(1+u)(1-u')}$ \\ $\approx\sqrt{1+u-u'}\approx1+\cfrac{u-u'}{2}$
+\end{tabular}
+\end{document}

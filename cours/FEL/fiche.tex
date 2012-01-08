@@ -1,0 +1,47 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fontenc}
+\usepackage[french]{babel}
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{schemabloc}
+
+\title{Fonctions de l'électronique}
+\date{\today}
+\author{Guilhem Saurel}
+
+\begin{document}
+%\maketitle
+
+Compenser un système bouclé consiste essentiellement à se ramener à un système du 1\textsuperscript{er} ordre avec une marge de phase minimale de 45\degres pour un bon rapport signal à bruit. Critères de compensation d'un amplificateur opéraionnel en boucle fermée : 
+\begin{itemize}
+    \item bande passante nécessaire en boucle fermée ($f_{CHF}$)
+    \item temps de montée en petits signaux ($t_r f_{CHF} = 0.35$)
+    \item amortissement du circuit (1\textsuperscript{er} ordre pour empêcher les oscillations)
+    \item niveau de bruit toléré en sortie (marge de phase $\geq$ 45\degres)
+    \item amplitude crête maximale du signal à treansmettre (slew rate)
+\end{itemize}
+
+Un AO bouclé est d'autant plus sujet à l'instabilité (oscillations) que l'on cherche un gain de plateau en boucle fermée $G_0$ petit.
+
+Le pôle dominant $f_1$ est obtenu via la capacité intégrée C dans l'AO. Il permet, quand il est suffisamment éloigné des autres pôles $f_2$, $f_3$ ... liés à la technologie (effet Miller), de compenser inconditionnellement ($G_0 \geq 1$) ou partiellement le système bouclé. $f_1 \ll f_2, f_3$.
+
+Si l'AO n'est pas inconditionnellement stable, un accès est prévu dans le boîtier pour venir connecter une capacité extérieure $C_0$ en parallèle sur C. Le pôle $f_1$ devient alors $f_1^\prime$. Ceci permet de rendre l'AO inconditionnellment stable ou d'optimiser la condition de stabilité pour un gain en boucle fermée minimum $G_{0_{min}}$ dépendant du cahier des charges de l'application : $Ad_0 f_1^\prime = G_{0_{min}} f_{CHF_{Max}}$, avec $f_{CHF_{Max}} = f_2$, et $Ad_0$ gain de plateau en boucle ouverte. Par ailleurs, $Ad_0 f_1^\prime = G_0 f_{CHF}$ avec $f_{CHF} < f_2$ quand $G_0^\prime > G_{0_{min}}$.
+
+Améliorer la stabilité d'un système bouclé par compensation entraîne une diminution de la bande passante en boucle ouverte et une augmentation du temps de montée du système en boucle fermée. Il faut donc trouver un compromis.
+
+Pour réduire cette diminution de bande passante, il est préférable d'ajouter une résistance externe r en série avec la capacité $C_0$. Le pôle $f_1$ devient alors $f_1^\ast$ tel que : $Ad_0 f_1^\ast = G_{0_{min}} f_{CHF_{Max}}$ avec $f_{CHF_{Max}} = f_3$. Rem $f_1^\prime < f_1^\ast < f_1$.
+
+Propriétés : 
+\begin{itemize}
+    \item produit gain bande passante constant au premier ordre
+    \item à l'ordre n : $\left|A_d\left(jf_n\right)\right|f_n^n = f_T^n$
+    \item produit facteur d'amortissement pulsation propre constant au 2\textsuperscript{ième} ordre
+\end{itemize}
+
+\end{document}

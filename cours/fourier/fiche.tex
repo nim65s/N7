@@ -1,0 +1,77 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fontenc}
+\usepackage[french]{babel}
+\usepackage[top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{schemabloc}
+\usepackage[european resistors]{circuitikz}
+\usepackage{array}
+\usepackage{multicol}
+%\usepackage{auto-pst-pdf}
+%\usepackage[usenames,dvipsnames]{pstricks}
+%\usepackage{pstricks}
+%\usepackage{epsfig}
+%\usepackage{pst-grad}
+%\usepackage{pst-plot}
+\usepackage{marvosym}
+
+\title{Fourier}
+\date{\today}
+\author{Guilhem Saurel}
+
+\newcolumntype{M}{>{\centering\arraybackslash} m{3.5cm} }
+\newcolumntype{N}{>{\centering\arraybackslash} m{2cm} }
+\newcolumntype{I}{>{\centering\arraybackslash} m{1.5cm} }
+
+\begin{document}
+\maketitle
+\begin{multicols}{2}
+
+Convergence monotone ou Beppo-Levi : Soit $f_n$ positive croissante et mesurable à valeurs dans E, Alors si $f(x)=\lim \limits_{n\to\infty} f_n(x)$ mesurable et positive sur E On a $\lim \limits_{n\to\infty} \int\limits_E f d\lambda = \lim\limits_{n\to\infty}f_n$
+
+$L^p(I)$ : puissance p\textsuperscript{ième} intégrable sur I
+
+Convergence dominée : $(X,T,\mu)$ espace mesuré, $(f_n)$ une suite de fonctions mesurables et CV vers f pp $\exists g \in L, |f_n(x)| \leq g(x)$ pp en x \textcircled{1} $f\in L^1$ \textcircled{2} $\lim \limits_{n\to\infty} \int \limits_E f_n (x)dx = \int \limits_E \lim \limits_{n\to\infty} f_n(x)dx = \int \limits_E f(x)dx \forall E \in T$
+
+$t \rightarrow f(t,x) \in C^1$ ppx au V de $t_0 \in ]a,b[$ si $\exists g\in L^1$ et un V de $t_0$ tq $\forall t \in V, |f(t,x)| \leq g(x)$ pp alors $I(t) = \int \limits_{X \in \mathbb{R}} f(t,x) dx$ continue en $t_0$
+
+V voisinage de $t_0$ dans $]a,b[$, si \textcircled{1} $t \rightarrow f(t,x) \in C^1$ ppx \textcircled{2} $\exists g \in L^1, \forall t \in V, \left|\cfrac{\partial f}{\partial t} \right| \leq g$ Alors I dérivable et $I^\prime(t_0) = \int \limits_X \cfrac{\partial f}{\partial t} (t,x) dx$
+
+Th de Fubini \textcircled{1} $f > 0 \Rightarrow \iint \limits_{E\times F} f(x,y)dxdy = \int\limits_E\int\limits_Ff(x,y)dxdy=\int\limits_F\int\limits_Ef(x,y)dydx$ \textcircled{2} f intégrable sur $E\times F \Rightarrow x\rightarrow f(x,y)$ int ppy \& $y \rightarrow f(x,y)$ int ppx \textcircled{3} $f\in L^1(\mathbb{R}) \Leftrightarrow \int\limits_E\int\limits_F|f|dxdy < \infty$
+
+$y\rightarrow f(y)$ intégrable sur $\Delta$\&$x\rightarrow f(\Phi(x))|J(x)|$ intégrable sur $\Omega \Rightarrow \int\limits_\Delta f(y)d\lambda_n(y)=\int\limits_\Omega f(\Phi(x))|J(x)|d\lambda_n(x)$
+
+$\|f\|_{L_p}=\|f\|_p = \left(\int\limits_I|f|^pd\lambda_n\right)^{\frac{1}{p}}$
+
+Tr de Fourier : $X(f) = \widehat{x}(f) = \int \limits_\mathbb{R} x(t) e^{-2i\pi ft} dt$;$X^{(k)}(f) = \widehat{(-2i\pi t)^k x(t)}(f)$;$\widehat{x^{(k)}}(f) = (2i\pi f)^k X(f)$
+
+Th de dérivation : $X(f) = -2i\pi\int\limits_\mathbb{R}te^{-at^2}e^{-2i\pi ft}dt \Rightarrow X^\prime(f)=-2i\pi\left(\left[\cfrac{-e^{-at^2}}{2a}e^{-2i\pi ft}\right]^\infty_{-\infty} - \cfrac{2i\pi f}{2a} \int\limits^\infty_{-\infty} e^{-at^2}e^{-2i\pi ft}dt\right) = -\cfrac{2\pi^2f}{a} X(f)$
+
+$x\in L^2(\mathbb{R}) \& (x,x^\prime,x^{\prime\prime})\in(L^1(\mathbb{R}))^3 \Rightarrow \Hat{x}\in L^1(\mathbb{R}) \& x = \Check{\Hat{x}}$
+
+$L^2(\mathbb{R})$ fonctions à energie finie:$\|f\|^2_{L_2}=\|\Hat{f}\|^2_{L_2}$
+
+Parseval-Plancherel:$\int\limits_\mathbb{R}f(x)\overline{g(x)}dx=\int\limits_\mathbb{R}\widehat{f(t)}\overline{\widehat{g(t)}}dt \forall(f,g)\in L^2$
+
+$\widehat{x\ast y}(f) = \Hat{x}(f)\Hat{y}(f);\Hat{x}\Hat{y}\in L^1 \Rightarrow \Hat{x}\ast\Hat{y}=\widehat{xy};(x\ast y)^{(k)} = x\ast y^{(k)}$
+
+Distribution:$T\in D^1(\Omega)$: T est une application linéaire continue sur $D(\Omega)$ où $D(\Omega) \in C^\infty$ à support compact (ie $\varphi\in D(\Omega)\Rightarrow\varphi(\infty)=0$). Si $f\in L^1_{loc}$, on peut définir $Tf\in D^1(\Omega)$ associé. $\forall\varphi\in D(\Omega), Tf(\varphi) = \int\limits_\Omega f(x)\varphi(x)dx$;$f=g$pp$\Rightarrow Tf=Tg$
+
+Dérivée d'une distribution : $\left\langle T^{(n)},\varphi\right\rangle=(-1)^n\left\langle T,\varphi^{(n)}\right\rangle$. Rmq : si T définie à partie de f, $Tf^\prime = (Tf)^\prime$
+
+$C^m_n=\cfrac{n!}{m!(n-m)!}$
+
+TF dans S de T $\subset S^\prime{\mathbb{R}}$ : $\left\langle\hat{T},\varphi\right\rangle=\left\langle T,\Hat{\varphi}\right\rangle \Leftrightarrow \int u\Hat{\varphi} = \int\Hat{u}\varphi$
+
+
+
+
+\end{multicols}
+
+\end{document}
