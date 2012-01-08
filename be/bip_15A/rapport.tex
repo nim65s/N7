@@ -1,0 +1,298 @@
+\documentclass[10pt]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{url,hyperref}
+\usepackage{siunitx}
+\usepackage{schemabloc}
+\usepackage{listings}
+\usepackage{auto-pst-pdf}
+\usepackage{pst-circ}
+\usepackage{soul}
+\usepackage{verbatim}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{xunicode,xltxtra}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{minted}
+\usepackage{multicol}
+\title{\includegraphics{inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ BE Transistors }
+\author{Ken Hasselmann, Guilhem Saurel}
+\date{\today}
+\begin{document}
+
+ \begin{titlepage}
+  \maketitle
+  \tableofcontents
+ \end{titlepage}
+
+ \section{Première Partie}
+  \ul{NB} : Les applications numériques indiquées dans ce document ne sont pas toujours données avec les bons chiffres significatifs, mais nous utilisons scilab pour tous les calculs, donc il garde toutes les décimales nécessaires en mémoire, nous nous permettrons donc de faire quelques approximations
+
+  \subsection{Faire une coupe technologique de ce transistor en tenant compte des paramètres précédents. Déterminer sans tenir compte des zones de charge d’espace $\beta_N$, $\beta_I$ et $I_S^\ast$ ainsi que la résistance série collecteur. En déduire le schéma électrique du transistor.}
+
+   \begin{center}
+    \begin{tikzpicture}
+     \draw (0,0)--(0,9)--(7,9)--(7,0);
+     \draw (0,2)--(7,2);
+     \draw (0,7)--(7,7);
+     \draw (4.8,9)--(4.8,8)--(7,8);
+     \draw[<->] (4.8,9.3)--(7,9.3) node[anchor=west] {$\sqrt{500} \mu m$};
+     \draw[<->] (7,6.7)--(0,6.7) node[anchor=east] {$\sqrt{5000} \mu m$};
+     \draw[<->] (7.3,9)--(7.3,8) node[pos=0.5,right] {$1 \mu m$};
+     \draw[<->] (7.3,8)--(7.3,7) node[pos=0.5,right] {$1 \mu m$};
+     \draw[<->] (7.3,7)--(7.3,2) node[pos=0.5,right] {$5 \mu m$};
+     \node at (6.5,8.5) {N+};
+     \node at (0.5,8.5) {P};
+     \node at (0.5,6.2) {N};
+     \node at (0.5,1.5) {N++};
+    \end{tikzpicture}
+
+    \begin{tabular}{|c|c|c|c|c|}
+     \hline
+      grandeur     & unité        & E (n)            & B (p)               & C (n)\\
+     \hline                                                                
+      $N$          &$(cm^{-3})$   & $2\cdot 10^{18}$ & $3\cdot 10^{61}$    & $9\cdot 10^{14}$ \\
+     \hline                                                                
+      $X$          & $(\mu m)$    & 1                & 1                   & 5 \\
+     \hline                                                                
+      $\mu_{min}$  & $(cm^2/V/s)$ & 125              & 1000                & 560 \\
+     \hline                                                                
+      $\mu_{MAJ}$  & $(cm^2/V/s)$ & 200              & 380                 & 1360 \\
+     \hline                                                                
+      $D_{min}$    & $(cm²/s)$    & 3.25             & 26                  & 14.6 \\
+     \hline        
+      $\tau_{min}$ & $(s)$        & $5\cdot 10^{-9}$ & $3.33\cdot 10^{-7}$ & $1.11\cdot 10^{-5}$\\
+     \hline        
+      $L_{min}$    & $(\mu m)$    & 1.27             & 29.4                & 127 \\
+     \hline                                                                
+      $X/L$        &              & 0.7              & 0.03                & 0.007 \\
+     \hline                                                                
+                   &              & normale          & courte              & courte\\
+     \hline
+    \end{tabular}
+   \end{center}
+   
+   $\gamma_E = 1 - \cfrac{D_P N_A L_n \tanh\cfrac{X_P}{L_n}}{D_N N_D L_p \tanh\cfrac{X_N}{L_p}} = 1 - \cfrac{D_P N_A X_P}{D_N N_D L_p \tanh\cfrac{X_N}{L_p}} \simeq 0.998$
+
+   $\alpha^\ast = 1 - \cfrac{X_B^2}{2 L_n^2} \simeq 0.999$
+
+   $\alpha_n = \gamma_E \cdot \alpha^\ast \simeq 0.997$
+
+   $\beta_n = \cfrac{\alpha_n}{1-\alpha_n} = 354$
+
+   $\gamma_C = \cfrac{1}{1 + \cfrac{D_{PC} N_{AB} X_B}{D_{NB} N_{DC} X_C}} \simeq 0.21$
+
+   $\beta_I = \cfrac{\gamma_C}{1-\gamma_C} \simeq 0.27$
+
+   $I_S^\ast = \alpha_n I_{ES} \simeq I_{ES} = q A_E n_i^2 \cfrac{D_N}{N_B X_B} = 1.77\cdot 10^{-15} A$
+
+   $R_{sc} = \rho\cfrac{L}{S} = \cfrac{1}{q \mu_{EC} N_C}\cfrac{W_C}{A_C} = 124\Omega$
+
+   On en déduit le schéma électrique du transistor :
+ 
+  \begin{center}
+   \begin{circuitikz} \draw
+     (-1,2) node[anchor=east] {B}
+      to[short, o-] (0,2)
+      to[empty diode,color=red] (2,2) -- (6,2) 
+      to[R=$R_{sc}$] (8,2)
+      to[short, -o] (8,2) node[anchor=west, -o] {C}
+     (0,2) to[empty diode,color=green] (0,0) -- (6,0) 
+      to[controlled current source,i_=$I_B$,color=red] (6,2)
+     (4,2) to[controlled current source,i^=$I_C$,color=green] (4,0)
+     (3,0) to[short, -o] (3,-0.5) node[anchor=north] {E}
+    ;
+   \end{circuitikz}
+  \end{center}
+
+  \subsection{On polarise le transistor : $V_{CE}=8V$, $V_{BE}=0.68V$. Quel est le type de fonctionnement de ce transistor. En déduire son schéma équivalent. Calculer les paramètres électriques nécessaires en tenant compte de la polarisation. Comparer ces paramètres à la question 1. Conclusion}
+
+   Ce transistor est en fonctionnement normal, vu que la jonction Émetteur/Base est polarisée en direct et que la jonction Base/Collecteur est polarisée en inverse. On ne garde donc que la partie verte du schéma précédent.
+
+   \begin{center}
+    \begin{circuitikz} \draw
+      (-1,2) node[anchor=east] {B}
+       to[short, o-] (0,2)
+      (4,2) -- (6,2) 
+       to[R=$R_{sc}$] (8,2)
+       to[short, -o] (8,2) node[anchor=west, -o] {C}
+      (0,2) to[empty diode,color=green] (0,0)
+      (4,2) to[controlled current source,i^=$I_C$,color=green] (4,0) -- (0,0)
+      (3,0) to[short, -o] (3,-0.5) node[anchor=north] {E}
+     ;
+    \end{circuitikz}
+   \end{center}
+
+   $\Phi_{EB} = U_T \ln\cfrac{N_E N_B}{n_i^2}$
+
+   $\Phi_{BC} = U_T \ln\cfrac{N_B N_C}{n_i^2}$
+
+   On part de l'hypothèse que la zone de charge d'espace de la jonction EB se situe entièrement dans la base.
+
+   $\delta_{EB} = \sqrt{\cfrac{2\varepsilon}{qN_{EB}^\ast}\left(\Phi_{EB}-V_{BE}\right)}$, avec $N_{EB}^\ast \simeq N_B$
+
+   Par contre, on ne peut pas faire cette hypothèse d'entrée pour la jonction BC, d'où 
+
+   $\delta_{BC} = \delta_{BC_B} + \delta_{BC_C} = \sqrt{\cfrac{2\varepsilon}{qN_{BC}^\ast}\left(\Phi_{BC}+V_{CB}\right)}$, avec $N_{BC}^\ast \simeq N_C$ et $\delta_{BC_B} N_B = \delta_{BC_C} N_C$.
+
+   Applications numériques :
+
+   $\delta_{EB} = 8.73\cdot 10^{-2} \mu m$
+
+   $\delta_{BC_B} = 9.84\cdot 10^{-2} \mu m$
+
+   $\delta_{BC_C} = 3.28 \mu m$
+
+   Maintenant, on peut trouver $W_B=X_B-\delta_{EB}-\delta_{BC_B} = 0.81\mu m$ et $W_C = X_B -\delta_{BC_C} = 1.7\mu m$, et on a toujours $W_E = X_E$. On peut donc remplacer tous les $X$ de la question précédente par ces $W$ :
+
+   $\gamma_E = 1 - \cfrac{D_P N_A L_n \tanh\cfrac{W_P}{L_n}}{D_N N_D L_p \tanh\cfrac{W_N}{L_p}} = 1 - \cfrac{D_P N_A W_P}{D_N N_D L_p \tanh\cfrac{W_N}{L_p}} \simeq 0.998$
+
+   $\alpha^\ast = 1 - \cfrac{W_B^2}{2 L_n^2} \simeq 1$
+
+   $\alpha_n = \gamma_E \cdot \alpha^\ast \simeq 0.998$
+
+   $\beta_n = \cfrac{\alpha_n}{1-\alpha_n} = 452$
+
+   $\gamma_C = \cfrac{1}{1 + \cfrac{D_{PC} N_{AB} W_B}{D_{NB} N_{DC} W_C}} \simeq 0.10$
+
+   $\beta_I = \cfrac{\gamma_C}{1-\gamma_C} \simeq 0.11$
+
+   $I_S^\ast = \alpha_n I_{ES} \simeq I_{ES} = q A_E n_i^2 \cfrac{D_N}{N_B W_B} = 2.18\cdot 10^{-15} A$
+
+   $R_{sc} = \rho\cfrac{L}{S} = \cfrac{1}{q \mu_{EC} N_C}\cfrac{W_C}{A_C} = 42.7\Omega$
+
+   On en conclu que le $\beta_n$ est largement supérieur, car les longeurs électriques sont inférieures aux longueurs physiques : c'est l'effet Early
+
+  \subsection{Calculer les courants Base et Collecteur dans les conditions de la question 2.} 
+
+  $I_B = I_S^\ast \left(e^{\cfrac{V_{BE}}{U_T}}-1\right) = 0.498mA$
+
+  $I_C = \beta_n I_B = 225mA$
+  
+  \subsection{Evaluer le paramètre d’effet Early μ puis la tension d’Early $V_A$. Faire le schéma électrique petit signal à fréquences moyennes puis à hautes fréquences dans les conditions de la question 2}
+
+   $\mu = \cfrac{\partial V_{BE}}{\partial I_E}\cdot\cfrac{\partial I_E}{\partial W_B}\cdot\cfrac{\partial W_B}{\partial V_{CB}} = \cfrac{U_T}{I_E} \cdot\cfrac{-I_E}{W_B} \sqrt{\cfrac{\varepsilon N^\ast}{2qN_B^2\left(\Phi_{CB}+V_{CB}\right)}} = -1.97\cdot 10^{-4}$
+
+   $r_c = \cfrac{U_T}{\mu I_E} = 588\Omega$
+
+   $V_A = r_c I_C = -132V$
+    
+   Schéma à basses fréquences : on reprend le précédent, linéarise la diode et ajoute la résistance d'Early
+
+   \begin{center}
+    \begin{circuitikz} \draw
+      (-1,2) node[anchor=east] {B}
+       to[short, o-] (0,2)
+      (4,2) -- (6,2) 
+       to[R=$R_{sc}$] (8,2)
+       to[short, -o] (8,2) node[anchor=west, -o] {C}
+      (0,2) to[R=$r_b$] (0,0)
+      (4,2) to[controlled current source,i^=$I_C$] (4,0) -- (0,0)
+      (3,0) to[short, -o] (3,-0.5) node[anchor=north] {E}
+      (6,2) to[R=$r_c$] (6,0) -- (4,0)
+     ;
+    \end{circuitikz}
+   \end{center}
+
+   Schéma à hautes fréquences : on reprend le précédent, et on ajoute les condensateurs correspondants aux ZCE.
+
+   \begin{center}
+    \begin{circuitikz} \draw
+      (-1,2) node[anchor=east] {B}
+       to[short, o-] (0,2)
+      (4,2) -- (6,2) 
+       to[R=$R_{sc}$] (8,2)
+       to[short, -o] (8,2) node[anchor=west, -o] {C}
+      (0,2) to[R=$r_b$] (0,0)
+      (4,2) to[controlled current source,i^=$I_C$] (4,0) -- (0,0)
+      (3,0) to[short, -o] (3,-0.5) node[anchor=north] {E}
+      (6,2) to[R=$r_c$] (6,0) -- (4,0)
+      (0,2) -- (2,2) to[C=$C_b$] (2,0)
+      (2,2) to[C=$C_c$] (4,2)
+     ;
+    \end{circuitikz}
+   \end{center}
+
+  \subsection{Evaluer la tension maximale $V_{CE}$ en régime normal de fonctionnement.}
+  
+  Joker \textbackslash{}o/
+  
+  \subsection{On souhaite réaliser un transistor PNP ayant les mêmes dopages et dimensions. Calculer à partir de résultats de la question 1 les paramètres $\beta_N$ et $I_S^\ast$.}
+
+  Nous avions trouvé les mobilités des majoritaires (au cas où...) à la question 1. Maintenant, il suffit de reprendre cette question en inversant les minoritaires et les majoritaires dans les mobilités :
+
+   $\gamma_E = 1 - \cfrac{D_N N_D L_p \tanh\cfrac{X_N}{L_p}}{D_P N_A L_n \tanh\cfrac{X_P}{L_n}} = 1 - \cfrac{D_N N_D X_N}{D_P N_A L_n \tanh\cfrac{X_P}{L_n}} \simeq 0.991$
+
+   $\alpha^\ast = 1 - \cfrac{X_B^2}{2 L_p^2} \simeq 0.998$
+
+   $\alpha_n = \gamma_E \cdot \alpha^\ast \simeq 0.990$
+
+   $\beta_n = \cfrac{\alpha_n}{1-\alpha_n} = 95$
+
+   $I_S^\ast = \alpha_n I_{ES} \simeq I_{ES} = q A_E n_i^2 \cfrac{D_P}{N_B X_B} = 6.74\cdot 10^{-16} A$
+
+   Sans surprises, les performances de ce PNP sont franchement moins bonnes que celles du même NPN, parceque la mobilité des électrons est supérieure à celle des trous.
+
+   \newpage
+
+ \section{Deuxième Partie}
+  \begin{center}
+   \begin{circuitikz} \draw
+    (3,2) node[npn] (npn) {Q}
+    (0,0) node[ground] {}
+     to[battery=$E_B$] (0,2)
+     to[R=$R_B$] (2,2) -- (npn.base) node[anchor=south] {B}
+    (3,0) node[ground] {} -- (npn.emitter) node[anchor=west] {E}
+    (5,0) node[ground] {}
+     to[battery=E] (5,1.5)
+     to[R=$R_C$] (5,3) -- (3,3) -- (npn.collector) node[anchor=east] {C}
+    ;
+   \end{circuitikz}
+  \end{center}
+
+  $R_B=12k\Omega$, $R_C = 1k\Omega$, $E=5V$
+
+  \subsection{Trouver le point de fonctionnement pour}
+   Pour ces trois question, on commence par faire deux lois des mailles : $E_B = V_{BE} + R_B I_B$ d'où $I_B = \cfrac{E_B -V_{BE}}{R_B}$, et $E=V_{CE} + R_C I_C$ d'où $I_C = \cfrac{E-V_{CE}}{R_C}$.
+   \subsubsection{$E_B=0$}
+
+    Dans ce cas, $V_{EB} = 0$ donc le transistor est bloqué.
+
+   \subsubsection{$E_B=1V$}
+
+    On est ici dans le cas étudié à l'exercice précédent : le transistor est en régime normal de fonctionnement.
+
+    $I_B = \cfrac{E_B-V_{BE}}{R_B}$, où on prendra $V_{BE} = 0.6V$. $I_B = 33\mu A$. On en déduit $I_C = \beta_n I_B = 15mA$, or $R_C I_C > E$ donc on est en régime saturé. Donc en fait, $I_C = I_{C_{sat}} = \cfrac{E}{R_C+R_{SC}}$ où $R_{SC} \ll R_C$, donc $I_C = 5mA$, et $V_{CE} = R_{sc} I_C = 0.21V$.
+
+   \subsubsection{$E_B=5V$}
+
+    On est ici encore dans le cas étudié à l'exercice précédent : le transistor est en régime normal de fonctionnement.
+
+    $I_B = \cfrac{E_B-V_{BE}}{R_B}$, où on prendra $V_{BE} = 0.6V$. $I_B = 367\mu A$. On en déduit $I_C = \beta_n I_B = 34.9mA$, or $R_C I_C > E$ donc on est en régime saturé. Donc en fait, $I_C = I_{C_{sat}} = \cfrac{E}{R_C+R_{SC}}$ où $R_{SC} \ll R_C$, donc $I_C = 5mA$, et $V_{CE} = R_{sc} I_C = 0.21V$.
+
+  \subsection{Pour quelle valeur $E_B$ est-on à la limite du régime normal et du régime saturé ?}
+
+   On attend cette limite pour $I_C = \beta_n I_B \simeq I_{C_{sat}}$, soit $I_B = \cfrac{I_{C_{sat}}}{\beta_n}$, et donc $E_B = V_{BE} +R_B I_B = 0.73V$. On vérifie bien que le transistor est saturé dans les deux cas précédents.
+
+  \subsection{Tracer l'allure de la fonction $V_{out}=f(V_{in})$}
+
+   \begin{center}
+    \begin{circuitikz}
+     \draw [->] (0,0)--(10,0) node[anchor=west] {$V_{out}$};
+     \draw [->] (0,0)--(0,6) node[anchor=west] {$V_{in}$};
+     \draw (0,5) node[anchor=east] {5} -- (6,5) -- (7.6,0.1) -- (10,0.1) ;
+     \node[below] at (7.6,0) {0.76};
+    \end{circuitikz}
+   \end{center}
+
+ \newpage
+
+ \section{Fichier Scilab}
+  Voici le fichier scilab qui contient toutes nos applications numériques et nos graphes :
+
+  \inputminted[linenos]{matlab}{calculs.sci}
+\end{document}
