@@ -472,10 +472,12 @@
 
      \begin{eqnarray}
       V_1 &=& A_1 A_2 V_2 - A_1 B_2 I_2 + B_1 C_2 V_2 - B_1 D_2 I_2 \nonumber \\
-      &=& (A_1 A_2 + B_1 C_2) V_2 - (A_1 B_2 + B_1 D_2) I_2 \\
+          &=& (A_1 A_2 + B_1 C_2) V_2 - (A_1 B_2 + B_1 D_2) I_2 \\
       I_1 &=& C_1 A_2 V_2 - C_1 B_2 I_2 + D_1 C_2 V_2 - D_1 D_2 I_2 \nonumber \\
-      &=& (C_1 A_2 +D_1 C_2) V_2 - (C_1 B_2 + D_1 D_2) I_2
+          &=& (C_1 A_2 +D_1 C_2) V_2 - (C_1 B_2 + D_1 D_2) I_2
      \end{eqnarray}
+
+    Pour avoir la matrice de chaîne équivalente à la chaîne de deux matrices de chaîne, il suffit donc de multiplier ces matrices.
 
     On programme donc la matrice \textbf{abcd} correspondant à la chaine des matrices du circuit d'adaptation et de la ligne de transmission, puis on traduit le tout en une matrice S qui dépend de la fréquence : 
 
@@ -502,4 +504,16 @@
 
     \includegraphics[height=7cm]{images/s2}
    \end{center}
+  \section{}
+
+   D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.1006 \lambda = 60.3mm$ après la charge, puis un simple stub de longueur $L=0.1667*0.5996=99.9mm$, et on rajoutera notre ligne de 2m.
+
+   On a donc directement le code MATLAB suivant :
+
+   \lstinputlisting[language=Matlab]{sources/2b.m}
+
+  \section{}
+   Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence, et on étudiera la puissance rayonnée, qui est égale à $P_d(1-|S_{11}|)$ :
+
+   \lstinputlisting[language=Matlab]{sources/2c.m}
 \end{document}
