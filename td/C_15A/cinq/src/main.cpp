@@ -6,11 +6,7 @@ using namespace std;
 
 //int main(int argc, char *argv[]) {
 int main() {
-    //entreprise mycompany = creerArbreInitial("Moi", "sous boss", "sous fifre");
-    entreprise mycompany();
-    //mycompany->ajouterEmploye("sous-boss",&mycompany->boss);
-    //mycompany->ajouterEmploye("sous-fiffre",&mycompany->suivant);
-    //mycompany->ajouterEmploye("autre sous fifre",&mycompany->suivant);
+    employe * entreprise = creer_entreprise_initial("net7","Nim","jean","jacques");
 
     return 0;
 }
