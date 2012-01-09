@@ -1,0 +1,6 @@
+#include "structures.h"
+
+vecteur...
+{
+
+}
