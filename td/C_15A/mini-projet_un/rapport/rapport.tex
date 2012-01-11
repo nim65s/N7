@@ -1,0 +1,69 @@
+\documentclass[10pt]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+%\usepackage{url,hyperref}
+\usepackage{auto-pst-pdf}
+\usepackage{soul}
+\usepackage{verbatim}
+\usepackage{lmodern}
+\usepackage{xunicode,xltxtra}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{minted}
+\title{\includegraphics{inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Mini Projet C }
+\author{Guilhem Saurel}
+\date{\today}
+\begin{document}
+
+ %\begin{titlepage}
+  \maketitle
+ % \tableofcontents
+ %\end{titlepage}
+
+ Le but de ce Mini-Projet est d'implémenter en C un tri par distributions.
+
+ Le premier jet de ce tri étant implémenté en moins de 100 lignes, je n'ai pas vu l'intérêt de faire un .h et un .cpp.
+
+ Pour éviter d'écrire une fonction qui demande les chiffres à trier, j'ai préféré utiliser les arguments du programme
+
+ Ce rapport sera l'intégralité du code source, sans les commentaires, scindé en sous parties expliquées.
+
+ Le début n'a rien d'intéressant, si ce n'est l'utilisation d'\verb|argc| et d'\verb|*argv[]| :
+
+  \inputminted[linenos,lastline=7]{cpp}{../src/main.cpp}
+
+  La suite est la déclaration des variables principales. La première est un tableau de nos classes à trois dimensions. La première correspond aux 10 classes de nombres dans lesquelles nous mettons nos nombres, la seconde aux 100 valeurs pouvant être inclues dans chaque classe, et la troisième, qui ne peut prendre que deux valeurs, nous permet d'avoir deux tableaux, que l'on utilisera alternativement à chaque étape.
+
+  \inputminted[linenos,firstnumber=9,firstline=9,lastline=9]{cpp}{../src/main.cpp}
+
+  La seconde stocke simplement le nombre de lignes dans chaque classe. De la même manière, il y a deux tableaux que l'on utilise alternativement. Contrairement à \verb|classes|, il est ici important que chaque case du tableau soit correctement initialisée à 0.
+
+  \inputminted[linenos,firstnumber=10,firstline=10,lastline=14]{cpp}{../src/main.cpp}
+
+  Vient ensuite la première étape du programme, qui converti les \verb|argc| arguments que l'on a passé au programme en nombres, et les insère dans le premier tableau, dans la classe correspondant à son chiffre des unités, et à la dernière ligne de cette classe (et on n'oublie pas d'incrémeter ce nombre de lignes, du coup). On en profite également pour calculer le nombre d'étapes à effectuer, en prenant le nombre de digits du plus grand des nombres.
+
+  \inputminted[linenos,firstnumber=19,firstline=19,lastline=25]{cpp}{../src/main.cpp}
+
+  Afin de simplement vérifier que tout se passe bien, on affiche ce tableau nouvellement créé :
+
+  \inputminted[linenos,firstnumber=28,firstline=28,lastline=34]{cpp}{../src/main.cpp}
+
+  Et enfin, pour chaque étape supplémentaire,
+  \begin{itemize}
+   \item On remet à 0 le nombre de lignes de tableau de destination;
+   \item pour chaque nombre de chaque classe du tableau de départ,
+    \begin{itemize}
+     \item on calcule le numéro de la nouvelle classe du nombre (ie. pour le digit suivant);
+     \item on l'ajoute dans le tableau de destination, dans la classe que l'on vient de calculer et à la dernière ligne de cette classe, que l'on incrémente à son tour;
+    \end{itemize}
+   \item et enfin, on affiche l'état de ce nouveau tableau, pour faire joli.
+  \end{itemize}
+
+  \inputminted[linenos,firstnumber=40,firstline=40,lastline=57]{cpp}{../src/main.cpp}
+
+  La fin du programe ne consiste plus qu'à afficher les nombres dans le bon ordre :
+
+  \inputminted[linenos,firstnumber=60,firstline=60,lastline=66]{cpp}{../src/main.cpp}
+\end{document}
