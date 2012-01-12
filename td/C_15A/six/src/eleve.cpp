@@ -11,6 +11,10 @@ Eleve::Eleve() : m_nom("Joe"), m_prenom("black"), m_classe("/dev/null") {
 
 Eleve::Eleve(std::string const & nom, std::string const & prenom, std::string const & classe; float const & notes[9]) : m_nom(nom), m_prenom(prenom), m_classe(classe), m_notes(notes) {}
 
+Eleve::afficher(){
+    //TODO
+}
+
 vector<Eleve> lire(string filename){{{
     f = fopen(filename,"rt");
     assert(f != NULL);
