@@ -43,59 +43,11 @@
    
    Or $\phi_{MS} = W_M - W_S = W_M - \left(\chi + \cfrac{E_g}{2q} + U_T ln \cfrac{N_a}{ni} \right) = \phi_{MI} - U_T ln \left(\cfrac{N_a}{ni}\right) = -949$mV (ce que nous retrouvons d’ailleurs sur l’abaque …),
    et $\Delta V_0 = \cfrac{Q_0}{C_{ox}} = \cfrac{q N_{ss} t_{ox}}{\varepsilon_{ox}} = 7.2$mV.
-   
-   Donc $V_{TP} = 324$mV.
-      
-   Si on prend un PMOS (substrat N) on aura :
-   $V_{TN} = V_{TH} + |\phi_{MS}| + \delta{V_0} = 2.24$V.
-
-  \subsection{Types de charges à implémenter}
-  Dans le cas du transistor NMOS, il faut diminuer la tension de seuil. 
-  Il faut alors implanter des charges de type opposé au substrat (des donneurs),
-  dans une quantitée 
-  $N_A \delta(x) = \cfrac{\varepsilon_{ox} \Delta V}{t_{ox} q} = 5.23\cdot 10^{11}$.
-
-  Dans le cas du transistor PMOS, il faut augmenter la tension de seuil. 
-  Il faut alors implanter des charges de type opposé au substrat (des accepteurs),
-  dans une quantitée  
-  $N_A \delta(x) = \cfrac{\varepsilon_{ox} \Delta V}{t_{ox} q} = 2.13\cdot 10^{12}$.
-  
- 
- \section{Caractéristiques C(v)}
- 
-  %Ben… TODO quoi ^^ pff… :D
- 
- \section{Polarisation d’un Transistor}
- 
- \subsection{$V_{IN1} = 5V$ et $V_{IN2} = 0V$}
- 
- Si $V_{IN1} = 5$V et $V_{IN2} = 0$V alors $V_{GS1} = V_{TH} < 5$V, donc le transistor T1 est passant,
- et $V_{GS2} = V_{TH} > 0$V, donc le transistor T2 est bloqué.
- 
- Si on considère $V_{OUT} = 2$V, on a : $I_{D} = \cfrac{V_{CC} - V_{OUT}}{R}$.
- Or dans ce cas $V_{GD1} > V_{TH}$, donc on est en zone ohmique, d'où
- $I_D = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$
- donc $\cfrac{V_{CC} - V_{OUT}}{R} = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$ avec $V_D = V_{OUT}$,
- donc $R =\cfrac{V_{CC} - V_{OUT}}{\mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT}} = ???$
- 
- \subsection{$V_{IN1} = V_{IN2} = 5V$}
- 
- Si $V_{IN1} = 5$V et $V_{IN2} = 5$V alors $V_{GS1} = V_{GS2} = V_{TH} < 5$V  donc les transistors sont passant. Ils sont équivalents donc le même courant les traverse.
- Si on considère qu'ils sont de plus tous deux en zone ohmique alors :
- $I_{D} = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$
- avec $V_D = V_{OUT}$ donc
- $I_D = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_OUT}{2}\right)V_OUT$
- De plus,
- $V_{OUT} = V_{CC} - 2 R I_D$
- Finalement, $V_{OUT} = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT} = ???$. %TODO
- 
- \subsection{$V_{IN1} = V_{IN2} = V_0 = 1V$}
- Si $V_{IN1} = V_{IN2} = 1$V alors $V_{GS1} = V_{GS2} = V_{TH} < 1$V donc les transistors sont passant. Mais par contre les transistors seront en zone saturée car au vu de la réponse à la question précédente on aura $V_{GD} < V_{TH}$. En revanche les courants dans les deux transistors restent les mêmes.
- $I_D = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 \Leftarrow
- V_{OUT} = V_{CC} - 2 R I_D = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 = ???$.
+$I_D = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 \Rightarrow
+ V_{OUT} = V_{CC} - 2 R I_D = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 = 4.96$V.
  
  \section{Analyse petit signal}
- 
+
  \appendix
  \section{Fichier Scilab}
  Voici le fichier scilab qui contient toutes nos applications numériques\,:
