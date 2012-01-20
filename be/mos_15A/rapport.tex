@@ -47,7 +47,7 @@
    Donc $V_{TP} = 324$mV.
       
    Si on prend un PMOS (substrat N) on aura :
-   $V_{TN} = V_{TH} + |\phi_{MS}| + \delta{V_0} = 2.24$V.
+   $V_{TN} = V_{TH} + |\phi_{MS}| + |\Delta{V_0}| = 2.24$V.
 
   \subsection{Types de charges à implémenter}
   Dans le cas du transistor NMOS, il faut diminuer la tension de seuil. 
@@ -62,8 +62,15 @@
   
  
  \section{Caractéristiques C(v)}
+  En accumulation, C(v) est constante, égale à $C_{ox}$, puiqu’il n’y a pas de ZCE dans le semi-conducteur, donc $C=C_{ox}$.
+
+  En dépeuplement, une ZCE dans le semi-conducteur apparait progressivement, donc $C=\cfrac{C_{ox} C_{si}}{C_{ox}+C_{si}}=
+  \cfrac{C_{ox}}{1+\cfrac{C_{ox}}{C_{si}}}=
+  \cfrac{C_{ox}}{1+\cfrac{\varepsilon_{ox}\delta_{si}}{t_{ox}\varepsilon_{si}}}=
+  \cfrac{C_{ox}}{1+\cfrac{t_{ox}}{\varepsilon_{ox}}\sqrt{2qN\varepsilon_{si}}}=
+  \cfrac{C_{ox}}{\sqrt{1+\cfrac{4V}{\gamma^2}}}$
  
-  %Ben… TODO quoi ^^ pff… :D
+  \newpage
  
  \section{Polarisation d’un Transistor}
  
@@ -76,7 +83,7 @@
  Or dans ce cas $V_{GD1} > V_{TH}$, donc on est en zone ohmique, d'où
  $I_D = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$
  donc $\cfrac{V_{CC} - V_{OUT}}{R} = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$ avec $V_D = V_{OUT}$,
- donc $R =\cfrac{V_{CC} - V_{OUT}}{\mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT}} = ???$
+ donc $R =\cfrac{V_{CC} - V_{OUT}}{\mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT}} = 5.84$k$\Omega$.
  
  \subsection{$V_{IN1} = V_{IN2} = 5V$}
  
@@ -84,17 +91,31 @@
  Si on considère qu'ils sont de plus tous deux en zone ohmique alors :
  $I_{D} = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_D}{2}\right)V_D$
  avec $V_D = V_{OUT}$ donc
- $I_D = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_OUT}{2}\right)V_OUT$
- De plus,
- $V_{OUT} = V_{CC} - 2 R I_D$
- Finalement, $V_{OUT} = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT} = ???$. %TODO
+ $I_D = \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT}$
+ De plus, $V_{OUT} = V_{CC} - 2 R I_D$
+ Finalement, $V_{OUT} = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{L} \left(V_G - V_{TH} - \cfrac{V_{OUT}}{2}\right)V_{OUT} = 1.14$V.
  
  \subsection{$V_{IN1} = V_{IN2} = V_0 = 1V$}
  Si $V_{IN1} = V_{IN2} = 1$V alors $V_{GS1} = V_{GS2} = V_{TH} < 1$V donc les transistors sont passant. Mais par contre les transistors seront en zone saturée car au vu de la réponse à la question précédente on aura $V_{GD} < V_{TH}$. En revanche les courants dans les deux transistors restent les mêmes.
- $I_D = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 \Leftarrow
- V_{OUT} = V_{CC} - 2 R I_D = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 = ???$.
+ $I_D = \cfrac{V_{CC} - V_{OUT}}{2 R} = \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 \Rightarrow
+ V_{OUT} = V_{CC} - 2 R I_D = V_{CC} - 2 R \mu_0 C_{ox} \cfrac{W}{2L}{\left(V_G - V_{TH}\right)}^2 = 4.96$V.
  
  \section{Analyse petit signal}
+  \subsection{Schéma électrique}
+   \begin{center}
+    \begin{circuitikz} \draw
+     (0,2) to[short, o-] (1,2) to[R=$R_G$] (1,0)
+     (0,0) -- (5,0) to[R=$R_S$] (5,2)
+     (3,0) to[R=$R_D$] (3,2) 
+      to[controlled current source=$I_D$] (5,2)
+      to[short, -o] (6,2)
+     (5,0) -- (6,0)
+     ;
+    \end{circuitikz}
+   \end{center}
+  
+  Où $I_D = \mu_0 C_{ox} \cfrac{W}{2L} (V_G - V_{TH})^2$
+
  
  \appendix
  \section{Fichier Scilab}

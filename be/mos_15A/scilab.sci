@@ -52,7 +52,7 @@ printf('\n\t III.1')
 
 Vcc=5
 Vout=2
-mu_0 = 875
+mu_0 = 875*0.4
 W = 1E-4
 L = 1E-4
 Vg = 5
