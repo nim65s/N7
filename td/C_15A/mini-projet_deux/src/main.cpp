@@ -33,6 +33,7 @@ typedef struct personne { // {{{
             cout << "-----------MÈRE---------------------------" << endl;
             mere->show(-1);
         }
+        cout << endl;
         return 0;
     }
             
@@ -51,6 +52,14 @@ personne * creerArbreVide(){{{
 }}}
 
 int ajouterPersonne(personne & A, personne & P){{{
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
+        return 1;
+    }
+    if (&P==NULL) {
+        cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à l’ajouter dans l’arbre !" << endl;
+        return 1;
+    }
     personne * temp = &A;
     while (temp->suivant !=NULL) temp = temp->suivant;
     temp->suivant = &P;
@@ -105,7 +114,7 @@ personne * creerArbreInitial() {{{
     personne * maman = new personne;
     maman->nom = "Dujols";
     maman->prenom = "Christine";
-    maman->genre = 1;
+    maman->genre = 0;
     maman->age = 55;
     maman->pere = papim;
     maman->mere = mamiem;
@@ -164,6 +173,10 @@ personne * creerArbreInitial() {{{
 }}}
 
 int ajouterPersonne(personne &A){{{
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
+        return 1;
+    }
     personne * P = new personne;
     char reponse;
 
@@ -177,7 +190,7 @@ int ajouterPersonne(personne &A){{{
     cin >> P->genre;
     cout << "Ajouter un père ? [o/N] =>";
     cin >> reponse;
-    if (reponse == 'o' || reponse == 'O'){ // TODO on doit pouvoir utiliser la recherche
+    if (reponse == 'o' || reponse == 'O'){
         int num=0;
         int cmpt=0;
         cout << "Quel est son numéro ? =>";
@@ -217,6 +230,10 @@ int ajouterPersonne(personne &A){{{
 }}}
 
 int afficherArbre(personne & A){{{
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’afficher !" << endl;
+        return 1;
+    }
     cout << endl << "\t\tAffichage de l'arbre : "<< endl;
     int retcode=0;
     personne * temp = &A;
@@ -227,11 +244,15 @@ int afficherArbre(personne & A){{{
     return retcode;
 }}}
 
-personne * retrouverPersonne(personne & A, bool utiliser=true){{{
+personne * retrouverPersonne(personne & A, bool afficher=false){{{
     //TODO on doit pouvoir chercher par numéro, quitte a le faire dans une ss fonction
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
+        return NULL;
+    }
     personne * p=NULL;
     personne * temp;
-    int critere, age, numero, choix=-1;
+    int critere, age, numero, choix=-1, place, cmpt=0;
     string nom, prenom;
     bool genre, sortie=false;
 
@@ -245,6 +266,7 @@ personne * retrouverPersonne(personne & A, bool utiliser=true){{{
         cout << "2) prénom" << endl;
         cout << "3) genre" << endl;
         cout << "4) age" << endl;
+        cout << "5) numéro" << endl;
         cout << "==>";
         cin >> critere;
         switch (critere){
@@ -284,6 +306,21 @@ personne * retrouverPersonne(personne & A, bool utiliser=true){{{
                     if (age == temp->age) temp->show(++numero);
                 }
                 break;
+            case 5:
+                cout << "Entrez le numéro de la personne" << endl << "==>";
+                cin >> place;
+
+                numero=1;
+                while (++cmpt != place+1 && temp->suivant != NULL) {
+                    temp = temp->suivant;
+                    if (temp->suivant == NULL) {
+                        cout << "Vous avez entré un numéro ne correspondant pas à une personne…" << endl;
+                        numero=-1;
+                    }
+                }
+                p=temp;
+
+                break;
             default:
                 cout << "Try again…" << endl;
                 break;
@@ -294,7 +331,7 @@ personne * retrouverPersonne(personne & A, bool utiliser=true){{{
             cin >> continuer;
             if (continuer == 'n' || continuer == 'N') sortie=true;
         }
-        else if(utiliser) {
+        else {
             while (choix<0||choix>numero) {
                 if (numero==1) choix=1;
                 else {
@@ -302,7 +339,7 @@ personne * retrouverPersonne(personne & A, bool utiliser=true){{{
                     cin >> choix;
                 }
                 if (choix>0||choix<numero){
-                    int cmpt=0;
+                    cmpt=0;
                     temp=&A;
                     switch (critere){
                         case 1:
@@ -345,55 +382,32 @@ personne * retrouverPersonne(personne & A, bool utiliser=true){{{
                 }
             }
         }
-        else sortie=true;
     }
+    if (afficher) p->show();
     return p;
 }}}
 
-int ascendants(personne & pers){{{
+int ascendants(personne & pers, int nbgene){{{
+    //TODO nbgene
     if (&pers==NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les ascendants !" << endl;
         return 1;
     }
-    cout << endl << "\t\tAffichage des Ascendants de : "<< endl; // TODO nombre de \t cohérents
-    personne * P[5][32];
-    P[0][0] = &pers;
-    P[0][0]->show();
-    if (P[0][0]->pere != NULL){
-        P[1][0] = P[0][0]->pere;
-        cout << "père" << endl;
-        P[1][0]->show();
-        if (P[1][0]->pere !=NULL){
-            P[2][0] = P[1][0]->pere;
-            cout << "Grand père paternel" << endl;
-            P[2][0]->show();
-        }
-        if (P[1][0]->mere !=NULL){
-            P[2][1] = P[1][0]->mere;
-            cout << "Grand mère paternelle" << endl;
-            P[2][1]->show();
-        }
-    }
-    if (P[0][0]->mere != NULL){
-        P[1][1] = P[0][0]->mere;
-        cout << "mère" << endl;
-        P[1][1]->show();
-        if (P[1][1]->pere !=NULL){
-            P[2][2] = P[1][1]->pere;
-            cout << "Grand père maternel" << endl;
-            P[2][2]->show();
-        }
-        if (P[1][1]->mere !=NULL){
-            P[2][3] = P[1][1]->mere;
-            cout << "Grand mère maternelle" << endl;
-            P[2][3]->show();
-        }
+    personne * P = &pers;
+    P->show(0,true);
+    if (nbgene>0) {
+        if (P->mere != NULL) ascendants(*P->mere,nbgene-1);
+        if (P->pere != NULL) ascendants(*P->pere,nbgene-1);
     }
     return 0;
 }}}
 
 int enfants(personne & A, personne & pers) {{{
     personne * P = &pers;
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
+        return 1;
+    }
     if (P==NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les enfants !" << endl;
         return 1;
@@ -405,8 +419,27 @@ int enfants(personne & A, personne & pers) {{{
     personne * temp = &A;
     while (temp->suivant !=NULL){
         temp = temp->suivant;
-        if (temp==P) temp->show(++retcode,1);
+        if (temp->pere==P||temp->mere==P) temp->show(++retcode,1);
     }
+    return retcode;
+}}}
+
+int soeursFreres(personne & A, personne & pers) {{{
+    personne * P = &pers;
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
+        return 1;
+    }
+    if (P==NULL) {
+        cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les enfants !" << endl;
+        return 1;
+    }
+    cout << endl << "\t\tAffichage des frères, sœurs, demi-frères et demi-sœurs de : "<< endl; // TODO nombre de \t cohérents
+    P->show();
+
+    int retcode=0;
+    if (P->mere != NULL) enfants(A,*P->mere);
+    if (P->pere != NULL) enfants(A,*P->pere);
     return retcode;
 }}}
 
@@ -416,16 +449,27 @@ int main(){{{
     cout << "\t\t\t Arbre" << endl;
     afficherArbre(*A);
 
+    retrouverPersonne(*A,true);
+
+    /*
     cout << "\t\t\t ascendants d’une personne recherchée" << endl;
-    ascendants(*retrouverPersonne(*A));
+    ascendants(*retrouverPersonne(*A),3);
 
     cout << "\t\t\t enfants d’une personne recherchée" << endl;
     enfants(*A,*retrouverPersonne(*A));
+    */
 
+    /*
+    cout << "\t\t\t frères & sœurs d’une personne recherchée" << endl;
+    soeursFreres(*A,*retrouverPersonne(*A));
+    */
+
+    /*
     cout << "\t\t\t Ajout personne " << endl;
     ajouterPersonne(*A);
     cout << "\t\t\t Arbre " << endl;
     afficherArbre(*A);
-}}}
+    */
 
-// vim: set foldmethod=marker:
+    return 0;
+}}}
