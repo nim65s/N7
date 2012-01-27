@@ -9,12 +9,12 @@ class Eleve {
         float m_notes[9];
 
         Eleve();
-        Eleve(std::string const & nom, std::string const & prenom, std::string const & classe; float const & notes[9]);
+        Eleve(std::string const & nom, std::string const & prenom, std::string const & classe, float const & notes[9]);
 
         void afficher();
         int ecrire(std::string filename = "../Promo.bin");
 };
 
-vector<Eleve> lire(std::string filename = "../Promo.txt");
+std::vector<Eleve> lire(std::string filename = "../Promo.txt");
 
 #endif
