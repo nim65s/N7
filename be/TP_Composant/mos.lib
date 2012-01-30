@@ -1,0 +1,6 @@
+* PSpice Model Editor - Version 16.3.0
+*$
+.model MyNMOS NMOS nsub=1E16 tox=10E-9 uo=470 ld=0.05E-6 lambda=0.05 tpg=+1 nss=-1.23E12
+*$
+.model MyPMOS PMOS nsub=1E16 tox=10E-9 uo=170 ld=0.05E-6 lambda=0.05 tpg=-1 nss=-1.17E12
+*$

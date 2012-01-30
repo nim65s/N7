@@ -1,0 +1,4 @@
+* PSpice Model Editor - Version 16.3.0
+*$
+.model MyNPN NPN IS=1.8E-14 BF=400 BR=1 RC=50 TF=100p TR=20n CJE=2p CJC=3p VA=100
+*$
