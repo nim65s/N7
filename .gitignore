@@ -1,0 +1,8 @@
+cours/
+Julien/
+rattrapages/
+*/*/*/build/bin/
+*/*/*/build/CMakeCache.txt
+*/*/*/build/CMakeFiles/
+mini_projets/
+be/fh_1A/others/

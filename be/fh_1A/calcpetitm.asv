@@ -1,0 +1,14 @@
+function [ a ] = a( vp,d,f )
+g = j*2*pi*f/vp;
+
+a = cosh(g*d);
+end
+
+function [ b ] = b( vp,d,f )
+g = j*2*pi*f/vp;
+
+a = sinh(g*d);
+end
+
+f=1E8:1E6:5E8
+plot(f,real(cosh(j*2*pi*f*d/vp)),f,imag(sinh(j*2*pi*f*d/vp))
