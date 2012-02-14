@@ -29,7 +29,7 @@ int ascendants(personne & pers, int nbgene);
 
 std::vector<personne *> enfants(personne & A, personne & pers, bool show=true);
 
-int soeursFreres(personne & A, personne & pers);
+std::vector<personne *> soeursFreres(personne & A, personne & pers);
 
 std::vector<personne *> cousins(personne & A, personne & pers);
 

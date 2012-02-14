@@ -182,14 +182,12 @@ int ajouterPersonne(personne &A){{{
     cin >> P->genre;
     cout << "Ajouter un père ? [o/N] =>";
     cin >> reponse;
-    //TODO if (reponse == 'o' || reponse == 'O') P->pere=retrouverPersonne(*A);
-    if (reponse == 'o' || reponse == 'O') P->pere=NULL;
+    if (reponse == 'o' || reponse == 'O') P->pere=retrouverPersonne(A);
     else P->pere = NULL;
 
     cout << "Ajouter une mère ? [o/N] =>";
     cin >> reponse;
-    //TODO if (reponse == 'o' || reponse == 'O') P->mere=retrouverPersonne(*A);
-    if (reponse == 'o' || reponse == 'O') P->mere=NULL;
+    if (reponse == 'o' || reponse == 'O') P->mere=retrouverPersonne(A);
     else P->mere = NULL;
 
     personne * temp = &A;
@@ -279,9 +277,7 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
                 cin >> place;
 
                 numero=1;
-                cout << "TOSTE " << place << endl;
                 while (++cmpt != place+1 && temp->suivant != NULL) {
-                    cout << "TESTE " << cmpt << endl;
                     temp = temp->suivant;
                     if (temp->suivant == NULL) {
                         cout << "Vous avez entré un numéro ne correspondant pas à une personne…" << endl;
@@ -385,7 +381,7 @@ vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
         return venfants;
     }
     if (show) {
-        cout << endl << "\t\tAffichage des enfants de : "<< endl; // TODO nombre de \t cohérents
+        cout << endl << "\t\tAffichage des enfants de : "<< endl;
         P->show();
     }
 
@@ -402,23 +398,47 @@ vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
     return venfants;
 }}}
 
-int soeursFreres(personne & A, personne & pers) {{{
+vector<personne *> soeursFreres(personne & A, personne & pers) {{{
+    vector<personne *>  vsoeursfreres;
+    vector<personne *>  venfants;
     personne * P = &pers;
     if (&A==NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
-        return 1;
+        return vsoeursfreres;
     }
     if (P==NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les frères et sœurs !" << endl;
-        return 1;
+        return vsoeursfreres;
     }
-    cout << endl << "\t\tAffichage des frères, sœurs, demi-frères et demi-sœurs de (ie des enfants des parents de): "<< endl; // TODO nombre de \t cohérents
-    P->show(-1,1);
+    cout << endl << "\t\tAffichage des frères, sœurs, demi-frères et demi-sœurs de (ie des enfants des parents de): "<< endl;
+    // TODO
+    P->show(-1,false);
 
-    int retcode=0;
-    if (P->mere != NULL) enfants(A,*P->mere);
-    if (P->pere != NULL) enfants(A,*P->pere);
-    return retcode;
+    if (P->mere != NULL) {
+        venfants = enfants(A,*P->mere,false);
+        vsoeursfreres.insert(vsoeursfreres.end(), venfants.begin(), venfants.end());
+    }
+    if (P->pere != NULL) {
+        venfants = enfants(A,*P->pere,false);
+        vsoeursfreres.insert(vsoeursfreres.end(), venfants.begin(), venfants.end());
+    }
+
+    sort(vsoeursfreres.begin(), vsoeursfreres.end());
+    vsoeursfreres.erase(unique(vsoeursfreres.begin(), vsoeursfreres.end() ), vsoeursfreres.end());
+
+    // TODO
+    for (int i(0); i<int(vsoeursfreres.size()); ++i) {
+        if (vsoeursfreres[i] != P) {
+            venfants = enfants(A,*onclestantes[i],false);
+            vcousins.insert(vcousins.end(), venfants.begin(), venfants.end());
+        }
+    }
+    // TODO
+
+
+    for (int i(0); i<int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
+
+    return vsoeursfreres;
 }}}
 
 vector<personne *> cousins(personne & A, personne & pers) {{{
@@ -435,7 +455,7 @@ vector<personne *> cousins(personne & A, personne & pers) {{{
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les cousins !" << endl;
         return vcousins;
     }
-    cout << endl << "\t\tAffichage des cousins et cousines de (ie des petits-enfants des grands-parents de): "<< endl; // TODO nombre de \t cohérents
+    cout << endl << "\t\tAffichage des cousins et cousines de (ie des petits-enfants des grands-parents de): "<< endl;
     P->show(-1,false);
 
     if (P->mere != NULL) {
