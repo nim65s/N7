@@ -355,7 +355,6 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
 }}}
 
 int ascendants(personne & pers, int nbgene){{{
-    //TODO nbgene
     if (&pers==NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les ascendants !" << endl;
         return 1;
@@ -399,8 +398,9 @@ vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
 }}}
 
 vector<personne *> soeursFreres(personne & A, personne & pers) {{{
-    vector<personne *>  vsoeursfreres;
-    vector<personne *>  venfants;
+    vector<personne *> vsoeursfreres;
+    vector<personne *> venfants;
+    vector<personne *>::iterator it;
     personne * P = &pers;
     if (&A==NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
@@ -411,7 +411,6 @@ vector<personne *> soeursFreres(personne & A, personne & pers) {{{
         return vsoeursfreres;
     }
     cout << endl << "\t\tAffichage des frères, sœurs, demi-frères et demi-sœurs de (ie des enfants des parents de): "<< endl;
-    // TODO
     P->show(-1,false);
 
     if (P->mere != NULL) {
@@ -426,15 +425,9 @@ vector<personne *> soeursFreres(personne & A, personne & pers) {{{
     sort(vsoeursfreres.begin(), vsoeursfreres.end());
     vsoeursfreres.erase(unique(vsoeursfreres.begin(), vsoeursfreres.end() ), vsoeursfreres.end());
 
-    // TODO
-    for (int i(0); i<int(vsoeursfreres.size()); ++i) {
-        if (vsoeursfreres[i] != P) {
-            venfants = enfants(A,*onclestantes[i],false);
-            vcousins.insert(vcousins.end(), venfants.begin(), venfants.end());
-        }
-    }
-    // TODO
-
+    it=vsoeursfreres.begin();
+    while (*it != P) it++;
+    vsoeursfreres.erase(it);
 
     for (int i(0); i<int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
 
