@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int main(){{{
+int main(){
     personne * A = creerArbreInitial();
 
     cout << "\t\t\t Arbre" << endl;
@@ -27,6 +27,7 @@ int main(){{{
         cout << "5) Afficher les enfants d’une personne" << endl;
         cout << "6) Afficher les frères & sœurs d’une personne" << endl;
         cout << "7) Afficher les cousins et cousines d’une personne" << endl;
+        cout << "8) Écrire l’arbre dans un fichier" << endl;
         cout << "==>";
         cin >> choix;
         switch (choix) {
@@ -56,11 +57,12 @@ int main(){{{
             case 7:
                 cousins(*A,*retrouverPersonne(*A));
                 break;
+            case 8:
+                ecrire(*A);
+                break;
             default :
                 cout << "Try Again…" << endl;
         } 
     }
     return 0;
-}}}
-
-// vim: set foldmethod=marker:
+}

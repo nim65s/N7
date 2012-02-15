@@ -33,5 +33,7 @@ std::vector<personne *> soeursFreres(personne & A, personne & pers);
 
 std::vector<personne *> cousins(personne & A, personne & pers);
 
+int ecrire(personne & A, std::string file="arbre.txt");
+
 #endif
 

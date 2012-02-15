@@ -489,4 +489,35 @@ vector<personne *> cousins(personne & A, personne & pers) {{{
     return vcousins;
 }}}
 
+int ecrire(personne & A, std::string file) {{{
+    cout << "Début de l’écriture…" << endl;
+    if (&A==NULL) {
+        cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’écrire dans un fichier !" << endl;
+        return 1;
+    }
+    int retcode=0;
+    personne * temp = &A;
+    FILE * fichier = fopen(file.c_str(),"w");
+    while (temp->suivant != NULL){
+        temp = temp->suivant;
+
+        fputs("------------------------------------------\n", fichier);
+        fputs(("Nom: " + temp->nom + "\n").c_str(), fichier);
+        fputs(("Prénom: " + temp->prenom + "\n").c_str(), fichier);
+        if (temp->genre) fputs("Homme \n", fichier);
+        else fputs("Femme \n", fichier);
+        fputs("Âge: ", fichier);
+        char age[3];
+        sprintf(age,"%d",temp->age);
+        fputs(age, fichier);
+        fputs(" ans\n", fichier);
+        if (temp->pere != NULL) fputs(("Père: " + temp->pere->prenom + " " + temp->pere->nom + "\n").c_str(), fichier);
+        if (temp->mere != NULL) fputs(("Mère: " + temp->mere->prenom + " " + temp->mere->nom + "\n").c_str(), fichier);
+        fputs("\n", fichier);
+    }
+    fclose(fichier);
+    cout << "Fin de l’écriture…" << endl;
+    return retcode;
+}}}
+
 // vim: set foldmethod=marker:
