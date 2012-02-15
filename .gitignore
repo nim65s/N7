@@ -1,6 +1,7 @@
 cours/
 Julien/
 rattrapages/
+*/*/*/bin/
 */*/*/build/bin/
 */*/*/build/CMakeCache.txt
 */*/*/build/CMakeFiles/
