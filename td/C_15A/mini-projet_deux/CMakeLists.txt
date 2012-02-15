@@ -4,7 +4,7 @@ project(mini-projet_deux)
 file(
 	GLOB_RECURSE
 	source_files
-	../src/*
+	src/*
 	)
 
 add_executable(

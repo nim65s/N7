@@ -44,16 +44,16 @@ personne * creerArbreVide(){{{
 }}}
 
 int ajouterPersonne(personne & A, personne & P){{{
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
         return 1;
     }
-    if (&P==NULL) {
+    if (&P == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à l’ajouter dans l’arbre !" << endl;
         return 1;
     }
     personne * temp = &A;
-    while (temp->suivant !=NULL) temp = temp->suivant;
+    while (temp->suivant != NULL) temp = temp->suivant;
     temp->suivant = &P;
     return 0;
 }}}
@@ -165,11 +165,12 @@ personne * creerArbreInitial() {{{
 }}}
 
 int ajouterPersonne(personne &A){{{
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
         return 1;
     }
     personne * P = new personne;
+    personne * temp = &A;
     char reponse;
 
     cout << "Nom ? =>";
@@ -180,53 +181,53 @@ int ajouterPersonne(personne &A){{{
     cin >> P->age;
     cout << "Sexe ? (0 pour femme, 1 pour homme) =>";
     cin >> P->genre;
+
     cout << "Ajouter un père ? [o/N] =>";
     cin >> reponse;
-    if (reponse == 'o' || reponse == 'O') P->pere=retrouverPersonne(A);
+    if (reponse == 'o' || reponse == 'O') P->pere = retrouverPersonne(A);
     else P->pere = NULL;
 
     cout << "Ajouter une mère ? [o/N] =>";
     cin >> reponse;
-    if (reponse == 'o' || reponse == 'O') P->mere=retrouverPersonne(A);
+    if (reponse == 'o' || reponse == 'O') P->mere = retrouverPersonne(A);
     else P->mere = NULL;
 
-    personne * temp = &A;
-    while (temp->suivant !=NULL) temp = temp->suivant;
+    while (temp->suivant != NULL) temp = temp->suivant;
     temp->suivant = P;
     return 0;
 }}}
 
 int afficherArbre(personne & A){{{
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’afficher !" << endl;
         return 1;
     }
     cout << endl << "\t\tAffichage de l'arbre : "<< endl;
-    int retcode=0;
+    int retcode = 0;
     personne * temp = &A;
-    while (temp->suivant !=NULL){
+    while (temp->suivant != NULL){
         temp = temp->suivant;
-        temp->show(++retcode,1);
+        temp->show(++retcode, true);
     }
     return retcode;
 }}}
 
 personne * retrouverPersonne(personne & A, bool afficher){{{
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
         return NULL;
     }
-    personne * p=NULL;
+    personne * p = NULL;
     personne * temp;
-    int critere, age, numero, choix=-1, place, cmpt=0;
+    int critere, age, numero, choix = -1, place, cmpt=0;
     string nom, prenom;
-    bool genre, sortie=false;
+    bool genre, sortie = false;
 
     cout << "\t\tRetrouvage de personne : "<< endl;
     while(!sortie) {
-        temp=&A;
-        choix=-1;
-        numero=0;
+        temp = &A;
+        choix = -1;
+        numero = 0;
         cout << "Vous voulez chercher à partir de quelle donnée ?" << endl;
         cout << "1) nom" << endl;
         cout << "2) prénom" << endl;
@@ -240,25 +241,25 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
                 cout << "Entrez le nom de la personne" << endl << "==>";
                 cin >> nom;
                 
-                while (temp->suivant !=NULL){
+                while (temp->suivant != NULL){
                     temp = temp->suivant;
-                    if (nom==temp->nom) temp->show(++numero);
+                    if (nom == temp->nom) temp->show(++numero);
                 }
                 break;
             case 2:
                 cout << "Entrez le prénom de la personne" << endl << "==>";
                 cin >> prenom;
                 
-                while (temp->suivant !=NULL){
+                while (temp->suivant != NULL){
                     temp = temp->suivant;
-                    if (prenom==temp->prenom) temp->show(++numero);
+                    if (prenom == temp->prenom) temp->show(++numero);
                 }
                 break;
             case 3:
                 cout << "Entrez 1 pour homme ou 0 pour femme (oui, c'est sexiste.)" << endl << "==>";
                 cin >> genre;
                 
-                while (temp->suivant !=NULL){
+                while (temp->suivant != NULL){
                     temp = temp->suivant;
                     if (genre == temp->genre) temp->show(++numero);
                 }
@@ -267,7 +268,7 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
                 cout << "Entrez l'age de la personne" << endl << "==>";
                 cin >> age;
                 
-                while (temp->suivant !=NULL){
+                while (temp->suivant != NULL){
                     temp = temp->suivant;
                     if (age == temp->age) temp->show(++numero);
                 }
@@ -276,72 +277,71 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
                 cout << "Entrez le numéro de la personne" << endl << "==>";
                 cin >> place;
 
-                numero=1;
+                numero = 1;
                 while (++cmpt != place+1 && temp->suivant != NULL) {
                     temp = temp->suivant;
                     if (temp->suivant == NULL) {
                         cout << "Vous avez entré un numéro ne correspondant pas à une personne…" << endl;
-                        numero=-1;
+                        numero = -1;
                     }
                 }
-                p=temp;
-                sortie=true;
-
+                p = temp;
+                sortie = true;
                 break;
             default:
                 cout << "Try again…" << endl;
                 break;
         }
-        if (numero<=0) {
+        if (numero <= 0) {
             char continuer;
             cout << "Rien trouvé…" << endl << "Recommencer la recherche ? [O/n]" << endl << "==>";
             cin >> continuer;
-            if (continuer == 'n' || continuer == 'N') sortie=true;
+            if (continuer == 'n' || continuer == 'N') sortie = true;
         }
         else {
-            while (choix<0||choix>numero) {
-                if (numero==1) choix=1;
+            while (choix < 0 || choix > numero) {
+                if (numero == 1) choix = 1;
                 else {
                     cout << "Entrez le numéro de la personne que vous cherchez, ou 0 pour recommencer :" << endl << "==>";
                     cin >> choix;
                 }
-                if (choix>0||choix<numero){
-                    cmpt=0;
-                    temp=&A;
+                if (choix > 0 || choix < numero){
+                    cmpt = 0;
+                    temp = &A;
                     switch (critere){
                         case 1:
-                            while (temp->suivant !=NULL){
+                            while (temp->suivant != NULL){
                                 temp = temp->suivant;
-                                if (nom==temp->nom && ++cmpt == choix) {
-                                    p=temp;
-                                    sortie=true;
+                                if (nom == temp->nom && ++cmpt == choix) {
+                                    p = temp;
+                                    sortie = true;
                                 }
                             }
                             break;
                         case 2:
-                            while (temp->suivant !=NULL){
+                            while (temp->suivant != NULL){
                                 temp = temp->suivant;
-                                if (prenom==temp->prenom && ++cmpt == choix) {
-                                    p=temp;
-                                    sortie=true;
+                                if (prenom == temp->prenom && ++cmpt == choix) {
+                                    p = temp;
+                                    sortie = true;
                                 }
                             }
                             break;
                         case 3:
-                            while (temp->suivant !=NULL){
+                            while (temp->suivant != NULL){
                                 temp = temp->suivant;
                                 if (genre == temp->genre && ++cmpt == choix) {
-                                    p=temp;
-                                    sortie=true;
+                                    p = temp;
+                                    sortie = true;
                                 }
                             }
                             break;
                         case 4:
-                            while (temp->suivant !=NULL){
+                            while (temp->suivant != NULL){
                                 temp = temp->suivant;
                                 if (age == temp->age && ++cmpt == choix) {
-                                    p=temp;
-                                    sortie=true;
+                                    p = temp;
+                                    sortie = true;
                                 }
                             }
                             break;
@@ -351,31 +351,34 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
         }
     }
     if (afficher) p->show();
+    //TODO segfault si on trouve rien et qu’on sort quand même
     return p;
 }}}
 
 int ascendants(personne & pers, int nbgene){{{
-    if (&pers==NULL) {
+    if (&pers == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les ascendants !" << endl;
         return 1;
     }
+    int retcode = 0;
     personne * P = &pers;
-    P->show(0,true);
+    P->show(0, true);
+    retcode++;
     if (nbgene>0) {
-        if (P->mere != NULL) ascendants(*P->mere,nbgene-1);
-        if (P->pere != NULL) ascendants(*P->pere,nbgene-1);
+        if (P->mere != NULL) retcode += ascendants(*P->mere, nbgene-1);
+        if (P->pere != NULL) retcode += ascendants(*P->pere, nbgene-1);
     }
-    return 0;
+    return retcode;
 }}}
 
 vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
     vector<personne *> venfants;
     personne * P = &pers;
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
         return venfants;
     }
-    if (P==NULL) {
+    if (P == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les enfants !" << endl;
         return venfants;
     }
@@ -384,14 +387,14 @@ vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
         P->show();
     }
 
-    int retcode=0;
+    int n = 0;
     personne * temp = &A;
-    while (temp->suivant !=NULL){
+    while (temp->suivant != NULL){
         temp = temp->suivant;
-        if (temp->pere==P||temp->mere==P) {
+        if (temp->pere == P || temp->mere == P) {
             venfants.push_back(temp);
-            if (show) temp->show(++retcode);
-            else retcode++;
+            n++;
+            if (show) temp->show(n);
         }
     }
     return venfants;
@@ -402,105 +405,101 @@ vector<personne *> soeursFreres(personne & A, personne & pers) {{{
     vector<personne *> venfants;
     vector<personne *>::iterator it;
     personne * P = &pers;
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
         return vsoeursfreres;
     }
-    if (P==NULL) {
+    if (P == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les frères et sœurs !" << endl;
         return vsoeursfreres;
     }
     cout << endl << "\t\tAffichage des frères, sœurs, demi-frères et demi-sœurs de (ie des enfants des parents de): "<< endl;
-    P->show(-1,false);
+    P->show(-1, false);
 
     if (P->mere != NULL) {
-        venfants = enfants(A,*P->mere,false);
+        venfants = enfants(A, *P->mere, false);
         vsoeursfreres.insert(vsoeursfreres.end(), venfants.begin(), venfants.end());
     }
     if (P->pere != NULL) {
-        venfants = enfants(A,*P->pere,false);
+        venfants = enfants(A, *P->pere, false);
         vsoeursfreres.insert(vsoeursfreres.end(), venfants.begin(), venfants.end());
     }
 
     sort(vsoeursfreres.begin(), vsoeursfreres.end());
-    vsoeursfreres.erase(unique(vsoeursfreres.begin(), vsoeursfreres.end() ), vsoeursfreres.end());
+    vsoeursfreres.erase(unique(vsoeursfreres.begin(), vsoeursfreres.end()), vsoeursfreres.end());
 
-    it=vsoeursfreres.begin();
+    it = vsoeursfreres.begin();
     while (*it != P) it++;
     vsoeursfreres.erase(it);
 
-    for (int i(0); i<int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
+    for (int i(0); i < int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
 
     return vsoeursfreres;
 }}}
 
 vector<personne *> cousins(personne & A, personne & pers) {{{
-    personne * P = &pers;
-    personne * temp = &pers;
-    vector<personne *> venfants;
-    vector<personne *> onclestantes;
-    vector<personne *> vcousins;
-    if (&A==NULL) {
+    personne * P = &pers, * temp = &pers;
+    vector<personne *> venfants, onclestantes, vcousins;
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
         return vcousins;
     }
-    if (P==NULL) {
+    if (P == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les cousins !" << endl;
         return vcousins;
     }
-    cout << endl << "\t\tAffichage des cousins et cousines de (ie des petits-enfants des grands-parents de): "<< endl;
-    P->show(-1,false);
+    cout << endl << "\t\tAffichage des cousins et cousines de: "<< endl;
+    P->show(-1, false);
 
     if (P->mere != NULL) {
         temp = P->mere;
         if (temp->mere != NULL) {
-            venfants = enfants(A,*temp->mere,false);
+            venfants = enfants(A, *temp->mere, false);
             onclestantes.insert(onclestantes.end(), venfants.begin(), venfants.end());
         }
         if (temp->pere != NULL) {
-            venfants = enfants(A,*temp->pere,false);
+            venfants = enfants(A, *temp->pere, false);
             onclestantes.insert(onclestantes.end(), venfants.begin(), venfants.end());
         }
     }
     if (P->pere != NULL) {
         temp = P->pere;
         if (temp->mere != NULL) {
-            venfants = enfants(A,*temp->mere,false);
+            venfants = enfants(A, *temp->mere, false);
             onclestantes.insert(onclestantes.end(), venfants.begin(), venfants.end());
         }
         if (temp->pere != NULL) {
-            venfants = enfants(A,*temp->pere,false);
+            venfants = enfants(A, *temp->pere, false);
             onclestantes.insert(onclestantes.end(), venfants.begin(), venfants.end());
         }
     }
 
     for (int i(0); i<int(onclestantes.size()); ++i) {
         if (onclestantes[i] != P->pere && onclestantes[i] != P->mere) {
-            venfants = enfants(A,*onclestantes[i],false);
+            venfants = enfants(A, *onclestantes[i], false);
             vcousins.insert(vcousins.end(), venfants.begin(), venfants.end());
         }
     }
 
     sort(vcousins.begin(), vcousins.end());
-    vcousins.erase(unique(vcousins.begin(), vcousins.end() ), vcousins.end());
+    vcousins.erase(unique(vcousins.begin(), vcousins.end()), vcousins.end());
 
-    for (int i(0); i<int(vcousins.size()); ++i) vcousins[i]->show(i+1);
+    for (int i(0); i < int(vcousins.size()); ++i) vcousins[i]->show(i+1);
 
     return vcousins;
 }}}
 
 int ecrire(personne & A, std::string file) {{{
     cout << "Début de l’écriture…" << endl;
-    if (&A==NULL) {
+    if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’écrire dans un fichier !" << endl;
         return 1;
     }
-    int retcode=0;
+    int retcode = 0;
     personne * temp = &A;
     FILE * fichier = fopen(file.c_str(),"w");
     while (temp->suivant != NULL){
         temp = temp->suivant;
-
         fputs("------------------------------------------\n", fichier);
         fputs(("Nom: " + temp->nom + "\n").c_str(), fichier);
         fputs(("Prénom: " + temp->prenom + "\n").c_str(), fichier);
@@ -517,6 +516,7 @@ int ecrire(personne & A, std::string file) {{{
     }
     fclose(fichier);
     cout << "Fin de l’écriture…" << endl;
+    //TODO retcode
     return retcode;
 }}}
 
