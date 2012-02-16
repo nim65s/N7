@@ -15,8 +15,8 @@ int main(){
     cout << "\t\t\t Arbre" << endl;
     afficherArbre(*A);
 
-    int choix(0),n(0);
-    bool fin=false;
+    int choix(0), n(0), retour;
+    bool fin = false;
     while (!fin) {
         cout << "Que voulez-vous faire ?" << endl;
         cout << "0) Sortir" << endl;
@@ -35,18 +35,30 @@ int main(){
                 fin=true;
                 break;
             case 1:
-                ajouterPersonne(*A);
+                retour = ajouterPersonne(*A);
+                switch (retour) {
+                    case 0:
+                        cout << "OK" << endl << endl;
+                        break;
+                    case -1:
+                        cout << "erreur sur l’arbre…" << endl << endl;
+                        break;
+                }
                 break;
             case 2:
-                afficherArbre(*A);
+                retour = afficherArbre(*A);
+                if (retour < 0) cout << "erreur sur l’arbre…" << endl << endl;
+                else cout << "Trouvé " << retour << " personnes" << endl << endl;
                 break;
             case 3:
-                retrouverPersonne(*A,true);
+                retrouverPersonne(*A);
                 break;
             case 4:
                 cout << "Vous voulez les ascendants sur combien de générations ?" << endl << "==>";
                 cin >> n;
-                ascendants(*retrouverPersonne(*A),n);
+                retour = ascendants(*retrouverPersonne(*A),n);
+                if (retour < 0) cout << "erreur sur la personne…" << endl << endl;
+                else cout << "Trouvé " << retour << " ascendants" << endl << endl;
                 break;
             case 5:
                 enfants(*A,*retrouverPersonne(*A));
@@ -58,10 +70,21 @@ int main(){
                 cousins(*A,*retrouverPersonne(*A));
                 break;
             case 8:
-                ecrire(*A);
+                retour = ecrire(*A);
+                switch (retour) {
+                    case 0:
+                        cout << "OK" << endl << endl;
+                        break;
+                    case -1:
+                        cout << "erreur sur l’arbre…" << endl << endl;
+                        break;
+                    case -2:
+                        cout << "erreur sur le fichier…" << endl << endl;
+                        break;
+                }
                 break;
             default :
-                cout << "Try Again…" << endl;
+                cout << "Try Again…" << endl << endl;
         } 
     }
     return 0;

@@ -46,11 +46,11 @@ personne * creerArbreVide(){{{
 int ajouterPersonne(personne & A, personne & P){{{
     if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
-        return 1;
+        return -1;
     }
     if (&P == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à l’ajouter dans l’arbre !" << endl;
-        return 1;
+        return -2;
     }
     personne * temp = &A;
     while (temp->suivant != NULL) temp = temp->suivant;
@@ -167,10 +167,9 @@ personne * creerArbreInitial() {{{
 int ajouterPersonne(personne &A){{{
     if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à ajouter quelqu’un dedans !" << endl;
-        return 1;
+        return -1;
     }
-    personne * P = new personne;
-    personne * temp = &A;
+    personne * P = new personne, * temp = &A;
     char reponse;
 
     cout << "Nom ? =>";
@@ -200,7 +199,7 @@ int ajouterPersonne(personne &A){{{
 int afficherArbre(personne & A){{{
     if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’afficher !" << endl;
-        return 1;
+        return -1;
     }
     cout << endl << "\t\tAffichage de l'arbre : "<< endl;
     int retcode = 0;
@@ -217,8 +216,7 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à trouver des gens dedans !" << endl;
         return NULL;
     }
-    personne * p = NULL;
-    personne * temp;
+    personne * p = NULL, * temp;
     int critere, age, numero, choix = -1, place, cmpt=0;
     string nom, prenom;
     bool genre, sortie = false;
@@ -292,12 +290,8 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
                 cout << "Try again…" << endl;
                 break;
         }
-        if (numero <= 0) {
-            char continuer;
-            cout << "Rien trouvé…" << endl << "Recommencer la recherche ? [O/n]" << endl << "==>";
-            cin >> continuer;
-            if (continuer == 'n' || continuer == 'N') sortie = true;
-        }
+        if (numero <= 0)
+            cout << "Rien trouvé…" << endl << "Recommencez la recherche ?" << endl;
         else {
             while (choix < 0 || choix > numero) {
                 if (numero == 1) choix = 1;
@@ -351,19 +345,17 @@ personne * retrouverPersonne(personne & A, bool afficher){{{
         }
     }
     if (afficher) p->show();
-    //TODO segfault si on trouve rien et qu’on sort quand même
     return p;
 }}}
 
 int ascendants(personne & pers, int nbgene){{{
     if (&pers == NULL) {
         cout << "Si on ne donne pas une personne à cette fonction, elle va avoir du mal à en trouver les ascendants !" << endl;
-        return 1;
+        return -1;
     }
     int retcode = 0;
     personne * P = &pers;
     P->show(0, true);
-    retcode++;
     if (nbgene>0) {
         if (P->mere != NULL) retcode += ascendants(*P->mere, nbgene-1);
         if (P->pere != NULL) retcode += ascendants(*P->pere, nbgene-1);
@@ -400,9 +392,8 @@ vector<personne *> enfants(personne & A, personne & pers, bool show) {{{
     return venfants;
 }}}
 
-vector<personne *> soeursFreres(personne & A, personne & pers) {{{
-    vector<personne *> vsoeursfreres;
-    vector<personne *> venfants;
+vector<personne *> soeursFreres(personne & A, personne & pers, bool show) {{{
+    vector<personne *> vsoeursfreres, venfants;
     vector<personne *>::iterator it;
     personne * P = &pers;
     if (&A == NULL) {
@@ -432,12 +423,12 @@ vector<personne *> soeursFreres(personne & A, personne & pers) {{{
     while (*it != P) it++;
     vsoeursfreres.erase(it);
 
-    for (int i(0); i < int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
+    if (show) for (int i(0); i < int(vsoeursfreres.size()); ++i) vsoeursfreres[i]->show(i+1);
 
     return vsoeursfreres;
 }}}
 
-vector<personne *> cousins(personne & A, personne & pers) {{{
+vector<personne *> cousins(personne & A, personne & pers, bool show) {{{
     personne * P = &pers, * temp = &pers;
     vector<personne *> venfants, onclestantes, vcousins;
     if (&A == NULL) {
@@ -484,7 +475,7 @@ vector<personne *> cousins(personne & A, personne & pers) {{{
     sort(vcousins.begin(), vcousins.end());
     vcousins.erase(unique(vcousins.begin(), vcousins.end()), vcousins.end());
 
-    for (int i(0); i < int(vcousins.size()); ++i) vcousins[i]->show(i+1);
+    if (show) for (int i(0); i < int(vcousins.size()); ++i) vcousins[i]->show(i+1);
 
     return vcousins;
 }}}
@@ -493,12 +484,12 @@ int ecrire(personne & A, std::string file) {{{
     cout << "Début de l’écriture…" << endl;
     if (&A == NULL) {
         cout << "Si on ne donne pas un arbre à cette fonction, elle va avoir du mal à l’écrire dans un fichier !" << endl;
-        return 1;
+        return -1;
     }
-    int retcode = 0;
     personne * temp = &A;
     FILE * fichier = fopen(file.c_str(),"w");
-    while (temp->suivant != NULL){
+    if (fichier == NULL) return -2;
+    while (temp->suivant != NULL) {
         temp = temp->suivant;
         fputs("------------------------------------------\n", fichier);
         fputs(("Nom: " + temp->nom + "\n").c_str(), fichier);
@@ -516,8 +507,7 @@ int ecrire(personne & A, std::string file) {{{
     }
     fclose(fichier);
     cout << "Fin de l’écriture…" << endl;
-    //TODO retcode
-    return retcode;
+    return 0;
 }}}
 
 // vim: set foldmethod=marker:
