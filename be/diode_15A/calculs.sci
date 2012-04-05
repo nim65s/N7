@@ -70,9 +70,9 @@ for v=list (0.55,0.56,0.57,0.58,0.59,0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68
 printf('%.2e | %.2e\n',v,Is*(%e^(v/Ut)-1)), end
 
 v=[0.55:0.01:0.64]
-//f = gcf()
-//plot(v,Is*(%e^(v/Ut)-1))
-//xs2png(f,"II-2.png")
+f = gcf()
+plot(v,Is*(%e^(v/Ut)-1))
+xs2png(f,"II-2.png")
 
 printf('\tII-3 : Calcul des valeurs des composants pour un courant de 7mA\n')
 I = 7E-3
@@ -91,15 +91,13 @@ printf('fc = %.2e\n',fc)
 
 printf('\tIII-2 : Tracé de Delta\n')
 v=[0.60:0.005:0.68]
-//plot(v,Is*(%e^(v/Ut)-1),v,(3-v)/50)
-//xs2png(f,"III-2.png")
+plot(v,Is*(%e^(v/Ut)-1),v,(3-v)/50)
+xs2png(f,"III-2.png")
 
 printf('\tIII-3 : Calcul de la puissance maximale admissible par la diode')
 J = 300
 mu_n = 200
-rho_n = 1 / ( q*Nd*mu_n)
-rho_p = 1 / (q*Na*mu_p)
-P = (rho_n*Xn + rho_p*Xp)*Aj*J*J
+rho_n = 1 / ( q*Nd*mu_n) rho_p = 1 / (q*Na*mu_p) P = (rho_n*Xn + rho_p*Xp)*Aj*J*J
 
 printf('J = %.2e\n',J)
 printf('mu_n = %.2e\n',mu_n)
@@ -107,4 +105,4 @@ printf('rho_n = %.2e\n',rho_n)
 printf('rho_p = %.2e\n',rho_p)
 printf('P = %.2e\n',P)
 
-//exit
+exit
