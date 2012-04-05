@@ -97,9 +97,7 @@ xs2png(f,"III-2.png")
 printf('\tIII-3 : Calcul de la puissance maximale admissible par la diode')
 J = 300
 mu_n = 200
-rho_n = 1 / ( q*Nd*mu_n)
-rho_p = 1 / (q*Na*mu_p)
-P = (rho_n*Xn + rho_p*Xp)*Aj*J*J
+rho_n = 1 / ( q*Nd*mu_n) rho_p = 1 / (q*Na*mu_p) P = (rho_n*Xn + rho_p*Xp)*Aj*J*J
 
 printf('J = %.2e\n',J)
 printf('mu_n = %.2e\n',mu_n)
