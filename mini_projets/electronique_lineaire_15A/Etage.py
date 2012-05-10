@@ -1,14 +1,14 @@
 #!/usr/bin/python2
 #-*- coding: utf-8 -*-
 
-import shelve, os.path
+import shelve, os.path, sys
 from mplib import *
 from logging import warning, error
 
 old_shelve = False
 
 try:
-    old = shelve.open(os.path.expanduser('~/.js_shelve'), writeback=True)
+    old = shelve.open(os.path.expanduser('~/N7/mini_projets/electronique_lineaire_15A/shelve'), writeback=True)
     old_shelve = True
 except:
     error('Ratage de l’ouverture du shelve')
@@ -18,18 +18,30 @@ class AmplifierProperty(object):
     """ Classe remplançant la fonction buildin «property»,
     histoire d’éviter la duplication de code.
     Entièrement copié collé de http://stackoverflow.com/questions/1380566/can-i-add-parameters-to-a-python-property-to-reduce-code-duplication """
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, nom, modifiable=True):
+        self.nom = nom
+        self.modifiable = modifiable
 
     def __get__(self, obj, objtype):
-        return getattr(obj, self.name)
+        return getattr(obj, self.nom)
 
     def __set__(self, obj, val):
-        setattr(obj, self.name, float(val))
-        obj.update()
+        if self.modifiable:
+            setattr(obj, self.nom, float(val))
+            obj.update()
+        else:
+            error('Vous essayez de modifier %s, qui ne se modifie pas à la main…' % self.nom.replace('_',''))
 
 class AbstractAmplifier(object):
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',ve=0):
+    
+    Rb1 = AmplifierProperty('_Rb1')
+    Rb2 = AmplifierProperty('_Rb1')
+    Rc = AmplifierProperty('_Rc')
+    Re = AmplifierProperty('_Re')
+    b = AmplifierProperty('_b')
+    Ve = AmplifierProperty('_Ve')
+
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',Ve=0):
         b = minimaxi(400,800)
 
         self.nom = nom
@@ -39,7 +51,7 @@ class AbstractAmplifier(object):
         self._Re = Re
         self._Cc = Cc
         self._b = b
-        self._ve = ve
+        self._Ve = Ve
         super(AbstractAmplifier, self).__init__()
 
     def __repr__(self):
@@ -50,8 +62,15 @@ class AbstractAmplifier(object):
         return s
 
 class CollecteurCommun(AbstractAmplifier):
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',ve=0):
-        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom,ve)
+
+    Rb = AmplifierProperty('_Rb', False)
+    Eth = AmplifierProperty('_Eth', False)
+    Ic = AmplifierProperty('_Ic', False)
+    gm = AmplifierProperty('_gm', False)
+    rb = AmplifierProperty('_rb', False)
+
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',Ve=0):
+        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom,Ve)
         self.update()
 
     def update(self):
@@ -85,10 +104,10 @@ class CollecteurCommun(AbstractAmplifier):
     def DS(self,zl):
         """ Dynamique de sortie """
         DS = 2*self._Ic*par(self._Re,zl)
-        if self._ve > 0:
-            if self._ve*self.Ad(zl)/DS > 0.9:
+        if self._Ve > 0:
+            if self._Ve*self.Ad(zl)/DS > 0.9:
                 error('Ouch ça sent la distorsion !')
-                print '{:^6s}: {:^17s}'.format('Ve', si(self._ve))
+                print '{:^6s}: {:^17s}'.format('Ve', si(self._Ve))
                 print '{:^6s}: {:^17s}'.format('Ad', si(self._Ad(zl)))
                 print '{:^6s}: {:^17s}'.format('DS', si(DS))
         return DS
@@ -138,22 +157,30 @@ CC4['DS'] = CC4['o'].DS(5000)
 affiche(CC1)
 affiche(CC4)
 
-CC1['o']._Rb1 = 55000
-CC1['o'].update()
+CC1['o'].Rb1 = 55000
 affiche(CC1)
+
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'u':
+        warning('SHELVE UPDATE')
+        old['CC1'] = CC1
+        old['CC4'] = CC4
 
 if old_shelve:
     if 'CC1' in old:
         if old['CC1'] == CC1:
-            print 'OK'
+            print 'CC1: OK'
         else:
-            print 'KO'
+            print 'CC1: KO'
     else:
         old['CC1'] = CC1
     if 'CC4' in old:
         if old['CC4'] == CC4:
-            print 'OK'
+            print 'CC2: OK'
         else:
-            print 'KO'
+            print 'CC2: KO'
     else:
         old['CC4'] = CC4
+
+if old_shelve:
+    old.close()
