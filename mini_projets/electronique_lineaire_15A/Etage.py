@@ -1,85 +1,227 @@
 #!/usr/bin/python2
 #-*- coding: utf-8 -*-
 
+from logging import warning
+
+def par(a,b): return (a*b)/(a+b)
+
+kSI = ' kMGT'
+mSI = 'munp'
+def si(a):
+    if isinstance(a,minimaxi):
+        return str(a)
+    if a == 0 or abs(a) > 0.9 and abs(a) < 1.1:
+        return '%.2f' % a
+    if abs(a) > 1:
+        for i in range(len(kSI)):
+            if abs(a) < 1000:
+                break
+            a /= 1000
+        if i==0:
+            return '%.2f' % a
+        else:
+            return '%.2f%s' % (a, kSI[i])
+    else:
+        for i in range(len(mSI)):
+            a *= 1000
+            if abs(a) > 0.1:
+                break
+        return '%.2f%s' % (a, mSI[i])
+     
+def testsi():
+    for i in range(-12,+12):
+        print 0.9*10**i, si(0.9*10**i)
+        print 10**i, si(10**i)
+        print 1.1*10**i, si(1.1*10**i)
+
 class minimaxi:
     def __init__(self,mini,maxi):
         self.mini = float(mini)
         self.maxi = float(maxi)
 
     def __eq__(self,a):
-        return isinstance(a,minimaxi) and a.mini == self.mini and a.maxi == self.maxi
+        if isinstance(a,minimaxi):
+            return a.mini == self.mini and a.maxi == self.maxi
+        return a >= self.mini and a <= self.maxi
+
+    def __req__(self,a):
+        return self == a
+    
+    def __ne__(self,a):
+        return not self == a
+
+    def __rne__(self,a):
+        return self != a
+
+    def __gt__(self,a):
+        if isinstance(a,minimaxi):
+            return self.mini > a.mini and self.maxi > a.maxi
+        return self.mini > a
+
+    def __rgt__(self,a):
+        return self <= a
+
+    def __lt__(self,a):
+        if isinstance(a,minimaxi):
+            return self.mini < a.mini and self.maxi < a.maxi
+        return self.maxi < a
+
+    def __rlt__(self,a):
+        return self >= a
+
+    def __ge__(self,a):
+        return self == a or self > a
+
+    def __rge__(self,a):
+        return self < a
+
+    def __le__(self,a):
+        return self == a or self < a
+
+    def __rle__(self,a):
+        return self > a
+
+    def __neg__(self):
+        return minimaxi(-self.maxi, -self.mini)
 
     def __add__(self,a):
-        return minimaxi(self.mini+a.mini,self.maxi+a.maxi)
+        if isinstance(a,minimaxi):
+            return minimaxi(self.mini+a.mini,self.maxi+a.maxi)
+        return minimaxi(self.mini+float(a),self.maxi+float(a))
+
+    def __radd__(self,a):
+        return self.__add__(float(a))
+
+    def __iadd__(self,a):
+        return self + a
 
     def __sub__(self,a):
-        return minimaxi(self.mini-a.mini,self.maxi-a.maxi)
+        if isinstance(a,minimaxi):
+            return minimaxi(self.mini+a.mini,self.maxi+a.maxi)
+        return minimaxi(self.mini-float(a),self.maxi-float(a))
+
+    def __rsub__(self,a):
+        return self.__sub__(float(a))
+
+    def __isub__(self,a):
+        return self - a
 
     def __mul__(self,a):
-        p = (
-                self.mini*a.mini,
-                self.mini*a.maxi,
-                self.maxi*a.mini,
-                self.maxi*a.maxi)
+        p = ''
+        if isinstance(a,minimaxi):
+            p = (
+                    self.mini*a.mini,
+                    self.mini*a.maxi,
+                    self.maxi*a.mini,
+                    self.maxi*a.maxi)
+        else:
+            p = ( self.mini*float(a), self.maxi*float(a))
         return minimaxi(min(p),max(p))
 
+    def __rmul__(self,a):
+        return self.__mul__(float(a))
+
+    def __imul__(self,a):
+        return self * a
+
     def __div__(self,a):
-        p = (
-                self.mini/a.mini,
-                self.mini/a.maxi,
-                self.maxi/a.mini,
-                self.maxi/a.maxi)
+        p = ''
+        if isinstance(a,minimaxi):
+            p = (
+                    self.mini/a.mini,
+                    self.mini/a.maxi,
+                    self.maxi/a.mini,
+                    self.maxi/a.maxi)
+        else:
+            p = (self.mini/float(a), self.maxi/float(a))
         return minimaxi(min(p),max(p))
+
+    def __rdiv__(self,a):
+        p = ''
+        if isinstance(a,minimaxi):
+            p = (
+                    a.mini/self.mini,
+                    a.mini/self.maxi,
+                    a.maxi/self.mini,
+                    a.maxi/self.maxi)
+        else:
+            p = (float(a)/self.mini, float(a)/self.maxi)
+        return minimaxi(min(p),max(p))
+
+
+    def __idiv__(self,a):
+        return self/a
 
     def __invert__(self):
         return minimaxi(1/self.maxi,1/self.mini)
 
     def __repr__(self):
-        if self.mini == self.maxi:
-            return str(self.mini)
-        return 'entre %s et %s'%(self.mini,self.maxi)
+        if self.mini == self.maxi or (self.maxi-self.mini)/self.mini < 0.01:
+            return si(self.mini)
+        return '%s à %s'%(si(self.mini),si(self.maxi))
 
-
-class CollecteurCommun:
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0):
+class AbstractAmplifier(object):
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom=''):
         b = minimaxi(400,800)
-        Rb1 = minimaxi(Rb1,Rb1)
-        Rb2 = minimaxi(Rb2,Rb2)
-        Rc = minimaxi(Rc,Rc)
-        Re = minimaxi(Re,Re)
-        Vcc = minimaxi(12,12)
-        Vbe = minimaxi(0.6,0.6)
-        Ut = minimaxi(0.026,0.026)
-        un = minimaxi(1,1)
 
-        Rb = (Rb1+Rb2)/(Rb1*Rb2)
-        Eth = Vcc/(un+Rb1/Rb2)
-        #self.Ic = ((self.Eth-0.6)/(Re+self.Rb/400),(self.Eth-0.6)/(Re+self.Rb/800)) #(min,max)
-        Ic = (Eth-Vbe)/(Re+Rb/b)
-        gm = Ic/Ut
-        rb = b/gm
-
-        self.b = {}
-        self.b['Rb1'] = Rb1
-        self.b['Rb2'] = Rb2
-        self.b['Rc'] = Rc
-        self.b['Re'] = Re
-        self.b['Cc'] = Cc
-        self.b['b'] = b
-        self.b['Rb'] = Rb
-        self.b['Eth'] = Eth
-        self.b['Ic'] = Ic
-        self.b['gm'] = gm
-        self.b['rb'] = rb
-        self.b['Cc'] = Cc
+        self.nom = nom
+        self.Rb1 = Rb1
+        self.Rb2 = Rb2
+        self.Rc = Rc
+        self.Re = Re
+        self.Cc = Cc
+        self.b = b
+        super(AbstractAmplifier, self).__init__()
 
     def __repr__(self):
-        s = ''
-        for i in self.b:
-            s += '%s: %s\n' %(i,self.b[i])
+        s = '=' * 10 + self.nom + '=' * 10
+        for i in self.__dict__:
+            if i != 'nom':
+                s += '\n{:^6s}: {:^17s}'.format(i,si(self.__dict__[i]))
         return s
 
-CC1 = CollecteurCommun(56000,68000,100,20000)
-CC4 = CollecteurCommun(54500,66500,100,4700)
+class CollecteurCommun(AbstractAmplifier):
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom=''):
+        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom)
+        b = self.b
+        Rb = par(Rb1,Rb2)
+        Eth = 12/(1+Rb1/Rb2)
+        Ic = (Eth-0.6)/(Re+Rb/b)
+        gm = Ic/0.026
+        rb = b/gm
+
+        self.Rb = Rb
+        self.Eth = Eth
+        self.Ic = Ic
+        self.gm = gm
+        self.rb = rb
+
+    def Ze(self,zl):
+        return par(self.Rb, self.rb + self.b*(par(self.Re,zl)))
+
+    def Zs(self,Rg=0):
+        if Rg == 0:
+            warning('Approximation de Rg=0 dans le calcul de Zs de %s' % self.nom)
+        return par(self.Re,(self.rb+par(Rg,self.Rb))/self.b)
+
+    def gain(self,zl):
+        return 1/(1+self.rb/(self.b*par(self.Re,zl)))
+
+    def dds(self,zl):
+        return 2*self.Ic*par(self.Re,zl)
+
+CC1 = CollecteurCommun(56000.0,68000.0,100.0,20000.0,nom='CC1')
+CC4 = CollecteurCommun(54500.0,66500.0,100.0,4700.0,nom='CC4')
 print CC1
+print '{:^6s}: {:^17s}'.format('Ze', si(CC4.Ze(15000)))
+print '{:^6s}: {:^17s}'.format('Zs', si(CC4.Zs(50)))
+print '{:^6s}: {:^17s}'.format('gain', si(CC4.gain(15000)))
+print '{:^6s}: {:^17s}'.format('dds', si(CC4.dds(15000)))
+print
 print CC4
+print '{:^6s}: {:^17s}'.format('Ze', si(CC4.Ze(5000)))
+print '{:^6s}: {:^17s}'.format('Zs', si(CC4.Zs(2690)))
+print '{:^6s}: {:^17s}'.format('gain', si(CC4.gain(5000)))
+print '{:^6s}: {:^17s}'.format('dds', si(CC4.dds(5000)))
+print
+
