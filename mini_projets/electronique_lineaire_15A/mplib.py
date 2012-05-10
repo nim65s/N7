@@ -155,6 +155,11 @@ class minimaxi:
     def __invert__(self):
         return minimaxi(1/self.maxi,1/self.mini)
 
+    def __abs__(self):
+        if self.mini > 0:
+            return minimaxi(abs(self.mini),abs(self.maxi))
+        return minimaxi(abs(self.maxi),abs(self.mini))
+
     def __repr__(self):
         if self.mini == self.maxi or (self.maxi-self.mini)/self.mini < 0.01:
             return si(self.mini)

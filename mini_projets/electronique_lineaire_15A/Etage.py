@@ -96,10 +96,20 @@ class CollecteurCommun(AbstractAmplifier):
     def __eq__(self, a):
         if not isinstance(a,CollecteurCommun):
             return False
+        ret = True
         for i in self.__dict__:
             if i != 'nom' and not self.__dict__[i] == a.__dict__[i]:
-                return False
-        return True
+                diff = abs(self.__dict__[i] - a.__dict__[i])
+                pourcentage = diff/self.__dict__[i]
+                action = 'augmenté'
+                if self.__dict__[i] > a.__dict__[i]:
+                    action = 'diminué'
+                if isinstance(diff,minimaxi): # ouch caymoche !
+                    print '%s: %s a %s de %s (%s %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
+                else:
+                    print '%s: %s a %s de %.2f (%.2f %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
+                ret = False
+        return ret
 
     def __req__(self,a):
         return self == a
@@ -127,6 +137,10 @@ CC4['DS'] = CC4['o'].DS(5000)
 
 affiche(CC1)
 affiche(CC4)
+
+CC1['o']._Rb1 = 55000
+CC1['o'].update()
+affiche(CC1)
 
 if old_shelve:
     if 'CC1' in old:
