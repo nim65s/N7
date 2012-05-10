@@ -161,7 +161,7 @@ class minimaxi:
         return '%s à %s'%(si(self.mini),si(self.maxi))
 
 class AbstractAmplifier(object):
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom=''):
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',ve=0):
         b = minimaxi(400,800)
 
         self.nom = nom
@@ -171,18 +171,19 @@ class AbstractAmplifier(object):
         self.Re = Re
         self.Cc = Cc
         self.b = b
+        self.ve = ve
         super(AbstractAmplifier, self).__init__()
 
     def __repr__(self):
         s = '=' * 10 + self.nom + '=' * 10
         for i in self.__dict__:
-            if i != 'nom':
+            if i != 'nom' and self.__dict__[i] != 0:
                 s += '\n{:^6s}: {:^17s}'.format(i,si(self.__dict__[i]))
         return s
 
 class CollecteurCommun(AbstractAmplifier):
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom=''):
-        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom)
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',ve=0):
+        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom,ve)
         b = self.b
         Rb = par(Rb1,Rb2)
         Eth = 12/(1+Rb1/Rb2)
@@ -208,7 +209,14 @@ class CollecteurCommun(AbstractAmplifier):
         return 1/(1+self.rb/(self.b*par(self.Re,zl)))
 
     def dds(self,zl):
-        return 2*self.Ic*par(self.Re,zl)
+        dds = 2*self.Ic*par(self.Re,zl)
+        if self.ve > 0:
+            if self.ve*self.gain(zl)/self.dds > 0.9:
+                error('Ouch ça sent la distorsion !')
+                print '{:^6s}: {:^17s}'.format('Ve', si(self.ve))
+                print '{:^6s}: {:^17s}'.format('gain', si(self.gain(zl)))
+                print '{:^6s}: {:^17s}'.format('dds', si(self.dds))
+        return dds
 
 CC1 = CollecteurCommun(56000.0,68000.0,100.0,20000.0,nom='CC1')
 CC4 = CollecteurCommun(54500.0,66500.0,100.0,4700.0,nom='CC4')
