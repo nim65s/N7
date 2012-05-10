@@ -64,28 +64,41 @@ class AbstractAmplifier(object):
 class CollecteurCommun(AbstractAmplifier):
 
     Rb = AmplifierProperty('_Rb', False)
-    Eth = AmplifierProperty('_Eth', False)
+    Eb = AmplifierProperty('_Eb', False)
     Ic = AmplifierProperty('_Ic', False)
     gm = AmplifierProperty('_gm', False)
     rb = AmplifierProperty('_rb', False)
 
     def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',Ve=0):
         super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom,Ve)
-        self.update()
+        self.update(init=True)
 
-    def update(self):
-        Rb = par(self._Rb1,self._Rb2)
-        Eth = 12/(1+self._Rb1/self._Rb2)
-        Ic = (Eth-0.6)/(self._Re+Rb/self._b)
-        gm = Ic/0.026
-        rb = self._b/gm
+    def update(self, init=False):
+        a = {}
+        a['_Rb'] = par(self._Rb1,self._Rb2)
+        a['_Eb'] = 12/(1+self._Rb1/self._Rb2)
+        a['_Ic'] = (a['_Eb']-0.6)/(self._Re+a['_Rb']/self._b)
+        a['_gm'] = a['_Ic']/0.026
+        a['_rb'] = self._b/a['_gm']
 
-        self._Rb = Rb
-        self._Eth = Eth
-        self._Ic = Ic
-        self._gm = gm
-        self._rb = rb
-        print 'update done'
+        if not init:
+            for i in ['_Rb','_Eb','_Ic','_gm','_rb']:
+                if self.__dict__[i] != a[i]:
+                    diff = abs(self.__dict__[i]) - abs(a[i])
+                    pourcentage = 100*diff/self.__dict__[i]
+                    action = 'augmenté'
+                    if self.__dict__[i] > a[i]:
+                        action = 'diminué'
+                    if isinstance(diff,minimaxi): # ouch caymoche !
+                        print '%s: %s a %s de %s (%s %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
+                    else:
+                        print '%s: %s a %s de %.2f (%.2f %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
+            print 'update done'
+        self._Rb = a['_Rb']
+        self._Eb = a['_Eb']
+        self._Ic = a['_Ic']
+        self._gm = a['_gm']
+        self._rb = a['_rb']
 
     def Ze(self,zl):
         """ Impédance d’entrée"""
@@ -108,30 +121,26 @@ class CollecteurCommun(AbstractAmplifier):
             if self._Ve*self.Ad(zl)/DS > 0.9:
                 error('Ouch ça sent la distorsion !')
                 print '{:^6s}: {:^17s}'.format('Ve', si(self._Ve))
-                print '{:^6s}: {:^17s}'.format('Ad', si(self._Ad(zl)))
+                print '{:^6s}: {:^17s}'.format('Ad', si(self.Ad(zl)))
                 print '{:^6s}: {:^17s}'.format('DS', si(DS))
         return DS
 
     def __eq__(self, a):
         if not isinstance(a,CollecteurCommun):
             return False
-        ret = True
         for i in self.__dict__:
             if i != 'nom' and not self.__dict__[i] == a.__dict__[i]:
-                diff = abs(self.__dict__[i] - a.__dict__[i])
-                pourcentage = diff/self.__dict__[i]
-                action = 'augmenté'
-                if self.__dict__[i] > a.__dict__[i]:
-                    action = 'diminué'
-                if isinstance(diff,minimaxi): # ouch caymoche !
-                    print '%s: %s a %s de %s (%s %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
-                else:
-                    print '%s: %s a %s de %.2f (%.2f %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
-                ret = False
-        return ret
+                return False
+        return True
 
-    def __req__(self,a):
+    def __req__(self, a):
         return self == a
+
+    def __neq__(self, a):
+        return not self == a
+
+    def __rneq__(self, a):
+        return not self == a
 
 def affiche(etage):
     """ affiche un étage """
