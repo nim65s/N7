@@ -8,7 +8,7 @@ from logging import warning, error
 old_shelve = False
 
 try:
-    old = shelve.open(os.path.expanduser('~/N7/mini_projets/electronique_lineaire_15A/shelve'), writeback=True)
+    old = shelve.open(os.path.expanduser('~/N7/mini_projets/electronique_lineaire_15A/shelve.ignore'), writeback=True)
     old_shelve = True
 except:
     error('Ratage de l’ouverture du shelve')
@@ -84,7 +84,7 @@ class CollecteurCommun(AbstractAmplifier):
         if not init:
             for i in ['_Rb','_Eb','_Ic','_gm','_rb']:
                 if self.__dict__[i] != a[i]:
-                    diff = abs(self.__dict__[i]) - abs(a[i])
+                    diff = abs(self.__dict__[i] - a[i])
                     pourcentage = 100*diff/self.__dict__[i]
                     action = 'augmenté'
                     if self.__dict__[i] > a[i]:

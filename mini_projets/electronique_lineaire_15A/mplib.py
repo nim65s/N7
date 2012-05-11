@@ -97,11 +97,12 @@ class minimaxi:
 
     def __sub__(self,a):
         if isinstance(a,minimaxi):
-            return minimaxi(self.mini+a.mini,self.maxi+a.maxi)
+            p = (self.mini-a.mini,self.maxi-a.maxi)
+            return minimaxi(min(p),max(p))
         return minimaxi(self.mini-float(a),self.maxi-float(a))
 
     def __rsub__(self,a):
-        return self.__sub__(float(a))
+        return -(self - a)
 
     def __isub__(self,a):
         return self - a
