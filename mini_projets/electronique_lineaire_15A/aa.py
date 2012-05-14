@@ -26,20 +26,22 @@ class AbstractAmplifier(object):
     
     Rb1 = AmplifierProperty('_Rb1')
     Rb2 = AmplifierProperty('_Rb2')
+    Re1 = AmplifierProperty('_Re1')
+    Re2 = AmplifierProperty('_Re2')
     Rc = AmplifierProperty('_Rc')
-    Re = AmplifierProperty('_Re')
     Ve = AmplifierProperty('_Ve')
     Zl = AmplifierProperty('_Zl')
     Rg = AmplifierProperty('_Rg')
     b = AmplifierProperty('_b')
 
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',Ve=0,Zl=0,Rg=50):
+    def __init__(self,Rb1,Rb2,Rc,Re1,Re2,Cc=0,Ce=0,nom='',Ve=0,Zl=0,Rg=50):
         self.nom = nom
         self._b = minimaxi(400,800)
         self._Rb1 = float(Rb1)
         self._Rb2 = float(Rb2)
+        self._Re1 = float(Re1)
+        self._Re2 = float(Re2)
         self._Rc = float(Rc)
-        self._Re = float(Re)
         self._Cc = float(Cc)
         self._Ve = float(Ve)
         self._Zl = float(Zl)
