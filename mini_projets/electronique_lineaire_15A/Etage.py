@@ -35,26 +35,28 @@ class AmplifierProperty(object):
 class AbstractAmplifier(object):
     
     Rb1 = AmplifierProperty('_Rb1')
-    Rb2 = AmplifierProperty('_Rb1')
+    Rb2 = AmplifierProperty('_Rb2')
     Rc = AmplifierProperty('_Rc')
     Re = AmplifierProperty('_Re')
-    b = AmplifierProperty('_b')
     Ve = AmplifierProperty('_Ve')
+    Zl = AmplifierProperty('_Zl')
+    Rg = AmplifierProperty('_Rg')
+    b = AmplifierProperty('_b')
 
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',Ve=0):
-        b = minimaxi(400,800)
-
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,Ce=0,nom='',Ve=0,Zl=0,Rg=50):
         self.nom = nom
-        self._Rb1 = Rb1
-        self._Rb2 = Rb2
-        self._Rc = Rc
-        self._Re = Re
-        self._Cc = Cc
-        self._b = b
-        self._Ve = Ve
+        self._b = minimaxi(400,800)
+        self._Rb1 = float(Rb1)
+        self._Rb2 = float(Rb2)
+        self._Rc = float(Rc)
+        self._Re = float(Re)
+        self._Cc = float(Cc)
+        self._Ve = float(Ve)
+        self._Zl = float(Zl)
+        self._Rg = float(Rg)
         super(AbstractAmplifier, self).__init__()
 
-    def __repr__(self):
+    def __str__(self):
         s = '=' * 10 + self.nom + '=' * 10
         for i in self.__dict__:
             if i != 'nom' and self.__dict__[i] != 0:
@@ -69,8 +71,8 @@ class CollecteurCommun(AbstractAmplifier):
     gm = AmplifierProperty('_gm', False)
     rb = AmplifierProperty('_rb', False)
 
-    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',Ve=0):
-        super(CollecteurCommun, self).__init__(Rb1,Rb2,Rc,Re,Cc,0,nom,Ve)
+    def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',Ve=0,Rg=50,Zl=5000):
+        super(CollecteurCommun, self).__init__(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re=Re,Cc=Cc,Ce=0,nom=nom,Ve=Ve,Zl=Zl,Rg=Rg)
         self.update(init=True)
 
     def update(self, init=False):
@@ -80,9 +82,13 @@ class CollecteurCommun(AbstractAmplifier):
         a['_Ic'] = (a['_Eb']-0.6)/(self._Re+a['_Rb']/self._b)
         a['_gm'] = a['_Ic']/0.026
         a['_rb'] = self._b/a['_gm']
-
+        a['_Ze'] = par(a['_Rb'], a['_rb'] + self._b*(par(self._Re,self._Zl)))
+        a['_Zs'] = par(self._Re,((a['_rb']+par(self._Rg,a['_Rb']))/self._b))
+        a['_Ad'] = 1/(1+a['_rb']/(self._b*par(self._Re,self._Zl)))
+        a['_DS'] = 2*a['_Ic']*par(self._Re,self._Zl)
+ 
         if not init:
-            for i in ['_Rb','_Eb','_Ic','_gm','_rb']:
+            for i in ['_Rb','_Eb','_Ic','_gm','_rb','_Ze','_Zs','_Ad']:
                 if self.__dict__[i] != a[i]:
                     diff = abs(self.__dict__[i] - a[i])
                     pourcentage = 100*diff/self.__dict__[i]
@@ -94,36 +100,28 @@ class CollecteurCommun(AbstractAmplifier):
                     else:
                         print '%s: %s a %s de %.2f (%.2f %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
             print 'update done'
+
         self._Rb = a['_Rb']
         self._Eb = a['_Eb']
         self._Ic = a['_Ic']
         self._gm = a['_gm']
         self._rb = a['_rb']
+        self._Ze = a['_Ze']
+        self._Zs = a['_Zs']
+        self._Ad = a['_Ad']
+        self._DS = a['_DS']
 
-    def Ze(self,zl):
-        """ Impédance d’entrée"""
-        return par(self._Rb, self._rb + self._b*(par(self._Re,zl)))
-
-    def Zs(self,Rg=0):
-        """ Impédance de sortie"""
-        if Rg == 0:
-            warning('Approximation de Rg=0 dans le calcul de Zs de %s' % self.nom)
-        return par(self._Re,(self._rb+par(Rg,self._Rb))/self._b)
-
-    def Ad(self,zl):
-        """ Gain """
-        return 1/(1+self._rb/(self._b*par(self._Re,zl)))
-
-    def DS(self,zl):
-        """ Dynamique de sortie """
-        DS = 2*self._Ic*par(self._Re,zl)
+    def __str__(self):
+        s = '=' * 10 + self.nom + '=' * 10
+        if self._Rg == 0:
+            s += '\nApproximation de Rg=0 dans le calcul de Zs de %s' % self.nom
         if self._Ve > 0:
-            if self._Ve*self.Ad(zl)/DS > 0.9:
-                error('Ouch ça sent la distorsion !')
-                print '{:^6s}: {:^17s}'.format('Ve', si(self._Ve))
-                print '{:^6s}: {:^17s}'.format('Ad', si(self.Ad(zl)))
-                print '{:^6s}: {:^17s}'.format('DS', si(DS))
-        return DS
+            if self._Ve*self._Ad/self._DS > 0.9:
+                s += '\nOuch ça sent la distorsion !'
+        for i in ['b','Rb1','Rb2','Re','Rc','Cc','Ve','Rg','Zl','Rb','Eb','Ic','gm','rb','Ze','Zs','Ad','DS']:
+            if self.__dict__['_'+i] != 0:
+                s += '\n{:^6s}: {:^17s}'.format(i,si(self.__dict__['_'+i]))
+        return s
 
     def __eq__(self, a):
         if not isinstance(a,CollecteurCommun):
@@ -142,54 +140,48 @@ class CollecteurCommun(AbstractAmplifier):
     def __rneq__(self, a):
         return not self == a
 
-def affiche(etage):
-    """ affiche un étage """
-    print etage['o']
-    for i in ['Ze','Zs','Ad','DS']:
-        print '{:^6s}: {:^17s}'.format(i, si(etage[i]))
+def affiche(etage=''):
+    """ affiche un étage ou le circuit complet """
+    if etage:
+        print Ampli[etage]
+    else:
+        for etage in Ampli:
+            affiche(etage)
     print
 
-CC1 = {}
-CC1['o'] = CollecteurCommun(56000.0,68000.0,100.0,20000.0,nom='CC1')
-CC1['Ze'] = CC1['o'].Ze(15000)
-CC1['Zs'] = CC1['o'].Zs(50)
-CC1['Ad'] = CC1['o'].Ad(15000)
-CC1['DS'] = CC1['o'].DS(15000)
+Ampli = {}
 
-CC4 = {}
-CC4['o'] = CollecteurCommun(54500.0,66500.0,100.0,4700.0,nom='CC4')
-CC4['Ze'] = CC4['o'].Ze(5000)
-CC4['Zs'] = CC4['o'].Zs(2690)
-CC4['Ad'] = CC4['o'].Ad(5000)
-CC4['DS'] = CC4['o'].DS(5000)
+Ampli['1CC'] = CollecteurCommun(Rb1=54500,Rb2=66500,Rc=100,Re=20000,nom='1CC',Rg=50,Zl=15036)
 
-affiche(CC1)
-affiche(CC4)
+Ampli['4CC'] = CollecteurCommun(Rb1=54500,Rb2=66500,Rc=100,Re=4700,nom='4CC',Rg=2690,Zl=5000)
+#Ampli['1CC'] = CollecteurCommun(Rb1=56000,Rb2=68000,Rc=100,Re=20000,nom='1CC',Rg=50,Zl=15000)
 
-CC1['o'].Rb1 = 55000
-affiche(CC1)
+#Ampli['4CC'] = CollecteurCommun(Rb1=180000,Rb2=150000,Rc=100,Re=3300,nom='4CC',Rg=47000,Zl=5000)
+
+affiche()
+
+#4CC['o'].Rb1 = 330000
+#4CC['o'].Rb2 = 220000
+#4CC['Ze'] = 4CC['o'].Ze(5000)
+#4CC['Zs'] = 4CC['o'].Zs(47000)
+#4CC['Ad'] = 4CC['o'].Ad(5000)
+#4CC['DS'] = 4CC['o'].DS(5000)
+#affiche(4CC)
 
 if len(sys.argv) > 1:
     if sys.argv[1] == 'u':
         warning('SHELVE UPDATE')
-        old['CC1'] = CC1
-        old['CC4'] = CC4
+        old['Ampli'] = Ampli
 
 if old_shelve:
-    if 'CC1' in old:
-        if old['CC1'] == CC1:
-            print 'CC1: OK'
+    for i in Ampli:
+        if i in old:
+            if old[i] == Ampli[i]:
+                print '%s: OK' % Ampli[i].nom
+            else:
+                print '%s: KO' % Ampli[i].nom
         else:
-            print 'CC1: KO'
-    else:
-        old['CC1'] = CC1
-    if 'CC4' in old:
-        if old['CC4'] == CC4:
-            print 'CC2: OK'
-        else:
-            print 'CC2: KO'
-    else:
-        old['CC4'] = CC4
+            old[i] = Ampli[i]
 
 if old_shelve:
     old.close()
