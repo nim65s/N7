@@ -70,6 +70,10 @@ class CollecteurCommun(AbstractAmplifier):
     Ic = AmplifierProperty('_Ic', False)
     gm = AmplifierProperty('_gm', False)
     rb = AmplifierProperty('_rb', False)
+    Ze = AmplifierProperty('_Ze', False)
+    Zs = AmplifierProperty('_Zs', False)
+    Ad = AmplifierProperty('_Ad', False)
+    DS = AmplifierProperty('_DS', False)
 
     def __init__(self,Rb1,Rb2,Rc,Re,Cc=0,nom='',Ve=0,Rg=50,Zl=5000):
         super(CollecteurCommun, self).__init__(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re=Re,Cc=Cc,Ce=0,nom=nom,Ve=Ve,Zl=Zl,Rg=Rg)
@@ -99,7 +103,6 @@ class CollecteurCommun(AbstractAmplifier):
                         print '%s: %s a %s de %s (%s %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
                     else:
                         print '%s: %s a %s de %.2f (%.2f %%)' % (self.nom, i.replace('_',''), action, diff, pourcentage)
-            print 'update done'
 
         self._Rb = a['_Rb']
         self._Eb = a['_Eb']
@@ -149,24 +152,22 @@ def affiche(etage=''):
             affiche(etage)
     print
 
+A1CC = CollecteurCommun(Rb1=56000,Rb2=68000,Rc=100,Re=20000,nom='1CC',Rg=50,Zl=15000)
+
+A4CC = CollecteurCommun(Rb1=180000,Rb2=150000,Rc=100,Re=3300,nom='4CC',Rg=47000,Zl=5000)
+
 Ampli = {}
-
-Ampli['1CC'] = CollecteurCommun(Rb1=54500,Rb2=66500,Rc=100,Re=20000,nom='1CC',Rg=50,Zl=15036)
-
-Ampli['4CC'] = CollecteurCommun(Rb1=54500,Rb2=66500,Rc=100,Re=4700,nom='4CC',Rg=2690,Zl=5000)
-#Ampli['1CC'] = CollecteurCommun(Rb1=56000,Rb2=68000,Rc=100,Re=20000,nom='1CC',Rg=50,Zl=15000)
-
-#Ampli['4CC'] = CollecteurCommun(Rb1=180000,Rb2=150000,Rc=100,Re=3300,nom='4CC',Rg=47000,Zl=5000)
+Ampli['1CC'] = A1CC
+Ampli['4CC'] = A4CC
 
 affiche()
 
-#4CC['o'].Rb1 = 330000
-#4CC['o'].Rb2 = 220000
-#4CC['Ze'] = 4CC['o'].Ze(5000)
-#4CC['Zs'] = 4CC['o'].Zs(47000)
-#4CC['Ad'] = 4CC['o'].Ad(5000)
-#4CC['DS'] = 4CC['o'].DS(5000)
-#affiche(4CC)
+A4CC.Rb1 = 330000
+A4CC.Rb2 = 220000
+
+Ampli['4CC'] = A4CC
+affiche('4CC')
+
 
 if len(sys.argv) > 1:
     if sys.argv[1] == 'u':
