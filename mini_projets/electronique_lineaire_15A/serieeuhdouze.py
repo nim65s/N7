@@ -1,6 +1,8 @@
 #!/usr/bin/python2
 #-*- coding: utf-8 -*-
 
+from mplib import *
+
 E12 = [10]
 v = [12,15,18,22,27,33,39,47,56,68,82,100]
 for p in range(5):
@@ -20,6 +22,9 @@ class E:
                     self.n = i
                     break
             self.v = float(v)
+
+    def minimaxi(self):
+        return minimaxi(self.v*0.9,self.v*1.1)
 
     def __str__(self):
         return 'valeur n°%i:%i' % (self.n,self.v)
