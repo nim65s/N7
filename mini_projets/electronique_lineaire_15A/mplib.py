@@ -35,8 +35,6 @@ def testsi():
         print 1.1*10**i, si(1.1*10**i)
  
 class minimaxi:
-    #TODO définir un "in" qui vérifie qu’un minimaxi est bien compris dans un autre
-    # CdC, toussa…
     def __init__(self,mini,maxi):
         self.mini = float(mini)
         self.maxi = float(maxi)
@@ -163,7 +161,12 @@ class minimaxi:
             return minimaxi(abs(self.mini),abs(self.maxi))
         return minimaxi(abs(self.maxi),abs(self.mini))
 
-    def __repr__(self):
+    def contains(self,a):
+        if isinstance(a, minimaxi):
+            return a.mini >= self.mini and a.maxi <= self.maxi
+        return a >= self.mini and  a <= self.maxi
+
+    def __str__(self):
         if self.mini == self.maxi or (self.maxi-self.mini)/self.mini < 0.01:
             return si(self.mini)
         return '%s à %s'%(si(self.mini),si(self.maxi))
