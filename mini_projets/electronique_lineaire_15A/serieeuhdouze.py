@@ -13,7 +13,7 @@ class E:
     def __init__(self,v=0,n=0):
         if n !=0:
             self.n = n
-            self.v = float(E12(n))
+            self.v = float(E12[n])
         else:
             if not v in E12:
                 raise ValueError
@@ -22,6 +22,7 @@ class E:
                     self.n = i
                     break
             self.v = float(v)
+        self.s=si(self.v)
 
     def minimaxi(self):
         return minimaxi(self.v*0.9,self.v*1.1)
@@ -32,12 +33,8 @@ class E:
     def __float__(self):
         return self.v
 
-    def __iadd__(self,n):
-        if n != 1:
-            raise ValueError
-        return E(n=self.n+1)
+    def __add__(self,n):
+        return E(n=self.n+n)
 
-    def __isub__(self,n):
-        if n != 1:
-            raise ValueError
-        return E(n=self.n-1)
+    def __sub__(self,n):
+        return E(n=self.n-n)
