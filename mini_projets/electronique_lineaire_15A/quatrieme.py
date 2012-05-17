@@ -7,6 +7,8 @@ from serieeuhdouze import *
 import shelve, os.path, sys
 from logging import warning, error
 
+ORDRE = 5
+
 # Init
 nom='4CC'
 a = {}
@@ -57,14 +59,39 @@ def trouvermieux(icc):
                     erreur = quatrieme(cc)
                     score = erreur[0] + erreur[1] + erreur[2]
                     if score == 0:
-                        zero.add(cc)
-                        print Rb1.s,Rb2.s,Re1.s,Re2.s,si(score),quatriemesi(cc)
+                        connu = False
+                        for ccc in zero:
+                            if cc == ccc:
+                                connu = True
+                                break
+                        if not connu:
+                            zero.add(cc)
+                            print Rb1.s,Rb2.s,Re1.s,Re2.s,si(score),quatriemesi(cc)
                     elif score < meilleur_score:
                         meilleur_score = score
                         meilleur = cc
                         print score
     if not zero:
         print meilleur_score
+    return meilleur
+
+def marge(cc):
+    return [ cc.Zs.mini - Zs.mini, Zs.maxi - cc.Zs.maxi, cc.DS.mini - DS ]
+
+def margesi(cc):
+    r = marge(cc)
+    return [si(r[0]),si(r[1]),si(r[2])]
+
+def trouverlemeilleur(zero):
+    meilleur_score = 0
+    meilleur = ''
+    for cc in zero:
+        scores = marge(cc)
+        score = scores[0] + scores[1] + scores[2] 
+        if score > meilleur_score:
+            meilleur_score = score
+            meilleur = cc
+            print cc.Rb1,cc.Rb2,cc.Re1,cc.Re2,si(score),margesi(cc)
     return meilleur
 
 
@@ -75,60 +102,23 @@ print
 
 premier = trouvermieux(init)
 deuxieme = trouvermieux(premier)
-zerocp = zero.copy()
+
 print len(zero)
+
+for i in range(ORDRE):
+    zerocp = zero.copy()
+    for cc in zerocp:
+        trouvermieux(cc)
+    print len(zero)
+
+j=0
 for cc in zerocp:
-    trouvermieux(cc)
-print len(zero)
-zerocp = zero.copy()
-for cc in zerocp:
-    trouvermieux(cc)
-print len(zero)
-zerocp = zero.copy()
-for cc in zerocp:
-    trouvermieux(cc)
-print len(zero)
+    i = 0
+    for ccp in zerocp:
+        if cc == ccp:
+            i += 1
+    if i > 1:
+        j += 1
+print len(zero), j
 
-#meilleur = init
-#meilleur_score = 10000
-
-#for Rb1 in [iRb1-1,iRb1,iRb1+1]:
-    #for Rb2 in [iRb2-1,iRb2,iRb2+1]:
-        #for Re1 in [iRe1-1,iRe1,iRe1+1]:
-            #for Re2 in [iRe2-1,iRe2,iRe2+1]:
-                #cc = CollecteurCommun(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re1=Re1,Re2=Re2,nom=nom,Rg=Rg,Zl=Zl)
-                #erreur = quatrieme(cc)
-                #score = erreur[0] + erreur[1] + erreur[2]
-                #print Rb1.s,Rb2.s,Re1.s,Re2.v,score,quatriemesi(cc)
-                #if score == 0:
-                    #zero.add(cc)
-                #elif score < meilleur_score:
-                    #meilleur_score = score
-                    #meilleur = cc
-                    #print score
-#print meilleur
-#print meilleur_score
-
-#iRb1 = E(meilleur.Rb1)
-#iRb2 = E(meilleur.Rb2)
-#iRe1 = E(meilleur.Re1)
-#iRe2 = E(meilleur.Re2)
-
-#for Rb1 in [iRb1-1,iRb1,iRb1+1]:
-    #for Rb2 in [iRb2-1,iRb2,iRb2+1]:
-        #for Re1 in [iRe1-1,iRe1,iRe1+1]:
-            #for Re2 in [iRe2-1,iRe2,iRe2+1]:
-                #cc = CollecteurCommun(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re1=Re1,Re2=Re2,nom=nom,Rg=Rg,Zl=Zl)
-                #erreur = quatrieme(cc)
-                #score = erreur[0] + erreur[1] + erreur[2]
-                #print Rb1.s,Rb2.s,Re1.s,Re2.s,si(score),quatriemesi(cc)
-                #if score == 0:
-                    #zero.add(cc)
-                #elif score < meilleur_score:
-                    #meilleur_score = score
-                    #meilleur = cc
-                    #print score
-#print meilleur
-#print meilleur_score
-
-#for i in zero
+print trouverlemeilleur(zero)
