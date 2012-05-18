@@ -23,9 +23,9 @@ class E:
                     break
             self.v = float(v)
         self.s=si(self.v)
-
-    def minimaxi(self):
-        return minimaxi(self.v*0.9,self.v*1.1)
+        self.minimaxi = minimaxi(self.v*0.9,self.v*1.1)
+        self.mini = self.v*0.9
+        self.maxi = self.v*1.1
 
     def __str__(self):
         return 'valeur n°%i:%i' % (self.n,self.v)
