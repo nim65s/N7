@@ -32,11 +32,10 @@ class AmplificateurDifferentiel(AbstractAmplifier):
         a['_rb3'] = self._b/a['_gm3']
         a['_Ze'] = 2*a['_rb']
         a['_Zs'] = self._Rc
-        a['_Zs3'] = # TODO \o/
         a['_Ad'] = a['_gm']*self._Rc/2
         a['_DS'] = 2*a['_Ic']*par(a['_Zs3'],self._Zl)-Vce
-        a['_ZS3'] = a['_r23'] + a['_r'] + a['_gm3']*a['_r23']*a['_r']*a['_rb3']/(a['_rb3'] + a['_Rb'])
         a['_r'] = par(a['_Re'],a['_rb3']+a['_Rb'])
+        a['_ZS3'] = a['_r23'] + a['_r'] + a['_gm3']*a['_r23']*a['_r']*a['_rb3']/(a['_rb3'] + a['_Rb'])
  
         if not init:
             for i in ['_Rb','_Re','_Eb','_Ic','_gm','_rb','_Ze','_Zs','_Ad']:
