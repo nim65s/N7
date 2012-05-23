@@ -114,6 +114,8 @@ while True:
         meilleur_score = nouveau_meilleur_score
 
 print meilleur
+meilleur.Zl=100
+print meilleur
 
 print len(ZERO)
 
