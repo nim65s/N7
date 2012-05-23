@@ -27,15 +27,11 @@ class EmetteurCommun(AbstractAmplifier):
         a['_Eb'] = 12/(1+self._Rb1/self._Rb2)
         a['_Ic'] = (a['_Eb']-0.6)/(a['_Re']+a['_Rb']/self._b)
         a['_gm'] = a['_Ic']/0.026
-        a['_gm3'] = a['_Ic3']/0.026
         a['_rb'] = self._b/a['_gm']
-        a['_rb3'] = self._b/a['_gm3']
         a['_Ze'] = par(a['_Rb'], a['_rb'])
         a['_Zs'] = self._Rc
         a['_Ad'] = a['_gm']*par(self._Zl,self._Rc)
         a['_DS'] = 2*a['_Ic']*par(self._Rc,self._Zl)
-        a['_r'] = par(a['_Re'],a['_rb3']+a['_Rb'])
-        a['_ZS3'] = a['_r23'] + a['_r'] + a['_gm3']*a['_r23']*a['_r']*a['_rb3']/(a['_rb3'] + a['_Rb'])
  
         if not init:
             for i in ['_Rb','_Re','_Eb','_Ic','_gm','_rb','_Ze','_Zs','_Ad']:
