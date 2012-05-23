@@ -35,9 +35,21 @@ def testsi():
         print 1.1*10**i, si(1.1*10**i)
  
 class minimaxi:
-    def __init__(self,mini,maxi):
-        self.mini = float(mini)
-        self.maxi = float(maxi)
+    def __init__(self,mini,maxi=0):
+        if maxi == 0:
+            if isinstance(mini, minimaxi):
+                self.mini = mini.mini
+                self.maxi = mini.maxi
+            else:
+                self.mini = float(mini)
+                self.maxi = float(mini)
+        else:
+            if isinstance(mini, minimaxi):
+                self.mini = mini.mini
+                self.maxi = maxi.maxi
+            else:
+                self.mini = float(mini)
+                self.maxi = float(maxi)
 
     def __eq__(self,a):
         if isinstance(a,minimaxi):

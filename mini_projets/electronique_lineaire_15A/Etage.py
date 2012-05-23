@@ -25,15 +25,15 @@ def affiche(etage=''):
             affiche(etage)
     print
 
-A1CC = CollecteurCommun(Rb1=56000,Rb2=68000,Rc=100,Re1=0,Re2=20000,nom='1CC',Rg=50,Zl=15000)
-A2EC = EmetteurCommun(Rb1=47000,Rb2=47000,Rc=5600,Re=33000,Ce=0,nom='2CE',Ve=0,Zl=28788)
+A1CC = CollecteurCommun(Rb1=56000,Rb2=68000,Rc=100,Re1=0,Re2=18000,nom='1CC',Rg=50,Zl=15000)
+#A2EC = EmetteurCommun(Rb1=47000,Rb2=47000,Rc=5600,Re=33000,Ce=0,nom='2CE',Ve=0,Zl=28788)
 
 #A4CC = CollecteurCommun(Rb1=180000,Rb2=150000,Rc=100,Re1=82,Re2=3300,nom='4CC',Rg=47000,Zl=5000)
 A4CC = CollecteurCommun(Rb1=47000,Rb2=560000,Rc=100,Re1=100,Re2=820,nom='4CC',Rg=5600,Zl=5000)
 
 Ampli = {}
 Ampli['1CC'] = A1CC
-Ampli['2EC'] = A2EC
+#Ampli['2EC'] = A2EC
 Ampli['4CC'] = A4CC
 
 affiche()

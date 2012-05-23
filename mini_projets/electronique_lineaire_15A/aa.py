@@ -2,6 +2,7 @@
 #-*- coding: utf-8 -*-
 
 from mplib import *
+from serieeuhdouze import *
 
 class AmplifierProperty(object):
     """ Classe remplançant la fonction buildin «property»,
@@ -37,13 +38,34 @@ class AbstractAmplifier(object):
     def __init__(self,Rb1,Rb2,Rc,Re1,Re2,Rbp=0,Rep=0,Cc=0,Ce=0,nom='',Ve=0,Zl=0,Rg=50):
         self.nom = nom
         self._b = minimaxi(400,800)
-        self._Rb1 = float(Rb1)
-        self._Rb2 = float(Rb2)
-        self._Re1 = float(Re1)
-        self._Re2 = float(Re2)
-        self._Rbp = float(Rbp)
-        self._Rep = float(Rep)
-        self._Rc = float(Rc)
+        if isinstance(Rb1, E):
+            self._Rb1 = Rb1.minimaxi
+        else:
+            self._Rb1 = minimaxi(Rb1*0.9,Rb1*1.1)
+        if isinstance(Rb2, E):
+            self._Rb2 = Rb2.minimaxi 
+        else:
+            self._Rb2 = minimaxi(Rb2*0.9,Rb2*1.1)
+        if isinstance(Re1, E):
+            self._Re1 = Re1.minimaxi 
+        else:
+            self._Re1 = minimaxi(Re1*0.9,Re1*1.1)
+        if isinstance(Re2, E):
+            self._Re2 = Re2.minimaxi 
+        else:
+            self._Re2 = minimaxi(Re2*0.9,Re2*1.1)
+        if isinstance(Rbp, E):
+            self._Rbp = Rbp.minimaxi 
+        else:
+            self._Rbp = minimaxi(Rbp*0.9,Rbp*1.1)
+        if isinstance(Rep, E):
+            self._Rep = Rep.minimaxi 
+        else:
+            self._Rep = minimaxi(Rep*0.9,Rep*1.1)
+        if isinstance(Rc, E):
+            self._Rc = Rc.minimaxi 
+        else:
+            self._Rc = minimaxi(Rc*0.9,Rc*1.1)
         self._Cc = float(Cc)
         self._Ce = float(Ce)
         self._Ve = float(Ve)

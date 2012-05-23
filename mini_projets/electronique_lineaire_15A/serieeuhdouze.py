@@ -15,6 +15,8 @@ class E:
             self.n = n
             self.v = float(E12[n])
         else:
+            if isinstance(v,minimaxi):
+                v = (v.mini+v.maxi)/2
             if not v in E12:
                 raise ValueError
             for i in range(len(E12)):
@@ -34,7 +36,11 @@ class E:
         return self.v
 
     def __add__(self,n):
+        if self.n in [0, len(E12)-1]:
+            return self
         return E(n=self.n+n)
 
     def __sub__(self,n):
+        if self.n in [0, len(E12)-1]:
+            return self
         return E(n=self.n-n)
