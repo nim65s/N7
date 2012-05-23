@@ -36,11 +36,11 @@ class E:
         return self.v
 
     def __add__(self,n):
-        if self.n in [0, len(E12)-1]:
+        if self.n+n not in range(1,len(E12)):
             return self
         return E(n=self.n+n)
 
     def __sub__(self,n):
-        if self.n in [0, len(E12)-1]:
+        if self.n-n not in range(1,len(E12)):
             return self
         return E(n=self.n-n)
