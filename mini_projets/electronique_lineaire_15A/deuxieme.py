@@ -17,12 +17,12 @@ iRb2=E(47000)
 iRe=E(33000)
 Rc=E(5600)
 Zl=16000
-Ve=0.5
+Ve=0.006
 
 init = EmetteurCommun(Rb1=iRb1,Rb2=iRb2,Rc=Rc,Re=iRe,nom=nom,Zl=Zl,Ve=Ve)
 print init
 
-Ad = 20
+Ad = minimaxi(15,30)
 
 def erreurs(cc):
     erreur = 0
@@ -32,7 +32,7 @@ def erreurs(cc):
 
 def erreurssi(cc):
     r = erreurs(cc)
-    return si(r)
+    return si(r[0])
 
 ZERO = set()
 
@@ -79,18 +79,19 @@ def trouvermieux(icc):
     return meilleur, meilleur_score
 
 def marge(cc):
-    return cc.Ad - Ad
+    return [ cc.Ad.mini - Ad.mini, Ad.maxi - cc.Ad.maxi]
 
 def margesi(cc):
     r = marge(cc)
-    return si(r)
+    return [si(r[0]),si(r[1])]
 
 def trouverlemeilleur(ZERO):
     meilleur_score = 0
     meilleur = ''
     for zRb1,zRb2,zRc,zRe in ZERO:
         cc = EmetteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=zRc,Re=zRe,nom=nom,Zl=Zl,Ve=Ve)
-        score = marge(cc)
+        scores = marge(cc)
+        score = scores[0]+scores[1]
         if score > meilleur_score:
             meilleur_score = score
             meilleur = cc
