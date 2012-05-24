@@ -47,7 +47,7 @@ def trouvermieuxboucle(Rb1,Rb2,Re1,Re2,Rc,nom,Rg,Zl,meilleur,meilleur_score):
     erreur = erreurs(cc)
     score = erreur[0] + erreur[1] + erreur[2]
     if score == 0:
-            ZERO.add((Rb1,Rb2,Re1,Re2))
+        ZERO.add((Rb1,Rb2,Re1,Re2))
     elif score < meilleur_score:
         meilleur_score = score
         meilleur = cc
@@ -68,13 +68,12 @@ def trouvermieux(icc):
     for i in range(1,5):
         sRb1 += [iRb1 + i]
         sRb1 += [iRb1 - i]
-        sRb2 += [iRb1 + i]
-        sRb2 += [iRb1 - i]
+        sRb2 += [iRb2 + i]
+        sRb2 += [iRb2 - i]
         sRe1 += [iRe1 + i]
         sRe1 += [iRe1 - i]
-        sRe2 += [iRe1 + i]
-        sRe2 += [iRe1 - i]
-
+        sRe2 += [iRe2 + i]
+        sRe2 += [iRe2 - i]
 
     for Rb1 in sRb1:
         for Rb2 in sRb2:
@@ -102,7 +101,6 @@ def trouverlemeilleur(ZERO):
         if score > meilleur_score:
             meilleur_score = score
             meilleur = cc
-            print cc.Rb1,cc.Rb2,cc.Re1,cc.Re2,si(score),margesi(cc)
     return meilleur
 
 meilleur,meilleur_score = trouvermieux(init)
@@ -114,26 +112,16 @@ while True:
         meilleur_score = nouveau_meilleur_score
 
 print meilleur
-meilleur.Zl=100
-print meilleur
+#meilleur.Zl=100
+#print meilleur
 
 print len(ZERO)
 
 if len(ZERO):
-    for i in range(ORDRE):
-        ZEROcp = ZERO.copy()
-        for cc in ZEROcp:
-            trouvermieux(cc)
-        print len(ZERO)
-
-    j=0
-    for cc in ZEROcp:
-        i = 0
-        for ccp in ZEROcp:
-            if cc == ccp:
-                i += 1
-        if i > 1:
-            j += 1
-    print len(ZERO), j
+    #for i in range(ORDRE):
+        #ZEROcp = ZERO.copy()
+        #for zRb1,zRb2,zRe1,zRe2 in ZEROcp:
+            #trouvermieux(CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=zRe1,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl))
+        #print len(ZERO)
 
     print trouverlemeilleur(ZERO)
