@@ -6,24 +6,24 @@ from aa import *
 class CollecteurCommun(AbstractAmplifier):
 
     Rb = AmplifierProperty('_Rbi', False)
-    Rbe = AmplifierProperty('_Rb', False)
     Re = AmplifierProperty('_Rei', False)
-    Ree = AmplifierProperty('_Re', False)
     Eb = AmplifierProperty('_Ebi', False)
-    Ebe = AmplifierProperty('_Eb', False)
     Ic = AmplifierProperty('_Ici', False)
-    Ice = AmplifierProperty('_Ic', False)
     gm = AmplifierProperty('_gmi', False)
-    gme = AmplifierProperty('_gm', False)
     rb = AmplifierProperty('_rbi', False)
-    rbe = AmplifierProperty('_rb', False)
     Ze = AmplifierProperty('_Zei', False)
-    Zee = AmplifierProperty('_Ze', False)
     Zs = AmplifierProperty('_Zsi', False)
-    Zse = AmplifierProperty('_Zs', False)
     Ad = AmplifierProperty('_Adi', False)
-    Ade = AmplifierProperty('_Ad', False)
     DS = AmplifierProperty('_DSi', False)
+    Rbe = AmplifierProperty('_Rb', False)
+    Ree = AmplifierProperty('_Re', False)
+    Ebe = AmplifierProperty('_Eb', False)
+    Ice = AmplifierProperty('_Ic', False)
+    gme = AmplifierProperty('_gm', False)
+    rbe = AmplifierProperty('_rb', False)
+    Zee = AmplifierProperty('_Ze', False)
+    Zse = AmplifierProperty('_Zs', False)
+    Ade = AmplifierProperty('_Ad', False)
     DSe = AmplifierProperty('_DS', False)
 
     def __init__(self,Rb1,Rb2,Rc,Re1,Re2,Cc=0,nom='',Ve=0,Rg=50,Zl=5000):
@@ -73,7 +73,7 @@ class CollecteurCommun(AbstractAmplifier):
         s += '\n{:^7s}: {:^18s} {:^18s}'.format('Valeur','Ideale',u'Resistances a 10%')
         for i in ['b','Rb1','Rb2','Re1','Re2','Rc','Cc','Ve','Rg','Zl','Rb','Re','Eb','Ic','gm','rb','Ze','Zs','Ad','DS']:
             if self.__dict__['_'+i] != 0:
-                s += '\n{:^7s}:  {:^18s}  {:^18s}'.format(i.replace('_',''),si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
+                s += '\n{:^7s}:  {:^18s}  {:^18s}'.format(i,si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
         return s
 
     def __eq__(self, a):
