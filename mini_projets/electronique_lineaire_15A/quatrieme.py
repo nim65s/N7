@@ -7,7 +7,7 @@ from serieeuhdouze import *
 import shelve, os.path, sys
 from logging import warning, error
 
-ORDRE = 5
+ORDRE = 0
 
 # Init
 nom='4CC'
@@ -47,7 +47,7 @@ def trouvermieuxboucle(Rb1,Rb2,Re1,Re2,Rc,nom,Rg,Zl,meilleur,meilleur_score):
     erreur = erreurs(cc)
     score = erreur[0] + erreur[1] + erreur[2]
     if score == 0:
-        ZERO.add((Rb1,Rb2,Re1,Re2))
+        ZERO.add((Rb1.v,Rb2.v,Re1.v,Re2.v))
     elif score < meilleur_score:
         meilleur_score = score
         meilleur = cc
@@ -112,16 +112,17 @@ while True:
         meilleur_score = nouveau_meilleur_score
 
 print meilleur
-#meilleur.Zl=100
-#print meilleur
 
 print len(ZERO)
 
 if len(ZERO):
-    #for i in range(ORDRE):
-        #ZEROcp = ZERO.copy()
-        #for zRb1,zRb2,zRe1,zRe2 in ZEROcp:
-            #trouvermieux(CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=zRe1,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl))
-        #print len(ZERO)
+    for i in range(ORDRE):
+        ZEROcp = ZERO.copy()
+        for zRb1,zRb2,zRe1,zRe2 in ZEROcp:
+            trouvermieux(CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=zRe1,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl))
+        print len(ZERO)
+    meilleur = trouverlemeilleur(ZERO)
+    print meilleur
 
-    print trouverlemeilleur(ZERO)
+meilleur.Zl=100
+print meilleur

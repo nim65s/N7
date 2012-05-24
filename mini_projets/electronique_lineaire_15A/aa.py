@@ -5,12 +5,15 @@ from mplib import *
 from serieeuhdouze import *
 
 class AmplifierProperty(object):
-    """ Classe remplançant la fonction buildin «property»,
-    histoire d’éviter la duplication de code.
-    Entièrement copié collé de http://stackoverflow.com/questions/1380566/can-i-add-parameters-to-a-python-property-to-reduce-code-duplication """
+    """ Classe remplançant la fonction buildin «property», histoire d’éviter la duplication de code.
+    Entièrement copié collé de 
+    http://stackoverflow.com/questions/1380566/can-i-add-parameters-to-a-python-property-to-reduce-code-duplication """
     def __init__(self, nom, modifiable=True):
         self.nom = nom
-        self.modifiable = modifiable
+        if nom.endswith('i'):
+            self.modifiable = modifiable
+        else:
+            self.modifiable = False
 
     def __get__(self, obj, objtype):
         return getattr(obj, self.nom)
@@ -18,6 +21,10 @@ class AmplifierProperty(object):
     def __set__(self, obj, val):
         if self.modifiable:
             setattr(obj, self.nom, float(val))
+            if self.nom[1:-1] in ['Rb1','Rb2','Re1','Re2','Rbp','Rep','Rc']:
+                setattr(obj, self.nom[:-1], minimaxi(val*0.9,val*1.1))
+            else:
+                setattr(obj, self.nom[:-1], float(val))
             print '%s de %s modifié…' % (self.nom.replace('_',''),obj.nom)
             obj.update()
         else:

@@ -7,21 +7,25 @@ from serieeuhdouze import *
 import shelve, os.path, sys
 from logging import warning, error
 
-ORDRE = 5
+ORDRE = 0
 
 # Init
 nom='1CC'
 a = {}
-iRb1=E(56000)
-iRb2=E(68000)
-iRe2=E(22000)
+#iRb1=E(56000)
+#iRb2=E(68000)
+#iRe2=E(22000)
+iRb1=E(820000)
+iRb2=E(1000000)
+iRe2=E(39)
 Rc=E(100)
 Rg=50
 Zl=15000
 
-init = CollecteurCommun(Rb1=iRb1,Rb2=iRb2,Rc=Rc,Re1=0,Re2=iRe2,nom=nom,Rg=Rg,Zl=Zl)
+init = CollecteurCommun(Rb1=iRb1,Rb2=iRb2,Rc=Rc,Re1=0,Re2=iRe2,nom=nom,Rg=Rg,Zl=Zl,Ve=0.006)
+print init
 
-Ze = minimaxi(25.5,34.5)
+Ze = minimaxi(25500,34500)
 
 def erreurs(cc):
     erreur = [0,0]
@@ -39,11 +43,11 @@ ZERO = set()
 
 def trouvermieuxboucle(Rb1,Rb2,Re2,Rc,nom,Rg,Zl,meilleur,meilleur_score):
     """ ce qu’il se passe dans la boucle de trouvermieux """
-    score = 0
-    icc = CollecteurCommun(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re1=0,Re2=Re2,nom=nom,Rg=Rg,Zl=Zl)
-    cc = icc
+    cc = CollecteurCommun(Rb1=Rb1,Rb2=Rb2,Rc=Rc,Re1=0,Re2=Re2,nom=nom,Rg=Rg,Zl=Zl,Ve=0.006)
+    erreur = erreurs(cc)
+    score = erreur[0] + erreur[1]
     if score == 0:
-        ZERO.add((Rb1,Rb2,Re2))
+        ZERO.add((Rb1.v,Rb2.v,Re2.v))
     elif score < meilleur_score:
         meilleur_score = score
         meilleur = cc
@@ -51,7 +55,7 @@ def trouvermieuxboucle(Rb1,Rb2,Re2,Rc,nom,Rg,Zl,meilleur,meilleur_score):
 
 def trouvermieux(icc):
     meilleur = icc
-    meilleur_score = 1000
+    meilleur_score = 100000
 
     iRb1 = E(icc.Rb1)
     iRb2 = E(icc.Rb2)
@@ -62,8 +66,8 @@ def trouvermieux(icc):
     for i in range(1,5):
         sRb1 += [iRb1 + i]
         sRb1 += [iRb1 - i]
-        sRb2 += [iRb1 + i]
-        sRb2 += [iRb1 - i]
+        sRb2 += [iRb2 + i]
+        sRb2 += [iRb2 - i]
         sRe2 += [iRe2 + i]
         sRe2 += [iRe2 - i]
 
@@ -86,7 +90,7 @@ def trouverlemeilleur(ZERO):
     meilleur_score = 0
     meilleur = ''
     for zRb1,zRb2,zRe1,zRe2 in ZERO:
-        cc = CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=0,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl)
+        cc = CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=0,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl,Ve=0.006)
         scores = marge(cc)
         score = scores[0] + scores[1]
         if score > meilleur_score:
@@ -104,26 +108,14 @@ while True:
         meilleur_score = nouveau_meilleur_score
 
 print meilleur
-meilleur.Zl=100
-print meilleur
 
 print len(ZERO)
 
 if len(ZERO):
     for i in range(ORDRE):
         ZEROcp = ZERO.copy()
-        for cc in ZEROcp:
-            trouvermieux(cc)
+        for zRb1,zRb2,zRe2 in ZEROcp:
+            trouvermieux(CollecteurCommun(Rb1=zRb1,Rb2=zRb2,Rc=Rc,Re1=0,Re2=zRe2,nom=nom,Rg=Rg,Zl=Zl,Ve=0.006))
         print len(ZERO)
-
-    j=0
-    for cc in ZEROcp:
-        i = 0
-        for ccp in ZEROcp:
-            if cc == ccp:
-                i += 1
-        if i > 1:
-            j += 1
-    print len(ZERO), j
-
-    print trouverlemeilleur(ZERO)
+    meilleur = trouverlemeilleur(ZERO)
+    print meilleur
