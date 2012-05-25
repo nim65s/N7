@@ -73,7 +73,7 @@ class CollecteurCommun(AbstractAmplifier):
         s += '\n{:^7s}: {:^18s} {:^18s}'.format('Valeur','Ideale',u'Resistances a 10%')
         for i in ['b','Rb1','Rb2','Re1','Re2','Rc','Cc','Ve','Rg','Zl','Rb','Re','Eb','Ic','gm','rb','Ze','Zs','Ad','DS']:
             if self.__dict__['_'+i] != 0:
-                s += '\n{:^7s}:  {:^18s}  {:^18s}'.format(i,si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
+                s += '\n{:^7s}&{:^18s}&{:^18s}'.format(i,si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
         return s
 
     def __eq__(self, a):
