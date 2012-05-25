@@ -1,0 +1,58 @@
+ \chapter{Énoncé}
+  \section{Cahier des charges}
+
+    \begin{tabular}{|l|l|c|c|c|c|c|}
+     \hline
+     & & Typique & Tolérance & Minimum & Maximum & Unités \\
+     \hline
+     \multirow{4}{3cm}{Caractéristiques générales à 30k\hertz} & Gain en tension & 60 & $\pm$ 5dB & 55 & 65 & dB \\
+     \cline{2-7} & Résistance d'entrée & 30 & $\pm$ 15 \% & 25.5 & 34.5 & \kilo\ohm \\
+     \cline{2-7} & Résistance de sortie & 100 & $\pm$ 15 \% & 85 & 115 & \ohm \\
+     \cline{2-7} & Dynamique de sortie (5\kilo\ohm)& & & 6 & & V càc \\
+     \cline{2-7} & Dynamique de sortie (100\ohm)& & & 0.1 & & V càc \\
+     \hline
+     \multirow{2}{3cm}{Fréquence de coupure} & basse & 100 & $\pm$ 20 \% & 80 & 120 & \hertz \\
+     \cline{2-7} & haute & & & 500 & & k\hertz \\
+     \hline
+     Distorsion harmonique & [1k\hertz;100k\hertz] & & & & 5,00 \% & \\
+     \hline
+     \multirow{2}*{Tension d'alimentation} & Positive & 12V & & 0 & 12 & V \\
+     \cline{2-7} & Négative & -12V & & -12 & 0 & V \\
+     \hline
+     Courant de collecteur & & & & 0.1 & 10 & mA \\
+     \hline
+    \end{tabular}
+
+
+  \section{Contraintes}
+    Obligation d'utiliser un montage d'amplification différentiel.
+
+    Consommer le moins possible.
+
+
+  \section{Conditions d'utilisation}
+
+    \underline{Entrée} : Générateur basse fréquence de résistance interne $R_g = 50 \ohm$
+
+    \underline{Sortie} : Résistance de charge $R_L = 5\kilo\ohm$
+
+
+  \section{Composants}
+    \underline{Actifs} : Transistors BC238
+
+    \underline{Passifs} : Composants appartenant à la norme E12
+
+    \underline{Valeurs} de la norme E12 : 1 ; 1.2 ; 1.5 ; 1.8 ; 2.2 ; 2.7 ; 3.3 ; 3.9 ; 4.7 ; 5.6 ; 6.8 ; 8.2
+
+    \begin{tabular}{|c|c|c|c|}
+     \hline
+     & Minimum & Maximum & Unités \\
+     \hline
+     Résistances & 10 & $10^6$ & \ohm \\
+     \hline
+     Condensateurs & 10 & $4,7.10^6$ & pF \\
+     \hline
+    \end{tabular}
+
+    Précisions : À partir de 1 $\micro$F, les condensateurs sont polarisés ( ils ont donc un sens de branchement). 
+    Les seules valeurs disponibles sont 1$\micro$F, 2.2$\micro$F et 4.7$\micro$F.

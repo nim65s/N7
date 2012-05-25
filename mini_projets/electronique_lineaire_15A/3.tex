@@ -1,0 +1,28 @@
+ \chapter{Architecture}
+  \section{Théorie}
+
+    Le cahier des charges nous impose un gain de 60dB et l'utilisation d'un amplificateur différentiel.
+    Afin d'éviter de saturer celui-ci, on choisira de décomposer ce gain en deux étages : un amplificateur différentiel et un émetteur commun.
+
+    l'émetteur commun ayant un gain plus faible que l'amplificateur différentiel, on prendra arbitrairement un gain de 25 pour l'émetteur commun et un gain de 40 pour l'amplificateur différentiel (ce qui fait bien un gain de 1000 = 60dB).
+
+    De plus, on nous impose une impédance d'entrée de 30 \kilo\ohm, ce qui nous amène à ajouter un collecteur commun possédant une forte impédance d'entrée en amont de l'émetteur commun.
+    Enfin, il nous est également demandé une impédance de sortie de 100\ohm. On utilise donc ici aussi un collecteur commun en sortie de l'amplificateur différentiel ; en effet, celui-ci possède une faible impédance de sortie.
+
+
+  \section{Schéma bloc récapitulatif}
+
+    \begin{tikzpicture}
+     \sbEntree{E}
+     \sbBloc{A}{\textbf{CC} : $Z_E$ = 30\kilo\ohm}{E}
+     \sbRelier[E]{E}{A}
+     \sbBloc{B}{\textbf{EC} : $a_v$ = 25}{A}
+     \sbRelier{A}{B}
+     \sbBloc{C}{\textbf{AD} : $a_v$ = 40}{B}
+     \sbRelier{B}{C}
+     \sbBloc{D}{\textbf{CC} : $Z_S$ = 100\ohm}{C}
+     \sbRelier{C}{D}
+     
+     \sbSortie{S}{D}
+     \sbRelier[S]{D}{S}
+    \end{tikzpicture}

@@ -1,0 +1,162 @@
+ \chapter{Applications aux différents étages}
+  \section{Utilisation d’un algorithme itératif}
+   Une fois un programme de calcul des caractéristiques d’un étage codé, 
+   il nous est venu l’idée de développer un peu ce programme pour qu’il trouve
+   tout seul les valeurs des différents composants.
+
+   ~
+
+   Le principe est simple: pour un collecteur commun, par exemple, on travaille
+   dans un espace à 4 dimensions où les dimensions représentent les résistances
+   $R_{B1}$, $R_{B2}$, $R_{E1}$ et $R_{E2}$ (où, bien entendu, chacune peut prendre
+   les valeurs de la série E12, entre 10 \ohm et 1M\ohm).
+   On part d’un point de cet espace qui semble cohérent, et on recalcule les
+   caractéristiques du circuit pour chaque point adjacent. On regarde ensuite 
+   quel est le point valide le mieux le cahier des charges, et on recommence à partir
+   de ce dernier.
+
+   Une fois que nous avons trouvé un point qui correspond, on cherche encore un peu
+   pour voir s’il n’y en aurait pas d’autres, et on prend ensuite le plus performant.
+   Lorsque l’on a encore l’embarras du choix, on prend les résistances les plus 
+   importantes pour que les courants soient les plus faibles possibles.
+
+   ~
+   
+   Il est alors intéressant d’utiliser l’outil informatique pour prendre en compte
+   facilement le fait que le $\beta$ varie du simple au double, voire que les 
+   résistances de la série E12 sont données à 10\%.
+
+   Les scripts qui implémentent cet algorithme en python sont disponibles à
+   cette adresse: 
+   
+   https://github.com/nim65s/N7/tree/master/mini\_projets/electronique\_lineaire\_15A
+
+
+  \section{Collecteur Commun du dernier étage}
+   Pour tester ce script, le plus simple est de commencer par le dernier étage.
+
+   En effet, on sait que sa résistance de sortie est très importante, et que sa
+   dynamique de sortie doit tenir les 6V.
+
+    Par contre, pour ces calculs, la résistance de sortie du troisième étage intervient.
+    On peut en général la négliger, mais puisque c’est une machine qui calcule, ça ne
+    change pas grand chose. Nous avons donc estimé la résistance de sortie du troisième
+    étage à 5.6\kilo\ohm, puisque c’est $R_C$ de la paire différentielle.
+
+   On trouve les caractéristiques suivantes:
+
+   \begin{tabular}{|c|c|c|}
+    \hline
+     Grandeur  & Idéale           &   Résistances connues à 10\% \\\hline
+     $\beta$     & 400.00 à 800.00 & 400.00 à 800.00 \\\hline
+     $R_{B1}$   &      10.00k      & 9.00k à 11.00k  \\\hline
+     $R_{B2}$   &     680.00k      &612.00k à 748.00k\\\hline
+     $R_{E1}$   &      100.00      & 90.00 à 110.00  \\\hline
+     $R_{E2}$   &      820.00      & 738.00 à 902.00 \\\hline
+     $R_C$       &      100.00      & 90.00 à 110.00  \\\hline
+     $R_G$       &      5.60k       &      5.60k       \\\hline
+     $Z_L$       &      5.00k       &      5.00k       \\\hline
+     $R_B$       &      9.86k       & 7.26k à 13.25k  \\\hline
+     $R_E$       &      920.00      & 828.00 à 1.01k  \\\hline
+     $E_B$       &      11.83       &      11.79       \\\hline
+     $I_C$       & 11.88m à 12.04m & 10.71m à 13.45m \\\hline
+     $g_m$       &457.08m à 463.12m&411.73m à 517.25m\\\hline
+     $r_b$       & 863.71 à 1.75k  & 773.32 à 1.94k  \\\hline
+     $Z_E$       & 4.85k à 19.11k  & 2.82k à 32.55k  \\\hline
+     $Z_S$       & 92.73 à 100.38  & 67.03 à 140.22  \\\hline
+     $Av$        &       0.99       &       0.99       \\\hline
+     $DS$         &  16.74 à 16.97  &  13.39 à 21.14  \\\hline
+  \end{tabular}
+
+
+  On peut également vérifier que la dynamique de sortie pour 100\ohm{}
+   reste suffisament bonne:
+
+
+   \begin{tabular}{|c|c|c|}
+    \hline
+    Grandeur  & Idéale           &   Résistances connues à 10\% \\\hline
+    $\beta$   & 400.00 à 800.00  & 400.00 à 800.00 \\\hline
+    $R_{B1}$  &      10.00k      & 9.00k à 11.00k  \\\hline
+    $R_{B2}$  &     680.00k      &612.00k à 748.00k\\\hline
+    $R_{E1}$  &      100.00      & 90.00 à 110.00  \\\hline
+    $R_{E2}$  &      820.00      & 738.00 à 902.00 \\\hline
+    $R_C$     &      100.00      & 90.00 à 110.00  \\\hline
+    $R_G$     &      5.60k       &      5.60k       \\\hline
+    $Z_L$     &      100.00      &      100.00      \\\hline
+    $R_B$     &      9.86k       & 7.26k à 13.25k  \\\hline
+    $R_E$     &      920.00      & 828.00 à 1.01k  \\\hline
+    $E_B$     &      11.83       &      11.79       \\\hline
+    $I_C$     & 11.88m à 12.04m  & 10.71m à 13.45m \\\hline
+    $g_m$     &457.08m à 463.12m &411.73m à 517.25m\\\hline
+    $r_b$     & 863.71 à 1.75k   & 773.32 à 1.94k  \\\hline
+    $Z_E$     & 4.35k à 15.56k   & 2.16k à 31.25k  \\\hline
+    $Z_S$     & 92.73 à 100.38   & 67.03 à 140.22  \\\hline
+    $Av$      &   0.95 à 0.99    &   0.94 à 0.99   \\\hline
+    $DS$      &   2.12 à 2.15    &   1.58 à 2.90\\\hline
+   \end{tabular}
+
+
+   On remarque que les calculs prenant en compte les résistances connues à 10\% 
+   ne sont pas satisfaisants. Cependant, ils sont donnés pour le pire des cas,
+   c’est à dire le pire cas cumulé pour toutes lés résistances et le $\beta$, dans chaque calcul
+   d’une des caractéristiques du circuit, ce qui a peu de chances d’arriver.
+    
+  \section{Collecteur Commun du premier étage}
+   L’étage facile à calculer suivant est le premier, vu que sa résistance d’entrée
+   nous est imposée.
+   Une fois de plus, nous devons estimer l’impédance d’entrée de l’étage suivant ; 
+   nous avons pris 15\kilo\ohm.
+
+   Les résultats sont les suivants:
+
+   \begin{tabular}{|c|c|c|}
+    \hline
+ Grandeur  &       Idéale    &  Résistances connues à 10\% \\\hline
+ $\beta$   & 400.00 à 800.00 & 400.00 à 800.00 \\\hline
+ $R_{B1}$  &     560.00k      &504.00k à 616.00k\\\hline
+ $R_{B2}$  &      1.00M       & 900.00k à 1.10M \\\hline
+ $R_{E1}$  &      27.00       &  24.30 à 29.70  \\\hline
+ $R_{E2}$  &      15.00       &  13.50 à 16.50  \\\hline
+ $R_C$     &      100.00      & 90.00 à 110.00  \\\hline
+ $R_G$     &      50.00       &      50.00       \\\hline
+ $Z_L$     &      15.00k      &      15.00k      \\\hline
+ $R_B$     &     358.97k      &264.34k à 482.62k\\\hline
+ $R_E$     &      42.00       &  37.80 à 46.20  \\\hline
+ $E_B$     &       7.69       &   7.12 à 8.23   \\\hline
+ $I_C$     & 7.55m à 14.45m  & 5.21m à 20.72m  \\\hline
+ $g_m$     &290.37m à 555.88m&200.30m à 796.91m\\\hline
+ $r_b$     & 719.58 à 2.76k  & 501.94 à 3.99k  \\\hline
+ $Z_E$     & 15.87k à 34.58k & 7.86k à 70.45k  \\\hline
+ $Z_S$     &  8.56 à 11.88   &  5.97 à 17.12   \\\hline
+ $Av$      & 858.77m à 0.98  & 790.53m à 0.99  \\\hline
+ $DS$      &226.26m à 433.15m&140.45m à 683.14m\\\hline
+\end{tabular}
+
+    Ici, même dans le cas idéal, la variation de $\beta$ entraine un dépassement des
+    limites authorisées pour $Z_E$… Il nous faudra donc probablement aviser une fois 
+    sous Spice.
+
+  \section{Émetteur Commun du second étage}
+
+  Ce qui nous intéresse pour cet étage est le gain de la dynamique de sortie.
+  Voici un circuit qui devrait aller:
+   \begin{tabular}{|c|c|c|}
+    \hline
+ Grandeur  & Idéale    &  Résistances connues à 10\% \\\hline
+ $\beta$   &         400.00 à 800.00 &  400.00 à 800.00 \\\hline
+ $R_{B1}$  &          22.00k     &   19.80k à 24.20k \\\hline
+ $R_{B2}$  &          22.00k     &   19.80k à 24.20k \\\hline
+ $R_E$  &          47.00k     &   42.30k à 51.70k \\\hline
+ $R_C$  &          12.00k     &   10.80k à 13.20k \\\hline
+ $Z_L$  &          16.00k     &        16.00k      \\\hline
+ $R_B$  &          11.00k     &   8.10k à 14.79k  \\\hline
+ $E_B$  &           6.00      &     5.40 à 6.60   \\\hline
+ $I_C$  &          0.11m      &   92.78u à 0.14m  \\\hline
+ $g_m$  &          4.42m      &    3.57m à 5.45m  \\\hline
+ $r_b$  &    90.54k à 181.14k & 73.34k à 224.19k \\\hline
+ $Z_E$  &     5.18k à 19.62k  &  2.49k à 40.71k  \\\hline
+ $Z_S$  &          12.00k     &   10.80k à 13.20k \\\hline
+ $Av$   &          30.28      &    21.12 à 42.98  \\\hline
+ $DS$   &           1.57      &     1.10 à 2.24   \\\hline
+\end{tabular}
