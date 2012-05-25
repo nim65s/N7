@@ -23,7 +23,7 @@ Zl=15000
 init = CollecteurCommun(Rb1=iRb1,Rb2=iRb2,Rc=Rc,Re1=iRe1,Re2=iRe2,nom=nom,Rg=Rg,Zl=Zl,Ve=0.006)
 print init
 
-Ze = minimaxi(25500,34500)
+Ze = minimaxi(30000,65000)
 
 def erreurs(cc):
     erreur = [0,0]

@@ -22,7 +22,7 @@ Ve=0.006
 init = EmetteurCommun(Rb1=iRb1,Rb2=iRb2,Rc=Rc,Re=iRe,nom=nom,Zl=Zl,Ve=Ve)
 print init
 
-Ad = minimaxi(15,30)
+Ad = minimaxi(30,60)
 
 def erreurs(cc):
     erreur = 0
