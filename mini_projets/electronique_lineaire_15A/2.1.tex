@@ -1,0 +1,156 @@
+  \section{Collecteur Commun}
+   \subsection{Schéma}
+
+   On utilisera le schéma suivant de collecteur commun :
+
+    \begin{circuitikz} \draw
+     (0,3) to[open,v=$V_E$] (0,-2)
+     (6,0) to[open,v=$V_S$] (6,-2)
+     (0,-2) -- (6,-2)
+     (0,3) to[C=$C_i$,i=$I_E$] (2,3)
+      to [R=$R_{B1}$] (2,6) -- (4,6)
+      to [R=$R_C$] (4,4)
+     (4,3) node[npn](npn){}
+      (npn.B) -- (2,3)
+      (npn.C) -- (4,4)
+      (npn.E) -- (4,2)
+     (2,3) to [R=$R_{B2}$] (2,-2) -- (4,-2)
+      to [R=$R_{E2}$] (4,0)
+      to [R=$R_{E1}$] (4,2)
+     (4,0) to [C=$C_o$,i=$I_S$] (6,0)
+     (1,6) node[anchor=east] {$V_{cc}$} to [short,o-] (2,6)
+     ;
+    \end{circuitikz}
+
+   \subsection{Polarisation}
+    En raison de la présence des condensateurs, ce circuit est équivalent à (en continu) :
+
+    \begin{circuitikz} \draw
+        (3,2) to [R=$R_{E1}$] (3,0) 
+      to [R=$R_{E2}$] (3,-2) -- (0,-2)
+      to [battery=$E_{th}$] (0,3)
+      to [R=$R_B$] (2,3)
+     (2,6) node[anchor=east] {$V_{cc}$} to [short,o-] (3,6)
+      to [R=$R_C$] (3,4)
+     (3,3) node[npn](npn){}
+      (npn.B) -- (2,3)
+      (npn.C) -- (3,4)
+      (npn.E) -- (3,2)
+     ;
+    \end{circuitikz}
+
+    On a alors les relations suivantes :
+
+    $\left.
+      \begin{array}{c}
+       R_B = \cfrac{R_{B1} R_{B2}}{R_{B1} + R_{B2}} \\
+       E_{th} = \cfrac{V_{cc}}{1+\cfrac{R_{B1}}{ R_{B2}}} \\
+       R_E I_C + V_{BE} + R_B I_B = E_{th} \\
+       I_C = \beta I_B
+      \end{array}
+    \right\} \Rightarrow I_C = \cfrac{E_{th} - V_{BE}}{R_E + \cfrac{R_B}{\beta}}$
+
+   \subsection{Droite de charge statique}
+
+    Afin de limiter les effets de distorsion, on s'efforcera de placer le point de polarisation Q au milieu de la droite de charge statique.
+    
+    $V_{cc} = R_C I_C + V_{CE} + R_E I_C$
+
+    $I_C = \cfrac{V_{cc} - V_{CE}}{R_E+R_C}$
+
+    \begin{circuitikz}
+     \begin{scope}[xshift=6.5cm, yshift=.5cm]
+      \draw [->] (0,0) -- (4.5,0) node[anchor=west] {$V_{CE} $};
+      \draw [->] (0,0) -- (0,2.5) node[anchor=west] {$I_C$} ;
+      \draw (2,0) node[anchor=north] {$\cfrac{V_{cc}}{2}$}
+            (4,0) node[anchor=north] {$V_{cc}$}
+            (0,1) node[anchor=east] {$\cfrac{V_{cc}}{2(R_E+R_C)}$}
+            (0,2) node[anchor=east] {$\cfrac{V_{cc}}{R_E+R_C}$}
+            (0,0) node[anchor=north] {0};
+      \draw [thick] (0,2) -- (4,0);
+      \draw [dotted] (0,1) -- (2,1) -- (2,0);
+     \end{scope}
+    \end{circuitikz}
+
+   \subsection{Schéma équivalent petit signal}
+    Aux fréquences moyennes et en comportement petit signal, on obtient le schéma équivalent suivant :
+
+    \begin{circuitikz} \draw
+     (0,4) to[open,v=$V_E$] (0,-2) -- (11,-2)
+     (11,0) to[open,v=$V_S$] (11,-2)
+     (0,4) to [short,i=$I_E$] (1,4) --(5,4)
+      to [R=$r_b$,v=v] (5,2) -- (9,2)
+     (1,-2) to [R=$R_{B1}$] (1,4)
+     (3,-2) to [R=$R_{B2}$] (3,4)
+     (9,-2) to [R=$R_{E2}$] (9,0)
+     (9,0) to [R=$R_{E1}$] (9,2)
+     (7,-2) to [cI=$g_mv$] (7,2)
+     (9,0) to [short,i=$I_S$] (11,0)
+     ;
+    \end{circuitikz}
+
+    $g_m = \cfrac{I_C}{U_T}$
+
+    $r_b = \cfrac{\beta}{g_m}$
+
+   \subsection{Droite de charge dynamique}
+
+    $\cfrac{V_{CE}(t)}{I_C(t)} = - R_E \parallel Z_L$
+
+    \begin{circuitikz}
+    \begin{scope}[xshift=6.5cm, yshift=.5cm]
+     \draw [->] (0,0) -- (4.5,0) node[anchor=west] {$V_{CE}(t) $};
+     \draw [->] (0,0) -- (0,2.5) node[anchor=west] {$I_C(t)$} ;
+     \draw (3,0) node[anchor=north] {$V_{CE_Q}$}
+           (4,0) node[anchor=north] {$V_{CE_{max}}$}
+           (0,0.5) node[anchor=east] {$I_{C_Q}$}
+           (0,2) node[anchor=east] {$I_{C_{max}}$}
+           (0,0) node[anchor=north] {0};
+     \draw [thick] (0,2) -- (4,0);
+     \draw [dotted] (0,0.5) -- (3,0.5) -- (3,0);
+    \end{scope}
+    \end{circuitikz}
+
+    Donc dynamique de sortie maximale (crête à crête) = $2(V_{CEmax}-V_{CEQ}) = 2 I_{CQ} (R_E \parallel Z_L)$ car $V_S = -V_{CE}$
+
+   \subsection{Impédance d'entrée}
+
+    $\left.
+     \begin{array}{c}
+      Z_E = \cfrac{V_E}{I_E}\\
+      V_E = v + V_S \\
+      v = r_b i \\
+      V_S = (R_E \parallel Z_L)(i+g_mv)
+     \end{array}
+    \right\} 
+    \begin{array}{l}
+     \Rightarrow \cfrac{V_E}{i}=\cfrac{v+V_S}{i} =r_b + (R_E\parallel Z_L)(1+g_mr_b) \\
+     \Rightarrow Z_E = R_B \parallel \left ( r_b + \beta (R_E\parallel Z_L) \right )
+    \end{array}$
+
+   \subsection{Impédance de sortie}
+
+    $Z_S = R_{E2} \parallel \left(R_{E1}+\cfrac{r_b + R_g \parallel R_B}{\beta}\right)$
+
+   \subsection{Gain}
+
+    $a_v = \cfrac{V_S}{V_E} = \cfrac{V_S}{v+V_S} = \cfrac{\beta(R_E \parallel Z_L)}{r_b+\beta(R_E\parallel Z_L)} \approx 1$
+
+    ~
+
+    On considérera donc le gain de cet étage comme égal à 1.
+
+   \subsection{Comportement en fréquence}
+    «À vue», l’influence de $C_i$ intervient dans la fonction de transfert
+    
+    $H = \cfrac{Z_E}{Z_E+R_g}\cdot\cfrac{(Z_E+R_g)C_ip}{1+(Z_E+R_g)C_ip}$, 
+
+    donc $f_{CBF1} = \cfrac{1}{2\pi(Z_E+R_g)C_i}$
+
+    On étudie l’influence de $C_o$ de la même manière:
+
+    $H = \cfrac{Z_L}{Z_L+Z_S}\cdot\cfrac{(Z_L+Z_S)C_ip}{1+(Z_L+Z_S)C_ip}$, 
+
+    donc $f_{CBF2} = \cfrac{1}{2\pi(Z_L+Z_S)C_i}$
+
+

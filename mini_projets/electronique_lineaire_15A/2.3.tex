@@ -1,0 +1,128 @@
+  \section{Amplificateur différentiel}
+   \subsection{Schéma}
+
+    \begin{circuitikz} \draw
+     (4,0) -- (0,0) to [battery=12V] (0,4)
+      to [battery=12V] (0,9) -- (8,9)
+     (4,6) node[npn](npn1){Q1}
+      (npn1.B) -- (2,6)
+      (npn1.C) -- (4,7)
+      (npn1.E) -- (4,5)
+     (8,6) node[npn,xscale=-1](npn2){}
+      (npn2) node {Q2}
+      (npn2.B) -- (10,6)
+      (npn2.C) -- (8,7)
+      (npn2.E) -- (8,5)
+     (6,3) node[npn](npn3){Q3}
+      (npn3.B) -- (5,3)
+      (npn3.C) -- (6,5)
+      (npn3.E) -- (6,2)
+     (4,3) node[npn,xscale=-1](npn4){}
+      (npn4) node {Q4}
+      (npn4.B) -- (5,3)
+      (npn4.C) -- (4,4) -- (5,4) -- (5,3)
+      (npn4.E) -- (4,2)
+     (6,2) to [R=$R_E$] (6,0) -- (4,0)
+      to [R=$R_E$] (4,2) 
+     (4,4) to [R=$R_{B2}$] (2,4) -- (0,4)
+     (1,6) to [short,i=$I_E$] (2,6)
+      to [R=$R_{B1}$] (2,4) -- (2,3)
+     (2,3) node[ground]{}
+     (4,9) to [R=$R_C$] (4,7)
+     (8,9) to [R=$R_C$] (8,7)
+     (10,6) -- (10,5)
+     (10,3) -- (10,2) node[ground]{}
+     (9,3) to [R=$R_{B1}$] (9,5) -- (11,5)
+      to [C=$C_2$] (11,3) -- (9,3)
+     (4,5) -- (8,5)
+     (8,7) -- (10,7) to [short,i=$I_S$] (11,7)
+     (6,5) node[anchor=south]{A}
+     ;
+    \end{circuitikz}
+
+   \subsection{Polarisation}
+    On commence par Q4:
+    $i_{c4} = \cfrac{12}{R_{B2}(1+2/\beta)+R_E(1+1/\beta)}$
+
+    Ce courant est égal à celui de Q3 (et on peut négliger les termes en $1/\beta$),
+    donc on obtient directement $i_{c4}=i_{c3}=2i_{c2}=2i_{c1}$.
+    
+    On en déduit la tension aux bornes des collecteurs de Q1 \& Q2:
+    $V_S = 12 - R_Ci_{c1}$
+
+    Avec les courants de collecteur, on a également les courants
+    de base $i_{b1} = i_{b2} = i_{c1}/\beta$.
+    
+    On peut alors connaître la tension aux bornes des émetteurs de Q1 \& Q2:
+    $V_A = 0 - R_{B1}i_{b1} - 0.6$
+
+   \subsection{Schéma équivalent petit signal}
+    Les transistors Q3 \& Q4 servent à fixer le courant dans les deux autres, on les modélise par la suite par une impédance $Z_{S3}$
+
+    $Z_{S3} = \cfrac{V_A}{i_{c3}}$
+
+    \begin{circuitikz} \draw
+     (0,6) to [short,i=$I_E$] (1,6)
+      to [R=$r_{b_1}$, v=v] (1,4) -- (4,4)
+     (4,6) to [cI,i=$g_mv$] (4,4)
+     (4,6) -- (6,6) to [R=$R_{C_1}$] (6,3)
+     (6,3) node[ground]{}
+     (8,3) node[ground]{}
+     (8,3) -- (8,6) -- (9,6)
+      to [R=$r_{b_2}$] (9,4) -- (12,4)
+     (12,6) to [cI,i=$g_mv$] (12,4)
+     (12,6) -- (14,6)
+      to [R=$R_{C_2}$] (14,3)
+     (14,3) node[ground]{}
+     (14,6) to [short, i=$I_S$] (15,6)
+     (2,4) -- (2,2) -- (11,2) -- (11,4)
+     (7,2) to [R=$Z_{S3}$] (7,0)
+     (7,0) node[ground]{}
+     ;
+    \end{circuitikz}
+
+    \begin{circuitikz} \draw
+     (0,6) to [short,i=$I_E$] (1,6)
+      to [R=$r_{b_1}$,v=v] (1,4) -- (8,4)
+     (8,2) to [cI,i=$g_mv$] (8,4)
+     (8,2) to [short,i=$I_S$] (9,2)
+     (9,0) -- (0,0)
+     (2,0) to [R=$R_{C_1}$] (2,2)
+      to [cI,i=$g_mv$] (2,4)
+     (4,0) to [R=$Z_{S3}$] (4,4)
+     (6,4) to [R=$r_{b_2}$,v=v] (6,0)
+     (8,0) to [R=$R_{C_2}$] (8,2)
+     ;
+    \end{circuitikz}
+
+   \subsection{Droite de charge dynamique}
+    $V_{CE} + R_C I_C = 2 I_C ( Z_{S3} \parallel r_b)$
+    
+    $\cfrac{V_{CE}}{I_C} = 2(Z_{S3}\parallel r_b) - R_C$
+
+    \begin{circuitikz}
+    \begin{scope}[xshift=6.5cm, yshift=.5cm]
+     \draw [->] (0,0) -- (4.5,0) node[anchor=west] {$V_{CE}(t) $};
+     \draw [->] (0,0) -- (0,2.5) node[anchor=west] {$I_C(t)$} ;
+     \draw (3,0) node[anchor=north] {$V_{CE_Q}$}
+           (4,0) node[anchor=north] {$V_{CE_{max}}$}
+           (0,0.5) node[anchor=east] {$I_{C_Q}$}
+           (0,2) node[anchor=east] {$I_{C_{max}}$}
+           (0,0) node[anchor=north] {0};
+     \draw [thick] (0,2) -- (4,0);
+     \draw [dotted] (0,0.5) -- (3,0.5) -- (3,0);
+    \end{scope}
+    \end{circuitikz}
+
+    $2(V_{CEmax}-V_{CEQ}) = 2 I_{CQ} (2(Z_{S3} \parallel r_b) -R_C)$ 
+    Donc dynamique de sortie maximale (crête à crête) = $2 I_C (Z_{S3} \parallel r_b) - V_{CE}$
+
+   \subsection{Impédance d'entrée}
+    $Z_E = 2 r_b$
+
+   \subsection{Impédance de sortie}
+    $Z_S = R_C$
+
+   \subsection{Gain}
+    Dans les conditions de notre amplificateur différentiel, on obtient un gain 
+    $a_v = \cfrac{g_m R_C}{2}$
