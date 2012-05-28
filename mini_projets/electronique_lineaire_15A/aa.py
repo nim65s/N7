@@ -20,11 +20,17 @@ class AmplifierProperty(object):
 
     def __set__(self, obj, val):
         if self.modifiable:
-            setattr(obj, self.nom, float(val))
+            if isinstance(val, minimaxi):
+                setattr(obj, self.nom, val)
+            else:
+                setattr(obj, self.nom, float(val))
             if self.nom[1:-1] in ['Rb1','Rb2','Re1','Re2','Rbp','Rep','Rc']:
                 setattr(obj, self.nom[:-1], minimaxi(val*0.9,val*1.1))
             else:
-                setattr(obj, self.nom[:-1], float(val))
+                if isinstance(val, minimaxi):
+                    setattr(obj, self.nom[:-1], val)
+                else:
+                    setattr(obj, self.nom[:-1], float(val))
             print '%s de %s modifié…' % (self.nom.replace('_',''),obj.nom)
             obj.update()
         else:
@@ -97,11 +103,17 @@ class AbstractAmplifier(object):
         else:
             self._Rc = minimaxi(Rc*0.9,Rc*1.1)
             self._Rci = Rc
+        if isinstance(Ve, minimaxi):
+            self._Ve = Ve
+        else:
+            self._Ve = minimaxi(Ve)
+        if isinstance(Rg, minimaxi):
+            self._Rg = Rg
+        else:
+            self._Rg = minimaxi(Rg)
         self._Cc = float(Cc)
         self._Ce = float(Ce)
-        self._Ve = float(Ve)
         self._Zl = float(Zl)
-        self._Rg = float(Rg)
         for attribu in ['_b','_Cc','_Ce','_Ve','_Zl','_Rg']:
             self.__dict__[attribu + 'i'] = self.__dict__[attribu]
 

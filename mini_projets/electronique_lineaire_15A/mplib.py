@@ -1,7 +1,11 @@
 #!/usr/bin/python2
 #-*- coding: utf-8 -*-
 
-def par(a,b): return (a*b)/(a+b)
+def par(a,b,c=0): 
+    if c:
+        return par(par(a,b),c)
+    else:
+        return (a*b)/(a+b)
 
 kSI = ' kMGT'
 mSI = 'munp'

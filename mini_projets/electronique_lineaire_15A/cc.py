@@ -67,13 +67,17 @@ class CollecteurCommun(AbstractAmplifier):
         s = '=' * 22 + self.nom + '=' * 22
         if self._Rg == 0:
             s += '\nApproximation de Rg=0 dans le calcul de Zs de %s' % self.nom
+        elif self._Rg/self._Ze > 0.01:
+            s += '\n Rg et Ze mal fichus dans %s' % self.nom
+        if self._Zs/self._Zl > 0.01:
+            s += '\n Zs et Zl mal fichus dans %s' % self.nom
         if self._Ve > 0:
             if self._Ve*self._Ad/self._DS > 0.9:
                 s += '\nOuch ça sent la distorsion !'
         s += '\n{:^7s}: {:^18s} {:^18s}'.format('Valeur','Ideale',u'Resistances a 10%')
         for i in ['b','Rb1','Rb2','Re1','Re2','Rc','Cc','Ve','Rg','Zl','Rb','Re','Eb','Ic','gm','rb','Ze','Zs','Ad','DS']:
             if self.__dict__['_'+i] != 0:
-                s += '\n{:^7s}&{:^18s}&{:^18s}'.format(i,si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
+                s += '\n{:^7s}:{:^18s} {:^18s}'.format(i,si(self.__dict__['_'+i+'i']),si(self.__dict__['_'+i]))
         return s
 
     def __eq__(self, a):
