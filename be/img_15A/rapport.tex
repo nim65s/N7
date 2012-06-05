@@ -152,7 +152,7 @@
         \begin{eqnarray}
             a &=& A \\
             b &=& \cfrac{B}{Z_c} \\
-            b &=& \cfrac{B}{Y_c} \\
+            c &=& \cfrac{B}{Y_c} \\
             d &=& D
         \end{eqnarray}
 
@@ -295,9 +295,9 @@
 
     \item[•] \textit{Déterminer la tension et le courant à l'entrée de la ligne : $V_1$, $I_1$ ; puis déduire la tension et le courant à la sortie de la ligne ($V_2$, $I_2$) à l'aide de la matrice \textbf{ABCD}.}
 
-        Si la puissance dissipée est de $P_d = 33 dBm$, la puissance dissipée en Watts vaut $P_d = 10^{6.3}W$.
+        Si la puissance disponible est de $P_d = 33 dBm$, la puissance disponible en Watts vaut $P_d = 10^{6.3}W$.
 
-        Si le générateur était chargé par $50 \Omega$, on aurait $P_d = \cfrac{|E_g|^2}{8R_c} \Rightarrow E_g = \sqrt{8 R_c Pd}$.
+        Si le générateur était chargé par $50 \Omega$, on aurait un pont diviseur par 2: $P_d = \cfrac{1}{2} \cfrac{|E_g|^2}{4R_c} \Rightarrow E_g = \sqrt{8 R_c Pd}$, ce qui est la puissance maximale.
 
         De plus
 
@@ -360,10 +360,10 @@
         Toujours par définition, la puissance dissipée dans l'antenne vaut :
 
         \begin{eqnarray}
-            P_{ray} &=& \cfrac{V_2 I_2^*}{2}
+            P_{ray} &=& \cfrac{V_2 I_2^\ast}{2}
         \end{eqnarray}
 
-        La puissance réfléchie vers le générateur correspond à la puissance de l'onde $b_2$, qui est celle réfléchie vers le générateur :
+        La puissance réfléchie vers le générateur correspond à la puissance de l'onde $b_1$, qui est celle réfléchie vers le générateur :
 
         \begin{eqnarray}
             P_{ref} &=& \cfrac{|b_1|^2}{2}
@@ -372,14 +372,14 @@
         La puissance développée par le générateur est donc logiquement la somme de la puissance rayonnée et de celle réfléchie vers le générateur, vu que la ligne de transmission est sans pertes :
 
         \begin{eqnarray}
-            P_f &=&  \cfrac{V_2 I_2^* + |b_1|^2}{2}
+            P_f &=&  \cfrac{V_2 I_2^\ast + |b_1|^2}{2}
         \end{eqnarray}
 
         Il ne reste plus qu'à calculer les pertes d'insertion et en réflexion :
 
         \begin{eqnarray}
-            IL &=& 20 \log \cfrac{P_d}{P_f} \\
-            RL &=& 20 \log \cfrac{P_d}{P_{ref}}
+            IL &=& 10 \log \cfrac{P_d}{P_f} \\
+            RL &=& 10 \log \cfrac{P_d}{P_{ref}}
         \end{eqnarray}
 
 \end{itemize}
@@ -391,7 +391,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 \begin{itemize}
     \item[•] \textit{Programmer sa matrice \textbf{abcd} ; (\ul{valeurs initiales} : une capacitance de $10pF$ en parallèle avec une self de $3.36nH$ et une résistance de $4k\Omega$ ; \textbf{$Z_c$} = $50\Omega$ ; \textbf{$f_0$} = $500MHz$)}
         \begin{eqnarray*}
-            Y_p &=& 10*10^{-12} p + \cfrac{1}{3.36*10^{-9} p} + \cfrac{1}{4*10^3}
+            Y_p &=& j 3.36 \times 10^{-9} \omega + \cfrac{1}{j 10 \times 10^{-12} \omega} + \cfrac{1}{4\times 10^3}
         \end{eqnarray*}
 
         Or la matrice d'un dipole $Y_p$ en parallèle est assez simple :
@@ -416,7 +416,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
         On a directement
 
         \begin{eqnarray}
-        V_1 &=& V_2 = \cfrac{I_1 + I_2}{Y_p}
+            V_1 &=& V_2 = \cfrac{I_1 + I_2}{Y_p}
         \end{eqnarray}
 
         D'où la représentation sous MATLAB suivante :
@@ -487,7 +487,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 
 \end{itemize}
 
-\subsection{Modèle d'un stub court-circuité en parallèle}
+\subsection{Modèle d'un stub court-circuité en parallèle.}
 De la même manière, en remplaçant simplement $Y_p$ par $Z_c j \tan(\beta l)$
 
 %\lstinputlisting[language=Matlab]{sources/1d.m}
@@ -495,7 +495,7 @@ De la même manière, en remplaçant simplement $Y_p$ par $Z_c j \tan(\beta l)$
 %\includegraphics[width=\linewidth,height=8cm]{images/1d}
 
 \section{Amélioration du système d'antenne. Adaptation d'antenne.}
-\subsection{Étude du circuit d'adaptation}
+\subsection{Étude du circuit d'adaptation.}
 Les deux solutions sont directement données par les applets java du site \verb|http://amanogawa.com| :
 
 \begin{center}
@@ -505,14 +505,14 @@ Les deux solutions sont directement données par les applets java du site \verb|
 \end{center}
 \subsection{}
 
-D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.1006 \lambda = 60.3mm$ après la charge, puis un simple stub de longueur $L=0.1667*0.5996=99.9mm$, et on rajoutera notre ligne de 2m.
+D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.1006 \lambda = 60.3mm$ après la charge, puis un simple stub de longueur $L=0.1667\times 0.5996=99.9mm$, et on rajoutera notre ligne de 2m.
 
 On a donc directement le code MATLAB suivant :
 
 %\lstinputlisting[language=Matlab]{sources/2b.m}
 
 \subsection{}
-Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence, et on étudiera la puissance rayonnée, qui est égale à $P_d(1-|S_{11}|)$ :
+Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence. On peut également tracer la puissance réfléchie ($\cfrac{|b_1|^2}{2}$) et la puissance rayonnée ($P_{ray} = \cfrac{V_2I_2^\ast}{2}$) en fonctiond de cette fréquence.
 
 %\lstinputlisting[language=Matlab]{sources/2c.m}
 \end{document}
