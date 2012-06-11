@@ -4,7 +4,6 @@
 from cc import *
 from ec import *
 from ad import *
-from connect import *
 from mplib import *
 from serieeuhdouze import *
 import shelve, os.path, sys
