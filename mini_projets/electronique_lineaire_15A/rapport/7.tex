@@ -58,48 +58,95 @@ Nos deux premiers étages consomment 9.85mA.
 
 \section{Seconde séance: deux derniers étages}
 
-R
+\subsection{Valeur des résistances}
+\begin{tabular}{|l|c|c|}
+    \hline
+    $R_{3b2}$ & 2200 & 2177 \\
+    \hline
+    $R_{3c1}$ & 5600 & 5538 \\
+    \hline
+    $R_{3c1}$ & 5600 & 5585 \\
+    \hline
+    $R_{3b11}$ & 3900 & 3911 \\
+    \hline
+    $R_{3b11}$ & 3900 & 3922 \\
+    \hline
+    $R_{3b11}$ & 3900 & 3929 \\
+    \hline
+    $R_{3b11}$ & 3900 & 3981 \\
+    \hline
+    \hline
+    $R_{4c}$ & 100 & 99.63 \\
+    \hline
+    $R_{4e1}$ & 68 & 68.8 \\
+    \hline
+    $R_{4e2}$ & 1000 & 993.8 \\
+    \hline
+    $R_{4b1}$ & 330k & 329k \\
+    \hline
+    $R_{4b2}$ & 680k & 672000 \\
+    \hline
+\end{tabular}
 
-2177
-5538
-5585
-3911
-3922
-3929
-3981
+\subsection{Tensions de polarisation}
+Retour sur la polarisation des deux premiers étages, l’impédance de sortie ayant été modifiée, et les tensions d’alimentation aussi:
+\begin{tabular}{|l|r|r|r|r|}
+    \hline
+    & Étage 1: théorique & Étage 1: expérimental & Étage 2: théorique & Étage 2: expérimental \\
+    \hline
+    c & 11.41 & 11.055 & 10.86 & 10.85 \\
+    \hline
+    b &  1.28 & 1.577  &  5.99 & 5.982 \\
+    \hline
+    e &  0.59 & 0.936  &  5.40 & 5.413 \\
+    \hline
+\end{tabular}
 
-99.63
-68.8
-993.8
-329000
-672000
+\begin{tabular}{|l|r|r|}
+    \hline
+    & Étage 3: théorique & Étage 3: expérimental \\
+    \hline
+    1c           &   6.834 &   6.669 \\
+    \hline
+    1b           & -12.59m &  -6.62m \\
+    \hline
+    2c           &   6.834 &   7.067 \\
+    \hline
+    2b           & -12.59m &  -8.27m \\
+    \hline
+    1e et 2e     & -647.4m & -0.6167 \\
+    \hline
+    4c, 3b et 4b &  -4.100 &  -4.984 \\
+    \hline
+    3e et 4e     &  -4.756 &  -4.698 \\
+    \hline
+\end{tabular}
+\begin{tabular}{|l|r|r|}
+    \hline
+    & Étage 4: théorique & Étage 4: expérimental \\
+    \hline
+    c & 11.138 & 11.476 \\
+    \hline
+    b &  5.137 & 6.181 \\
+    \hline
+    e &  4.461 & 5.635 \\
+    \hline
+    s &  4.177 & 5.278 \\
+    \hline
+\end{tabular}
 
-V
+\subsection{Tension d’alimentation}
+$V_{cc}$ = 11.99V.
 
-11.99
--12.05
+$V_{ss}$ = -12.05V.
 
-11.055
-1.577
-0.936
+\section{Circuit global}
 
-10.85
-5.982
-5.413
+\subsection{Fréquences de coupure}
+$F_{CBF}$ = 98Hz.
 
-6.669 7.067
--6.62m -8.27m
--0.6167
--4.084
--4.698
+$F_{CHF}$ = 190kHz.
 
-11.476
-6.181
-5.635
-5.278
-
-FCBF 98
-FCHF 190k
-
-Ze: 68000
-Zs
+\subsection {Impédances}
+Entrée: 68000\ohm
+Sortie: 0\ohm % TODO
