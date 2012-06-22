@@ -158,6 +158,7 @@
 
         Ce qui donne, sous MATLAB :
         %\lstinputlisting[language=Matlab,lastline=20]{sources/1a.m}
+        \inputminted[linenos]{matlab}{src/1a.m}
 
     \item[•] \textit{Déduire de la matrice \textbf{abcd} la matrice impédance réduite et la matrice S ; programmer ces relations de passage sous forme de fichier \textbf{*.m} ; vérifier la nature réciproque et sans perte de ce quadripôle.}
 
@@ -235,10 +236,12 @@
 
         On programme ces relations de passage sous forme de fichier \textbf{*.m} :
         %\lstinputlisting[language=Matlab,firstline=21,lastline=43,firstnumber=21]{sources/1a.m}
+        \inputminted[linenos]{matlab}{src/1a.m}
 
 
     \item[•] \textit{Montrer que les éléments de cette matrice dépendent de la fréquence en traçant la partie léelle de \textbf{a} et la partie imaginaire de \textbf{b} avec \textbf{$f_0$} variant de 100MHz à 500MHz.}
     %\lstinputlisting[language=Matlab,firstline=44,firstnumber=44]{sources/1a.m}
+    \inputminted[linenos]{matlab}{src/1a.m}
 
     %\includegraphics[width=\linewidth,height=6cm]{images/1a}
 
@@ -386,6 +389,7 @@
 
 Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous nous en sommes rendu compte qu'après l'avoir tout de même fait, donc voici le fichier, en bonus :
 %\lstinputlisting[language=Matlab]{sources/1b.m}
+\inputminted[linenos]{matlab}{src/1b.m}
 
 \subsection{}
 \begin{itemize}
@@ -422,6 +426,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
         D'où la représentation sous MATLAB suivante :
 
         %\lstinputlisting[language=Matlab,lastline=8]{sources/1c.m}
+        \inputminted[linenos]{matlab}{src/1c.m}
 
     \item[•] \textit{En faisant varier la fréquence entre $500MHz$ et $1GHz$, calculer à l'aide du programme de passage développé en \emph{1.a} la variation du coefficient de réflexion et du coefficient de transmission en fonction de la fréquence ; trancer sous MATLAB la variation de $S_{11}$ à l'aide des commandes \textbf{plot} et \textbf{smith} ; tracer également la variation de $S_{21}$ à l'aide de \textbf{plot}.}
 
@@ -482,6 +487,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 
         \newpage
         %\lstinputlisting[language=Matlab,firstline=10,firstnumber=10]{sources/1c.m}
+        \inputminted[linenos]{matlab}{src/1c.m}
 
         %\includegraphics[width=\linewidth,height=8cm]{images/1c}
 
@@ -491,6 +497,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 De la même manière, en remplaçant simplement $Y_p$ par $Z_c j \tan(\beta l)$
 
 %\lstinputlisting[language=Matlab]{sources/1d.m}
+\inputminted[linenos]{matlab}{src/1d.m}
 
 %\includegraphics[width=\linewidth,height=8cm]{images/1d}
 
@@ -510,9 +517,11 @@ D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.10
 On a donc directement le code MATLAB suivant :
 
 %\lstinputlisting[language=Matlab]{sources/2b.m}
+\inputminted[linenos]{matlab}{src/2b.m}
 
 \subsection{}
 Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence. On peut également tracer la puissance réfléchie ($\cfrac{|b_1|^2}{2}$) et la puissance rayonnée ($P_{ray} = \cfrac{V_2I_2^\ast}{2}$) en fonctiond de cette fréquence.
 
 %\lstinputlisting[language=Matlab]{sources/2c.m}
+\inputminted[linenos]{matlab}{src/2c.m}
 \end{document}
