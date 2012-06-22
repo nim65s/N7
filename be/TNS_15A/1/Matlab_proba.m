@@ -9,7 +9,7 @@ h = h*Nc/((max(r)-min(r))*N);
 %hold
 l = min(r):(max(r)-min(r))/Nc:max(r);
 y = normpdf(l,1,sqrt(0.1));
-%plot(y) 
+%plot(y)
 
 %3)
 u = 1+rand(N,1);
