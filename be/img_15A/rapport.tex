@@ -121,10 +121,10 @@
         On en déduit
 
         \begin{eqnarray}
-            (1.5) \& (1.7) \Rightarrow V^- &=& \cfrac{Z_c I_2 + V_2}{2}
+            (5) \& (7) \Rightarrow V^- &=& \cfrac{Z_c I_2 + V_2}{2}
         \end{eqnarray}
 
-        Donc, en injectant (1.9) dans (1.6),
+        Donc, en injectant (9) dans (6),
 
         \begin{eqnarray}
             V_1 &=& (V_2 - V^-) e^{+\gamma d} + V^- e^{-\gamma d} \nonumber \\
@@ -133,7 +133,7 @@
             &=& V_2 \cosh(\gamma d) - I_2 Z_c \sinh(\gamma d)
         \end{eqnarray}
 
-        D'où, par identification entre (1.10) et (1.1),
+        D'où, par identification entre (10) et (1),
 
         \begin{eqnarray}
             A &=& \cosh(\gamma d) \\
@@ -157,8 +157,9 @@
         \end{eqnarray}
 
         Ce qui donne, sous MATLAB :
-        %\lstinputlisting[language=Matlab,lastline=20]{sources/1a.m}
-        \inputminted[linenos]{matlab}{src/1a.m}
+        \inputminted[linenos]{matlab}{src/M.m}
+        et
+        \inputminted[linenos]{matlab}{src/m_normalise.m}
 
     \item[•] \textit{Déduire de la matrice \textbf{abcd} la matrice impédance réduite et la matrice S ; programmer ces relations de passage sous forme de fichier \textbf{*.m} ; vérifier la nature réciproque et sans perte de ce quadripôle.}
 
@@ -186,7 +187,7 @@
             v_2 &=& z_{21} i_1 + z_{22} i_2
         \end{eqnarray}
 
-        Or, on rappelle (1.1) et (1.2) pour une impédance réduite :
+        Or, on rappelle (1) et (2) pour une impédance réduite :
 
         \begin{eqnarray}
             v_1 &=& a v_2 - b i_2 \\
@@ -196,25 +197,25 @@
         Donc
 
         \begin{eqnarray}
-            (1.21) \Rightarrow c v_2 &=& i_1 + d i_2 \nonumber \\
+            (21) \Rightarrow c v_2 &=& i_1 + d i_2 \nonumber \\
             \Rightarrow v_2 &=& \cfrac{1}{c} i_1 + \cfrac{d}{c} i_2
         \end{eqnarray}
 
-        D'où, par identification, entre (1.20) et (1.23), 
+        D'où, par identification, entre (20) et (23), 
 
         \begin{eqnarray}
             z_{21} &=& \cfrac{1}{c} \\
             z_{22} &=& \cfrac{d}{c}
         \end{eqnarray}
 
-        On remplace alors (1.23) dans (1.21) :
+        On remplace alors (23) dans (21) :
 
         \begin{eqnarray}
             v_1 &=& a \left( \cfrac{1}{c} i_1 + \cfrac{d}{c} i_2 \right) - b i_2 \nonumber \\
             &=& \cfrac{a}{c} i_1 + \cfrac{a d - b c}{c} i_2
         \end{eqnarray}
 
-        Puis en identifiant (1.19) et (1.26) :
+        Puis en identifiant (19) et (26) :
 
         \begin{eqnarray}
             z_{11} &=& \cfrac{a}{c} \\
@@ -235,15 +236,16 @@
         De plus, cette matrice ne peut etre que sans pertes : en effet, jusqu'ici, tous les calculs ont été faits avec un certain $\gamma$, mais les données du problème ne nous permettent de déduire que $\gamma = j \beta = \cfrac{j \omega}{v_\varphi}$, comme est codée la variable "g" dans le fichier .m depuis le début.
 
         On programme ces relations de passage sous forme de fichier \textbf{*.m} :
-        %\lstinputlisting[language=Matlab,firstline=21,lastline=43,firstnumber=21]{sources/1a.m}
-        \inputminted[linenos]{matlab}{src/1a.m}
+        \inputminted[linenos]{matlab}{src/Z.m}
+        \inputminted[linenos]{matlab}{src/z_normalise.m}
+        \inputminted[linenos]{matlab}{src/S.m}
 
 
     \item[•] \textit{Montrer que les éléments de cette matrice dépendent de la fréquence en traçant la partie léelle de \textbf{a} et la partie imaginaire de \textbf{b} avec \textbf{$f_0$} variant de 100MHz à 500MHz.}
-    %\lstinputlisting[language=Matlab,firstline=44,firstnumber=44]{sources/1a.m}
-    \inputminted[linenos]{matlab}{src/1a.m}
 
-    %\includegraphics[width=\linewidth,height=6cm]{images/1a}
+    \inputminted[linenos,lastline=20]{matlab}{src/BE.m}
+
+    %\includegraphics[width=\linewidth,height=6cm]{img/1a} TODO
 
 \end{itemize}
 
@@ -281,7 +283,7 @@
             Z_E &=& \cfrac{V_1}{I_1}
         \end{eqnarray}
 
-        Donc en égalisant (1.34) et (1.35),
+        Donc en égalisant (34) et (35),
 
         \begin{eqnarray}
             -Z_{ant} I_2 &=& Z_{21} I_1 + Z_{22} I_2 \nonumber \\
@@ -289,7 +291,7 @@
             \Leftrightarrow I_2 &=& \cfrac{-Z_{21}}{Z_{22} + Z_{ant}} I_1
         \end{eqnarray}
 
-        Donc en injectant (1.37) dans (1.33) de manière à identifier avec (1.36),
+        Donc en injectant (37) dans (33) de manière à identifier avec (36),
 
         \begin{eqnarray}
             V_1 &=& Z_{11} I_1 + Z_{12} \cfrac{-Z_{21}}{Z_{22} + Z_{ant}} I_1 \nonumber \\
@@ -314,7 +316,7 @@
             I_1 &=& \cfrac{V_1}{Z_E} = \cfrac{E_g}{Z_E+R_c}
         \end{eqnarray}
 
-        Et, à l'aide de la matrice ABCD, on en déduit : 
+        Et, à l'aide de la matrice ABCD, on en déduit :
         \[
             \begin{pmatrix}
                 V_2 \\
@@ -388,7 +390,6 @@
 \end{itemize}
 
 Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous nous en sommes rendu compte qu'après l'avoir tout de même fait, donc voici le fichier, en bonus :
-%\lstinputlisting[language=Matlab]{sources/1b.m}
 \inputminted[linenos]{matlab}{src/1b.m}
 
 \subsection{}
@@ -426,7 +427,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
         D'où la représentation sous MATLAB suivante :
 
         %\lstinputlisting[language=Matlab,lastline=8]{sources/1c.m}
-        \inputminted[linenos]{matlab}{src/1c.m}
+        \inputminted[linenos,firstline=21,firstnumber=21,lastline=32]{matlab}{src/BE.m}
 
     \item[•] \textit{En faisant varier la fréquence entre $500MHz$ et $1GHz$, calculer à l'aide du programme de passage développé en \emph{1.a} la variation du coefficient de réflexion et du coefficient de transmission en fonction de la fréquence ; trancer sous MATLAB la variation de $S_{11}$ à l'aide des commandes \textbf{plot} et \textbf{smith} ; tracer également la variation de $S_{21}$ à l'aide de \textbf{plot}.}
 
@@ -472,7 +473,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
             -I' &=& C_2 V_2 - D_2 I_2
         \end{eqnarray}
 
-        Donc, en substituant (1.56) et (1.57) dans (1.54) et (1.55),
+        Donc, en substituant (56) et (57) dans (54) et (55),
 
         \begin{eqnarray}
             V_1 &=& A_1 A_2 V_2 - A_1 B_2 I_2 + B_1 C_2 V_2 - B_1 D_2 I_2 \nonumber \\
@@ -485,30 +486,26 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 
         On programme donc la matrice \textbf{abcd} correspondant à la chaine des matrices du circuit d'adaptation et de la ligne de transmission, puis on traduit le tout en une matrice S qui dépend de la fréquence : 
 
-        \newpage
-        %\lstinputlisting[language=Matlab,firstline=10,firstnumber=10]{sources/1c.m}
-        \inputminted[linenos]{matlab}{src/1c.m}
+        \inputminted[linenos,firstline=32,firstnumber=32,lastline=49]{matlab}{src/BE.m}
 
-        %\includegraphics[width=\linewidth,height=8cm]{images/1c}
+        %\includegraphics[width=\linewidth,height=8cm]{img/1c} TODO
 
 \end{itemize}
 
 \subsection{Modèle d'un stub court-circuité en parallèle.}
 De la même manière, en remplaçant simplement $Y_p$ par $Z_c j \tan(\beta l)$
 
-%\lstinputlisting[language=Matlab]{sources/1d.m}
-\inputminted[linenos]{matlab}{src/1d.m}
+\inputminted[linenos,firstline=50,firstnumber=50]{matlab}{src/BE.m}
 
-%\includegraphics[width=\linewidth,height=8cm]{images/1d}
+%\includegraphics[width=\linewidth,height=8cm]{img/1d} TODO
 
 \section{Amélioration du système d'antenne. Adaptation d'antenne.}
 \subsection{Étude du circuit d'adaptation.}
-Les deux solutions sont directement données par les applets java du site \verb|http://amanogawa.com| :
+Les deux solutions sont directement données par les applets java du site \url{http://amanogawa.com} :
 
 \begin{center}
-    %\includegraphics[height=7cm]{images/s1}
-
-    %\includegraphics[height=7cm]{images/s2}
+    \includegraphics[height=7cm]{img/abaque1}
+    \includegraphics[height=7cm]{img/abaque2}
 \end{center}
 \subsection{}
 
@@ -516,12 +513,10 @@ D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.10
 
 On a donc directement le code MATLAB suivant :
 
-%\lstinputlisting[language=Matlab]{sources/2b.m}
 \inputminted[linenos]{matlab}{src/2b.m}
 
 \subsection{}
 Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence. On peut également tracer la puissance réfléchie ($\cfrac{|b_1|^2}{2}$) et la puissance rayonnée ($P_{ray} = \cfrac{V_2I_2^\ast}{2}$) en fonctiond de cette fréquence.
 
-%\lstinputlisting[language=Matlab]{sources/2c.m}
 \inputminted[linenos]{matlab}{src/2c.m}
 \end{document}

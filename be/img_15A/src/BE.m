@@ -35,23 +35,13 @@ Yp = 10E-12*1i*2*pi*f + 1./(3.3E-9*1i*2*pi*f) + 1/4000;
 
 c1 = Yp/Zc;
 
-g = 1i*pi*f/1E8;
+vp = 1E8;
+M2 = M(Zc,vp,d,f);
+m2 = m_normalise(M2,Zc);
 
-a2 = cosh(1i*g*2);
-b2 = sinh(1i*g*2);
-c2 = sinh(1i*g*2);
-d2 = cosh(1i*g*2);
+m = m1*m2;
+[a b;c d] = m
 
-m2 = [a2 b2;c2 d2];
-
-a = a1.*a2 + b1.*c2;
-b = a1.*b2 + b1.*d2;
-c = c1.*a2 + d1.*c2;
-d = c1.*b2 + d1.*d2;
-
-m = [a b;c d];
-
-%TODO
 S11 = (a+b-c-d)./(a+b+c+d);
 S21 = 2./(a+b+c+d);
 
@@ -62,20 +52,13 @@ f = 5E7:5E5:5E8;
 vp = 2E8;
 g = (2*pi*f)./vp;
 
-a1 = 1;
-b1 = 0;
-c1 = 1i*tan(g*2);
-d1 = 1;
+m1 = [1 0; 1i*tan(g*2) 1]
 
-a2 = cosh(1i*g*2);
-b2 = sinh(1i*g*2);
-c2 = sinh(1i*g*2);
-d2 = cosh(1i*g*2);
+M2 = M(Zc,vp,2,f)
+m2 = m_normalise(M2,Zc);
 
-a = a1.*a2 + b1.*c2;
-b = a1.*b2 + b1.*d2;
-c = c1.*a2 + d1.*c2;
-d = c1.*b2 + d1.*d2;
+m = m1*m2;
+[a b;c d] = m
 
 S11 = (a+b-c-d)./(a+b+c+d);
 S21 = (2)./(a+b+c+d);
