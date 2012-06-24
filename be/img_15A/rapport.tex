@@ -43,7 +43,7 @@
 
 \renewcommand{\thesubsection}{\thesection .\alph{subsection}}
 
-\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ BE Fonction Hyperfréquences}
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ BE Ingénierie Micro-Ondes}
 \author{Mathieu Couffinhal, Guilhem Saurel}
 \date{}
 
@@ -245,7 +245,7 @@
 
     \inputminted[linenos,lastline=20]{matlab}{src/BE.m}
 
-    %\includegraphics[width=\linewidth,height=6cm]{img/1a} TODO
+    \includegraphics[width=\linewidth,height=6cm]{img/1a}
 
 \end{itemize}
 
@@ -426,8 +426,7 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 
         D'où la représentation sous MATLAB suivante :
 
-        %\lstinputlisting[language=Matlab,lastline=8]{sources/1c.m}
-        \inputminted[linenos,firstline=21,firstnumber=21,lastline=32]{matlab}{src/BE.m}
+        \inputminted[linenos,firstline=21,firstnumber=21,lastline=27]{matlab}{src/BE.m}
 
     \item[•] \textit{En faisant varier la fréquence entre $500MHz$ et $1GHz$, calculer à l'aide du programme de passage développé en \emph{1.a} la variation du coefficient de réflexion et du coefficient de transmission en fonction de la fréquence ; trancer sous MATLAB la variation de $S_{11}$ à l'aide des commandes \textbf{plot} et \textbf{smith} ; tracer également la variation de $S_{21}$ à l'aide de \textbf{plot}.}
 
@@ -486,9 +485,9 @@ Remarque : Dans cette partie, il n'y avait rien à faire en MATLAB, mais nous no
 
         On programme donc la matrice \textbf{abcd} correspondant à la chaine des matrices du circuit d'adaptation et de la ligne de transmission, puis on traduit le tout en une matrice S qui dépend de la fréquence : 
 
-        \inputminted[linenos,firstline=32,firstnumber=32,lastline=49]{matlab}{src/BE.m}
+        \inputminted[linenos,firstline=27,firstnumber=27,lastline=49]{matlab}{src/BE.m}
 
-        %\includegraphics[width=\linewidth,height=8cm]{img/1c} TODO
+        \includegraphics[width=\linewidth,height=8cm]{img/1c}
 
 \end{itemize}
 
@@ -497,7 +496,7 @@ De la même manière, en remplaçant simplement $Y_p$ par $Z_c j \tan(\beta l)$
 
 \inputminted[linenos,firstline=50,firstnumber=50]{matlab}{src/BE.m}
 
-%\includegraphics[width=\linewidth,height=8cm]{img/1d} TODO
+\includegraphics[width=\linewidth,height=8cm]{img/1d}
 
 \section{Amélioration du système d'antenne. Adaptation d'antenne.}
 \subsection{Étude du circuit d'adaptation.}
@@ -513,11 +512,11 @@ D'après Amanogawa, il faut mettre une ligne de transmission de longueur $d=0.10
 
 On a donc directement le code MATLAB suivant :
 
-\inputminted[linenos]{matlab}{src/2b.m}
+\inputminted[linenos]{matlab}{src/deux_b.m}
 
 \subsection{}
 Comme précédement, on peut étudier les pertes en réflexion en traçant $S_{11}$ en fonction de la fréquence. On peut également tracer la puissance réfléchie ($\cfrac{|b_1|^2}{2}$) et la puissance rayonnée ($P_{ray} = \cfrac{V_2I_2^\ast}{2}$) en fonctiond de cette fréquence.
 
-\inputminted[linenos]{matlab}{src/2c.m}
-\includegraphics[width=\linewidth,height=8cm]{img/2c} TODO
+\inputminted[linenos]{matlab}{src/deux_c.m}
+\includegraphics[width=\linewidth,height=8cm]{img/2c}
 \end{document}
