@@ -1,0 +1,40 @@
+\chapter{Fabrication et derniers tests}
+Nous savions qu’il resterait quelques modifications à faire avant d’avoir un amplificateur correspondant au cahier des charges (ne serait-ce que pour la résistance d’entrée du montage…), mais nous avons eu l’excellente surprise de voir une bonne partie des caractéristiques améliorées au passage au typon.
+
+La fabrication s’est déroulée sans aucun problème, si ce n’est que les emplacements pour les trous n’étaient pas visibles dans les pistes larges.
+
+Bien sûr, toutes les soudures n’étaient pas parfaites du premier coup, mais les problèmes ont été rapidement corrigés.
+
+\section{Caractéristiques et respect du cahier des charges}
+\begin{tabular}{|l|l|c|c|c|c|c|}
+\hline
+& & Typique & Tolérance & Minimum & Maximum  & Mesurée\\
+\hline
+\multirow{4}{3cm}{Caractéristiques générales à 30k\hertz} & Gain en tension & 60 & $\pm$ 5dB & 55 & 65 & 55,15\\
+\cline{2-7} & Résistance d'entrée & 30 & $\pm$ 15 \% & 25,5 & 34,5 & \textcolor{green}{32,4}\\
+\cline{2-7} & Résistance de sortie & 100 & $\pm$ 15 \% & 85 & 115 & \textcolor{green}{100}\\
+\cline{2-7} & Dyn. de sortie (5\kilo\ohm)& & & 6 & & \textcolor{green}{9}\\
+\cline{2-7} & Dyn. de sortie (100\ohm)& & & 0,1 & & \textcolor{green}{1,7}\\
+\hline
+\multirow{2}{3cm}{Fréquence de coupure} & basse & 100 & $\pm$ 20 \% & 80 & 120 & \textcolor{green}{100}\\
+\cline{2-7} & haute & & & 500 & & \textcolor{red}{439}\\
+\hline
+Distorsion harmonique & [1k\hertz;100k\hertz] & & & & 5,00 \% & \textcolor{green}{3,17}\\
+\hline
+\multirow{2}*{Tension d'alimentation} & Positive & 12V & & 0 & 12 & 12\\
+\cline{2-7} & Négative & -12V & & -12 & 0 & -12\\
+\hline
+Courant de collecteur & & & & 0,1 & 10 & \textcolor{green}{$\Sigma = 9,7$}\\
+\hline
+\end{tabular}
+
+La dynamique de sortie et la distorsion harmonique sont donc meilleures sur le typon. Il en va de même pour la fréquence de coupure haute, mais on n’atteind tout de même pas la limite fixée par le cahier des charges.
+
+Les résistances $R_{1B1}$ et $R_{1B2}$ ont naturellement été changées pour avoir une bonne résistance d’entrée, $R_{1C}$ a également été modifiée d’après les conseils d’un professeur, et nous avons trouvé à tatons la valeur de $R_{4E1}$ qui correspondait le mieux (même si notre valeur initiale entrait déjà dans le cahier des charges).
+
+
+\section{Oral et désymétrisation de la paire différentielle}
+
+Lors de l’oral, il nous manquait encore la fréquence de coupure haute, mais on nous a fait remarquer que l’on pouvait réduire l’effet Miller simplement en se passant du gain de la branche de la paire différentielle sur laquelle on ne prend pas la sortie. En effet, ce gain ne nous intéresse pas, et la valeur de la capacité équivalente du théorème de Miller est directement proportionnelle à ce gain.
+
+Nous avons donc fortement baissé $R_{3C1}$, et notre fréquence de coupure haute est passée à 1,7 MHz. Notre gain a également été très légèrement augmenté: nous avons un gain supérieur à 55dB sur la majeure partie du plateau, alors qu’avant cette limite n’était atteinte que pour une faible partie de la bande passante.
