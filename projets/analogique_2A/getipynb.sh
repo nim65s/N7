@@ -13,4 +13,4 @@ then
 fi
 
 ~/scripts/ipynbtotex.py ~/Downloads/notebook.ipynb $1
-rm ~/Downloads/notebook.ipynb
+mv ~/Downloads/notebook.ipynb IPy/$i.ipynb
