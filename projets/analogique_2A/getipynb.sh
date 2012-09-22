@@ -6,11 +6,20 @@ then
     exit 1
 fi
 
-if [[ ! -f ~/Downloads/notebook.ipynb ]]
+if [[ $1 == "all" ]]
 then
-    echo 'Pas de notebook.ipynb'
-    exit 2
-fi
+    for ipynb in IPy/*
+    do
+        file=${ipynb#IPy/}
+        ~/scripts/ipynbtotex.py $ipynb ${file%.*}
+    done
+else
+    if [[ ! -f ~/Downloads/notebook.ipynb ]]
+    then
+        echo 'Pas de notebook.ipynb'
+        exit 2
+    fi
 
-~/scripts/ipynbtotex.py ~/Downloads/notebook.ipynb $1
-mv ~/Downloads/notebook.ipynb IPy/$i.ipynb
+    ~/scripts/ipynbtotex.py ~/Downloads/notebook.ipynb $1
+    mv ~/Downloads/notebook.ipynb IPy/$1.ipynb
+fi
