@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=2.25cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Rapport de stage de première année \\ ~ \\ Réalisation d'une carte d'extension mémoire pour une plateforme d'émulation matérielle multi-FPGA}
+\author{Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+%\begin{titlepage}
+    %\setcounter{page}{0}
+    \maketitle
+    %\thispagestyle{empty}
+%\end{titlepage}
+
+%\tableofcontents
+
+
+\section{Contexte}
+Le laboratoire BEAMS (Bio, Electro and Mechanical Systems) est l'un des deux plus grands services de l'Ecole Polytechnique de l'ULB (Université Libre de Bruxelles).
+
+Il est situé sur le campus du Solbosh, à Bruxelles (tous les campus de l’ULB n’y sont pas).
+
+~
+
+D’anciens élèves de l’INP-ENSEEIHT, essentiellement en éléctronique et en informatique (bien que des GEA pourraient largement trouver leur bonheur dans des salles de TP très impressionnantes), y travaillent ou y ont séjourné il y a peu, et ce laboratoire dispose égalemenet d’un club Robotique, qui participe aux mêmêmes compétitions que celui de l’INP-ENSEEIHT.
+
+\section{Motivation}
+Le laboratoire dispose d’une plate-forme d’émulation matérielle multi-FPGA Synopsys™ Chip-It™, et certains chercheurs travaillent à la conception d’architectures processeur.
+Pour pouvoir tester ces architectures, il faut ajouter les périphériques indispensables à un ordinateur, comme une RAM ou des périphériques d’entrée/sortie.
+
+~
+
+Je devais donc comprendre le fonctionnement des cartes d’extension à cette plateforme, comprendre le fonctionnement d’une RAM et créer une carte d’extension à brancher sur la plateforme, sur laquelle on connecterait directement des barettes de RAM.
+
+Il était également question d’ajouter un port série sur cette carte, mais cela semblait trivial en comparaison.
+
+~
+
+Mon intérêt pour la création de toute pièce d’un composant à la frontière de l’éléctronique et de l’informatique s’est donc entièrement épanoui dans ce stage, même si sur l’offre de stage il était mentionné que c’était censé être un stage de 6 mois, et que j’ai donc du travailler à fond pendant ces 9 semaines.
+
+\section{Conditions d’insertion}
+Je me suis particulièrement bien entendu avec les membres du club de robotique (des chercheurs, contrairement à l’INP-ENSEEIHT), ainsi qu’avec les ingénieurs dont je partageais l’open-space. On m’a également parlé de me reprendre pour une Thèse, mais j’ai encore un peu de temps pour y réfléchir.
+
+~
+
+Je connaissais également un ancien élève (Éléctronique 2010) qui m’a grandement facilité la vie, puisqu’il a toujours été là pour toutes les petites question qu’on peut avoir quand on passe neuf semaines à l’étranger, bien que ce ne soit que la Belgique.
+
+~
+
+De plus, les trois autres stagiaires présents en même temps que moi étaient des IMA 2013, donc nous nous sommes naturellement bien entendus.
+
+\section{Travail effectué}
+J’ai passé les trois premières semaines à lire les spécifications et datasheets du matériel que je devais utiliser et à essayer de faire un schéma global du circuit que je devais réaliser.
+
+Ces trois premières semaines ont été assez difficiles, puisque je faisais face à une complexité qui dépassait de loin tout ce que je connaissais, puisque je n’avais que des connaissances très fondamentales sur le fonctionnement d’une RAM, et il me fallait comprendre rapidement un grand nombre de problématiques de longueur matchées, de longueurs compensées, de délais dans les différents composants… Et je devais comprendre parfaitement l’utilité de chaque bus et de chaque signal.
+
+~
+
+Après ça, il y a eu plus ou moins deux semaines de choix des composants, pendant lesquelles j’ai passé le plus clair de mont temps entre les sites webs de RadioSpares et de Farnell, ainsi qu’à éplucher les datasheets. Chaque devait être choisie pour ses dimensions physiques (la place pour les cartes d’extensions sur la plateform Chip-It™ est assez faible), ses charactéristiques techniques (par exemple, les level shifters devaient pouvoir changer automatiquement de sens, ou via un bit de contrôle, mais dans ce cas les performances étaient souvent un problème), sa disponibilité, son prix, etc. Il a également fallu trouver une alimentation, ce qui n’était pas évident, mais je m’en suis sorti grace à des «samples» de chez Texas Instruments, puisque le composant n’était pas disponible ailleurs.
+
+~
+
+Enfin quatre semaines de conception sous Altium™, où j’ai eu tout le temps de me rendre compte de ma piètre maitrise des autres logiciels que j’avais utilisé jusque là (Orcad et Eagle, essentiellement, bien que j’ai aussi un peu joué avec kicad et DesignSpark).
+
+Les fonctionnalités de ce logiciel m’ont beaucoup impressioné, nottament les fonctionnalités de routage multi-couches, de paires différentielles, les outils pour matcher des longueurs, et les innombrables règles qu’on peu définir très précisemment pour vérifier que tout répond au cahier des charges, voire pour automatiser certaines tâches.
+
+\section{Conclusions}
+À ma grande surprise, j’ai beaucoup aimé Bruxelles, alors que je ne m’attendais pas du tout à être dépaysé en passant cette frontière (1h de TGV de Paris…): de nombreux points forts sont venus largement compensé la météo, légèrement moins agréable que celle de l’Occitanie. Cependant, je ne sais pas si je pourrai en dire autant en hivers.
+
+~
+
+L’ambiance de travail a toujours été excellente, et j’ai pu conduire entièrement un projet qui me passionait, même si je n’ai pas été payé pour. À titre de comparaison, Synopsys™ vend des cartes similaires à celle que je devais concevoir, mais moins bien (DDR2 contre DDR3, et leurs puces de DDR2 sont directement soudées sur leur carte, tandis qu’avec la mienne, on peut facilement changer une barette, pour en mettre une plus récente ou de plus grande capacité), et qui coute dans les 6000€.
+
+~
+
+Comme prévu, je suis tombé sur un grand nombre de problèmes inatendus, ce qui m’a donc vraiment permis de progresser très vite. Le plus inatendus de tous était l’omniprésence de lignes de transmission, alors que je m’attendais à faire de l’éléctronique numérique ; d’où la nuance «High-Speed Digital Design».
+
+~
+
+Le seul point noir aura été que je n’ai pas pu envoyer la carte en fabrication alors que la conception était finie, pour des raisons de protection juridique du travail effectué.
+
+\end{document}
+
