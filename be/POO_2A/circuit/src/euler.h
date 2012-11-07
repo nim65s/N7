@@ -9,7 +9,7 @@ class euler {
         float epsilon; // $h_n$
         std::vector<float> u; // $u^n$
 
-        float u_prime(int const & point) const;
+        virtual float u_prime(int const & i) const;
 
     public:
         float init;
@@ -22,7 +22,7 @@ class euler {
 
 class fille : public euler {
     protected:
-        float u_prime(int const & point) const;
+        virtual float u_prime(int const & i) const;
 
     public:
         fille(int const & nmax, float const & epsilon, float const & init);
