@@ -12,7 +12,6 @@ class mobile {
     public:
         float calcul_position(float const & temps);
 
-        void recapitulation_mobile() const;
         virtual void recapitulation() const;
 
         mobile();

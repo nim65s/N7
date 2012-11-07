@@ -41,20 +41,16 @@ float mobile::calcul_position(float const & temps) {
     return position;
 }
 
-void mobile::recapitulation_mobile() const {
+void mobile::recapitulation() const {
     cout << "\t données issues de la classe mobile:" << endl;
     cout << "\t\t Immatriculation: " << immatriculation << endl;
     cout << "\t\t Vitesse:         " << vitesse << endl;
     cout << "\t\t Position:        " << position << endl;
 }
 
-void mobile::recapitulation() const {
-    cout << "Nothing to do here…" << endl;
-}
-
 void voiture::recapitulation() const {
     cout << "Récapitulation de la voiture:" << endl;
-    recapitulation_mobile();
+    mobile::recapitulation();
     cout << "\t données issues de la classe voiture:" << endl;
     cout << "\t\t Masse:           " << masse << endl;
     cout << "\t\t consommation:    " << consommation << endl;
@@ -62,7 +58,7 @@ void voiture::recapitulation() const {
 
 void scooter::recapitulation() const {
     cout << "Récapitulation du scooter:" << endl;
-    recapitulation_mobile();
+    mobile::recapitulation();
     cout << "\t données issues de la classe scooter:" << endl;
     cout << "\t\t Prix:            " << prix << endl;
     if (type == 1) cout << "\t\t Type:            " << "Essence" << endl;

@@ -20,12 +20,44 @@ class euler {
         euler(int const & nmax, float const & epsilon, float const & init);
 };
 
-class fille : public euler {
+class application : public euler {
     protected:
         virtual float u_prime(int const & i) const;
 
     public:
-        fille(int const & nmax, float const & epsilon, float const & init);
+        application(int const & nmax, float const & epsilon, float const & init);
 };
+
+class ordre_un : public euler {
+    protected:
+        virtual float u_prime(int const & i) const;
+        float (*Ve)(float const & t);
+
+    public:
+        ordre_un(int const & nmax, float const & epsilon, float const & init, float (*Ve)(float const & t));
+};
+
+class circuit_un : public ordre_un {
+    protected:
+        virtual float u_prime(int const & i) const;
+        float R;
+        float C;
+
+    public:
+        circuit_un(int const & nmax, float const & epsilon, float const & init, float (*Ve)(float const & t), float const & R, float const & C);
+};
+
+typedef float (ordre_un::*ptrVe)(float const &)
+
+/*
+ *class circuit_deux : public ordre_un {
+ *    protected:
+ *        virtual float u_prime(int const & i) const;
+ *
+ *    public:
+ *        circuit_deux(int const & nmax, float const & epsilon, float const & init);
+ *};
+ *
+ */
 
 #endif
