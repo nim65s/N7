@@ -1,62 +1,56 @@
 #ifndef SOURCE_H_INCLUDED
 #define SOURCE_H_INCLUDED
 
-// TODO Ve pourrait être const
-
 class source {
     protected:
         float V;
         float phi;
 
     public:
+        virtual float Ve(float t) = 0;
+        void affiche() const;
         source(float const & V, float const & phi);
-        virtual float Ve(float const & t) = 0;
 };
 
-class impulsion : public source {
+class impulsion : public virtual source {
     protected:
         float T;
 
     public:
         impulsion(float const & V, float const & phi, float const & T);
-        virtual float Ve(float const & t);
+        void affiche() const;
+        virtual float Ve(float t);
 };
 
 class echelon : public source {
     public:
         echelon(float const & V, float const & phi);
-        virtual float Ve(float const & t);
+        void affiche() const;
+        virtual float Ve(float t);
 };
 
-class periodique : public source {
+class periodique : public virtual source {
     protected:
         float P;
 
     public:
         periodique(float const & V, float const & phi, float const & P);
-        virtual float Ve(float const & t) = 0;
+        void affiche() const;
+        virtual float Ve(float t) = 0;
 };
 
 class triangle : public periodique {
     public:
         triangle(float const & V, float const & phi, float const & P);
-        virtual float Ve(float const & t);
+        void affiche() const;
+        virtual float Ve(float t);
 };
 
-// TODO diamant…
-//class impulsion_periodique : public impulsion, public periodique {
-    //public:
-        //impulsion_periodique(float const & V, float const & phi, float const & P, float const & t);
-        //virtual float Ve(float const & t);
-//};
-
-class impulsion_periodique: public periodique {
-    protected:
-        float T;
-
+class impulsion_periodique : public impulsion, public periodique {
     public:
         impulsion_periodique(float const & V, float const & phi, float const & P, float const & t);
-        virtual float Ve(float const & t);
+        void affiche() const;
+        virtual float Ve(float t);
 };
 
 #endif

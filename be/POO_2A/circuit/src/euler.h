@@ -2,6 +2,7 @@
 #define EULER_H_INCLUDED
 
 #include <vector>
+#include "source.h"
 
 class euler {
     protected:
@@ -10,6 +11,9 @@ class euler {
         std::vector<float> u; // $u^n$
 
         virtual float u_prime(int const & i) const;
+        virtual float exacte(int const & i) const;
+
+        bool exacte_isknown;
 
     public:
         float init;
@@ -22,37 +26,39 @@ class euler {
 
 class application : public euler {
     protected:
-        virtual float u_prime(int const & i) const;
+        float u_prime(int const & i) const;
+        float exacte(int const & i) const;
 
     public:
+        void affiche() const;
         application(int const & nmax, float const & epsilon, float const & init);
 };
 
 class ordre_un : public euler {
     protected:
-        virtual float u_prime(int const & i) const;
-        float (*Ve)(float const & t);
+        source* src;
 
     public:
-        ordre_un(int const & nmax, float const & epsilon, float const & init, float (*Ve)(float const & t));
+        void affiche() const;
+        ordre_un(int const & nmax, float const & epsilon, float const & init, source* src);
 };
 
 class circuit_un : public ordre_un {
     protected:
-        virtual float u_prime(int const & i) const;
+        float u_prime(int const & i) const;
+        float exacte(int const & i) const;
         float R;
         float C;
 
     public:
-        circuit_un(int const & nmax, float const & epsilon, float const & init, float (*Ve)(float const & t), float const & R, float const & C);
+        void affiche() const;
+        circuit_un(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & C);
 };
-
-typedef float (ordre_un::*ptrVe)(float const &)
 
 /*
  *class circuit_deux : public ordre_un {
  *    protected:
- *        virtual float u_prime(int const & i) const;
+ *        virtual float u_prime(int const & i) co;
  *
  *    public:
  *        circuit_deux(int const & nmax, float const & epsilon, float const & init);
