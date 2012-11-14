@@ -16,6 +16,7 @@ euler::euler(int const & nmax, float const & epsilon, float const & init): nmax(
 }
 
 float euler::u_prime(int const & i) const {
+    cout << "fail" << endl;
     if (i == 0) return init;
     return (u[i + 1] - u[i]) / epsilon;
 }
@@ -28,10 +29,12 @@ float euler::exacte(int const & i) const {
 
 void euler::main_loop() {
     u.push_back(init);
+    cout << "Calcul principal…" << endl;
     for (int i(0);i<nmax;i++) {
-        u.push_back(u[i] + epsilon*u_prime(i));
-        cout << endl << "approchée:\t" << u[i] + epsilon*u_prime(i);
+        u.push_back(u[i-1] + epsilon*u_prime(i-1));
+        cout << i << ": approchée:\t" << u[i];
         if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
+        cout << endl;
     }
     cout << endl;
 }
@@ -51,9 +54,10 @@ application::application(int const & nmax, float const & epsilon, float const & 
     euler::exacte_isknown = true;
 }
 
+// TODO: sûr que la dérivée en 0 est égale à l’init ? o_O
 float application::u_prime(int const & i) const {
     if (i == 0) return init;
-    return - 3 * u[i] - 3  * epsilon * i;
+    return - 3 * u[i-1] - 3  * epsilon * i;
 }
 
 float application::exacte(int const & i) const {
@@ -64,45 +68,6 @@ void application::affiche() const {
     cout << "classe Application…" << endl;
     cout << "fille de la euler suivante:" << endl;
     euler::affiche();
-}
-
-// Ordre 1
-
-ordre_un::ordre_un(int const & nmax, float const & epsilon, float const & init, source* src) : euler(nmax, epsilon, init), src(src) {}
-
-void ordre_un::affiche() const {
-    cout << "classe Ordre_un…" << endl;
-    cout << "a la source suivante:" << endl;
-    src->affiche();
-}
-
-// Circuit 1
-
-circuit_un::circuit_un(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & C) : ordre_un(nmax, epsilon, init, src), R(R), C(C) {
-    exacte_isknown = false;
-}
-
-float circuit_un::u_prime(int const & i) const {
-    if (i == 0) return init;
-    cout << endl << "circuit_un::u_prime, i: " << i;
-    cout << "\t Ve(i*epsilon): " << src->Ve(i*epsilon);
-    cout << "\t u[i]: " << u[i];
-    cout << "\t R*C: " << R*C << endl;
-    return (src->Ve(i*epsilon) - u[i]) / (R*C);
-}
-
-float circuit_un::exacte(int const & i) const {
-    // Cette méthode devrait être pure…
-    assert(false);
-    return i;
-}
-
-void circuit_un::affiche() const {
-    cout << "classe Circuit_un:" << endl;
-    cout << "\tR:\t" << R << endl;
-    cout << "\tC:\t" << C << endl;
-    cout << "fille de la l’ordre un suivant:" << endl;
-    ordre_un::affiche();
 }
 
 // vim: set foldmethod=marker:

@@ -34,36 +34,4 @@ class application : public euler {
         application(int const & nmax, float const & epsilon, float const & init);
 };
 
-class ordre_un : public euler {
-    protected:
-        source* src;
-
-    public:
-        void affiche() const;
-        ordre_un(int const & nmax, float const & epsilon, float const & init, source* src);
-};
-
-class circuit_un : public ordre_un {
-    protected:
-        float u_prime(int const & i) const;
-        float exacte(int const & i) const;
-        float R;
-        float C;
-
-    public:
-        void affiche() const;
-        circuit_un(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & C);
-};
-
-/*
- *class circuit_deux : public ordre_un {
- *    protected:
- *        virtual float u_prime(int const & i) co;
- *
- *    public:
- *        circuit_deux(int const & nmax, float const & epsilon, float const & init);
- *};
- *
- */
-
 #endif
