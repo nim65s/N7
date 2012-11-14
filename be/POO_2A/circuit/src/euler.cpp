@@ -16,9 +16,8 @@ euler::euler(int const & nmax, float const & epsilon, float const & init): nmax(
 }
 
 float euler::u_prime(int const & i) const {
-    cout << "fail" << endl;
-    if (i == 0) return init;
-    return (u[i + 1] - u[i]) / epsilon;
+    assert(false);
+    return i;
 }
 
 float euler::exacte(int const & i) const {

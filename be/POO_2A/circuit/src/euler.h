@@ -6,17 +6,17 @@
 
 class euler {
     protected:
-        int nmax;
-        float epsilon; // $h_n$
-        std::vector<float> u; // $u^n$
+        int nmax; // nombre d’instants
+        float epsilon; // durée d’un instant
+        float init; // valeur initiale
+        std::vector<float> u; // vecteur réponse
 
-        virtual float u_prime(int const & i) const;
+        virtual float u_prime(int const & i) const; // calcul de la dérivée
         virtual float exacte(int const & i) const;
 
         bool exacte_isknown;
 
     public:
-        float init;
 
         void main_loop();
         void affiche() const;

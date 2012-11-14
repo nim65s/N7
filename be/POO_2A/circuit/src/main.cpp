@@ -1,11 +1,12 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+#include <vector>
 #include <assert.h>
 #include "euler.h"
 #include "source.h"
 #include "ordre_un.h"
-#include <vector>
+#include "ordre_deux.h"
 
 using namespace std;
 
@@ -80,6 +81,12 @@ int main() {
     C6.affiche();
     cout << endl;
 
+
+    circuit_trois C7(500, 1e-9, 0, 0, 50, 1e-6, 1e-9);
+    C7.main_loop();
+    cout << endl;
+    //C7.affiche();
+    //cout << endl;
 
 
     return 0;
