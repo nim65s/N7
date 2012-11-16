@@ -116,6 +116,10 @@ Pour tester notre VCO, nous connectons son entrée à un potentiomètre suivi d�
 
 \includegraphics[width=\linewidth]{../img/schematic_test_vco.png}
 
+\subsection{Réalisation sur plaquette LABDEC}
+
+\includegraphics[width=\linewidth]{../img/moulation_frec_labde.png}
+
 \section{Séance 3: Simulation et mesures de l’amplificateur audio}
 
 %TODO: Schéma p.54, bode théorique p.53
@@ -210,13 +214,39 @@ C6 = 100 / (Rb6 * 2 * pi * fT)
 \end{minted}
 \verb|C6 = 6.366| \si{\nano\farad}
 
+On vérifie sur la simulation: Avant:
+
+\includegraphics[width=\linewidth]{../img/simu_t_rise_del.png}
+
+Après:
+
+\includegraphics[width=\linewidth]{../img/simu_t_rise_del_amelioree.png}
+
+
+
 On prend alors 100 \si{\nano\farad}.
 \section{Séance 5: Routage de l’émetteur, dépôt du typon}
-Ce routage s’est déroulé sans problème, voici à quoi ressemble notre typon:
+Ce routage s’est déroulé sans problème, voici à la schématique: 
+
+\includegraphics[width=\linewidth]{../img/schematic_routage.png}
+
+Et notre typon:
 
 \includegraphics[width=\linewidth]{../img/routage.png}
 
-\section{Séance 6: Soudage de la carte de l’émetteur − mesures de l’ḿetteur complet}
+\section{Séance 6: Soudage de la carte de l’émetteur − mesures de l’émetteur complet}
 Cette séance mérite assez peu de commentaires techniques, si ce n’est «Ça marche».
 
 Par contre, on peut ajouter qu’on est particulièrement content que ça marche aussi bien.
+
+Voici notre le diagramme de Bode du circuit final:
+
+\includegraphics[width=\linewidth]{../img/bode_circuit_audio_labdec.png}
+
+Pour comparaison, voici le circuit total simulé:
+
+\includegraphics[width=\linewidth]{../img/circuit_emetteur_bias_point_tension.png}
+
+\includegraphics[width=\linewidth]{../img/circuit_emetteur_bias_point_courant.png}
+
+\includegraphics[width=\linewidth]{../img/bode_circuit_audio_simu.png}
