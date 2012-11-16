@@ -14,12 +14,12 @@ then
         ~/scripts/ipynbtotex.py $ipynb ${file%.*}
     done
 else
-    if [[ ! -f ~/Downloads/notebook.ipynb ]]
+    if [[ ! -f ~/Downloads/*.ipynb ]]
     then
         echo 'Pas de notebook.ipynb'
         exit 2
     fi
 
     ~/scripts/ipynbtotex.py ~/Downloads/notebook.ipynb $1
-    mv ~/Downloads/notebook.ipynb IPy/$1.ipynb
+    mv ~/Downloads/*.ipynb IPy/$1.ipynb
 fi
