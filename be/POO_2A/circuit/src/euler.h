@@ -6,17 +6,17 @@
 
 class euler {
     protected:
-        int nmax;
-        float epsilon; // $h_n$
-        std::vector<float> u; // $u^n$
+        int nmax; // nombre d’instants
+        float epsilon; // durée d’un instant
+        float init; // valeur initiale
+        std::vector<float> u; // vecteur réponse
 
-        virtual float u_prime(int const & i) const;
+        virtual float u_prime(int const & i) const; // calcul de la dérivée
         virtual float exacte(int const & i) const;
 
         bool exacte_isknown;
 
     public:
-        float init;
 
         void main_loop();
         void affiche() const;
@@ -33,37 +33,5 @@ class application : public euler {
         void affiche() const;
         application(int const & nmax, float const & epsilon, float const & init);
 };
-
-class ordre_un : public euler {
-    protected:
-        source* src;
-
-    public:
-        void affiche() const;
-        ordre_un(int const & nmax, float const & epsilon, float const & init, source* src);
-};
-
-class circuit_un : public ordre_un {
-    protected:
-        float u_prime(int const & i) const;
-        float exacte(int const & i) const;
-        float R;
-        float C;
-
-    public:
-        void affiche() const;
-        circuit_un(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & C);
-};
-
-/*
- *class circuit_deux : public ordre_un {
- *    protected:
- *        virtual float u_prime(int const & i) co;
- *
- *    public:
- *        circuit_deux(int const & nmax, float const & epsilon, float const & init);
- *};
- *
- */
 
 #endif
