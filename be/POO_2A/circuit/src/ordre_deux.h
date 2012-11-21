@@ -28,11 +28,20 @@ class circuit_trois : public ordre_deux {
 
     public:
         void affiche() const;
-        circuit_trois(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & L, float const & C);
+        circuit_trois(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src, float const & R, float const & L, float const & C);
 };
 
-//class circuit_quatre : public ordre_deux {
-//};
+class circuit_quatre : public ordre_deux {
+    protected:
+        float u_seconde(int const & i) const;
+        float R;
+        float L;
+        float C;
+
+    public:
+        void affiche() const;
+        circuit_quatre(int const & nmax, float const & epsilon, float const & init, float const & init_p,  source* src, float const & R, float const & L, float const & C);
+};
 
 
 #endif

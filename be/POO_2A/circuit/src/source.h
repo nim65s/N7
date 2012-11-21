@@ -8,6 +8,7 @@ class source {
 
     public:
         virtual float Ve(float t) = 0;
+        virtual float Ve_p(float t, float epsilon) = 0;
         void affiche() const;
         source(float const & V, float const & phi);
 };
@@ -20,6 +21,7 @@ class impulsion : public virtual source {
         impulsion(float const & V, float const & phi, float const & T);
         void affiche() const;
         virtual float Ve(float t);
+        virtual float Ve_p(float t, float epsilon);
 };
 
 class echelon : public source {
@@ -27,6 +29,7 @@ class echelon : public source {
         echelon(float const & V, float const & phi);
         void affiche() const;
         virtual float Ve(float t);
+        virtual float Ve_p(float t, float epsilon);
 };
 
 class periodique : public virtual source {
@@ -37,6 +40,7 @@ class periodique : public virtual source {
         periodique(float const & V, float const & phi, float const & P);
         void affiche() const;
         virtual float Ve(float t) = 0;
+        virtual float Ve_p(float t, float epsilon) = 0;
 };
 
 class triangle : public periodique {
@@ -44,6 +48,7 @@ class triangle : public periodique {
         triangle(float const & V, float const & phi, float const & P);
         void affiche() const;
         virtual float Ve(float t);
+        virtual float Ve_p(float t, float epsilon);
 };
 
 class impulsion_periodique : public impulsion, public periodique {
@@ -51,6 +56,10 @@ class impulsion_periodique : public impulsion, public periodique {
         impulsion_periodique(float const & V, float const & phi, float const & P, float const & t);
         void affiche() const;
         virtual float Ve(float t);
+        virtual float Ve_p(float t, float epsilon);
 };
+
+
+// TODO sinus
 
 #endif

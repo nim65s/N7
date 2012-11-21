@@ -31,9 +31,9 @@ void euler::main_loop() {
     cout << "Calcul principal…" << endl;
     for (int i(0);i<nmax;i++) {
         u.push_back(u[i-1] + epsilon*u_prime(i-1));
-        cout << i << ": approchée:\t" << u[i];
-        if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
-        cout << endl;
+        //cout << i << ": approchée:\t" << u[i];
+        //if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
+        //cout << endl;
     }
     cout << endl;
 }

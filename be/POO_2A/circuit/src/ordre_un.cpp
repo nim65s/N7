@@ -18,6 +18,8 @@ void ordre_un::affiche() const {
     cout << "classe Ordre_un…" << endl;
     cout << "a la source suivante:" << endl;
     src->affiche();
+    cout << "fille de la méthode d’euler suivante:" << endl;
+    euler::affiche();
 }
 
 // Circuit 1

@@ -57,14 +57,23 @@ void impulsion_periodique::affiche() const {
 }
 
 float impulsion::Ve(float t) {
-    if (t < 0) return 0;
     if (t > phi and t < phi + T) return V;
     return 0;
 }
 
+float impulsion::Ve_p(float t, float epsilon) {
+    if (t >= phi and t < phi + epsilon) return V / epsilon;
+    if (t >= phi + T and t < phi + T + epsilon) return - V / epsilon;
+    return 0;
+}
+
 float echelon::Ve(float t) {
-    if (t < 0) return 0;
     if (t > phi) return V;
+    return 0;
+}
+
+float echelon::Ve_p(float t, float epsilon) {
+    if (t >= phi and t < phi + epsilon) return V / epsilon;
     return 0;
 }
 
@@ -76,11 +85,26 @@ float triangle::Ve(float t) {
     return 2 * V * (1 - t / P);
 }
 
+float triangle::Ve_p(float t, float epsilon) {
+    if (t < 0) return 0;
+    if (t > P) return Ve_p(t - P, epsilon);
+    if (t < P/2) return 2 * V / P;
+    return - 2 * V / P;
+}
+
 // TODO phi
 float impulsion_periodique::Ve(float t) {
     if (t < 0) return 0;
     if (t > P) return Ve(t - P);
     if (t < T) return V;
+    return 0;
+}
+
+float impulsion_periodique::Ve_p(float t, float epsilon) {
+    if (t < 0) return 0;
+    if (t > P) return Ve_p(t - P, epsilon);
+    if (t >= 0 and t < epsilon) return V / epsilon;
+    if (t >= T and t < T + epsilon) return - V / epsilon;
     return 0;
 }
 
