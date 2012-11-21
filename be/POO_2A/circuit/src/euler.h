@@ -21,6 +21,7 @@ class euler {
         void main_loop();
         void affiche() const;
 
+        euler();
         euler(int const & nmax, float const & epsilon, float const & init);
 };
 

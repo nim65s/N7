@@ -16,6 +16,7 @@ class ordre_deux : public euler {
         void main_loop();
 
         void affiche() const;
+        ordre_deux();
         ordre_deux(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src);
 };
 
@@ -28,6 +29,7 @@ class circuit_trois : public ordre_deux {
 
     public:
         void affiche() const;
+        circuit_trois();
         circuit_trois(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src, float const & R, float const & L, float const & C);
 };
 
@@ -40,7 +42,20 @@ class circuit_quatre : public ordre_deux {
 
     public:
         void affiche() const;
-        circuit_quatre(int const & nmax, float const & epsilon, float const & init, float const & init_p,  source* src, float const & R, float const & L, float const & C);
+        circuit_quatre();
+        circuit_quatre(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src, float const & R, float const & L, float const & C);
+};
+
+class validation : public ordre_deux {
+    protected:
+        float u_seconde(int const & i) const;
+        float exacte(int const & i) const;
+        float lambda;
+
+    public:
+        void affiche() const;
+        validation();
+        validation(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src, float const & lambda);
 };
 
 

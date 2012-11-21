@@ -10,7 +10,10 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
+    cout.precision(6);
+    cout.setf(ios::fixed,ios::floatfield);
+
     cout << "Test de la petite «application»…" << endl;
     application f(10, 0.01, 3.14);
     f.main_loop();
@@ -40,6 +43,7 @@ int main() {
 
     impulsion Ve3(1, 50e-9, 100e-9);
     Ve3.affiche();
+
 
     // ------------- ATTENTION: les pas ont été multipliés par 10 ! -----------------------
 
@@ -130,10 +134,22 @@ int main() {
     C12.affiche();
     cout << endl;
 
+    // TODO: voir avec un enseignant s’il a une réponse juste…
+    // Validation
+    validation V(50, 0.1, 14, 11, &Ve1, 10);
+    V.main_loop();
+    cout << endl;
+    V.affiche();
+    cout << endl;
 
-
-
-
+    if (argc > 1 and argv[1][0] == 't') {
+        circuit_deux * test = new circuit_deux;
+        test->main_loop();
+        cout << endl;
+        test->affiche();
+        cout << endl;
+        //delete test;
+    }
 
     return 0;
 }

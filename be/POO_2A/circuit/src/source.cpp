@@ -3,7 +3,22 @@
 
 using namespace std;
 
+/********************** Constructeurs, destructeurs et fonctions d’affichage ***************************/
+
+// Source
+
 source::source(float const & V, float const & phi): V(V), phi(phi) {}
+
+source::source() {
+    cout << "Constructeur de source:" << endl;
+    cout << "\tV: ";
+    cin >> V;
+    cout << "\tphi: ";
+    cin >> phi;
+    cout << " OK." << endl;
+}
+
+//source::~source() {}
 
 void source::affiche() const {
     cout << "classe abstraite Source…" << endl;
@@ -11,7 +26,18 @@ void source::affiche() const {
     cout << "\tphi:\t" << phi << endl;
 }
 
+// Impulsion
+
 impulsion::impulsion(float const & V, float const & phi, float const & T): source(V, phi), T(T) {}
+
+impulsion::impulsion(): source() {
+    cout << "constructeur d’impulsion:";
+    cout << endl << "\tT: ";
+    cin >> T;
+    cout << " OK." << endl;
+}
+
+//impulsion::~impulsion() {}
 
 void impulsion::affiche() const {
     cout << "classe Impulsion…" << endl;
@@ -20,7 +46,13 @@ void impulsion::affiche() const {
     source::affiche();
 }
 
+// Echelon
+
 echelon::echelon(float const & V, float const & phi): source(V, phi) {}
+
+echelon::echelon(): source() {}
+
+//echelon::~echelon() {}
 
 void echelon::affiche() const {
     cout << "classe Échelon" << endl;
@@ -28,7 +60,18 @@ void echelon::affiche() const {
     source::affiche();
 }
 
+// Periodique
+
 periodique::periodique(float const & V, float const & phi, float const & P): source(V, phi), P(P) {}
+
+periodique::periodique(): source() {
+    cout << "Constructeur de périodique:" << endl;
+    cout << "\tP: ";
+    cin >> P;
+    cout << " OK." << endl;
+}
+
+//periodique::~periodique() {}
 
 void periodique::affiche() const {
     cout << "classe abstraite Périodique" << endl;
@@ -37,8 +80,14 @@ void periodique::affiche() const {
     source::affiche();
 }
 
+// Triangle
+
 // Il faut appeler le constructeur de source dirctement à cause du l’héritage virtuel à cause du diamant
 triangle::triangle(float const & V, float const & phi, float const & P): source(V, phi), periodique(V, phi, P) {}
+
+triangle::triangle(): source(), periodique() {}
+
+//triangle::~triangle() {}
 
 void triangle::affiche() const {
     cout << "classe Triangle" << endl;
@@ -46,8 +95,14 @@ void triangle::affiche() const {
     periodique::affiche();
 }
 
+// Impulsion périodique
+
 // Il faut appeler le constructeur de source dirctement à cause du l’héritage virtuel à cause du diamant
 impulsion_periodique::impulsion_periodique(float const & V, float const & phi, float const & P, float const & T): source(V, phi), impulsion(V, phi, T), periodique(V, phi, P) {}
+
+impulsion_periodique::impulsion_periodique(): source(), impulsion(), periodique() {}
+
+//impulsion_periodique::~impulsion_periodique() {}
 
 void impulsion_periodique::affiche() const {
     cout << "classe Impulsion Périodique" << endl;
@@ -55,6 +110,8 @@ void impulsion_periodique::affiche() const {
     periodique::affiche();
     impulsion::affiche();
 }
+
+/********************** Tensions et dérivées  ***************************/
 
 float impulsion::Ve(float t) {
     if (t > phi and t < phi + T) return V;

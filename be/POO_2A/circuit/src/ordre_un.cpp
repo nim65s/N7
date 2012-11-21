@@ -14,6 +14,40 @@ using namespace std;
 
 ordre_un::ordre_un(int const & nmax, float const & epsilon, float const & init, source* src) : euler(nmax, epsilon, init), src(src) {}
 
+ordre_un::ordre_un(): euler() {
+    int i(0);
+    cout << "constructeur d’ordre_un:" << endl;
+    cout << "quel type de source voulez-vous ?" << endl;
+    cout << "\t1 - impulsion" << endl;
+    cout << "\t2 - echelon" << endl;
+    cout << "\t3 - triangle" << endl;
+    cout << "\t4 - impulsion périodique" << endl;
+    cout << "==> ";
+    cin >> i;
+    switch (i) {
+        case 1:
+            //impulsion i();
+            src = new impulsion;
+            break;
+        case 2:
+            //echelon e();
+            src = new echelon;
+            break;
+        case 3:
+            //triangle t();
+            src = new triangle;
+            break;
+        case 4:
+            //impulsion_periodique ip();
+            src = new impulsion_periodique;
+            break;
+    }
+}
+
+//ordre_un::~ordre_un() {
+    //delete src;
+//}
+
 void ordre_un::affiche() const {
     cout << "classe Ordre_un…" << endl;
     cout << "a la source suivante:" << endl;
@@ -27,6 +61,18 @@ void ordre_un::affiche() const {
 circuit_un::circuit_un(int const & nmax, float const & epsilon, float const & init, source* src, float const & R, float const & C) : ordre_un(nmax, epsilon, init, src), R(R), C(C) {
     exacte_isknown = false;
 }
+
+circuit_un::circuit_un(): ordre_un() {
+    cout << "constructeur de circuit_un:";
+    cout << endl << "\tR: ";
+    cin >> R;
+    cout << endl << "\tC: ";
+    cin >> C;
+    cout << " OK." << endl;
+    exacte_isknown = false;
+}
+
+//circuit_un::~circuit_un() {}
 
 float circuit_un::u_prime(int const & i) const {
     return (src->Ve(i*epsilon) - u[i]) / (R*C);
@@ -51,6 +97,20 @@ void circuit_un::affiche() const {
 circuit_deux::circuit_deux(int const & nmax, float const & epsilon, float const & init, source* src, float const & R1, float const & R2, float const & C) : ordre_un(nmax, epsilon, init, src), R1(R1), R2(R2), C(C) {
     exacte_isknown = false;
 }
+
+circuit_deux::circuit_deux(): ordre_un() {
+    cout << "constructeur de circuit_deux:";
+    cout << endl << "\tR1: ";
+    cin >> R1;
+    cout << endl << "\tR2: ";
+    cin >> R2;
+    cout << endl << "\tC: ";
+    cin >> C;
+    cout << " OK." << endl;
+    exacte_isknown = false;
+}
+
+//circuit_deux::~circuit_deux() {}
 
 float circuit_deux::u_prime(int const & i) const {
     float I(0);

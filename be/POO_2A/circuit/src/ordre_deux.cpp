@@ -21,9 +21,9 @@ void ordre_deux::main_loop() {
     for (int i(1);i<nmax;i++) {
         u.push_back(u[i-1] + epsilon*u_p[i-1]);
         u_p.push_back(u_p[i-1] + epsilon*u_seconde(i-1));
-        //cout << i << ": approchée:\t" << u[i];
-        //if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
-        //cout << endl;
+        cout << i << ": approchée:\t" << u[i];
+        if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
+        cout << endl;
     }
     cout << endl;
 }
@@ -80,4 +80,24 @@ void circuit_quatre::affiche() const {
     ordre_deux::affiche();
 }
 
+// Validation
+
+validation::validation(int const & nmax, float const & epsilon, float const & init, float const & init_p, source* src, float const & lambda): ordre_deux(nmax, epsilon, init, init_p, src), lambda(lambda) {
+    exacte_isknown = true;
+}
+
+float validation::exacte(int const & i) const {
+    return (init_p*sin(sqrt(lambda)*i*epsilon) + init*cos(sqrt(lambda)*i*epsilon)) / sqrt(lambda);
+}
+
+float validation::u_seconde(int const & i) const {
+    return - lambda * u[i];
+}
+
+void validation::affiche() const {
+    cout << "classe Validation:" << endl;
+    cout << "\tlambda:\t" << lambda << endl;
+    cout << "fille de l’ordre deux suivant:" << endl;
+    ordre_deux::affiche();
+}
 

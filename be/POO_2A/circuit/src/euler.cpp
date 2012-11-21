@@ -15,6 +15,18 @@ euler::euler(int const & nmax, float const & epsilon, float const & init): nmax(
     exacte_isknown = false;
 }
 
+euler::euler() {
+    cout << "Constructeur de euler…" << endl;
+    cout << "\tnmax: ";
+    cin >> nmax;
+    cout << "\tepsilon: ";
+    cin >> epsilon;
+    cout << "\tinit: ";
+    cin >> init;
+    exacte_isknown = false;
+    cout << " OK." << endl;
+}
+
 float euler::u_prime(int const & i) const {
     assert(false);
     return i;
@@ -31,9 +43,9 @@ void euler::main_loop() {
     cout << "Calcul principal…" << endl;
     for (int i(0);i<nmax;i++) {
         u.push_back(u[i-1] + epsilon*u_prime(i-1));
-        //cout << i << ": approchée:\t" << u[i];
-        //if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
-        //cout << endl;
+        cout << i << ": approchée:\t" << u[i];
+        if (exacte_isknown) cout << "\texacte:\t" << exacte(i);
+        cout << endl;
     }
     cout << endl;
 }

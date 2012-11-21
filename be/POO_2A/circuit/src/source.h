@@ -10,7 +10,9 @@ class source {
         virtual float Ve(float t) = 0;
         virtual float Ve_p(float t, float epsilon) = 0;
         void affiche() const;
+        source();
         source(float const & V, float const & phi);
+        //virtual ~source();
 };
 
 class impulsion : public virtual source {
@@ -18,7 +20,9 @@ class impulsion : public virtual source {
         float T;
 
     public:
+        impulsion();
         impulsion(float const & V, float const & phi, float const & T);
+        //virtual ~impulsion();
         void affiche() const;
         virtual float Ve(float t);
         virtual float Ve_p(float t, float epsilon);
@@ -26,7 +30,9 @@ class impulsion : public virtual source {
 
 class echelon : public source {
     public:
+        echelon();
         echelon(float const & V, float const & phi);
+        //virtual ~echelon();
         void affiche() const;
         virtual float Ve(float t);
         virtual float Ve_p(float t, float epsilon);
@@ -37,7 +43,9 @@ class periodique : public virtual source {
         float P;
 
     public:
+        periodique();
         periodique(float const & V, float const & phi, float const & P);
+        //virtual ~periodique();
         void affiche() const;
         virtual float Ve(float t) = 0;
         virtual float Ve_p(float t, float epsilon) = 0;
@@ -45,7 +53,9 @@ class periodique : public virtual source {
 
 class triangle : public periodique {
     public:
+        triangle();
         triangle(float const & V, float const & phi, float const & P);
+        //virtual ~triangle();
         void affiche() const;
         virtual float Ve(float t);
         virtual float Ve_p(float t, float epsilon);
@@ -53,7 +63,9 @@ class triangle : public periodique {
 
 class impulsion_periodique : public impulsion, public periodique {
     public:
+        impulsion_periodique();
         impulsion_periodique(float const & V, float const & phi, float const & P, float const & t);
+        //virtual ~impulsion_periodique();
         void affiche() const;
         virtual float Ve(float t);
         virtual float Ve_p(float t, float epsilon);
