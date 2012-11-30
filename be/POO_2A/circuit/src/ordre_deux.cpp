@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -34,11 +35,12 @@ float ordre_deux::u_seconde(int const & i) const {
 }
 
 void ordre_deux::affiche() const {
-    cout << "classe Ordre_deux…" << endl;
-    cout << "\tinit_p:\t" << init_p << endl;
-    cout << "a la source suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Ordre_deux…" << endl;
+    fichier << "\tinit_p:\t" << init_p << endl;
+    fichier << "a la source suivante:" << endl;
     src->affiche();
-    cout << "fille de la méthode d’euler suivante:" << endl;
+    fichier << "fille de la méthode d’euler suivante:" << endl;
     euler::affiche();
 }
 
@@ -53,11 +55,12 @@ float circuit_trois::u_seconde(int const & i) const {
 }
 
 void circuit_trois::affiche() const {
-    cout << "classe Circuit_trois:" << endl;
-    cout << "\tR:\t" << R << endl;
-    cout << "\tL:\t" << L << endl;
-    cout << "\tC:\t" << C << endl;
-    cout << "fille de l’ordre deux suivant:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Circuit_trois:" << endl;
+    fichier << "\tR:\t" << R << endl;
+    fichier << "\tL:\t" << L << endl;
+    fichier << "\tC:\t" << C << endl;
+    fichier << "fille de l’ordre deux suivant:" << endl;
     ordre_deux::affiche();
 }
 
@@ -72,11 +75,12 @@ float circuit_quatre::u_seconde(int const & i) const {
 }
 
 void circuit_quatre::affiche() const {
-    cout << "classe Circuit_quatre:" << endl;
-    cout << "\tR:\t" << R << endl;
-    cout << "\tL:\t" << L << endl;
-    cout << "\tC:\t" << C << endl;
-    cout << "fille de l’ordre deux suivant:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Circuit_quatre:" << endl;
+    fichier << "\tR:\t" << R << endl;
+    fichier << "\tL:\t" << L << endl;
+    fichier << "\tC:\t" << C << endl;
+    fichier << "fille de l’ordre deux suivant:" << endl;
     ordre_deux::affiche();
 }
 
@@ -95,9 +99,10 @@ float validation::u_seconde(int const & i) const {
 }
 
 void validation::affiche() const {
-    cout << "classe Validation:" << endl;
-    cout << "\tlambda:\t" << lambda << endl;
-    cout << "fille de l’ordre deux suivant:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Validation:" << endl;
+    fichier << "\tlambda:\t" << lambda << endl;
+    fichier << "fille de l’ordre deux suivant:" << endl;
     ordre_deux::affiche();
 }
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "source.h"
 
 using namespace std;
@@ -21,9 +22,10 @@ source::source() {
 //source::~source() {}
 
 void source::affiche() const {
-    cout << "classe abstraite Source…" << endl;
-    cout << "\tV:\t" << V << endl;
-    cout << "\tphi:\t" << phi << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe abstraite Source…" << endl;
+    fichier << "\tV:\t" << V << endl;
+    fichier << "\tphi:\t" << phi << endl;
 }
 
 // Impulsion
@@ -40,9 +42,10 @@ impulsion::impulsion(): source() {
 //impulsion::~impulsion() {}
 
 void impulsion::affiche() const {
-    cout << "classe Impulsion…" << endl;
-    cout << "\tT:\t" << T << endl;
-    cout << "fille de la source suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Impulsion…" << endl;
+    fichier << "\tT:\t" << T << endl;
+    fichier << "fille de la source suivante:" << endl;
     source::affiche();
 }
 
@@ -55,8 +58,9 @@ echelon::echelon(): source() {}
 //echelon::~echelon() {}
 
 void echelon::affiche() const {
-    cout << "classe Échelon" << endl;
-    cout << "fille de la source suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Échelon" << endl;
+    fichier << "fille de la source suivante:" << endl;
     source::affiche();
 }
 
@@ -74,9 +78,10 @@ periodique::periodique(): source() {
 //periodique::~periodique() {}
 
 void periodique::affiche() const {
-    cout << "classe abstraite Périodique" << endl;
-    cout << "\tP:\t" << P << endl;
-    cout << "fille de la source suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe abstraite Périodique" << endl;
+    fichier << "\tP:\t" << P << endl;
+    fichier << "fille de la source suivante:" << endl;
     source::affiche();
 }
 
@@ -90,8 +95,9 @@ triangle::triangle(): source(), periodique() {}
 //triangle::~triangle() {}
 
 void triangle::affiche() const {
-    cout << "classe Triangle" << endl;
-    cout << "fille de la source périodique suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Triangle" << endl;
+    fichier << "fille de la source périodique suivante:" << endl;
     periodique::affiche();
 }
 
@@ -105,8 +111,9 @@ impulsion_periodique::impulsion_periodique(): source(), impulsion(), periodique(
 //impulsion_periodique::~impulsion_periodique() {}
 
 void impulsion_periodique::affiche() const {
-    cout << "classe Impulsion Périodique" << endl;
-    cout << "fille de la source périodique et de l’impulsion suivants:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Impulsion Périodique" << endl;
+    fichier << "fille de la source périodique et de l’impulsion suivants:" << endl;
     periodique::affiche();
     impulsion::affiche();
 }

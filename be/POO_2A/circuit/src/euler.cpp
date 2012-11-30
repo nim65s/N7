@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -51,12 +52,17 @@ void euler::main_loop() {
 }
 
 void euler::affiche() const {
-    cout << "classe Euler:" << endl;
-    cout << "\tnmax:\t" << nmax << endl;
-    cout << "\tepsilon:\t" << epsilon << endl;
-    cout << "\tinit:\t" << init << endl;
-    cout << "\ti\tu:" << endl;
-    for (int i(1);i<nmax;i++) cout << "\t" << i << "\t" << u[i] << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Euler:" << endl;
+    fichier << "\tnmax:\t" << nmax << endl;
+    fichier << "\tepsilon:\t" << epsilon << endl;
+    fichier << "\tinit:\t" << init << endl;
+    //fichier << "\ti\tu:" << endl;
+    ofstream matlab("../rapport/genere.m", ios::app);
+    matlab << "t = 0:" << epsilon << ":" << nmax/epsilon << endl;
+    matlab << "Vs = [ ";
+    for (int i(1);i<nmax;i++) matlab << u[i] << " ";
+    matlab << "]" << endl;
 }
 
 // Application
@@ -76,8 +82,9 @@ float application::exacte(int const & i) const {
 }
 
 void application::affiche() const {
-    cout << "classe Application…" << endl;
-    cout << "fille de la euler suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Application…" << endl;
+    fichier << "fille de la euler suivante:" << endl;
     euler::affiche();
 }
 

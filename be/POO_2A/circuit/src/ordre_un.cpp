@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -49,10 +50,15 @@ ordre_un::ordre_un(): euler() {
 //}
 
 void ordre_un::affiche() const {
-    cout << "classe Ordre_un…" << endl;
-    cout << "a la source suivante:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Ordre_un…" << endl;
+    fichier << "a la source suivante:" << endl;
     src->affiche();
-    cout << "fille de la méthode d’euler suivante:" << endl;
+    ofstream matlab("../rapport/genere.m", ios::app);
+    matlab << "Ve = [ ";
+    for (int i(1);i<nmax;i++) matlab << src->Ve(i*epsilon) << " ";
+    matlab << "]" << endl;
+    fichier << "fille de la méthode d’euler suivante:" << endl;
     euler::affiche();
 }
 
@@ -85,10 +91,11 @@ float circuit_un::exacte(int const & i) const {
 }
 
 void circuit_un::affiche() const {
-    cout << "classe Circuit_un:" << endl;
-    cout << "\tR:\t" << R << endl;
-    cout << "\tC:\t" << C << endl;
-    cout << "fille de l’ordre un suivant:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Circuit_un:" << endl;
+    fichier << "\tR:\t" << R << endl;
+    fichier << "\tC:\t" << C << endl;
+    fichier << "fille de l’ordre un suivant:" << endl;
     ordre_un::affiche();
 }
 
@@ -125,11 +132,12 @@ float circuit_deux::exacte(int const & i) const {
 }
 
 void circuit_deux::affiche() const {
-    cout << "classe Circuit_deux:" << endl;
-    cout << "\tR1:\t" << R1 << endl;
-    cout << "\tR2:\t" << R2 << endl;
-    cout << "\tC:\t" << C << endl;
-    cout << "fille de l’ordre un suivant:" << endl;
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Circuit_deux:" << endl;
+    fichier << "\tR1:\t" << R1 << endl;
+    fichier << "\tR2:\t" << R2 << endl;
+    fichier << "\tC:\t" << C << endl;
+    fichier << "fille de l’ordre un suivant:" << endl;
     ordre_un::affiche();
 }
 
