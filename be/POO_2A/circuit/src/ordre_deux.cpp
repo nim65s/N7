@@ -40,6 +40,10 @@ void ordre_deux::affiche() const {
     fichier << "\tinit_p:\t" << init_p << endl;
     fichier << "a la source suivante:" << endl;
     src->affiche();
+    ofstream matlab("../rapport/genere.m", ios::app);
+    matlab << "Ve = [ ";
+    for (int i(1);i<nmax;i++) matlab << src->Ve(i*epsilon) << " ";
+    matlab << "];" << endl;
     fichier << "fille de la méthode d’euler suivante:" << endl;
     euler::affiche();
 }

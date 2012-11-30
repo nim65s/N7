@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -13,6 +14,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
     cout.precision(6);
     cout.setf(ios::fixed,ios::floatfield);
+    ofstream matlab("../rapport/genere.m", ios::app);
 
     cout << "Test de la petite «application»…" << endl;
     application f(10, 0.01, 3.14);
@@ -53,6 +55,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C1.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 2: Circuit A, Impulsion périodique
     circuit_un C2(500, 1e-9, 0, &Ve2, 50, 1e-9);
@@ -60,6 +63,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C2.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 3: Circuit A, impulsion
     circuit_un C3(500, 1e-9, 0, &Ve3, 50, 1e-9);
@@ -67,6 +71,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C3.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
 
     // Exemple 4 : Circuit C, Echelon
@@ -75,6 +80,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C4.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 5: Circuit C, Impulsion périodique
     circuit_deux C5(500, 1e-9, 0, &Ve2, 36, 180, 1e-9);
@@ -82,6 +88,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C5.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 6: Circuit C, impulsion
     circuit_deux C6(500, 1e-9, 0, &Ve3, 36, 180, 1e-9);
@@ -89,6 +96,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C6.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
 
     // Exemple 7: Circuit B, impulsion
@@ -97,6 +105,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C7.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 8: Circuit B, impulsion périodique
     circuit_trois C8(500, 1e-9, 0, 0, &Ve2, 50, 1e-6, 0.1e-9);
@@ -104,6 +113,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C8.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 9: Circuit B, Echelon
     circuit_trois C9(500, 1e-9, 0, 0, &Ve3, 50, 1e-6, 0.1e-9);
@@ -111,6 +121,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C9.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 10: CircuitD, impulsion
     circuit_quatre C10(500, 1e-9, 0, 0, &Ve1, 1.2, 10e-9, 0.1e-6);
@@ -118,6 +129,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C10.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // Exemple 11: CircuitD, impulsion périodique
     circuit_quatre C11(500, 1e-9, 0, 0, &Ve2, 1.2, 10e-9, 0.1e-6);
@@ -125,6 +137,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C11.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
 
     // Exemple 12: CircuitD, Echelon
@@ -133,6 +146,7 @@ int main(int argc, char *argv[]) {
     cout << endl;
     C12.affiche();
     cout << endl;
+    matlab << "plot(t,Vs,t,Ve)" << endl << "pause" << endl;
 
     // TODO: voir avec un enseignant s’il a une réponse juste…
     // Validation

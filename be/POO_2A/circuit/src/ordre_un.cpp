@@ -57,7 +57,7 @@ void ordre_un::affiche() const {
     ofstream matlab("../rapport/genere.m", ios::app);
     matlab << "Ve = [ ";
     for (int i(1);i<nmax;i++) matlab << src->Ve(i*epsilon) << " ";
-    matlab << "]" << endl;
+    matlab << "];" << endl;
     fichier << "fille de la méthode d’euler suivante:" << endl;
     euler::affiche();
 }

@@ -59,10 +59,10 @@ void euler::affiche() const {
     fichier << "\tinit:\t" << init << endl;
     //fichier << "\ti\tu:" << endl;
     ofstream matlab("../rapport/genere.m", ios::app);
-    matlab << "t = 0:" << epsilon << ":" << nmax/epsilon << endl;
+    matlab << "t = " << epsilon << ":" << epsilon << ":" << (nmax-1)*epsilon << ";" << endl;
     matlab << "Vs = [ ";
     for (int i(1);i<nmax;i++) matlab << u[i] << " ";
-    matlab << "]" << endl;
+    matlab << "];" << endl;
 }
 
 // Application
