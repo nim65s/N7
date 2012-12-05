@@ -36,8 +36,8 @@ float ordre_deux::u_seconde(int const & i) const {
 
 void ordre_deux::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Ordre_deux…" << endl;
-    fichier << "\tinit_p:\t" << init_p << endl;
+    fichier << "classe Ordre deux…" << endl;
+    fichier << "\tinit-p:\t" << init_p << endl;
     fichier << "a la source suivante:" << endl;
     src->affiche();
     ofstream matlab("../rapport/genere.m", ios::app);
@@ -60,7 +60,7 @@ float circuit_trois::u_seconde(int const & i) const {
 
 void circuit_trois::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit_trois:" << endl;
+    fichier << "classe Circuit trois:" << endl;
     fichier << "\tR:\t" << R << endl;
     fichier << "\tL:\t" << L << endl;
     fichier << "\tC:\t" << C << endl;
@@ -80,7 +80,7 @@ float circuit_quatre::u_seconde(int const & i) const {
 
 void circuit_quatre::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit_quatre:" << endl;
+    fichier << "classe Circuit quatre:" << endl;
     fichier << "\tR:\t" << R << endl;
     fichier << "\tL:\t" << L << endl;
     fichier << "\tC:\t" << C << endl;

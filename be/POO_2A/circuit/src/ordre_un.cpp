@@ -51,7 +51,7 @@ ordre_un::ordre_un(): euler() {
 
 void ordre_un::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Ordre_un…" << endl;
+    fichier << "classe Ordre un…" << endl;
     fichier << "a la source suivante:" << endl;
     src->affiche();
     ofstream matlab("../rapport/genere.m", ios::app);
@@ -92,7 +92,7 @@ float circuit_un::exacte(int const & i) const {
 
 void circuit_un::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit_un:" << endl;
+    fichier << "classe Circuit un:" << endl;
     fichier << "\tR:\t" << R << endl;
     fichier << "\tC:\t" << C << endl;
     fichier << "fille de l’ordre un suivant:" << endl;
@@ -133,7 +133,7 @@ float circuit_deux::exacte(int const & i) const {
 
 void circuit_deux::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit_deux:" << endl;
+    fichier << "classe Circuit deux:" << endl;
     fichier << "\tR1:\t" << R1 << endl;
     fichier << "\tR2:\t" << R2 << endl;
     fichier << "\tC:\t" << C << endl;
