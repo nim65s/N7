@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
@@ -30,6 +30,8 @@
 \author{Guilhem Saurel}
 \date{\oldstylenums{\today}}
 
+\renewcommand{•}{•}
+
 \begin{document}
 
 \begin{titlepage}
@@ -40,6 +42,44 @@
 
 \tableofcontents
 
+
+
+\section{Préambule}
+\subsection{BÉPO}
+Ceci est mon rapport du Bureau d’Étude de Programation oriente Objet. Il se trouve qu’en en prenant
+l’acronyme, on tombe sur BÉPO ; je saute donc sur l’occasion pour glisser un petit lien : \url{bepo.fr}
+(vous n’êtes certainement pas sans savoir que l’AZERTY a été conçu pour éviter que les marteaux de 
+machine à écrire ne s’entrechoquent… Il est peut être temps d’envisager autre chose). Donc voilà, si,
+par hasard, il vous arrive de vous servir d’un clavier, je vous le recommande.
+
+\subsection{Logiciels utilisés}
+Pour la réalisation de ce BÉ et la création de ce rapport, voici une liste non-exhaustives des 
+logiciels qui m’ont été les plus utiles:
+\begin{description}
+	\item[Vim] un éditeur de texte: \url{www.vim.org};
+	\item[GCC] un compilateur C++: \url{gcc.gnu.org};
+	\item[git] un gestionnaire de versions: \url{git-scm.com/};
+	\item[CMake] un moteur de production: \url{www.cmake.org};
+	\item[\LaTeX] un logiciel de composition de documents: \url{www.latex-project.org};
+	\item[GNU Octave] un logiciel de calcul numérique: \url{www.gnu.org/software/octave/};
+	\item[ImageMagick] un logiciel de traitement d’images: \url{www.imagemagick.org/script/index.php}
+	\item[Bash] un interpréteur de commandes: \url{tiswww.case.edu/php/chet/bash/bashtop.html}
+\end{description}
+
+\subsection{Sources annexes}
+Les codes sources du Bureau d’Étude sont naturellement présentes en annexe, mais pour le reste des documents, 
+tout est disponible sur Github: \url{github.com/nim65s/N7/tree/master/be/POO_2A/circuit}, et 
+notamment le script qui sert à tout (rapport/go.sh).
+
+\section{RAS}
+rien ici pour l’instant
+
+\appendix
+\part{Code source}
+\section{RAS}
+rien ici pour l’instant
+
+\part{Résultats}
 \include{genere}
 
 
