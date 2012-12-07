@@ -51,14 +51,14 @@ ordre_un::ordre_un(): euler() {
 
 void ordre_un::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Ordre un…" << endl;
-    fichier << "a la source suivante:" << endl;
+    fichier << "classe Ordre un…\\\\" << endl;
+    fichier << "a la source suivante:\\\\" << endl;
     src->affiche();
     ofstream matlab("../rapport/genere.m", ios::app);
-    matlab << "Ve = [ ";
-    for (int i(1);i<nmax;i++) matlab << src->Ve(i*epsilon) << " ";
+    matlab << "Ve = [ 0 "; // on ajoute un 0 au début pour montrer que Ve est nul pour tout t < 0 sur les plots matlab
+    for (int i(1);i<nmax-1;i++) matlab << src->Ve(i*epsilon) << " ";
     matlab << "];" << endl;
-    fichier << "fille de la méthode d’euler suivante:" << endl;
+    fichier << "fille de la méthode d’euler suivante:\\\\" << endl;
     euler::affiche();
 }
 
@@ -92,10 +92,10 @@ float circuit_un::exacte(int const & i) const {
 
 void circuit_un::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit un:" << endl;
-    fichier << "\tR:\t" << R << endl;
-    fichier << "\tC:\t" << C << endl;
-    fichier << "fille de l’ordre un suivant:" << endl;
+    fichier << "classe Circuit un:\\\\" << endl;
+    fichier << "\tR:\t" << R << " ohms\\\\" << endl;
+    fichier << "\tC:\t" << C << " F\\\\" << endl;
+    fichier << "fille de l’ordre un suivant:\\\\" << endl;
     ordre_un::affiche();
 }
 
@@ -133,11 +133,11 @@ float circuit_deux::exacte(int const & i) const {
 
 void circuit_deux::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit deux:" << endl;
-    fichier << "\tR1:\t" << R1 << endl;
-    fichier << "\tR2:\t" << R2 << endl;
-    fichier << "\tC:\t" << C << endl;
-    fichier << "fille de l’ordre un suivant:" << endl;
+    fichier << "classe Circuit deux:\\\\" << endl;
+    fichier << "\tR1:\t" << R1 << " ohms\\\\" << endl;
+    fichier << "\tR2:\t" << R2 << " ohms\\\\" << endl;
+    fichier << "\tC:\t" << C << " F\\\\" << endl;
+    fichier << "fille de l’ordre un suivant:\\\\" << endl;
     ordre_un::affiche();
 }
 

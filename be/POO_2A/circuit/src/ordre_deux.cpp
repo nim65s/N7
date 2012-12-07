@@ -36,15 +36,15 @@ float ordre_deux::u_seconde(int const & i) const {
 
 void ordre_deux::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Ordre deux…" << endl;
-    fichier << "\tinit-p:\t" << init_p << endl;
-    fichier << "a la source suivante:" << endl;
+    fichier << "classe Ordre deux…\\\\" << endl;
+    fichier << "\tinit-p:\t" << init_p << "\\\\" << endl;
+    fichier << "a la source suivante:\\\\" << endl;
     src->affiche();
     ofstream matlab("../rapport/genere.m", ios::app);
-    matlab << "Ve = [ ";
-    for (int i(1);i<nmax;i++) matlab << src->Ve(i*epsilon) << " ";
+    matlab << "Ve = [ 0 "; // on ajoute un 0 au début pour montrer que Ve est nul pour tout t < 0 sur les plots matlab
+    for (int i(1);i<nmax-1;i++) matlab << src->Ve(i*epsilon) << " ";
     matlab << "];" << endl;
-    fichier << "fille de la méthode d’euler suivante:" << endl;
+    fichier << "fille de la méthode d’euler suivante:\\\\" << endl;
     euler::affiche();
 }
 
@@ -60,11 +60,11 @@ float circuit_trois::u_seconde(int const & i) const {
 
 void circuit_trois::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit trois:" << endl;
-    fichier << "\tR:\t" << R << endl;
-    fichier << "\tL:\t" << L << endl;
-    fichier << "\tC:\t" << C << endl;
-    fichier << "fille de l’ordre deux suivant:" << endl;
+    fichier << "classe Circuit trois:\\\\" << endl;
+    fichier << "\tR:\t" << R << " ohms\\\\" << endl;
+    fichier << "\tL:\t" << L << " H\\\\" << endl;
+    fichier << "\tC:\t" << C << " F\\\\" << endl;
+    fichier << "fille de l’ordre deux suivant:\\\\" << endl;
     ordre_deux::affiche();
 }
 
@@ -80,11 +80,11 @@ float circuit_quatre::u_seconde(int const & i) const {
 
 void circuit_quatre::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Circuit quatre:" << endl;
-    fichier << "\tR:\t" << R << endl;
-    fichier << "\tL:\t" << L << endl;
-    fichier << "\tC:\t" << C << endl;
-    fichier << "fille de l’ordre deux suivant:" << endl;
+    fichier << "classe Circuit quatre:\\\\" << endl;
+    fichier << "\tR:\t" << R << " ohms\\\\" << endl;
+    fichier << "\tL:\t" << L << " H\\\\" << endl;
+    fichier << "\tC:\t" << C << " F\\\\" << endl;
+    fichier << "fille de l’ordre deux suivant:\\\\" << endl;
     ordre_deux::affiche();
 }
 
@@ -104,9 +104,8 @@ float validation::u_seconde(int const & i) const {
 
 void validation::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Validation:" << endl;
-    fichier << "\tlambda:\t" << lambda << endl;
-    fichier << "fille de l’ordre deux suivant:" << endl;
+    fichier << "classe Validation:\\\\" << endl;
+    fichier << "\tlambda:\t" << lambda << "\\\\" << endl;
+    fichier << "fille de l’ordre deux suivant:\\\\" << endl;
     ordre_deux::affiche();
 }
-

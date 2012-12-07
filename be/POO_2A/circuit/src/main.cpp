@@ -11,6 +11,16 @@
 
 using namespace std;
 
+
+void rapport(int const & figure, float const & ymin, float const & ymax) {
+    ofstream latex("../rapport/genere.tex", ios::app);
+    ofstream matlab("../rapport/genere.m", ios::app);
+    matlab << "plot(t,Vs,t,Ve)" << endl;
+    matlab << "axis([-1e-7 5e-7 " << ymin << " " << ymax << "])" << endl;
+    matlab << "print -dsvg " << figure << ".svg" << endl;
+    latex << "\\includegraphics[width=\\linewidth]{" << figure << "}" << endl;
+}
+
 int main(int argc, char *argv[]) {
     cout.precision(6);
     cout.setf(ios::fixed,ios::floatfield);
@@ -56,137 +66,102 @@ int main(int argc, char *argv[]) {
     Ve3.affiche();
 
 
-    // ------------- ATTENTION: les pas ont été multipliés par 10 ! -----------------------
-
+    latex << "\\newpage" << endl;
     latex << "\\section{Premier ordre}" << endl;
     latex << "\\subsection{Circuit 1}" << endl;
 
     // Exemple 1: Circuit A, Echelon
     latex << "\\subsubsection{Échelon}" << endl;
-    circuit_un C1(500, 1e-9, 0, &Ve1, 50, 1e-9);
+    circuit_un C1(5000, 1e-10, 0, &Ve1, 50, 1e-9);
     C1.main_loop();
-    cout << endl;
     C1.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 1);
 
     // Exemple 2: Circuit A, Impulsion périodique
     latex << "\\subsubsection{Impulsion périodique}" << endl;
-    circuit_un C2(500, 1e-9, 0, &Ve2, 50, 1e-9);
+    circuit_un C2(5000, 1e-10, 0, &Ve2, 50, 1e-9);
     C2.main_loop();
-    cout << endl;
     C2.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 0.7);
 
     // Exemple 3: Circuit A, impulsion
     latex << "\\subsubsection{Impulsion}" << endl;
-    circuit_un C3(500, 1e-9, 0, &Ve3, 50, 1e-9);
+    circuit_un C3(5000, 1e-10, 0, &Ve3, 50, 1e-9);
     C3.main_loop();
-    cout << endl;
     C3.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 0.7);
 
     latex << "\\subsection{Circuit 3}" << endl;
 
     // Exemple 4 : Circuit C, Echelon
     latex << "\\subsubsection{Échelon}" << endl;
-    circuit_deux C4(500, 1e-9, 0, &Ve1, 36, 180, 1e-9);
+    circuit_deux C4(5000, 1e-10, 0, &Ve1, 36, 180, 1e-9);
     C4.main_loop();
-    cout << endl;
     C4.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 0.35);
 
     // Exemple 5: Circuit C, Impulsion périodique
     latex << "\\subsubsection{Impulsion périodique}" << endl;
-    circuit_deux C5(500, 1e-9, 0, &Ve2, 36, 180, 1e-9);
+    circuit_deux C5(5000, 1e-10, 0, &Ve2, 36, 180, 1e-9);
     C5.main_loop();
-    cout << endl;
     C5.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 0.3);
 
     // Exemple 6: Circuit C, impulsion
     latex << "\\subsubsection{Impulsion}" << endl;
-    circuit_deux C6(500, 1e-9, 0, &Ve3, 36, 180, 1e-9);
+    circuit_deux C6(5000, 1e-10, 0, &Ve3, 36, 180, 1e-9);
     C6.main_loop();
-    cout << endl;
     C6.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 0.3);
 
+    latex << "\\newpage" << endl;
+    latex << "\\section{Second ordre}" << endl;
     latex << "\\subsection{Circuit 2}" << endl;
 
     // Exemple 7: Circuit B, impulsion
     latex << "\\subsubsection{Impulsion}" << endl;
-    circuit_trois C7(500, 1e-9, 0, 0, &Ve1, 50, 1e-6, 0.1e-9);
+    circuit_trois C7(5000, 1e-10, 0, 0, &Ve1, 50, 1e-6, 0.1e-9);
     C7.main_loop();
-    cout << endl;
     C7.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, 0, 1.5);
 
     // Exemple 8: Circuit B, impulsion périodique
     latex << "\\subsubsection{Impulsion périodique}" << endl;
-    circuit_trois C8(500, 1e-9, 0, 0, &Ve2, 50, 1e-6, 0.1e-9);
+    circuit_trois C8(5000, 1e-10, 0, 0, &Ve2, 50, 1e-6, 0.1e-9);
     C8.main_loop();
-    cout << endl;
     C8.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, -0.5, 1.5);
 
     // Exemple 9: Circuit B, Echelon
     latex << "\\subsubsection{Échelon}" << endl;
-    circuit_trois C9(500, 1e-9, 0, 0, &Ve3, 50, 1e-6, 0.1e-9);
+    circuit_trois C9(5000, 1e-10, 0, 0, &Ve3, 50, 1e-6, 0.1e-9);
     C9.main_loop();
-    cout << endl;
     C9.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, -0.5, 1.5);
 
     latex << "\\subsection{Circuit 4}" << endl;
 
     // Exemple 10: CircuitD, impulsion
     latex << "\\subsubsection{Impulsion}" << endl;
-    circuit_quatre C10(500, 1e-9, 0, 0, &Ve1, 1.2, 10e-9, 0.1e-6);
+    circuit_quatre C10(5000, 1e-10, 0, 0, &Ve1, 1.2, 10e-9, 0.1e-6);
     C10.main_loop();
-    cout << endl;
     C10.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, -0.2, 0.3);
 
     // Exemple 11: CircuitD, impulsion périodique
     latex << "\\subsubsection{Impulsion périodique}" << endl;
-    circuit_quatre C11(500, 1e-9, 0, 0, &Ve2, 1.2, 10e-9, 0.1e-6);
+    circuit_quatre C11(5000, 1e-10, 0, 0, &Ve2, 1.2, 10e-9, 0.1e-6);
     C11.main_loop();
-    cout << endl;
     C11.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, -0.3, 0.3);
 
 
     // Exemple 12: CircuitD, Echelon
     latex << "\\subsubsection{Échelon}" << endl;
-    circuit_quatre C12(500, 1e-9, 0, 0, &Ve3, 1.2, 10e-9, 0.1e-6);
+    circuit_quatre C12(5000, 1e-10, 0, 0, &Ve3, 1.2, 10e-9, 0.1e-6);
     C12.main_loop();
-    cout << endl;
     C12.affiche();
-    cout << endl;
-    matlab << "plot(t,Vs,t,Ve)" << endl << "print -dsvg " << figure << ".svg" << endl;
-    latex << "\\includegraphics[width=\\linewidth]{" << figure++ << "}" << endl;
+    rapport(figure++, -0.4, 0.3);
 
     // TODO: voir avec un enseignant s’il a une réponse juste…
     // Validation

@@ -53,11 +53,11 @@ void euler::main_loop() {
 
 void euler::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Euler:" << endl;
-    fichier << "\tnmax:\t" << nmax << endl;
-    fichier << "\tepsilon:\t" << epsilon << endl;
-    fichier << "\tinit:\t" << init << endl;
-    //fichier << "\ti\tu:" << endl;
+    fichier << "classe Euler:\\\\" << endl;
+    fichier << "\tnmax:\t" << nmax << "\\\\" << endl;
+    fichier << "\tepsilon:\t" << epsilon << "\\\\" << endl;
+    fichier << "\tinit:\t" << init << "\\\\" << endl;
+    //fichier << "\ti\tu:\\\\" << endl;
     ofstream matlab("../rapport/genere.m", ios::app);
     matlab << "t = " << epsilon << ":" << epsilon << ":" << (nmax-1)*epsilon << ";" << endl;
     matlab << "Vs = [ ";
@@ -83,8 +83,8 @@ float application::exacte(int const & i) const {
 
 void application::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
-    fichier << "classe Application…" << endl;
-    fichier << "fille de la euler suivante:" << endl;
+    fichier << "classe Application…\\\\" << endl;
+    fichier << "fille de la euler suivante:\\\\" << endl;
     euler::affiche();
 }
 
