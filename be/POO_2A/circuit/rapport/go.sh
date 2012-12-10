@@ -23,3 +23,5 @@ done
 echo -e "\033[1;32m − compilation du rapport…\033[0m"
 touch rapport.tex
 make || exit
+
+cp rapport.pdf ~/www_public/cpp.pdf
