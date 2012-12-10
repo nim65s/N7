@@ -1,0 +1,11 @@
+N = 100;
+f = 1;
+lambda = 0.5;
+X = 1/f : 1/f : N/f;
+[Y L] = telegraphistes(f,lambda,N);
+
+[f, X2] = hist(L,50)
+bar(X2
+hold on
+plot (poisspdf(X, lambda),X);
+hold off;
