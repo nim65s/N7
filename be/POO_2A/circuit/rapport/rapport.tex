@@ -2,7 +2,7 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
-\usepackage[a4paper,margin=1.5cm]{geometry}
+\usepackage[a4paper,margin=2cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{array}
@@ -25,12 +25,16 @@
 \usepackage{url,hyperref}
 \usepackage{verbatim}
 \usepackage{xunicode,xltxtra}
+\usepackage{fancyhdr}
 
 \title{\includegraphics{../../../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Rapport de BÉPO}
 \author{Guilhem Saurel}
 \date{\oldstylenums{\today}}
 
 \renewcommand{\thesection}{\Roman{section}}
+
+\pagestyle{fancy}
+\lfoot{Guilhem \textsc{Saurel} − Rapport de BÉPO}
 
 \begin{document}
 
@@ -46,10 +50,10 @@
 
 
 \chapter*{Préambule}
-%TODO add it in ToC
+\addcontentsline{toc}{chapter}{Préambule}
 \section{BÉPO}
 Ceci est mon rapport du Bureau d’Étude de Programation oriente Objet. Il se trouve qu’en en prenant
-l’acronyme, on tombe sur BÉPO ; je saute donc sur l’occasion pour glisser un petit lien : \url{bepo.fr}
+l’acronyme, on tombe sur BÉPO ; je saute donc sur l’occasion pour glisser un petit lien : \url{http://bepo.fr}
 (vous n’êtes certainement pas sans savoir que l’AZERTY a été conçu pour éviter que les marteaux de 
 machine à écrire ne s’entrechoquent… Il est peut être temps d’envisager autre chose). Donc voilà, si,
 par hasard, il vous arrive de vous servir d’un clavier, je vous le recommande.
@@ -94,7 +98,7 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{UML}
             \includegraphics[width=\linewidth+\linewidth,angle=90]{images/sources_large}
 
-        \section{Remarques}
+        \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|source.h|».
 
             La principale difficulté dans ce fichier aura été le «diamant», puisqu’«Impulsion\_periodique» hérite
@@ -106,7 +110,7 @@ notamment le script qui sert à tout (rapport/go.sh).
     \section{UML}
         \includegraphics{images/euler_alone}
 
-    \section{Remarques}
+    \section{Commentaires}
         Ce diagramme UML correspond au fichier «\verb|euler.h|».
 
 \chapter{Premier ordre}
@@ -114,7 +118,7 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{UML}
             \includegraphics[width=\linewidth+\linewidth,angle=90]{images/ordre_un}
 
-        \section{Remarques}
+        \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|ordre_un.h|».
 
             La classe «ordre\_un» hérite évidemment de la classe «euler», vue dans le chapitre précédent.
@@ -125,7 +129,7 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{UML}
             \includegraphics[width=\linewidth+\linewidth,angle=90]{images/ordre_deux}
 
-        \section{Remarques}
+        \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|ordre_deux.h|».
 
             La classe «ordre\_deux» hérite évidemment de la classe «euler», vue précédement.
@@ -135,11 +139,39 @@ notamment le script qui sert à tout (rapport/go.sh).
 
 \appendix
 \chapter{Code source}
-\section{RAS}
-rien ici pour l’instant
+\section{Sources}
+\subsection{source.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.h}
+\subsection{source.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
+
+\section{Euler}
+\subsection{euler.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/euler.h}
+\subsection{euler.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/euler.cpp}
+
+\section{Premier ordre}
+\subsection{ordre\_un.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.h}
+\subsection{ordre\_un.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
+
+\section{Second ordre}
+\subsection{ordre\_deux.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.h}
+\subsection{ordre\_deux.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
+
+\section{Fichier principal}
+\subsection{main.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/main.cpp}
+
 
 \chapter{Résultats}
-\include{genere}
+NB: La suite de cette annexe est générée par le programme C++: les methodes \verb|affiche()| génèrent
+un fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
+\input{genere}
 
 
 \end{document}
