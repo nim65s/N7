@@ -2,7 +2,7 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
-\usepackage[a4paper,margin=1cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{array}
@@ -41,39 +41,97 @@
 \end{titlepage}
 
 \tableofcontents
+\newpage
 
 
 
-\section{Préambule}
-\subsection{BÉPO}
+\chapter*{Préambule}
+%TODO add it in ToC
+\section{BÉPO}
 Ceci est mon rapport du Bureau d’Étude de Programation oriente Objet. Il se trouve qu’en en prenant
 l’acronyme, on tombe sur BÉPO ; je saute donc sur l’occasion pour glisser un petit lien : \url{bepo.fr}
 (vous n’êtes certainement pas sans savoir que l’AZERTY a été conçu pour éviter que les marteaux de 
 machine à écrire ne s’entrechoquent… Il est peut être temps d’envisager autre chose). Donc voilà, si,
 par hasard, il vous arrive de vous servir d’un clavier, je vous le recommande.
 
-\subsection{Logiciels utilisés}
+\section{Logiciels utilisés}
 Pour la réalisation de ce BÉ et la création de ce rapport, voici une liste non-exhaustives des 
 logiciels qui m’ont été les plus utiles:
 \begin{description}
-	\item[Vim] un éditeur de texte: \url{www.vim.org};
-	\item[GCC] un compilateur C++: \url{gcc.gnu.org};
-	\item[git] un gestionnaire de versions: \url{git-scm.com/};
-	\item[CMake] un moteur de production: \url{www.cmake.org};
-	\item[\LaTeX] un logiciel de composition de documents: \url{www.latex-project.org};
-	\item[GNU Octave] un logiciel de calcul numérique: \url{www.gnu.org/software/octave/};
-	\item[ImageMagick] un logiciel de traitement d’images: \url{www.imagemagick.org/script/index.php}
-	\item[Bash] un interpréteur de commandes: \url{tiswww.case.edu/php/chet/bash/bashtop.html}
+    \item[Vim] un éditeur de texte: \url{http://www.vim.org};
+    \item[GCC] un compilateur C++: \url{http://gcc.gnu.org};
+    \item[git] un gestionnaire de versions: \url{http://git-scm.com/};
+    \item[CMake] un moteur de production: \url{http://cmake.org};
+    \item[\LaTeX] un logiciel de composition de documents: \url{http://latex-project.org};
+    \item[Umbrello] un logiciel de modélisation UML: \url{http://uml.sourceforge.net/};
+    \item[GNU Octave] un logiciel de calcul numérique: \url{http://gnu.org/software/octave/};
+    \item[ImageMagick] un logiciel de traitement d’images: \url{http://imagemagick.org/script/index.php};
+    \item[Bash] un interpréteur de commandes: \url{http://tiswww.case.edu/php/chet/bash/bashtop.html};
 \end{description}
 
-\subsection{Sources annexes}
-Les codes sources du Bureau d’Étude sont naturellement présentes en annexe, mais pour le reste des documents, 
-tout est disponible sur Github: \url{github.com/nim65s/N7/tree/master/be/POO_2A/circuit}, et 
+\section{UML \& Umbrello}
+Umbrello, le logiciel utilisé pour génerer les images présentes dans les différentes sections «UML», utilise
+les conventions suivantes:
+\begin{itemize}
+    \item Trois «cases»: le nom de la classe, les attributs, puis les méthodes;
+    \item Les attributs et méthodes «protected» apparaissent avec un «\#», tandis que les «public» utilisent un «+»;
+    \item Les variable sont affichées de la manière suivante: «<nom de la variable>: <type de la variable> [<paramètres>]»;
+    \item Certaines données ne sont pas affichées, telles que:
+        \begin{itemize}
+            \item le mot-clef \verb|const|;
+            \item le mot-clef \verb|virtual|;
+            \item le type \verb|void|;
+        \end{itemize}
+\end{itemize}
+
+\section{Sources annexes}
+Les codes sources du Bureau d’Étude sont naturellement présentes en annexe, mais pour le reste des documents,
+tout est disponible sur Github: \url{http://github.com/nim65s/N7/tree/master/be/POO_2A/circuit}, et
 notamment le script qui sert à tout (rapport/go.sh).
 
 \chapter{Sources}
-\section{UML}
-\includegraphics[width=\linewidth]{images/sources}
+    \begin{multicols}{2}
+        \section{UML}
+            \includegraphics[width=\linewidth+\linewidth,angle=90]{images/sources_large}
+
+        \section{Remarques}
+            Ce diagramme UML correspond au fichier «\verb|source.h|».
+
+            La principale difficulté dans ce fichier aura été le «diamant», puisqu’«Impulsion\_periodique» hérite
+            d’«Impulsion» et de la classe abstraite «Periodique», ce qui complique un peu les constructeurs.
+
+    \end{multicols}
+
+\chapter{Euler}
+    \section{UML}
+        \includegraphics{images/euler_alone}
+
+    \section{Remarques}
+        Ce diagramme UML correspond au fichier «\verb|euler.h|».
+
+\chapter{Premier ordre}
+    \begin{multicols}{2}
+        \section{UML}
+            \includegraphics[width=\linewidth+\linewidth,angle=90]{images/ordre_un}
+
+        \section{Remarques}
+            Ce diagramme UML correspond au fichier «\verb|ordre_un.h|».
+
+            La classe «ordre\_un» hérite évidemment de la classe «euler», vue dans le chapitre précédent.
+    \end{multicols}
+
+\chapter{Second ordre}
+    \begin{multicols}{2}
+        \section{UML}
+            \includegraphics[width=\linewidth+\linewidth,angle=90]{images/ordre_deux}
+
+        \section{Remarques}
+            Ce diagramme UML correspond au fichier «\verb|ordre_deux.h|».
+
+            La classe «ordre\_deux» hérite évidemment de la classe «euler», vue précédement.
+    \end{multicols}
+
+
 
 \appendix
 \chapter{Code source}
