@@ -61,6 +61,16 @@ class triangle : public periodique {
         virtual float Ve_p(float t, float epsilon);
 };
 
+class sinus : public periodique {
+    public:
+        sinus();
+        sinus(float const & V, float const & phi, float const & P);
+        //virtual ~sinus();
+        void affiche() const;
+        virtual float Ve(float t);
+        virtual float Ve_p(float t, float epsilon);
+};
+
 class impulsion_periodique : public impulsion, public periodique {
     public:
         impulsion_periodique();
@@ -70,8 +80,5 @@ class impulsion_periodique : public impulsion, public periodique {
         virtual float Ve(float t);
         virtual float Ve_p(float t, float epsilon);
 };
-
-
-// TODO sinus
 
 #endif
