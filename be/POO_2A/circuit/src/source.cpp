@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
 #include "source.h"
 
 using namespace std;
@@ -101,6 +102,22 @@ void triangle::affiche() const {
     periodique::affiche();
 }
 
+// Sinus
+
+// Il faut appeler le constructeur de source dirctement à cause du l’héritage virtuel à cause du diamant
+sinus::sinus(float const & V, float const & phi, float const & P): source(V, phi), periodique(V, phi, P) {}
+
+sinus::sinus(): source(), periodique() {}
+
+//sinus::~sinus() {}
+
+void sinus::affiche() const {
+    ofstream fichier("../rapport/genere.tex", ios::app);
+    fichier << "classe Sinus" << endl;
+    fichier << "fille de la source périodique suivante:" << endl;
+    periodique::affiche();
+}
+
 // Impulsion périodique
 
 // Il faut appeler le constructeur de source dirctement à cause du l’héritage virtuel à cause du diamant
@@ -155,6 +172,17 @@ float triangle::Ve_p(float t, float epsilon) {
     if (t < P/2) return 2 * V / P;
     return - 2 * V / P;
 }
+
+float sinus::Ve(float t) {
+    if (t < 0) return 0;
+    return V * sin(t);
+}
+
+float sinus::Ve_p(float t, float epsilon) {
+    if (t < 0) return 0;
+    return - 2 * cos(t);
+}
+
 
 // TODO phi
 float impulsion_periodique::Ve(float t) {
