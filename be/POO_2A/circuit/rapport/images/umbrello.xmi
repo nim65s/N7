@@ -499,7 +499,7 @@
         </UML:Operation>
        </UML:Classifier.feature>
       </UML:Class>
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="oXToAE7jOT0p" name="euler">
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="oXToAE7jOT0p" name="runge_kutta">
        <UML:Classifier.feature>
         <UML:Attribute visibility="protected" isSpecification="false" xmi.id="Vj5KKgxh86Mj" type="osGuBYSsZwX1" name="nmax"/>
         <UML:Attribute visibility="protected" isSpecification="false" xmi.id="DasRUw5HRW5b" type="wuITooUJYZYm" name="epsilon"/>
@@ -520,8 +520,8 @@
         </UML:Operation>
         <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="Pi9If4kaDqPj" name="main_loop"/>
         <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="AlGIKbbSPmx5" name="affiche"/>
-        <UML:Operation stereotype="constructor" visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="2yamERBbAItn" name="euler"/>
-        <UML:Operation stereotype="constructor" visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="NdNaUnHeWVuq" name="euler">
+        <UML:Operation stereotype="constructor" visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="2yamERBbAItn" name="runge_kutta"/>
+        <UML:Operation stereotype="constructor" visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="NdNaUnHeWVuq" name="runge_kutta">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter visibility="private" isSpecification="false" xmi.id="6TGTFDZFB9zN" type="6w8cbhbjpOLb" value="" name="nmax"/>
           <UML:Parameter visibility="private" isSpecification="false" xmi.id="b9yjRrWoTtMx" type="Oxx3e78G5STx" value="" name="epsilon"/>
@@ -581,7 +581,7 @@
          </assocwidget>
         </associations>
        </diagram>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="euler" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="422" canvaswidth="862" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="MKxrzfMFhnUY" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="runge_kutta" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="422" canvaswidth="862" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="MKxrzfMFhnUY" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets>
          <classwidget linecolor="none" usesdiagramfillcolor="1" linewidth="none" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="1" showpubliconly="0" showpackage="1" x="398" showattsigs="601" showstereotype="1" y="151" showattributes="1" font="Sans Serif,9,-1,0,75,0,0,0,0,0" width="434" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="oXToAE7jOT0p" showscope="1" height="168" showopsigs="601"/>
          <classwidget linecolor="none" usesdiagramfillcolor="1" linewidth="none" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="1" showpubliconly="0" showpackage="1" x="387" showattsigs="601" showstereotype="1" y="341" showattributes="1" font="Sans Serif,9,-1,0,75,0,0,0,0,0" width="471" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="NFMZOJuxStgu" showscope="1" height="77" showopsigs="601"/>
@@ -738,7 +738,7 @@
       <listitem open="0" type="814" id="dIuKpM2BWgZz"/>
       <listitem open="0" type="815" id="89pemMUuQJRM"/>
      </listitem>
-     <listitem open="0" type="807" id="MKxrzfMFhnUY" label="euler"/>
+     <listitem open="0" type="807" id="MKxrzfMFhnUY" label="runge_kutta"/>
      <listitem open="0" type="813" id="8RJ1qZqTpq1k"/>
      <listitem open="0" type="813" id="dNmgnDdTO8IO">
       <listitem open="0" type="815" id="lZmQgPLfLHC0"/>

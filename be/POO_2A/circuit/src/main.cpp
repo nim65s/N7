@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <assert.h>
-#include "euler.h"
+#include "runge_kutta.h"
 #include "source.h"
 #include "ordre_un.h"
 #include "ordre_deux.h"

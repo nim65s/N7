@@ -4,7 +4,7 @@
 #include <vector>
 #include "source.h"
 
-class euler {
+class runge_kutta {
     protected:
         int nmax; // nombre d’instants
         float epsilon; // durée d’un instant
@@ -21,11 +21,11 @@ class euler {
         void main_loop();
         void affiche() const;
 
-        euler();
-        euler(int const & nmax, float const & epsilon, float const & init);
+        runge_kutta();
+        runge_kutta(int const & nmax, float const & epsilon, float const & init);
 };
 
-class application : public euler {
+class application : public runge_kutta {
     protected:
         float u_prime(int const & i) const;
         float exacte(int const & i) const;

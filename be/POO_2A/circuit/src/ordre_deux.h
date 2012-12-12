@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "source.h"
-#include "euler.h"
+#include "runge_kutta.h"
 
-class ordre_deux : public euler {
+class ordre_deux : public runge_kutta {
     protected:
         float init_p; // valeur initiale de la dérivée
         source* src; // source

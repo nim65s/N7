@@ -5,19 +5,19 @@
 #include <vector>
 #include <math.h>
 #include <assert.h>
-#include "euler.h"
+#include "runge_kutta.h"
 #include "source.h"
 
 using namespace std;
 
 // Euler
 
-euler::euler(int const & nmax, float const & epsilon, float const & init): nmax(nmax), epsilon(epsilon), init(init) {
+runge_kutta::runge_kutta(int const & nmax, float const & epsilon, float const & init): nmax(nmax), epsilon(epsilon), init(init) {
     exacte_isknown = false;
 }
 
-euler::euler() {
-    cout << "Constructeur de euler…" << endl;
+runge_kutta::runge_kutta() {
+    cout << "Constructeur de runge\\_kutta…" << endl;
     cout << "\tnmax: ";
     cin >> nmax;
     cout << "\tepsilon: ";
@@ -28,18 +28,18 @@ euler::euler() {
     cout << " OK." << endl;
 }
 
-float euler::u_prime(int const & i) const {
+float runge_kutta::u_prime(int const & i) const {
     assert(false);
     return i;
 }
 
-float euler::exacte(int const & i) const {
+float runge_kutta::exacte(int const & i) const {
     // Cette méthode devrait être pure…
     assert(false);
     return i;
 }
 
-void euler::main_loop() {
+void runge_kutta::main_loop() {
     u.push_back(init);
     cout << "Calcul principal…" << endl;
     for (int i(0);i<nmax;i++) {
@@ -51,7 +51,7 @@ void euler::main_loop() {
     cout << endl;
 }
 
-void euler::affiche() const {
+void runge_kutta::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
     fichier << "classe Euler:\\\\" << endl;
     fichier << "\tnmax:\t" << nmax << "\\\\" << endl;
@@ -67,8 +67,8 @@ void euler::affiche() const {
 
 // Application
 
-application::application(int const & nmax, float const & epsilon, float const & init): euler(nmax, epsilon, init) {
-    euler::exacte_isknown = true;
+application::application(int const & nmax, float const & epsilon, float const & init): runge_kutta(nmax, epsilon, init) {
+    runge_kutta::exacte_isknown = true;
 }
 
 // TODO: sûr que la dérivée en 0 est égale à l’init ? o_O
@@ -84,8 +84,8 @@ float application::exacte(int const & i) const {
 void application::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
     fichier << "classe Application…\\\\" << endl;
-    fichier << "fille de la euler suivante:\\\\" << endl;
-    euler::affiche();
+    fichier << "fille de la runge\\_kutta suivante:\\\\" << endl;
+    runge_kutta::affiche();
 }
 
 // vim: set foldmethod=marker:
