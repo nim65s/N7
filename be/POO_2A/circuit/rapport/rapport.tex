@@ -52,10 +52,10 @@
 \chapter*{Préambule}
 \addcontentsline{toc}{chapter}{Préambule}
 \section{BÉPO}
-Ceci est mon rapport du Bureau d’Étude de Programation oriente Objet. Il se trouve qu’en en prenant
+Ceci est mon rapport du Bureau d’Étude de Programation orientée Objet. Il se trouve qu’en en prenant
 l’acronyme, on tombe sur BÉPO ; je saute donc sur l’occasion pour glisser un petit lien : \url{http://bepo.fr}
 (vous n’êtes certainement pas sans savoir que l’AZERTY a été conçu pour éviter que les marteaux de 
-machine à écrire ne s’entrechoquent… Il est peut être temps d’envisager autre chose). Donc voilà, si,
+machine à écrire ne s’entrechoquent… Il est peut être temps d’envisager autre chose). Donc si,
 par hasard, il vous arrive de vous servir d’un clavier, je vous le recommande.
 
 \section{Logiciels utilisés}
@@ -101,17 +101,75 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|source.h|».
 
+            Ces classes modélisent les différentes sources de tension électrique que l’on peut connecter à l’entrée
+            d’un circuit.
+
             La principale difficulté dans ce fichier aura été le «diamant», puisqu’«Impulsion\_periodique» hérite
             d’«Impulsion» et de la classe abstraite «Periodique», ce qui complique un peu les constructeurs.
 
+            En effet, certains héritages doivent être virtuels, ce qui nécessite d’appeler explicitement les 
+            constructeurs des ancêtres dans les constructeurs.
+
+            \subsection{Méthodes}
+
+            Les sources ont donc deux constructeurs, un où l’on passe les arguments en paramètres et un autre où
+            l’utilisateur est invité à rentrer interractivement les différentes valeurs.
+
+            La méthode \verb|affiche()|, comme toutes les autres identiquement nommées, est utilisée par la classe
+            pour se présenter («je suis une <classe>, et mes attributs sont …»).
+
+            Et enfin, les deux méthodes utiles sont \verb|Ve(t)| et \verb|Ve_p(t)|, qui donnent respectivement
+            la tension aux bornes de la source et sa dérivée à l’instant \verb|t|. Vu que nous travaillons avec
+            des temps discrets, ces méthodes sont généralement appelées avec un argument \verb|t| de la forme 
+            «$\varepsilon \times i$», où $\varepsilon$ représent le pas et $i$ le numéro de l’instant considéré.
+
+            \subsection{Attributs}
+
+            \begin{description}
+                \item[V:] Tension maximale de la source;
+                \item[phi:] Instant où la source est «allumée»;
+                \item[T:] Largeur d’une impulsion;
+                \item[P:] Période temporelle;
+            \end{description}
     \end{multicols}
 
 \chapter{Euler}
     \section{UML}
-        \includegraphics{images/euler_alone}
+        \includegraphics[height=5.5cm]{images/euler_alone}
 
     \section{Commentaires}
         Ce diagramme UML correspond au fichier «\verb|euler.h|».
+
+        La classe Euler sert à résoudre des équations différentielles par la méthode d’Euler, et la classe
+        Application sert à vérifier le bon fonctionnement de la classe précédente.
+
+        C’est cette classe Euler qui sera dérivée par la suite au cas par cas, et l’on n’aura qu’a changer
+        pour chaque circuit le calcul de la dérivée de la fonction en un point donné.
+
+        \subsection{Méthodes}
+
+        Ces classes ont également deux constructeurs, un interactif et un automatique. La méthode \verb|affiche()|
+        sert à nouveau à laisser la classe se présenter.
+
+        Les deux méthodes intéressantes, qui seront masquées par les classe représentant les différents circuits,
+        sont \verb|u_prime(i)| et \verb|exacte(i)|. \verb|exacte(i)| sert à calculer la valeur exacte de la fonction
+        au point i, lorsque cette valeur est connue, afin d’afficher côte à côte l’approximation et la valeur exacte.
+
+        La méthode \verb|u_prime(i)| est celle qui donne la dérivée au point i, qui sera utilisée à chaque nouvelle 
+        itération dans la méthode \verb|main_loop()|, qui prend la valeur initiale, et calcule la valeur de la fonction
+        itérativement à chaque point.
+
+        \subsection{Attributs}
+
+        \begin{description}
+            \item[nmax:] Nombre de points sur lesquels le calcul est effectué;
+            \item[epsilon:] «Pas» de résolution numérique;
+            \item[init:] Valeur initiale de la fonction dont on cherche à connaître les instants suivants
+                (souvent la tension à l’instant $t=0$);
+            \item[u:] vecteur des valeurs de la fonction à chaque instant;
+            \item[exacte\_isknown:] Booléen indiqant que pour cette instance, la valeur exacte est connue
+        \end{description}
+
 
 \chapter{Premier ordre}
     \begin{multicols}{2}
@@ -122,6 +180,24 @@ notamment le script qui sert à tout (rapport/go.sh).
             Ce diagramme UML correspond au fichier «\verb|ordre_un.h|».
 
             La classe «ordre\_un» hérite évidemment de la classe «euler», vue dans le chapitre précédent.
+
+            La classe «ordre\_un» associe simplement une méthode de résolution d’euleur et une source, deux
+            classes vues précédemment.
+
+            Les classe «circuit\_un» et «circuit\_deux» représentent les circuits de l’énnoncé.
+
+            \subsection{Méthodes}
+            Pour ces trois classes, on implémente simplement les méthodes vues précédemment.
+
+            \subsection{Attributs}
+            \begin{description}
+                \item[src:] Cet attribut est un pointeur vers une classe «source», ou une de ses descendantes.
+                    Ceci permet de calculer la valeur de la source à l’instant i de la manière suivante:
+                    \verb|src->Ve(epsilon*i)|;
+                \item[R, R1, R2, C:] Ces attributs représentent les valeurs des résistances et capacitées des
+                    circuits, en ohm ou en farad.
+            \end{description}
+
     \end{multicols}
 
 \chapter{Second ordre}
@@ -133,11 +209,27 @@ notamment le script qui sert à tout (rapport/go.sh).
             Ce diagramme UML correspond au fichier «\verb|ordre_deux.h|».
 
             La classe «ordre\_deux» hérite évidemment de la classe «euler», vue précédement.
+
+            Ces trois classes ressemblement fortemment aux trois précédentes, avec quelques petites modifications
+            pour prendre en compte les spécificitées d’un second ordre.
+
+            \subsection{Méthodes}
+            Ces classes reprenent les méthodes vues précedemment, en ajoutant un ordre supérieur.
+
+            C’est le cas pour \verb|u_seconde(i)|, qui a la même utilité que \verb|u_prime(i)|, mais également
+            pour la méthode \verb|main_loop()|, qui doit prendre en compte le \verb|u_seconde(i)| et aussi
+            l’attribut \verb|u_p|.
+
+            \subsection{Attributs}
+            En plus des attributs déjà étudiés, on peut noter la présence de \verb|u_p|, l’équivalent du vecteur
+            \verb|u| mais pour les valeurs de la dérivée de la fonction à chaque instant, ainsi que \verb|init_p|,
+            la valeur initiale de cette dérivée.
     \end{multicols}
 
 
 
 \appendix
+\addcontentsline{toc}{chapter}{Annexes}
 \chapter{Code source}
 \section{Sources}
 \subsection{source.h}
@@ -170,7 +262,7 @@ notamment le script qui sert à tout (rapport/go.sh).
 
 \chapter{Résultats}
 NB: La suite de cette annexe est générée par le programme C++: les methodes \verb|affiche()| génèrent
-un fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
+êun fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
 \input{genere}
 
 
