@@ -106,12 +106,12 @@ notamment le script qui sert à tout (rapport/go.sh).
 
     \end{multicols}
 
-\chapter{Runge-Kutta}
+\chapter{Euler}
     \section{UML}
-        \includegraphics{images/runge_kutta_alone}
+        \includegraphics{images/euler_alone}
 
     \section{Commentaires}
-        Ce diagramme UML correspond au fichier «\verb|runge_kutta.h|».
+        Ce diagramme UML correspond au fichier «\verb|euler.h|».
 
 \chapter{Premier ordre}
     \begin{multicols}{2}
@@ -121,7 +121,7 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|ordre_un.h|».
 
-            La classe «ordre\_un» hérite évidemment de la classe «runge\_kutta», vue dans le chapitre précédent.
+            La classe «ordre\_un» hérite évidemment de la classe «euler», vue dans le chapitre précédent.
     \end{multicols}
 
 \chapter{Second ordre}
@@ -132,19 +132,8 @@ notamment le script qui sert à tout (rapport/go.sh).
         \section{Commentaires}
             Ce diagramme UML correspond au fichier «\verb|ordre_deux.h|».
 
-            La classe «ordre\_deux» hérite évidemment de la classe «runge\_kutta», vue précédement.
+            La classe «ordre\_deux» hérite évidemment de la classe «euler», vue précédement.
     \end{multicols}
-
-\chapter{Bonus}
-Pour aller un peu plus loin, je me suis permis d’implémenter une source sinusoïdale, qui n’était pas demandée
-mais présente dans les différents exemples.
-
-Aussi, la classe \verb|runge_kutta| était initiallement appelée \verb|euler|, vu qu’il s’agit du nom de la
-méthode de résolution numérique des équations différentielles. Mais on peut assimiler la méthode d’Euler à
-une méthode de Runge-Kutta d’ordre 1, donc autant ajouter un paramètre \verb|ordre| pour visualiser son effet.
-
-Ces résultats en bonus ne sont pas compris dans l’Annexe \ref{resultats} (p.\pageref{resultats}), mais il 
-suffirait d’ajouter des tests dans le fichier \verb|main.cpp|.
 
 
 
@@ -156,11 +145,11 @@ suffirait d’ajouter des tests dans le fichier \verb|main.cpp|.
 \subsection{source.cpp}
 \inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
 
-\section{Runge-Kutta}
-\subsection{runge\_kutta.h}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/runge_kutta.h}
-\subsection{runge\_kutta.cpp}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/runge_kutta.cpp}
+\section{Euler}
+\subsection{euler.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/euler.h}
+\subsection{euler.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/euler.cpp}
 
 \section{Premier ordre}
 \subsection{ordre\_un.h}
@@ -180,7 +169,6 @@ suffirait d’ajouter des tests dans le fichier \verb|main.cpp|.
 
 
 \chapter{Résultats}
-\label{resultats}
 NB: La suite de cette annexe est générée par le programme C++: les methodes \verb|affiche()| génèrent
 un fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
 \input{genere}

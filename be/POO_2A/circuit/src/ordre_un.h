@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "source.h"
-#include "runge_kutta.h"
+#include "euler.h"
 
-class ordre_un : public runge_kutta {
+class ordre_un : public euler {
     protected:
         source* src;
 

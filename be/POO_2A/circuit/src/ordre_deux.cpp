@@ -5,7 +5,7 @@
 #include <vector>
 #include <math.h>
 #include <assert.h>
-#include "runge_kutta.h"
+#include "euler.h"
 #include "source.h"
 #include "ordre_deux.h"
 
@@ -13,7 +13,7 @@ using namespace std;
 
 // Ordre 2
 
-ordre_deux::ordre_deux(int const & nmax, float const & epsilon, float const & init, float const & init_p,  source* src) : runge_kutta(nmax, epsilon, init), init_p(init_p), src(src) {}
+ordre_deux::ordre_deux(int const & nmax, float const & epsilon, float const & init, float const & init_p,  source* src) : euler(nmax, epsilon, init), init_p(init_p), src(src) {}
 
 void ordre_deux::main_loop() {
     u.push_back(init);
@@ -44,8 +44,8 @@ void ordre_deux::affiche() const {
     matlab << "Ve = [ 0 "; // on ajoute un 0 au début pour montrer que Ve est nul pour tout t < 0 sur les plots matlab
     for (int i(1);i<nmax-1;i++) matlab << src->Ve(i*epsilon) << " ";
     matlab << "];" << endl;
-    fichier << "fille de la méthode runge\\_kutta suivante:\\\\" << endl;
-    runge_kutta::affiche();
+    fichier << "fille de la méthode d’euler suivante:\\\\" << endl;
+    euler::affiche();
 }
 
 // Circuit 3
