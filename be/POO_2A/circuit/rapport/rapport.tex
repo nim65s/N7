@@ -93,6 +93,82 @@ Les codes sources du Bureau d’Étude sont naturellement présentes en annexe, 
 tout est disponible sur Github: \url{http://github.com/nim65s/N7/tree/master/be/POO_2A/circuit}, et
 notamment le script qui sert à tout (rapport/go.sh).
 
+\chapter{Objectif}
+    \begin{multicols}{2}
+        Le but de ce bureau d’étude est de résoudre certains circuits analogiques, du premier et du second ordre,
+        connectés à certaines sources, par la méthode d’euler.
+
+        \section{Circuits}
+        \subsection{Circuit un}
+        \subsubsection{Schéma}
+          \begin{center}
+           \begin{circuitikz} \draw
+               (0,2) to[open, v=$V_e(t)$] (0,0)
+               (4,2) to[open, v^=$V_s(t)$] (4,0) -- (0,0)
+               (0,2) -- (1,2) to[R=R] (3,2) -- (4,2)
+               (3,2) to[C=C] (3,0)
+            ;
+           \end{circuitikz}
+          \end{center}
+        \subsubsection{Calcul de la tension $V_s^\prime(t)$}
+        $V_s^\prime(t) = \cfrac{V_e(t)-V_s(t)}{RC}$
+        \subsection{Circuit deux}
+        \subsubsection{Schéma}
+          \begin{center}
+           \begin{circuitikz} \draw
+               (0,2) to[open, v=$V_e(t)$] (0,0)
+               (6,2) to[open, v^=$V_s(t)$] (6,0) -- (0,0)
+               (0,2) to[R=R1, i=$i(t)$] (2,2) to[Do] (4,2) -- (6,2)
+               (4,0) to[R=R2] (4,2)
+               (5,2) to[C=C] (5,0)
+            ;
+           \end{circuitikz}
+          \end{center}
+        \subsubsection{Calcul de la tension $V_s^\prime(t)$}
+        On a
+
+        $i(t) = \left\{
+            \begin{array}{c l}
+                \cfrac{V_e(t) - 0.6 - V_s(t)}{R1} & \text{si} V_e(t) - V_s(t) < 0.6\\
+                0 & \text{sinon.}
+            \end{array}
+        \right.$
+
+        Et donc $V_s^\prime(t) = \cfrac{i(t) - \cfrac{V_s(t)}{R2}}{C}$
+
+
+        \subsection{Circuit trois}
+        \subsubsection{Schéma}
+          \begin{center}
+           \begin{circuitikz} \draw
+               (0,2) to[open, v=$V_e(t)$] (0,0)
+               (6,2) to[open, v^=$V_s(t)$] (6,0) -- (0,0)
+               (0,2) -- (1,2) to[R=R] (3,2) to [L=L] (5,2) -- (6,2)
+               (5,2) to[C=C] (5,0)
+            ;
+           \end{circuitikz}
+          \end{center}
+
+        \subsubsection{Calcul de la tension $V_s^{\prime\prime}(t)$}
+        $V_s^{\prime\prime}(t) = \cfrac{V_e(t) - V_s(t) - R C V_s^\prime(t)}{LC}$
+
+        \subsection{Circuit quatre}
+        \subsubsection{Schéma}
+          \begin{center}
+           \begin{circuitikz} \draw
+               (0,2) to[open, v=$V_e(t)$] (0,0)
+               (5,2) to[open, v^=$V_s(t)$] (5,0) -- (0,0)
+               (0,2) -- (1,2) to[R=R] (3,2) -- (5,2)
+               (3,0) to[C=C] (3,2)
+               (4,2) to[L=L] (4,0)
+            ;
+           \end{circuitikz}
+          \end{center}
+        \subsubsection{Calcul de la tension $V_s^{\prime\prime}(t)$}
+        $V_s^{\prime\prime}(t) = \cfrac{\cfrac{V_e(t) - V_s^\prime(t)}{R} - \cfrac{V_s(t)}{L}}{C}$
+    \end{multicols}
+
+
 \chapter{Sources}
     \begin{multicols}{2}
         \section{UML}
@@ -153,11 +229,12 @@ notamment le script qui sert à tout (rapport/go.sh).
 
         Les deux méthodes intéressantes, qui seront masquées par les classe représentant les différents circuits,
         sont \verb|u_prime(i)| et \verb|exacte(i)|. \verb|exacte(i)| sert à calculer la valeur exacte de la fonction
-        au point i, lorsque cette valeur est connue, afin d’afficher côte à côte l’approximation et la valeur exacte.
+        au point i, lorsque cette valeur est connue, afin d’afficher côte à côte l’approximation et la valeur exacte,
+        voire de calculer l’erreur.
 
-        La méthode \verb|u_prime(i)| est celle qui donne la dérivée au point i, qui sera utilisée à chaque nouvelle 
+        La méthode \verb|u_prime(i)| est celle qui donne la dérivée au point i, qui sera utilisée à chaque nouvelle
         itération dans la méthode \verb|main_loop()|, qui prend la valeur initiale, et calcule la valeur de la fonction
-        itérativement à chaque point.
+        itérativement à chaque point, pour les sauvegarder dans le vecteur \verb|u|.
 
         \subsection{Attributs}
 
@@ -227,6 +304,65 @@ notamment le script qui sert à tout (rapport/go.sh).
     \end{multicols}
 
 
+\chapter{main}
+Le fichier main.cpp ne comporte rien de particulièrement intéressant, si ce n’est le squelette des fichiers
+générés (notamment via la fonction \verb|rapport(figure, ymin, ymax)|, qui enregistre les bon plots au bon endroit
+sur une fenêtre précise).
+
+~
+
+Viennent ensuite la liste des exemples présents sur moodle.
+
+~
+
+Si vous compilez les sources, vous pourrez lancer le programme, et s’il est lancé en console, vous pourrez
+ajouter l’argument «t», qui vous permettra de simuler un «circuit\_deux» de manière interractive.
+
+~
+
+Vous pouvez également modifier ce fichier main.cpp dans ce but.
+
+\chapter{Remarques diverses}
+\section{Méthodes «affiche()»}
+Ces méthodes affichent des données sur la classe, en console et dans un ficher \LaTeX, telles que les valeurs
+des différents attributs, et notamment le vecteur solution calculé \verb|u| (et \verb|u_p| quand c’est pertinent),
+et elles écrivent également un fichier .m, avec les valeurs du temps, de la source et de la solution dans des matrices,
+qui peuvent ensuite être exploitées par les logiciels GNU Octave, SciLab ou MathWorks® Matlab™.
+
+Elles sont intéressantes dans la mesure où on utilise le masquague pour que le bon objet se présente, mais également
+le démasquage vu qu’on veut que l’objet présente aussi les attributs qu’il a hérité de sa classe mère.
+
+\section{Polymorphisme}
+Tout au long de ce Bureau d’Étude, comme c’était son but, l’accent a été mis sur les «nouvelles» notions vues en cours,
+telles que le polymorphisme.
+
+On notera particulièrement la présence de «classes abstraites» (comme «périodique») et de «méthodes virtuelles pures»
+(comme \verb|source::Ve(t)|).
+
+\subsection{Asserts}
+Ces méthodes pures devant tout de même être présentes dans les fichiers cpp, il ne faut pas s’étonner s’il y a dans
+les sources des méthodes dont le seul code est un assert.
+
+Si vous faites tourner le code en modifiant le fichier main.cpp, et que le programme s’arrête brusquement,
+il se peut donc que vous soyez tombés sur un tel assert car vous tentez d’appeler une méthode virtuelle pure.
+
+\section{Valgrind}
+Il est toujours bon d’utiliser des outils de debogage une fois le programme fini, pour vérifier que, même si
+les résultats numériques correspondent à la théorie, le code n’est pas empli de failles.
+
+Ici, le logiciel valgrind indique très clairement :
+\begin{verbatim}
+==17467== HEAP SUMMARY:
+==17467==     in use at exit: 0 bytes in 0 blocks
+==17467==   total heap usage: 513 allocs, 513 frees, 2,240,676 bytes allocated
+==17467==
+==17467== All heap blocks were freed -- no leaks are possible
+\end{verbatim}
+
+Ce qui est une bonne nouvelle, même si, vu le nombre de \verb|new| et de \verb|malloc|, il ne devrait
+pas y avoir de problèmes.
+
+
 
 \appendix
 \addcontentsline{toc}{chapter}{Annexes}
@@ -245,15 +381,15 @@ notamment le script qui sert à tout (rapport/go.sh).
 
 \section{Premier ordre}
 \subsection{ordre\_un.h}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/ordre_un.h}
 \subsection{ordre\_un.cpp}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/ordre_un.cpp}
 
 \section{Second ordre}
 \subsection{ordre\_deux.h}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.h}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/ordre_deux.h}
 \subsection{ordre\_deux.cpp}
-\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/source.cpp}
+\inputminted[linenos,fontsize=\scriptsize]{c++}{../src/ordre_deux.cpp}
 
 \section{Fichier principal}
 \subsection{main.cpp}
@@ -262,7 +398,8 @@ notamment le script qui sert à tout (rapport/go.sh).
 
 \chapter{Résultats}
 NB: La suite de cette annexe est générée par le programme C++: les methodes \verb|affiche()| génèrent
-êun fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
+un fichier \verb|genere.tex| et un fichier \verb|genere.m|, qui sont ensuite affichés ici.
+
 \input{genere}
 
 

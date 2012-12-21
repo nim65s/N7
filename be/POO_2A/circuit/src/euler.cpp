@@ -57,7 +57,6 @@ void euler::affiche() const {
     fichier << "\tnmax:\t" << nmax << "\\\\" << endl;
     fichier << "\tepsilon:\t" << epsilon << "\\\\" << endl;
     fichier << "\tinit:\t" << init << "\\\\" << endl;
-    //fichier << "\ti\tu:\\\\" << endl;
     ofstream matlab("../rapport/genere.m", ios::app);
     matlab << "t = " << epsilon << ":" << epsilon << ":" << (nmax-1)*epsilon << ";" << endl;
     matlab << "Vs = [ ";
@@ -71,9 +70,8 @@ application::application(int const & nmax, float const & epsilon, float const & 
     euler::exacte_isknown = true;
 }
 
-// TODO: sûr que la dérivée en 0 est égale à l’init ? o_O
 float application::u_prime(int const & i) const {
-    if (i == 0) return init;
+    if (i == 0) return 0;
     return - 3 * u[i-1] - 3  * epsilon * i;
 }
 
@@ -87,5 +85,3 @@ void application::affiche() const {
     fichier << "fille de la euler suivante:\\\\" << endl;
     euler::affiche();
 }
-
-// vim: set foldmethod=marker:

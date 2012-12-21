@@ -163,21 +163,12 @@ int main(int argc, char *argv[]) {
     C12.affiche();
     rapport(figure++, -0.4, 0.3);
 
-    // TODO: voir avec un enseignant s’il a une réponse juste…
-    // Validation
-    validation V(50, 0.1, 14, 11, &Ve1, 10);
-    V.main_loop();
-    cout << endl;
-    V.affiche();
-    cout << endl;
-
     if (argc > 1 and argv[1][0] == 't') {
         circuit_deux * test = new circuit_deux;
         test->main_loop();
         cout << endl;
         test->affiche();
         cout << endl;
-        //delete test;
     }
 
     return 0;

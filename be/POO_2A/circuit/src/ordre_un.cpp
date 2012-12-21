@@ -45,10 +45,6 @@ ordre_un::ordre_un(): euler() {
     }
 }
 
-//ordre_un::~ordre_un() {
-    //delete src;
-//}
-
 void ordre_un::affiche() const {
     ofstream fichier("../rapport/genere.tex", ios::app);
     fichier << "classe Ordre un…\\\\" << endl;
@@ -77,8 +73,6 @@ circuit_un::circuit_un(): ordre_un() {
     cout << " OK." << endl;
     exacte_isknown = false;
 }
-
-//circuit_un::~circuit_un() {}
 
 float circuit_un::u_prime(int const & i) const {
     return (src->Ve(i*epsilon) - u[i]) / (R*C);
@@ -117,8 +111,6 @@ circuit_deux::circuit_deux(): ordre_un() {
     exacte_isknown = false;
 }
 
-//circuit_deux::~circuit_deux() {}
-
 float circuit_deux::u_prime(int const & i) const {
     float I(0);
     float Ve(src->Ve(i*epsilon));
@@ -140,5 +132,3 @@ void circuit_deux::affiche() const {
     fichier << "fille de l’ordre un suivant:\\\\" << endl;
     ordre_un::affiche();
 }
-
-// vim: set foldmethod=marker:
