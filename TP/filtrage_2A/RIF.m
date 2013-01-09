@@ -19,15 +19,11 @@ X = Fe * X / N;
 Y = 20 * log10(abs(fft(filter(coeff, 1, blanc))));
 
 plot(W .* Fe / (2 * pi), 20 * log10(abs(H)), X, Y(1:N/2), Xg, Ygb, Xg, Ygh);
-legend('Transmittance','bruit blanc filtre', 'gabarit min', 'gabarit max')
-xlabel('Frequence (Hz)')
-ylabel('Gain ou Amplitude (dB)')
+legend('Transmittance','bruit blanc filtre', 'gabarit min', 'gabarit max'); xlabel('Frequence (Hz)'); ylabel('Gain ou Amplitude (dB)');
 print -dpng RIF_1.png
 
-plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)  %ca n'a aucun sens !
-legend('phase')
-xlabel('Frequence (Hz)')
-ylabel('Phase')
+plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)%multiplication & division: correction d'un bug
+legend('phase'); xlabel('Frequence (Hz)'); ylabel('Phase');
 % Mais c'est lineaire.
 print -dpng RIF_2.png
 
@@ -38,7 +34,5 @@ fft_test = 20*log10(abs(fft(test)));
 f = 0 : N/2-1;
 test_f = 20 * log10(abs(fft(filter(coeff, 1, test))));
 plot(f(2:end), fft_test(2:N/2), f(2:end), test_f(2:N/2));
-legend('signal de test', 'signal de test filtre')
-xlabel('Frequence (Hz)')
-ylabel('Amplitude (dB)')
+legend('signal de test', 'signal de test filtre'); xlabel('Frequence (Hz)'); ylabel('Amplitude (dB)');
 print -dpng RIF_3.png

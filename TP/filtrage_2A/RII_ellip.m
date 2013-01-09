@@ -1,5 +1,3 @@
-clear;
-
 Fe = 8e3;
 
 Xg = [0 200 300 400 500 800 1000 1300 1500 Fe/2];
@@ -15,23 +13,23 @@ N = 8192;
 [H1, W] = freqz(B1, A1, N); % calcul des filtres
 [H2, W] = freqz(B2, A2, N);
 
-moyenne = - 0.5;
-sigma = 1;
-blanc = moyenne + sigma * rand(1, N);
+blanc = rand(1, N) - 0.5;
 
 X = 1 : N/2;
 X = Fe * X / N;
 Y1 = 20 * log10(abs(fft(filter(B1, A1, blanc))));
 Y2 = 20 * log10(abs(fft(filter(B2, A2, blanc))));
 
-figure
-subplot(2, 1, 1);
 Y = Y1 + Y2;
 H = H1 + H2;
 plot(W .* Fe / (2 * pi), 20 * log10(abs(H)), X, Y(1:N/2), Xg, Ygb, Xg, Ygh)
-subplot(2, 1, 2);
+legend('Transmittance','bruit blanc filtre', 'gabarit min', 'gabarit max'); xlabel('Frequence (Hz)'); ylabel('Gain ou Amplitude (dB)');
+print -dpng ell_1.png
+
 plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)  %ça n'a aucun sens !
+legend('phase'); xlabel('Frequence (Hz)'); ylabel('Phase');
 % Mais c'est pas lineaire.
+print -dpng ell_2.png
 
 figure;
 t = 0 : 1/N : 1;
@@ -43,3 +41,5 @@ test_f1 = 20 * log10(abs(fft(filter(B1, A1, test))));
 test_f2 = 20 * log10(abs(fft(filter(B2, A2, test))));
 test_f = test_f1 + test_f2;
 plot(f(2:end), fft_test(2:N/2), f(2:end), test_f(2:N/2));
+legend('signal de test', 'signal de test filtre'); xlabel('Frequence (Hz)'); ylabel('Amplitude (dB)');
+print -dpng ell_3.png
