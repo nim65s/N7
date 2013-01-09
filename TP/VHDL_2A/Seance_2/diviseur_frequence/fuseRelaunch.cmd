@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "D:/2EN/Nim/diviseur_frequence/anti_rebond_tb_isim_beh.exe" -prj "D:/2EN/Nim/diviseur_frequence/anti_rebond_tb_beh.prj" "work.anti_rebond_tb" 
