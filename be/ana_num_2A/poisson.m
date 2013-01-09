@@ -11,10 +11,10 @@ function [ U, Uideal ] = poisson( N, dn, dp, Nd, Na, Vn, Vp, q )
         A(i+1,i) = -1;
         A(i,i+1) = -1;
         b(i) = -rho(i*h, dn, dp, Nd, Na, q)/1e-12;
-        if i < N/2
-            Uideal(i) = Vp+q*Na*(x(i)-dp).^2/(2*h);
+        if i > N/2
+            Uideal(i) = Vp+q*Na*(x(i)-dp).^2/(2e-12);
         else
-            Uideal(i) = Vn -q*Nd*(x(i)-dn).^2/(2*h);
+            Uideal(i) = Vn -q*Nd*(x(i)+dn).^2/(2e-12);
         end
     end
     b(1) = b(1) - Vn/h^2;
