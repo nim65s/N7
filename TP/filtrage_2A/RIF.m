@@ -1,5 +1,3 @@
-clear;
-
 Fe = 8e3;
 
 Xg = [0 200 300 400 500 800 1000 1300 1500 Fe/2];
@@ -14,20 +12,20 @@ coeff = fir1(N, Wn, 'DC-0');
 N = 8192;
 [H, W] = freqz(coeff, 1, N); % calcul du filtre
 
-moyenne = - 0.5;
-sigma = 1;
-blanc = moyenne + sigma * rand(1, N);
+blanc = rand(1, N) - 0.5;
 
 X = 1 : N/2;
 X = Fe * X / N;
 Y = 20 * log10(abs(fft(filter(coeff, 1, blanc))));
 
 plot(W .* Fe / (2 * pi), 20 * log10(abs(H)), X, Y(1:N/2), Xg, Ygb, Xg, Ygh);
+legend('Transmittance','bruit blanc filtré', 'gabarit min', 'gabarit max')
 print -dpng RIF_1.png
 
-plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)  %ça n'a aucun sens !
-print -dpng RIF_2.png
+plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)  %ca n'a aucun sens !
+legend('phase')
 % Mais c'est lineaire.
+print -dpng RIF_2.png
 
 t = 0 : 1/N : 1;
 test = sin(2*pi*100*t) + sin(2*pi*350*t) + sin(2*pi*650*t) + sin(2*pi*1150*t) + sin(2*pi*1600*t);
@@ -36,4 +34,5 @@ fft_test = 20*log10(abs(fft(test)));
 f = 0 : N/2-1;
 test_f = 20 * log10(abs(fft(filter(coeff, 1, test))));
 plot(f(2:end), fft_test(2:N/2), f(2:end), test_f(2:N/2));
+legend('signal de test', 'signal de test filtré')
 print -dpng RIF_3.png
