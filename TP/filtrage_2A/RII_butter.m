@@ -26,12 +26,11 @@ plot(W .* Fe / (2 * pi), 20 * log10(abs(H)), X, Y(1:N/2), Xg, Ygb, Xg, Ygh)
 legend('Transmittance','bruit blanc filtre', 'gabarit min', 'gabarit max'); xlabel('Frequence (Hz)'); ylabel('Gain ou Amplitude (dB)');
 print -dpng butt_1.png
 
-plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)  %ça n'a aucun sens !
+plot(W .* Fe / (2 * pi), unwrap(10 * phase(H)) / 10)
 legend('phase'); xlabel('Frequence (Hz)'); ylabel('Phase');
 % Mais c'est pas lineaire.
 print -dpng butt_2.png
 
-figure;
 t = 0 : 1/N : 1;
 test = sin(2*pi*100*t) + sin(2*pi*350*t) + sin(2*pi*650*t) + sin(2*pi*1150*t) + sin(2*pi*1600*t);
 t = Fe * t;
