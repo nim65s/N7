@@ -1,0 +1,4 @@
+NET "CLK" LOC = B8;
+#Created by Constraints Editor (xc3s500e-fg320-5) - 2012/12/14
+NET "CLK" TNM_NET = CLK;
+TIMESPEC TS_CLK = PERIOD "CLK" 2 ns HIGH 50%;
