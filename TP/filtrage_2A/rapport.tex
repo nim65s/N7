@@ -2,7 +2,7 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
-\usepackage[a4paper,margin=1cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{array}
@@ -26,7 +26,7 @@
 \usepackage{verbatim}
 \usepackage{xunicode,xltxtra}
 
-\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Traitement numérique du signal: \\ Filtrage Multi-Bandes}
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ Traitement numérique du signal: \\ ~ \\ Filtrage Multi-Bandes \\ ~}
 \author{François Pierron, Guilhem Saurel}
 \date{\oldstylenums{\today}}
 
@@ -36,6 +36,12 @@
     \setcounter{page}{0}
     \maketitle
     \thispagestyle{empty}
+
+    ~
+
+    ~
+
+    ~
     \tableofcontents
 \end{titlepage}
 
@@ -56,10 +62,10 @@ On souhaite synthétiser un filtre dont les spécifications friéquentielles ont
 \inputminted[linenos,lastline=21]{matlab}{RIF.m}
 \includegraphics[height=13cm]{RIF_1}
 \inputminted[linenos,firstnumber=25,firstline=25,lastline=25]{matlab}{RIF.m}
-\includegraphics[height=0cm]{RIF_2} \\
-On observe bien la linéarité, (contrairement aux filtres RII). \\
+\includegraphics[height=9cm]{RIF_2}\\
+NB: On observe bien la linéarité, (contrairement aux filtres RII).\\
 \inputminted[linenos,firstnumber=30,firstline=30,lastline=36]{matlab}{RIF.m}
-\includegraphics[height=13cm]{RIF_3}
+\includegraphics[height=12cm]{RIF_3}
 
 \section{RII}
 \subsection{Butterworth}
@@ -67,7 +73,7 @@ On observe bien la linéarité, (contrairement aux filtres RII). \\
 \inputminted[linenos,lastline=25]{matlab}{RII_butter.m}
 \includegraphics[height=13cm]{butt_1}
 \inputminted[linenos,firstnumber=29,firstline=29,lastline=29]{matlab}{RII_butter.m}
-\includegraphics[height=10cm]{butt_2}
+\includegraphics[height=9cm]{butt_2}
 \inputminted[linenos,firstnumber=34,firstline=34,lastline=43]{matlab}{RII_butter.m}
 \includegraphics[height=13cm]{butt_3}
 
@@ -76,7 +82,7 @@ On observe bien la linéarité, (contrairement aux filtres RII). \\
 \inputminted[linenos,lastline=25]{matlab}{RII_Cheby1m.m}
 \includegraphics[height=13cm]{cheb1_1}
 \inputminted[linenos,firstnumber=29,firstline=29,lastline=29]{matlab}{RII_Cheby1m.m}
-\includegraphics[height=10cm]{cheb1_2}
+\includegraphics[height=9cm]{cheb1_2}
 \inputminted[linenos,firstnumber=34,firstline=34,lastline=42]{matlab}{RII_Cheby1m.m}
 \includegraphics[height=13cm]{cheb1_3}
 
@@ -85,7 +91,7 @@ On observe bien la linéarité, (contrairement aux filtres RII). \\
 \inputminted[linenos,lastline=25]{matlab}{RII_Cheby2.m}
 \includegraphics[height=13cm]{cheb2_1}
 \inputminted[linenos,firstnumber=29,firstline=29,lastline=29]{matlab}{RII_Cheby2.m}
-\includegraphics[height=10cm]{cheb2_2}
+\includegraphics[height=9cm]{cheb2_2}
 \inputminted[linenos,firstnumber=34,firstline=34,lastline=42]{matlab}{RII_Cheby2.m}
 \includegraphics[height=13cm]{cheb2_3}
 
@@ -94,7 +100,7 @@ On observe bien la linéarité, (contrairement aux filtres RII). \\
 \inputminted[linenos,lastline=25]{matlab}{RII_ellip.m}
 \includegraphics[height=13cm]{ell_1}
 \inputminted[linenos,firstnumber=29,firstline=29,lastline=29]{matlab}{RII_ellip.m}
-\includegraphics[height=10cm]{ell_2}
+\includegraphics[height=9cm]{ell_2}
 \inputminted[linenos,firstnumber=34,firstline=34,lastline=43]{matlab}{RII_ellip.m}
 \includegraphics[height=13cm]{ell_3}
 
