@@ -1,0 +1,25 @@
+NET "aff[7]" LOC = L18;
+NET "aff[6]" LOC = F18;
+NET "aff[5]" LOC = D17;
+NET "aff[4]" LOC = D16;
+NET "aff[3]" LOC = G14;
+NET "aff[2]" LOC = J17;
+NET "aff[1]" LOC = H14;
+NET "aff[0]" LOC = C17;
+
+NET "aff_no[0]" LOC = F17;
+NET "aff_no[1]" LOC = H17;
+NET "aff_no[2]" LOC = C18;
+NET "aff_no[3]" LOC = F15;
+
+NET "A[0]" LOC = L14;
+NET "A[1]" LOC = L13;
+NET "A[2]" LOC = N17;
+NET "A[3]" LOC = R17;
+
+NET "B[0]" LOC = G18;
+NET "B[1]" LOC = H18;
+NET "B[2]" LOC = K18;
+NET "B[3]" LOC = K17;
+
+NET "C" LOC = J14;
