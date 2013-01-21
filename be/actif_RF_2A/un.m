@@ -12,20 +12,20 @@ S12f = S12(fi);
 S21f = S21(fi);
 S22f = S22(fi);
 S = [S11f S12f; S21f S22f];
-
-% Gain du transistor à la fréquence d’intérêt: 
-G = 20*log10(abs(S21f)); % 4.0766 dB
-
-% Unilatéral: 
-Greverse = 20*log10(abs(S12f)); % -23.7387 dB=> oui
-
-% Gain maximum attendu:
-% % Gt = Gsmax + G0 + Glmax
-Gsmax = 1 / ( 1 - abs(S11f)^2);
-Glmax = 1 / ( 1 - abs(S22f)^2);
-G0 = abs(S21f)^2;
-Gt = Gsmax + G0 + Glmax; % 6.3259
-Gtdb = 20*log10(Gt); % 16.0225 dB
+% 
+% % Gain du transistor à la fréquence d’intérêt: 
+% G = 20*log10(abs(S21f)); % 4.0766 dB
+% 
+% % Unilatéral: 
+% Greverse = 20*log10(abs(S12f)); % -23.7387 dB=> oui
+% 
+% % Gain maximum attendu:
+% % % Gt = Gsmax + G0 + Glmax
+% Gsmax = 1 / ( 1 - abs(S11f)^2);
+% Glmax = 1 / ( 1 - abs(S22f)^2);
+% G0 = abs(S21f)^2;
+% Gt = Gsmax + G0 + Glmax; % 6.3259
+% Gtdb = 20*log10(Gt); % 16.0225 dB
 
 % Stabilité
 %   Paramètre de stabilité inconditionnelle
