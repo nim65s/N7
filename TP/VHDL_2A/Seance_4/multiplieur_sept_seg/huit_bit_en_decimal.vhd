@@ -23,18 +23,18 @@ begin
 			elsif (resultat >= 100) then centaines <= 1;
 			else centaines <= 0;
 			end if;
-			if    (resultat - centaines >= 90) then dizaines <= 9;
-			elsif (resultat - centaines >= 80) then dizaines <= 8;
-			elsif (resultat - centaines >= 70) then dizaines <= 7;
-			elsif (resultat - centaines >= 60) then dizaines <= 6;
-			elsif (resultat - centaines >= 50) then dizaines <= 5;
-			elsif (resultat - centaines >= 40) then dizaines <= 4;
-			elsif (resultat - centaines >= 30) then dizaines <= 3;
-			elsif (resultat - centaines >= 20) then dizaines <= 2;
-			elsif (resultat - centaines >= 10) then dizaines <= 1;
+			if    (resultat - centaines*100 >= 90) then dizaines <= 9;
+			elsif (resultat - centaines*100 >= 80) then dizaines <= 8;
+			elsif (resultat - centaines*100 >= 70) then dizaines <= 7;
+			elsif (resultat - centaines*100 >= 60) then dizaines <= 6;
+			elsif (resultat - centaines*100 >= 50) then dizaines <= 5;
+			elsif (resultat - centaines*100 >= 40) then dizaines <= 4;
+			elsif (resultat - centaines*100 >= 30) then dizaines <= 3;
+			elsif (resultat - centaines*100 >= 20) then dizaines <= 2;
+			elsif (resultat - centaines*100 >= 10) then dizaines <= 1;
 			else dizaines <= 0;
 			end if;
-			unites <= resultat - centaines - dizaines;
+			unites <= resultat - centaines*100 - dizaines*10;
 		end if;
 	end process;
 	
