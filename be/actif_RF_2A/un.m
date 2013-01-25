@@ -64,8 +64,8 @@ Gamma1 = (B1-sqrt(B1^2-4*abs(C1)^2)) / (2*C1);
 Gamma2 = (B2-sqrt(B2^2-4*abs(C2)^2)) / (2*C2);
 z1 = (1 + Gamma1) / (1 - Gamma1);
 z2 = (1 + Gamma2) / (1 - Gamma2);
-trace_imp(z1,'*b');
-trace_imp(z2,'+b');
+trace_centre(z1,'*b');
+trace_centre(z2,'+b');
 
 % Après calcul des longueurs sur les abaques,
 lambda = 3E8/2E10;

@@ -55,10 +55,17 @@ angle(Cl(l))/pi*0.25+0.25; % 0.4325
 Zs = 0.55 + 1i*0.24;
 Zl = 0.725 + 1i*0.225;
 
+lambda = 3E8/2E10;
 Lla = 0.172*lambda;
 Llsa = 0.068*lambda;
 Lsa = 0.153*lambda;
 Lssa = 0.075*lambda;
+
+S11gaa = zeros(size(f));
+S12gaa = zeros(size(f));
+S21gaa = zeros(size(f));
+S22gaa = zeros(size(f));
+
 
 for i = 1:size(f,2)
     lambda = 3E8/f(i);
@@ -77,43 +84,15 @@ for i = 1:size(f,2)
     D = ((1 - S11(i))*(1 + S22(i)) + S12(i)*S21(i))/(2*S21(i));
     T = [A B; C D];
 
-    Tglobaa = Yr1a * T1a * T * T2a * Yr2a;
+    Tglobaa = Yrs * T1a * T * T2a * Yrl;
     Agaa = Tglobaa(1,1);
     Bgaa = Tglobaa(1,2);
     Cgaa = Tglobaa(2,1);
     Dgaa = Tglobaa(2,2);
-    S11gaa(i) = (Agaa + Bgaa - Cgaa - Dgaa) / (Agaa + Bgaa + Cgaa + Dgaa);
-    S12gaa(i) = 2*(Agaa*Dgaa - Bgaa * Cgaa) / (Agaa + Bgaa + Cgaa + Dgaa);
-    S21gaa(i) = 2 / (Agaa + Bgaa + Cgaa + Dgaa);
+    S11gaa(i) =   (Agaa + Bgaa - Cgaa - Dgaa) / (Agaa + Bgaa + Cgaa + Dgaa);
+    S12gaa(i) = 2*(Agaa * Dgaa - Bgaa * Cgaa) / (Agaa + Bgaa + Cgaa + Dgaa);
+    S21gaa(i) =                             2 / (Agaa + Bgaa + Cgaa + Dgaa);
     S22gaa(i) = (- Agaa + Bgaa - Cgaa + Dgaa) / (Agaa + Bgaa + Cgaa + Dgaa);
-    
-    Tglobab = Yr1a * T1a * T * T2b * Yr2b;
-    Agab = Tglobab(1,1);
-    Bgab = Tglobab(1,2);
-    Cgab = Tglobab(2,1);
-    Dgab = Tglobab(2,2);
-    S11gab(i) = (Agab + Bgab - Cgab - Dgab) / (Agab + Bgab + Cgab + Dgab);
-    S12gab(i) = 2*(Agab*Dgab - Bgab * Cgab) / (Agab + Bgab + Cgab + Dgab);
-    S21gab(i) = 2 / (Agab + Bgab + Cgab + Dgab);
-    S22gab(i) = (- Agab + Bgab - Cgab + Dgab) / (Agab + Bgab + Cgab + Dgab);
-
-    Tglobba = Yr1b * T1b * T * T2a * Yr2a;
-    Agba = Tglobba(1,1);
-    Bgba = Tglobba(1,2);
-    Cgba = Tglobba(2,1);
-    Dgba = Tglobba(2,2);
-    S11gba(i) = (Agba + Bgba - Cgba - Dgba) / (Agba + Bgba + Cgba + Dgba);
-    S12gba(i) = 2*(Agba*Dgba - Bgba * Cgba) / (Agba + Bgba + Cgba + Dgba);
-    S21gba(i) = 2 / (Agba + Bgba + Cgba + Dgba);
-    S22gba(i) = (- Agba + Bgba - Cgba + Dgba) / (Agba + Bgba + Cgba + Dgba);
-    
-    Tglobbb = Yr1b * T1b * T * T2b * Yr2b;
-    Agbb = Tglobbb(1,1);
-    Bgbb = Tglobbb(1,2);
-    Cgbb = Tglobbb(2,1);
-    Dgbb = Tglobbb(2,2);
-    S11gbb(i) = (Agbb + Bgbb - Cgbb - Dgbb) / (Agbb + Bgbb + Cgbb + Dgbb);
-    S12gbb(i) = 2*(Agbb*Dgbb - Bgbb * Cgbb) / (Agbb + Bgbb + Cgbb + Dgbb);
-    S21gbb(i) = 2 / (Agbb + Bgbb + Cgbb + Dgbb);
-    S22gbb(i) = (- Agbb + Bgbb - Cgbb + Dgbb) / (Agbb + Bgbb + Cgbb + Dgbb);
 end
+
+plot(f, 20*log10(abs(S11gaa)), f, 20*log10(abs(S22gaa)), f, 20*log10(abs(S21gaa)))
