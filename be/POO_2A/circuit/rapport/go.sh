@@ -16,7 +16,7 @@ echo -e "\033[1;32m − Éxécution du matlab…\033[0m"
 octave genere.m || exit
 
 echo -e "\033[1;32m − Génération des pdf à partir des svg…\033[0m"
-for i in *.svg
+for i in *.svg images/*.svg
 do convert $i ${i/svg/pdf} || exit
 done
 
