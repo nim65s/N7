@@ -643,9 +643,11 @@ Au temps de transit des porteurs:
 
 $ t_{tr} = \cfrac{d}{v_n} \simeq 10\si{\pico\second} $
 
-La constante de temps liée à la capa de jonction : TODO masse, Rload,
-diode
+La constante de temps liée à la capa de jonction : 
 
+\begin{circuitikz} \draw
+  (0,0) node[ground]{} to[R=$R_{load}$] (0,2) to[diode] (0,4);
+\end{circuitikz}
 $\rightarrow f_c=\cfrac{1}{2\pi R_{load}C_j} $
 
 Des deux phénomènes, le plus contraignant impose la Bande Passante
@@ -721,10 +723,18 @@ $S_B=S_iR_{load}$, $S_i$ en \si{\square\ampere\per\hertz}
 
 $S_B=\cfrac{S_v}{R_{load}}, $S\_v\$ en \si{\square\volt\per\hertz}
 
-Pour le bruit thermique, $S_i=\cfrac{4k_BT}{R}$ et $S_v=4k_BTR$ TODO
-R//source de courant et R série avec source de tension
+Pour le bruit thermique, $S_i=\cfrac{4k_BT}{R}$ et $S_v=4k_BTR$
 
-Pour le bruit de grenaille, $S_i=2qI$ TODO~diode // source de courant
+\begin{circuitikz} \draw
+	(0,0) to[R] (0,2) -- (2,2) to [current source] (2,0) -- (0,0)
+	(4,1) to[R] (5,1) to[voltage source](7,1);
+\end{circuitikz}
+
+Pour le bruit de grenaille, $S_i=2qI$
+
+\begin{circuitikz} \draw
+	(0,0) to[R] (0,2) -- (2,2) to [current source] (2,0) -- (0,0);
+\end{circuitikz}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
@@ -739,8 +749,11 @@ Ce sont des valeursefficaces calculées sur une bande de 1\si\hertz.
 
 Rem: lois de Kirschoff
 
-TODO ib1 et ib2 vers ibT =\textgreater{}
-$i_{b_T} = \sqrt{i_{b_1}^2+i_{b_2}^2}$
+\begin{circuitikz} \draw
+	(0,2) to[short,i=$i_{b1}$] (2,2) to [short,i=$i_{bT}$] (4,2)
+	(2,0) to[short,i=$i_{b2}$] (2,2);
+\end{circuitikz}
+$\Rightarrow i_{b_T} = \sqrt{i_{b_1}^2+i_{b_2}^2}$
 
 TODO vb1 \textbar{} vb2 − vbt \textbar{} =\textgreater{}
 $v_{b_T} = \sqrt{v_{b_1}^2+v_{b_2}^2}$
@@ -751,7 +764,9 @@ $v_{b_T} = \sqrt{v_{b_1}^2+v_{b_2}^2}$
   Modèle en bruit de la photodiode
 \end{itemize}
 
-TODO i\_d // C\_j
+\begin{circuitikz} \draw
+	(0,0) to[current source=$i_d$] (0,2) -- (2,2) to [C=$C_j$] (2,0) -- (0,0);
+\end{circuitikz}
 
 Le courant que parcours la PD~est la somme de deux termes:
 
