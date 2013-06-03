@@ -86,8 +86,8 @@
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package std_logic_arith
-# -- Compiling entity compteur_echantillonage
-# -- Compiling architecture Behavioral of compteur_echantillonage
+# -- Compiling entity compteur_echantillonnage
+# -- Compiling architecture Behavioral of compteur_echantillonnage
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -153,19 +153,11 @@
 # Loading work.bascule_d(behavioral)#1
 # Loading work.un_hertz(behavioral)#1
 # Loading work.choix_etal_echant(behavioral)#1
-# Loading work.compteur_echantillonage(behavioral)#1
-# Loading work.detect_front_entree(behavioral)#1
 # Loading work.compteur_etalonnage(behavioral)#1
+# Loading work.detect_front_entree(behavioral)#1
 # Loading work.conversion_decimale(behavioral)#1
+# Loading work.compteur_echantillonnage(behavioral)#1
 # .main_pane.wave.interior.cs.body.pw.wf
 # .main_pane.structure.interior.cs.body.struct
 # .main_pane.objects.interior.cs.body.tree
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_inf_echant
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_inf_etal
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_sup_echant
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_sup_etal
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_echant
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_etal
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_in
-add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_out
-restart; run 10ms;
+restart; run 500ms;

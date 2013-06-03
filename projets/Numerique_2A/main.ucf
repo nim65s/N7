@@ -18,3 +18,7 @@ NET "leds_gamme(2)" LOC="P15";
 NET "entree" LOC="B4";
 NET "depassement_sup" LOC="J14";
 NET "depassement_inf" LOC="J15";
+NET "etal_on" LOC="K15";
+NET "auto_on" LOC="K14";
+NET "mode_auto" LOC="K18";
+NET "manu_etal" LOC="H18";

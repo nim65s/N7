@@ -14,9 +14,9 @@ end compteur_etalonnage;
 architecture Behavioral of compteur_etalonnage is
 	Signal etalon : STD_LOGIC;
 	Signal etat_etalon : STD_LOGIC;
-	Signal nombre_buf : integer range 0 to 10000;
+	Signal nombre_buf, nombre_buf_2 : integer range 0 to 10000;
 	Signal nombre_out : STD_LOGIC_VECTOR (13 downto 0);
-	Signal front : STD_LOGIC;
+	Signal front, fin_etalonnage : STD_LOGIC;
 	
 	component un_hertz port (
 		clk : in STD_LOGIC;
@@ -44,31 +44,47 @@ begin
 	begin
 		if (rst = '1') then 
 			etat_etalon <= etalon;
-			depassement_sup <= '0';
-			depassement_inf <= '0';
 			nombre_buf <= 0;
-			nombre_out <= (others => '0');
-		elsif (clk 'event and clk = '1')	then
-			if (etat_etalon = etalon) then
+		elsif (clk'event and clk = '1')	then
+			if (fin_etalonnage = '1') then 
+				nombre_buf <= 2;
+				fin_etalonnage <= '0';
+			elsif (etat_etalon = etalon) then
 				if (front = '1' and nombre_buf /= 10000) then nombre_buf <= nombre_buf + 1;
+				else nombre_buf <= nombre_buf;
 				end if;
-				nombre_out <= nombre_out;
 			else 
 				etat_etalon <= etalon;
-				if (etat_etalon = '1') then
-					if (nombre_buf = 0) then 
-						depassement_inf <= '1';
-						depassement_sup <= '0';
-						nombre_out <= (others => '0');
-					elsif (nombre_buf > 9999) then
-						depassement_inf <= '0';
-						depassement_sup <= '1';
-						nombre_out <= (others => '0');
-					else
-						nombre_out <= conv_std_logic_vector(nombre_buf, 14);
-					end if;
-					nombre_buf <= 1;
+				if (etat_etalon = '1') then 
+					nombre_buf <= nombre_buf;
+					fin_etalonnage <= '0';
+				else
+					fin_etalonnage <= '1';
+					nombre_buf_2 <= nombre_buf;
 				end if;
+			end if;
+		end if;
+	end process;
+	
+	sorties: process (nombre_buf_2, clk, rst)
+	begin
+		if (rst = '1') then
+			depassement_sup <= '0';
+			depassement_inf <= '0';
+			nombre_out <= (others => '0');
+		elsif (clk'event and clk = '1') then
+			if (nombre_buf_2 < 3) then 
+				depassement_inf <= '1';
+				depassement_sup <= '0';
+				nombre_out <= (others => '0');
+			elsif (nombre_buf_2 > 9999) then
+				depassement_inf <= '0';
+				depassement_sup <= '1';
+				nombre_out <= (others => '0');
+			else
+				depassement_sup <= '0';
+				depassement_inf <= '0';
+				nombre_out <= conv_std_logic_vector(nombre_buf_2, 14);
 			end if;
 		end if;
 	end process;

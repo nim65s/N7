@@ -60,3 +60,10 @@ n = 27
 
 50.00 MHz => 0.2 *0.1us
 
+
+
+bugs
+====
+En échantillonnage, la valeur double parfois
+En étalonnage, il y a une erreur statique
+En automatique, le passage de l'étalonnage à l'échantillonage ne marche pas

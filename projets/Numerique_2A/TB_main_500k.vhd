@@ -16,7 +16,9 @@ ARCHITECTURE behavioral OF main_sch_main_sch_sch_tb_deux IS
           point	:	OUT	STD_LOGIC; 
           leds_gamme	:	OUT	STD_LOGIC_VECTOR (2 DOWNTO 0); 
           depassement_inf	:	OUT	STD_LOGIC; 
-          depassement_sup	:	OUT	STD_LOGIC);
+          depassement_sup	:	OUT	STD_LOGIC;
+			 etalonnage_on : out STD_LOGIC;
+			 echantillonnage_on : out STD_LOGIC);
    END COMPONENT;
 
    --Inputs
@@ -29,6 +31,8 @@ ARCHITECTURE behavioral OF main_sch_main_sch_sch_tb_deux IS
    SIGNAL leds_gamme	:	STD_LOGIC_VECTOR (2 DOWNTO 0);
    SIGNAL depassement_inf	:	STD_LOGIC;
    SIGNAL depassement_sup	:	STD_LOGIC;
+	SIGNAL etalonnage_on : STD_LOGIC;
+	SIGNAL echantillonnage_on : STD_LOGIC;
 	
 BEGIN
 
@@ -41,11 +45,13 @@ BEGIN
 		point => point, 
 		leds_gamme => leds_gamme, 
 		depassement_inf => depassement_inf, 
-		depassement_sup => depassement_sup
+		depassement_sup => depassement_sup,
+		etalonnage_on => etalonnage_on,
+		echantillonnage_on => echantillonnage_on
    );
-	
+
 clk <= not clk after 10 ns;
-entree <= not entree after 1 us;
+entree <= not entree after 50 ms;
 rst <= '1', '0' after 50 ns;
 
 END;

@@ -39,5 +39,5 @@ begin
 		end if;
 	end process;
 
-	nombre_out <= nombre_in;
+	nombre_out <= nombre_buf;
 end Behavioral;
