@@ -1,0 +1,28 @@
+Comptage de fronts
+	entrée
+	horloge
+
+	gamme actuelle:
+		On incrémente si on compte plus de 9999
+		On décrémente si on compte moins de 1000
+
+Conversion en décimal
+	9999 => 14 bits d’entrée
+
+Gestion de l’affichage
+	4 chiffres utiles
+	gamme (1 à 8)
+
+Fin:
+	8 segs
+	4 afficheurs
+	3 leds pour la gamme
+
+1.000 Hz  => 0
+10.00 Hz  => 1
+100.0 Hz  => 2
+1.000 kHz => 3
+10.00 kHz => 4
+100.0 kHz => 5
+1.000 MHz => 6
+10.00 MHz => 7
