@@ -23,7 +23,7 @@ begin
 				else gamme <= "010";
 				end if;
 			else
-				if (conv_integer(unsigned(nombre)) < 10) then gamme <= "100";
+				if (conv_integer(unsigned(nombre)) < 100) then gamme <= "100";
 				else gamme <= "010";
 				end if;
 			end if;

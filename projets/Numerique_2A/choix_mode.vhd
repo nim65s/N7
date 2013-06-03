@@ -30,16 +30,16 @@ begin
 			depassement_sup <= '0';
 			depassement_inf <= '0';
 		elsif (clk'event and clk = '1') then
-			if ((mode_auto = '1' and auto_etal = '1') or (mode_auto = '0' and manu_etal = '1')) then
-				nombre <= nombre_etal;
-				etal_on <= '1';
-				depassement_sup <= dep_sup_etal;
-				depassement_inf <= dep_inf_etal;
-			else
+			if ((mode_auto = '1' and auto_etal = '0') or (mode_auto = '0' and manu_etal = '0')) then
 				nombre <= nombre_echant;
 				etal_on <= '0';
 				depassement_sup <= dep_sup_echant;
 				depassement_inf <= dep_inf_echant;
+			else
+				nombre <= nombre_etal;
+				etal_on <= '1';
+				depassement_sup <= dep_sup_etal;
+				depassement_inf <= dep_inf_etal;
 			end if;
 		end if;
 	end process;

@@ -72,7 +72,7 @@ begin
 				depassement_inf <= '1';
 				depassement_sup <= '0';
 				nombre_out <= (others => '0');
-			elsif (nombre_buf_2 >= 9999) then
+			elsif (nombre_buf_2 >= 10000) then
 				depassement_inf <= '0';
 				depassement_sup <= '1';
 				nombre_out <= (others => '0');

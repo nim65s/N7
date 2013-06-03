@@ -1,0 +1,8 @@
+[Inputs]
+clk
+rst
+dep_inf_echant
+dep_sup_etal
+[Outputs]
+etalonnage_on
+[BiDir]

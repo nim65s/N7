@@ -25,23 +25,23 @@ begin
 		if (clk'event and clk = '1') then
 			if (conv_integer(unsigned(nombre)) >= 1000) then
 				resultat <= conv_integer(unsigned(nombre));
-				if (etal_on = '0') then pos_point <= "0010";
-				else pos_point <= "0001";
+				if (etal_on = '0') then pos_point <= "0100";
+				else pos_point <= "0000";
 				end if;
 			elsif (conv_integer(unsigned(nombre)) >= 100) then
 				resultat <= conv_integer(unsigned(nombre))*10;
-				if (etal_on = '0') then pos_point <= "0100";
-				else pos_point <= "0010";
+				if (etal_on = '0') then pos_point <= "1000";
+				else pos_point <= "0001";
 				end if;
 			elsif (conv_integer(unsigned(nombre)) >= 10) then
 				resultat <= conv_integer(unsigned(nombre))*100;
-				if (etal_on = '0') then pos_point <= "1000";
-				else pos_point <= "0100";
+				if (etal_on = '0') then pos_point <= "0010";
+				else pos_point <= "0010";
 				end if;
 			else
 				resultat <= conv_integer(unsigned(nombre))*1000;
-				if (etal_on = '0') then pos_point <= "0000";
-				else pos_point <= "1000";
+				if (etal_on = '0') then pos_point <= "0100";
+				else pos_point <= "0100";
 				end if;
 			end if;
 

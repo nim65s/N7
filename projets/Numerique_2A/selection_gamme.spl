@@ -1,0 +1,8 @@
+[Inputs]
+clk
+rst
+etal_on
+=nombre[13:0]=
+[Outputs]
+=gamme[2:0]=
+[BiDir]

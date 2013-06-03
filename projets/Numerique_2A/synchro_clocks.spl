@@ -1,0 +1,10 @@
+[Inputs]
+clk
+dep_sup_in
+dep_inf_in
+=nombre_in[13:0]=
+[Outputs]
+dep_sup_out
+dep_inf_out
+=nombre_out[13:0]=
+[BiDir]

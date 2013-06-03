@@ -1,0 +1,11 @@
+[Inputs]
+etal_on
+clk
+=nombre[13:0]=
+[Outputs]
+=hex_un[3:0]=
+=hex_deux[3:0]=
+=hex_trois[3:0]=
+=hex_quatre[3:0]=
+=pos_point[3:0]=
+[BiDir]

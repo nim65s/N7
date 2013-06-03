@@ -1,3 +1,4 @@
-sch2hdl,-intstyle,ise,-family,spartan3e,-flat,-suppress,-vhdl,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/afficheur_sch.vhf,-w,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/afficheur_sch.sch
+sch2hdl,-intstyle,ise,-family,spartan3e,-flat,-suppress,-vhdl,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/selection_mode.vhf,-w,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/selection_mode.sch
+sch2hdl,-intstyle,ise,-family,spartan3e,-flat,-suppress,-vhdl,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/compteurs.vhf,-w,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/compteurs.sch
 sch2hdl,-intstyle,ise,-family,spartan3e,-flat,-suppress,-vhdl,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/main_sch.vhf,-w,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/main_sch.sch
 sch2hdl,-intstyle,ise,-family,spartan3e,-flat,-suppress,-vhdl,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/main_sch.vhf,-w,D:/2EN/Bai-Saurel/Projet_numerique_bai_saurel/main_sch.sch
