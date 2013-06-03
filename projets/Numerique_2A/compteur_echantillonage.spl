@@ -1,9 +1,0 @@
-[Inputs]
-entree
-clk
-rst
-[Outputs]
-depassement_sup
-depassement_inf
-=nombre[13:0]=
-[BiDir]
