@@ -7,17 +7,15 @@ entity compteur_echantillonage is
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
            nombre : out STD_LOGIC_VECTOR (13 downto 0);
-           gamme : out STD_LOGIC_VECTOR (2 downto 0);
 			  depassement_sup : out STD_LOGIC;
 			  depassement_inf : out STD_LOGIC);
 end compteur_echantillonage;
 
 architecture Behavioral of compteur_echantillonage is
-	Signal nombre_buf, nombre_us : integer range 0 to 100000000;
+	Signal nombre_buf, nombre_dus : integer range 0 to 10000;
+	Signal clk_count : integer range 0 to 5;
 	Signal nombre_out : STD_LOGIC_VECTOR (13 downto 0);
-	Signal gamme_buf : integer range 0 to 7;
 	Signal front : STD_LOGIC;
-	Signal sub_counter : integer range 0 to 1000000000;
 	
 	component detect_front_entree port (
 		entree : in STD_LOGIC;
@@ -25,7 +23,6 @@ architecture Behavioral of compteur_echantillonage is
 		front : out STD_LOGIC);
 	end component;
 begin
-		
 	detecteur: detect_front_entree port map (
 		entree => entree,
 		clk => clk,
@@ -36,57 +33,35 @@ begin
 		if (rst = '1') then 
 			depassement_sup <= '0';
 			depassement_inf <= '0';
-			gamme_buf <= 0;
-			sub_counter <= 0;
-			nombre_out <= "00000000000000";
+			nombre_out <= (others => '0');
+			nombre_dus <= 0;
 		elsif (clk 'event and clk = '1')	then
 			if (front = '0') then
-				sub_counter <= sub_counter + 1;
+				if (clk_count = 5) then
+					nombre_dus <= nombre_dus + 1;
+					clk_count <= 1;
+				else
+					clk_count <= clk_count + 1;
+				end if;
 				nombre_out <= nombre_out;
 			else
-				nombre_us <= sub_counter*20;
-				if (nombre_us < 100) then
+				if (nombre_dus < 1) then
 					depassement_inf <= '0';
 					depassement_sup <= '1';
-					nombre_out <= conv_std_logic_vector(nombre_us, 14);
-				elsif (nombre_us < 1000) then 
-					gamme_buf <= 7;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-					nombre_out <= conv_std_logic_vector(nombre_us, 14);
-				elsif (nombre_us < 10000) then
-					gamme_buf <= 6;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				elsif (nombre_us < 100000) then 
-					gamme_buf <= 5;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				elsif (nombre_us < 1000000) then 
-					gamme_buf <= 4;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				elsif (nombre_us < 10000000) then 
-					gamme_buf <= 3;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				elsif (nombre_us < 10000000) then 
-					gamme_buf <= 2;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				elsif (nombre_us < 100000000) then 
-					gamme_buf <= 1;
-					depassement_inf <= '0';
-					depassement_sup <= '0';
-				else 
+					nombre_out <= (others => '0');
+				elsif (nombre_dus > 10000) then 
 					depassement_inf <= '1';
 					depassement_sup <= '0';
+					nombre_out <= (others => '0');
+				else
+					depassement_inf <= '0';
+					depassement_sup <= '0';
+					nombre_out <= conv_std_logic_vector(nombre_dus, 14);
 				end if;
 			end if;
 		end if;
 	end process;
 	
-	gamme <= conv_std_logic_vector(gamme_buf, 3);
 	nombre <= nombre_out;
 	
 end Behavioral;

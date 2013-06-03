@@ -10,8 +10,7 @@ ARCHITECTURE behavior OF TB_etalonnage IS
          entree : IN  std_logic;
          clk : IN  std_logic;
          rst : IN  std_logic;
-         nombre : OUT  std_logic_vector(13 downto 0);
-         gamme : OUT  std_logic_vector(2 downto 0);
+         nombre : OUT  std_logic_vector(26 downto 0);
          depassement_sup : OUT  std_logic;
          depassement_inf : OUT  std_logic
         );
@@ -24,8 +23,7 @@ ARCHITECTURE behavior OF TB_etalonnage IS
    signal rst : std_logic := '1'; 
 
  	--Outputs
-   signal nombre : std_logic_vector(13 downto 0);
-   signal gamme : std_logic_vector(2 downto 0);
+   signal nombre : std_logic_vector(26 downto 0);
    signal depassement_sup : std_logic;
    signal depassement_inf : std_logic;
 
@@ -41,7 +39,6 @@ BEGIN
           clk => clk,
           rst => rst,
           nombre => nombre,
-          gamme => gamme,
           depassement_sup => depassement_sup,
           depassement_inf => depassement_inf
         );
