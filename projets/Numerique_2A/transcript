@@ -1,0 +1,171 @@
+# Reading C:/modeltech64_10.1b/tcl/vsim/pref.tcl 
+# //  ModelSim SE-64 10.1b Apr 27 2012 
+# //
+# //  Copyright 1991-2012 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# do {main_sch_main_sch_sch_tb_deux.fdo} 
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nb_to_sept_seg
+# -- Compiling architecture Behavioral of nb_to_sept_seg
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity hex_state_mux
+# -- Compiling architecture Behavioral of hex_state_mux
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity un_hertz
+# -- Compiling architecture Behavioral of un_hertz
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity set_leds_gamme
+# -- Compiling architecture Behavioral of set_leds_gamme
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity position_point
+# -- Compiling architecture Behavioral of position_point
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity machine_a_etat_afficheur
+# -- Compiling architecture Behavioral of machine_a_etat_afficheur
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity detect_front_entree
+# -- Compiling architecture Behavioral of detect_front_entree
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity choix_aff
+# -- Compiling architecture Behavioral of choix_aff
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity afficheur_sept_seg_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity conversion_decimale
+# -- Compiling architecture Behavioral of conversion_decimale
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity compteur_etalonnage
+# -- Compiling architecture Behavioral of compteur_etalonnage
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity compteur_echantillonage
+# -- Compiling architecture Behavioral of compteur_echantillonage
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity choix_etal_echant
+# -- Compiling architecture Behavioral of choix_etal_echant
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity bascule_D
+# -- Compiling architecture Behavioral of bascule_D
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity afficheur_sept_seg_sch_MUSER_afficheur_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch_MUSER_afficheur_sch
+# -- Compiling entity afficheur_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sch
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity afficheur_sept_seg_sch_MUSER_main_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch_MUSER_main_sch
+# -- Compiling entity afficheur_sch_MUSER_main_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sch_MUSER_main_sch
+# -- Compiling entity main_sch
+# -- Compiling architecture BEHAVIORAL of main_sch
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity main_sch_main_sch_sch_tb_deux
+# -- Compiling architecture behavioral of main_sch_main_sch_sch_tb_deux
+# vsim -lib work -voptargs=\"+acc\" -t 1ps work.main_sch_main_sch_sch_tb_deux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading unisim.vcomponents
+# Loading work.main_sch_main_sch_sch_tb_deux(behavioral)#1
+# Loading work.main_sch(behavioral)#1
+# Loading work.afficheur_sch_muser_main_sch(behavioral)#1
+# Loading work.afficheur_sept_seg_sch_muser_main_sch(behavioral)#1
+# Loading work.hex_state_mux(behavioral)#1
+# Loading work.nb_to_sept_seg(behavioral)#1
+# Loading work.choix_aff(behavioral)#1
+# Loading work.set_leds_gamme(behavioral)#1
+# Loading work.machine_a_etat_afficheur(behavioral)#1
+# Loading work.position_point(behavioral)#1
+# Loading ieee.std_logic_arith(body)
+# Loading work.bascule_d(behavioral)#1
+# Loading work.un_hertz(behavioral)#1
+# Loading work.choix_etal_echant(behavioral)#1
+# Loading work.compteur_echantillonage(behavioral)#1
+# Loading work.detect_front_entree(behavioral)#1
+# Loading work.compteur_etalonnage(behavioral)#1
+# Loading work.conversion_decimale(behavioral)#1
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_inf_echant
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_inf_etal
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_sup_echant
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/dep_sup_etal
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_echant
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_etal
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_in
+add wave -position end  sim:/main_sch_main_sch_sch_tb_deux/UUT/nombre_out
+restart; run 10ms;

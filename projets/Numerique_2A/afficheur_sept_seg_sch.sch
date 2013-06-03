@@ -6,7 +6,7 @@
         <trait edittrait="all:0" />
     </attr>
     <netlist>
-        <signal name="XLXN_1(3:0)" />
+        <signal name="hex(3:0)" />
         <signal name="sept_seg(6:0)" />
         <signal name="hex_un(3:0)" />
         <signal name="hex_deux(3:0)" />
@@ -43,26 +43,28 @@
             <rect width="64" x="432" y="-300" height="24" />
             <line x2="496" y1="-288" y2="-288" x1="432" />
         </blockdef>
-        <block symbolname="nb_to_sept_seg" name="XLXI_1">
-            <blockpin signalname="XLXN_1(3:0)" name="nombre(3:0)" />
+        <block symbolname="nb_to_sept_seg" name="hex_to_sept_seg">
+            <blockpin signalname="hex(3:0)" name="nombre(3:0)" />
             <blockpin signalname="sept_seg(6:0)" name="sept_seg(6:0)" />
         </block>
-        <block symbolname="hex_state_mux" name="XLXI_2">
+        <block symbolname="hex_state_mux" name="hex_mux">
             <blockpin signalname="hex_un(3:0)" name="hex_un(3:0)" />
             <blockpin signalname="hex_deux(3:0)" name="hex_deux(3:0)" />
             <blockpin signalname="hex_trois(3:0)" name="hex_trois(3:0)" />
             <blockpin signalname="hex_quatre(3:0)" name="hex_quatre(3:0)" />
             <blockpin signalname="etat_courant(1:0)" name="etat_courant(1:0)" />
-            <blockpin signalname="XLXN_1(3:0)" name="hex_courant(3:0)" />
+            <blockpin signalname="hex(3:0)" name="hex_courant(3:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
-        <instance x="1120" y="1712" name="XLXI_2" orien="R0">
+        <instance x="1120" y="1712" name="hex_mux" orien="R0">
         </instance>
-        <instance x="1696" y="1456" name="XLXI_1" orien="R0">
+        <instance x="1696" y="1456" name="hex_to_sept_seg" orien="R0">
         </instance>
-        <branch name="XLXN_1(3:0)">
-            <wire x2="1696" y1="1424" y2="1424" x1="1616" />
+        <branch name="hex(3:0)">
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="1648" y="1424" type="branch" />
+            <wire x2="1648" y1="1424" y2="1424" x1="1616" />
+            <wire x2="1696" y1="1424" y2="1424" x1="1648" />
         </branch>
         <branch name="sept_seg(6:0)">
             <wire x2="2144" y1="1424" y2="1424" x1="2112" />

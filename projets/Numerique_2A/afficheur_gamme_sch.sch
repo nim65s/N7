@@ -31,6 +31,15 @@
             <rect width="64" x="384" y="-44" height="24" />
             <line x2="448" y1="-32" y2="-32" x1="384" />
         </blockdef>
+        <blockdef name="position_point">
+            <timestamp>2013-4-16T8:47:12</timestamp>
+            <rect width="256" x="64" y="-128" height="128" />
+            <rect width="64" x="0" y="-108" height="24" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <rect width="64" x="0" y="-44" height="24" />
+            <line x2="0" y1="-32" y2="-32" x1="64" />
+            <line x2="384" y1="-96" y2="-96" x1="320" />
+        </blockdef>
         <block symbolname="set_point" name="XLXI_1">
             <blockpin signalname="etat_courant(1:0)" name="etat_courant(1:0)" />
             <blockpin signalname="gamme(2:0)" name="gamme(2:0)" />
@@ -39,6 +48,11 @@
         <block symbolname="set_leds_gamme" name="XLXI_2">
             <blockpin signalname="gamme(2:0)" name="gamme(2:0)" />
             <blockpin signalname="leds_gamme(2:0)" name="leds_gamme(2:0)" />
+        </block>
+        <block symbolname="position_point" name="XLXI_3">
+            <blockpin name="etat_courant(1:0)" />
+            <blockpin name="pos_point(3:0)" />
+            <blockpin name="point" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -66,5 +80,7 @@
         </branch>
         <iomarker fontsize="28" x="1632" y="1312" name="leds_gamme(2:0)" orien="R0" />
         <iomarker fontsize="28" x="1632" y="1120" name="point" orien="R0" />
+        <instance x="1200" y="1568" name="XLXI_3" orien="R0">
+        </instance>
     </sheet>
 </drawing>

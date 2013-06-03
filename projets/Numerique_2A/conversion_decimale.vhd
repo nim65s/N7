@@ -7,6 +7,7 @@ entity conversion_decimale is
            hex_deux : out STD_LOGIC_VECTOR (3 downto 0);
            hex_trois : out STD_LOGIC_VECTOR (3 downto 0);
            hex_quatre : out STD_LOGIC_VECTOR (3 downto 0);
+			  pos_point : out STD_LOGIC_VECTOR (3 downto 0);
            clk : in  STD_LOGIC;
 			  nombre: in STD_LOGIC_VECTOR (13 downto 0));
 end conversion_decimale;
@@ -23,13 +24,19 @@ begin
 		if (clk'event and clk = '1') then
 			if (conv_integer(unsigned(nombre)) >= 1000) then
 				resultat <= conv_integer(unsigned(nombre));
+				pos_point <= "0001";
 			elsif (conv_integer(unsigned(nombre)) >= 100) then
 				resultat <= conv_integer(unsigned(nombre))*10;
+				pos_point <= "0010";
 			elsif (conv_integer(unsigned(nombre)) >= 10) then
 				resultat <= conv_integer(unsigned(nombre))*100;
+				pos_point <= "0100";
 			else
 				resultat <= conv_integer(unsigned(nombre))*1000;
+				pos_point <= "1000";
 			end if;
+
+			--resultat <= conv_integer(unsigned(nombre));
 			
 			if (resultat >= 9000) then milliers <= 9;
 			elsif (resultat >= 8000) then milliers <= 8;
@@ -43,33 +50,51 @@ begin
 			else milliers <= 0;
 			end if;
 			
-			r_m <= resultat - milliers*1000;
-			if (r_m >= 900) then centaines <= 9;
-			elsif (r_m >= 800) then centaines <= 8;
-			elsif (r_m >= 700) then centaines <= 7;
-			elsif (r_m >= 600) then centaines <= 6;
-			elsif (r_m >= 500) then centaines <= 5;
-			elsif (r_m >= 400) then centaines <= 4;
-			elsif (r_m >= 300) then centaines <= 3;
-			elsif (r_m >= 200) then centaines <= 2;
-			elsif (r_m  >= 100) then centaines <= 1;
-			else centaines <= 0;
+			if (resultat - milliers*1000 > 999 or resultat - milliers*1000 < 0) then 
+				r_m <= 0;
+				r_c <= 0;
+				centaines <= 0;
+				dizaines <= 0;
+				unites <= 0;
+			else
+				r_m <= resultat - milliers*1000;
+				if (r_m >= 900) then centaines <= 9;
+				elsif (r_m >= 800) then centaines <= 8;
+				elsif (r_m >= 700) then centaines <= 7;
+				elsif (r_m >= 600) then centaines <= 6;
+				elsif (r_m >= 500) then centaines <= 5;
+				elsif (r_m >= 400) then centaines <= 4;
+				elsif (r_m >= 300) then centaines <= 3;
+				elsif (r_m >= 200) then centaines <= 2;
+				elsif (r_m  >= 100) then centaines <= 1;
+				else centaines <= 0;
+				end if;
+				
+				if (r_m - centaines*100 > 99 or r_m - centaines*100 < 0) then 
+					r_c <= 0;
+					dizaines <= 0;
+					unites <= 0;
+				else
+					r_c <= r_m - centaines*100;
+					if (r_c >= 90) then dizaines <= 9;
+					elsif (r_c >= 80) then dizaines <= 8;
+					elsif (r_c >= 70) then dizaines <= 7;
+					elsif (r_c >= 60) then dizaines <= 6;
+					elsif (r_c >= 50) then dizaines <= 5;
+					elsif (r_c >= 40) then dizaines <= 4;
+					elsif (r_c >= 30) then dizaines <= 3;
+					elsif (r_c >= 20) then dizaines <= 2;
+					elsif (r_c >= 10) then dizaines <= 1;
+					else dizaines <= 0;
+					end if;
+					
+					if (r_c - dizaines*10 > 9 or r_c - dizaines*10 < 0) then
+						unites <= 0;
+					else
+						unites <= r_c - dizaines*10;
+					end if;
+				end if;
 			end if;
-			
-			r_c <= r_m - centaines*100;
-			if (r_c >= 90) then dizaines <= 9;
-			elsif (r_c >= 80) then dizaines <= 8;
-			elsif (r_c >= 70) then dizaines <= 7;
-			elsif (r_c >= 60) then dizaines <= 6;
-			elsif (r_c >= 50) then dizaines <= 5;
-			elsif (r_c >= 40) then dizaines <= 4;
-			elsif (r_c >= 30) then dizaines <= 3;
-			elsif (r_c >= 20) then dizaines <= 2;
-			elsif (r_c >= 10) then dizaines <= 1;
-			else dizaines <= 0;
-			end if;
-			
-			unites <= r_c - dizaines*10;
 		end if;
 	end process;
 

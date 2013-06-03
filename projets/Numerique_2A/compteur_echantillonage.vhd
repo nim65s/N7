@@ -38,7 +38,9 @@ begin
 		elsif (clk 'event and clk = '1')	then
 			if (front = '0') then
 				if (clk_count = 5) then
-					nombre_dus <= nombre_dus + 1;
+					if (nombre_dus = 10000) then nombre_dus <= nombre_dus;
+					else nombre_dus <= nombre_dus + 1;
+					end if;
 					clk_count <= 1;
 				else
 					clk_count <= clk_count + 1;
@@ -49,7 +51,7 @@ begin
 					depassement_inf <= '0';
 					depassement_sup <= '1';
 					nombre_out <= (others => '0');
-				elsif (nombre_dus > 10000) then 
+				elsif (nombre_dus > 9999) then 
 					depassement_inf <= '1';
 					depassement_sup <= '0';
 					nombre_out <= (others => '0');
@@ -57,6 +59,7 @@ begin
 					depassement_inf <= '0';
 					depassement_sup <= '0';
 					nombre_out <= conv_std_logic_vector(nombre_dus, 14);
+					nombre_dus <= 0;
 				end if;
 			end if;
 		end if;

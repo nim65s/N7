@@ -40,7 +40,7 @@ begin
 		clk => clk,
 		front => front);
 		
-	comptage: process (clk, rst, entree, front, nombre_out)
+	comptage: process (clk, rst, entree, front, nombre_out, etalon)
 	begin
 		if (rst = '1') then 
 			etat_etalon <= etalon;
