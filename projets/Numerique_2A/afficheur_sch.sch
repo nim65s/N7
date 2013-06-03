@@ -46,7 +46,7 @@
             <line x2="464" y1="-288" y2="-288" x1="400" />
         </blockdef>
         <blockdef name="machine_a_etat_afficheur">
-            <timestamp>2013-3-27T10:51:11</timestamp>
+            <timestamp>2013-4-5T6:11:17</timestamp>
             <rect width="256" x="64" y="-128" height="128" />
             <line x2="0" y1="-96" y2="-96" x1="64" />
             <line x2="0" y1="-32" y2="-32" x1="64" />
@@ -54,12 +54,23 @@
             <line x2="384" y1="-96" y2="-96" x1="320" />
         </blockdef>
         <blockdef name="choix_aff">
-            <timestamp>2013-3-27T10:51:56</timestamp>
+            <timestamp>2013-4-5T6:11:31</timestamp>
             <rect width="352" x="64" y="-64" height="64" />
             <rect width="64" x="0" y="-44" height="24" />
             <line x2="0" y1="-32" y2="-32" x1="64" />
             <rect width="64" x="416" y="-44" height="24" />
             <line x2="480" y1="-32" y2="-32" x1="416" />
+        </blockdef>
+        <blockdef name="afficheur_gamme_sch">
+            <timestamp>2013-3-27T12:1:23</timestamp>
+            <rect width="368" x="64" y="-128" height="128" />
+            <rect width="64" x="0" y="-108" height="24" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <rect width="64" x="0" y="-44" height="24" />
+            <line x2="0" y1="-32" y2="-32" x1="64" />
+            <line x2="496" y1="-96" y2="-96" x1="432" />
+            <rect width="64" x="432" y="-44" height="24" />
+            <line x2="496" y1="-32" y2="-32" x1="432" />
         </blockdef>
         <block symbolname="afficheur_sept_seg_sch" name="XLXI_2">
             <blockpin signalname="hex_un(3:0)" name="hex_un(3:0)" />
@@ -77,6 +88,12 @@
         <block symbolname="choix_aff" name="XLXI_4">
             <blockpin signalname="XLXN_3(1:0)" name="etat_courant(1:0)" />
             <blockpin signalname="quatre_aff(3:0)" name="quatre_aff(3:0)" />
+        </block>
+        <block symbolname="afficheur_gamme_sch" name="XLXI_5">
+            <blockpin signalname="gamme(2:0)" name="gamme(2:0)" />
+            <blockpin signalname="XLXN_3(1:0)" name="etat_courant(1:0)" />
+            <blockpin signalname="point" name="point" />
+            <blockpin signalname="leds_gamme(2:0)" name="leds_gamme(2:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -143,5 +160,7 @@
         <iomarker fontsize="28" x="480" y="1232" name="hex_deux(3:0)" orien="R180" />
         <iomarker fontsize="28" x="480" y="1168" name="hex_un(3:0)" orien="R180" />
         <iomarker fontsize="28" x="480" y="1648" name="gamme(2:0)" orien="R180" />
+        <instance x="1104" y="1744" name="XLXI_5" orien="R0">
+        </instance>
     </sheet>
 </drawing>

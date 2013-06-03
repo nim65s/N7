@@ -21,7 +21,16 @@ begin
 	go: process(clk, nombre)
 	begin
 		if (clk'event and clk = '1') then
-			resultat <= conv_integer(unsigned(nombre));
+			if (conv_integer(unsigned(nombre)) >= 1000) then
+				resultat <= conv_integer(unsigned(nombre));
+			elsif (conv_integer(unsigned(nombre)) >= 100) then
+				resultat <= conv_integer(unsigned(nombre))*10;
+			elsif (conv_integer(unsigned(nombre)) >= 10) then
+				resultat <= conv_integer(unsigned(nombre))*100;
+			else
+				resultat <= conv_integer(unsigned(nombre))*1000;
+			end if;
+			
 			if (resultat >= 9000) then milliers <= 9;
 			elsif (resultat >= 8000) then milliers <= 8;
 			elsif (resultat >= 7000) then milliers <= 7;
