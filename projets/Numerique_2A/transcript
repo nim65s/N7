@@ -8,9 +8,15 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# do {main_sch_main_sch_sch_tb_deux.fdo} 
+# do {main_sch_main_sch_sch_tb.fdo} 
 # ** Warning: (vlib-34) Library already exists at "work".
 # 
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity un_hertz
+# -- Compiling architecture Behavioral of un_hertz
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -27,14 +33,15 @@
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity un_hertz
-# -- Compiling architecture Behavioral of un_hertz
+# -- Compiling entity set_leds_gamme
+# -- Compiling architecture Behavioral of set_leds_gamme
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity set_leds_gamme
-# -- Compiling architecture Behavioral of set_leds_gamme
+# -- Loading package std_logic_arith
+# -- Compiling entity selection_gamme
+# -- Compiling architecture Behavioral of selection_gamme
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -57,23 +64,9 @@
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity choix_aff
-# -- Compiling architecture Behavioral of choix_aff
-# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package VCOMPONENTS
-# -- Compiling entity afficheur_sept_seg_sch
-# -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch
-# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
 # -- Loading package std_logic_arith
-# -- Compiling entity conversion_decimale
-# -- Compiling architecture Behavioral of conversion_decimale
+# -- Compiling entity correction_etalonnage
+# -- Compiling architecture Behavioral of correction_etalonnage
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -92,8 +85,51 @@
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
+# -- Compiling entity choix_mode
+# -- Compiling architecture Behavioral of choix_mode
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
 # -- Compiling entity choix_etal_echant
 # -- Compiling architecture Behavioral of choix_etal_echant
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity choix_aff
+# -- Compiling architecture Behavioral of choix_aff
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity afficheur_sept_seg_sch
+# -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity selection_mode
+# -- Compiling architecture BEHAVIORAL of selection_mode
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity conversion_decimale
+# -- Compiling architecture Behavioral of conversion_decimale
+# Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package VCOMPONENTS
+# -- Compiling entity compteurs
+# -- Compiling architecture BEHAVIORAL of compteurs
 # Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -117,6 +153,10 @@
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
 # -- Loading package VCOMPONENTS
+# -- Compiling entity compteurs_MUSER_main_sch
+# -- Compiling architecture BEHAVIORAL of compteurs_MUSER_main_sch
+# -- Compiling entity selection_mode_MUSER_main_sch
+# -- Compiling architecture BEHAVIORAL of selection_mode_MUSER_main_sch
 # -- Compiling entity afficheur_sept_seg_sch_MUSER_main_sch
 # -- Compiling architecture BEHAVIORAL of afficheur_sept_seg_sch_MUSER_main_sch
 # -- Compiling entity afficheur_sch_MUSER_main_sch
@@ -129,9 +169,9 @@
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
 # -- Loading package VCOMPONENTS
-# -- Compiling entity main_sch_main_sch_sch_tb_deux
-# -- Compiling architecture behavioral of main_sch_main_sch_sch_tb_deux
-# vsim -lib work -voptargs=\"+acc\" -t 1ps work.main_sch_main_sch_sch_tb_deux 
+# -- Compiling entity main_sch_main_sch_sch_tb
+# -- Compiling architecture behavioral of main_sch_main_sch_sch_tb
+# vsim -lib work -voptargs=\"+acc\" -t 1ps work.main_sch_main_sch_sch_tb 
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # 
 # Loading std.standard
@@ -139,7 +179,7 @@
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.numeric_std(body)
 # Loading unisim.vcomponents
-# Loading work.main_sch_main_sch_sch_tb_deux(behavioral)#1
+# Loading work.main_sch_main_sch_sch_tb(behavioral)#1
 # Loading work.main_sch(behavioral)#1
 # Loading work.afficheur_sch_muser_main_sch(behavioral)#1
 # Loading work.afficheur_sept_seg_sch_muser_main_sch(behavioral)#1
@@ -152,12 +192,80 @@
 # Loading ieee.std_logic_arith(body)
 # Loading work.bascule_d(behavioral)#1
 # Loading work.un_hertz(behavioral)#1
-# Loading work.choix_etal_echant(behavioral)#1
-# Loading work.compteur_etalonnage(behavioral)#1
-# Loading work.detect_front_entree(behavioral)#1
 # Loading work.conversion_decimale(behavioral)#1
+# Loading work.compteurs_muser_main_sch(behavioral)#1
 # Loading work.compteur_echantillonnage(behavioral)#1
+# Loading work.compteur_etalonnage(behavioral)#1
+# Loading work.correction_etalonnage(behavioral)#1
+# Loading work.detect_front_entree(behavioral)#1
+# Loading work.selection_mode_muser_main_sch(behavioral)#1
+# Loading work.choix_etal_echant(behavioral)#1
+# Loading work.choix_mode(behavioral)#1
+# Loading work.selection_gamme(behavioral)#1
+# Loading unisim.buf(buf_v)#1
 # .main_pane.wave.interior.cs.body.pw.wf
 # .main_pane.structure.interior.cs.body.struct
 # .main_pane.objects.interior.cs.body.tree
-restart; run 500ms;
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/etalon
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/etat_etalon
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/fin_etalonnage
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/nombre_buf
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/nombre_buf_2
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/depassement_sup
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/etalonnage_et_echantillonnage/compteur_par_etalonnage/depassement_inf
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/auto_etal
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/etal_on
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/depassement_inf
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/depassement_sup
+restart; run 1100ms;
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+restart; run 550ms;
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10 ns  Iteration: 0  Instance: /main_sch_main_sch_sch_tb/UUT/conversion
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/choix_auto_du_mode/courant
+add wave -position end  sim:/main_sch_main_sch_sch_tb/UUT/selecteur_de_mode/choix_auto_du_mode/etalonnage_on

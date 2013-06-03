@@ -15,8 +15,6 @@
         <signal name="hex_deux(3:0)" />
         <signal name="hex_trois(3:0)" />
         <signal name="hex_quatre(3:0)" />
-        <signal name="leds_gamme(2:0)" />
-        <signal name="gamme(2:0)" />
         <signal name="point" />
         <signal name="pos_point(3:0)" />
         <port polarity="Input" name="clk" />
@@ -27,8 +25,6 @@
         <port polarity="Input" name="hex_deux(3:0)" />
         <port polarity="Input" name="hex_trois(3:0)" />
         <port polarity="Input" name="hex_quatre(3:0)" />
-        <port polarity="Output" name="leds_gamme(2:0)" />
-        <port polarity="Input" name="gamme(2:0)" />
         <port polarity="Output" name="point" />
         <port polarity="Input" name="pos_point(3:0)" />
         <blockdef name="afficheur_sept_seg_sch">
@@ -63,14 +59,6 @@
             <rect width="64" x="416" y="-44" height="24" />
             <line x2="480" y1="-32" y2="-32" x1="416" />
         </blockdef>
-        <blockdef name="set_leds_gamme">
-            <timestamp>2013-3-27T11:46:10</timestamp>
-            <rect width="320" x="64" y="-64" height="64" />
-            <rect width="64" x="0" y="-44" height="24" />
-            <line x2="0" y1="-32" y2="-32" x1="64" />
-            <rect width="64" x="384" y="-44" height="24" />
-            <line x2="448" y1="-32" y2="-32" x1="384" />
-        </blockdef>
         <blockdef name="position_point">
             <timestamp>2013-4-16T8:47:12</timestamp>
             <rect width="256" x="64" y="-128" height="128" />
@@ -96,10 +84,6 @@
         <block symbolname="choix_aff" name="choix_digit">
             <blockpin signalname="state(1:0)" name="etat_courant(1:0)" />
             <blockpin signalname="quatre_aff(3:0)" name="quatre_aff(3:0)" />
-        </block>
-        <block symbolname="set_leds_gamme" name="led_gamme">
-            <blockpin signalname="gamme(2:0)" name="gamme(2:0)" />
-            <blockpin signalname="leds_gamme(2:0)" name="leds_gamme(2:0)" />
         </block>
         <block symbolname="position_point" name="pos_pt">
             <blockpin signalname="state(1:0)" name="etat_courant(1:0)" />
@@ -156,16 +140,6 @@
         <iomarker fontsize="28" x="480" y="1296" name="hex_trois(3:0)" orien="R180" />
         <iomarker fontsize="28" x="480" y="1232" name="hex_deux(3:0)" orien="R180" />
         <iomarker fontsize="28" x="480" y="1168" name="hex_un(3:0)" orien="R180" />
-        <instance x="1152" y="1840" name="led_gamme" orien="R0">
-        </instance>
-        <branch name="leds_gamme(2:0)">
-            <wire x2="1616" y1="1808" y2="1808" x1="1600" />
-        </branch>
-        <iomarker fontsize="28" x="1616" y="1808" name="leds_gamme(2:0)" orien="R0" />
-        <branch name="gamme(2:0)">
-            <wire x2="1136" y1="1808" y2="1808" x1="464" />
-            <wire x2="1152" y1="1808" y2="1808" x1="1136" />
-        </branch>
         <instance x="1200" y="1664" name="pos_pt" orien="R0">
         </instance>
         <branch name="point">
@@ -178,6 +152,5 @@
             <wire x2="1200" y1="1632" y2="1632" x1="1184" />
         </branch>
         <iomarker fontsize="28" x="464" y="1632" name="pos_point(3:0)" orien="R180" />
-        <iomarker fontsize="28" x="464" y="1808" name="gamme(2:0)" orien="R180" />
     </sheet>
 </drawing>

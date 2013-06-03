@@ -8,6 +8,7 @@ entity conversion_decimale is
            hex_trois : out STD_LOGIC_VECTOR (3 downto 0);
            hex_quatre : out STD_LOGIC_VECTOR (3 downto 0);
 			  pos_point : out STD_LOGIC_VECTOR (3 downto 0);
+			  etal_on : in  STD_LOGIC;
            clk : in  STD_LOGIC;
 			  nombre: in STD_LOGIC_VECTOR (13 downto 0));
 end conversion_decimale;
@@ -24,16 +25,24 @@ begin
 		if (clk'event and clk = '1') then
 			if (conv_integer(unsigned(nombre)) >= 1000) then
 				resultat <= conv_integer(unsigned(nombre));
-				pos_point <= "0001";
+				if (etal_on = '0') then pos_point <= "0010";
+				else pos_point <= "0001";
+				end if;
 			elsif (conv_integer(unsigned(nombre)) >= 100) then
 				resultat <= conv_integer(unsigned(nombre))*10;
-				pos_point <= "0010";
+				if (etal_on = '0') then pos_point <= "0100";
+				else pos_point <= "0010";
+				end if;
 			elsif (conv_integer(unsigned(nombre)) >= 10) then
 				resultat <= conv_integer(unsigned(nombre))*100;
-				pos_point <= "0100";
+				if (etal_on = '0') then pos_point <= "1000";
+				else pos_point <= "0100";
+				end if;
 			else
 				resultat <= conv_integer(unsigned(nombre))*1000;
-				pos_point <= "1000";
+				if (etal_on = '0') then pos_point <= "0000";
+				else pos_point <= "1000";
+				end if;
 			end if;
 
 			--resultat <= conv_integer(unsigned(nombre));

@@ -5,8 +5,6 @@ entity choix_etal_echant is
     Port ( clk : in  STD_LOGIC;
 			  rst : in STD_LOGIC;
            dep_inf_echant : in  STD_LOGIC;
-           dep_sup_echant : in  STD_LOGIC;
-           dep_inf_etal : in  STD_LOGIC;
            dep_sup_etal : in  STD_LOGIC;
 			  etalonnage_on : out STD_LOGIC);
 end choix_etal_echant;
@@ -22,7 +20,7 @@ begin
 		end if;
 	end process;
 	
-	calc: process (courant, dep_inf_echant, dep_sup_echant, dep_inf_etal, dep_sup_etal)
+	calc: process (courant, dep_inf_echant, dep_sup_etal)
 	begin
 		case courant is
 			when echantillonnage =>
