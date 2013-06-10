@@ -1,0 +1,7 @@
+
+module reg(rst, clk, cs, d, q)
+	q := d ;
+	q.clk = clk ;
+	q.rst = rst ;
+	q.ena = cs ;
+end module

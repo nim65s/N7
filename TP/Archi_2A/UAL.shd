@@ -1,0 +1,79 @@
+module UAL(a[31..0], b[31..0], cmd[5..0] : s[31..0], enN, enZ, enVC, dN, dZ, dV, dC)
+
+
+decodeur6to64(cmd[5..0] : dcmd[63..0]);
+
+
+//multiplication (26)
+umult16x16(a[15..0], b[15..0] : smult[31..0]);
+s[31..0] = smult[31..0] : dcmd[26];
+
+
+//additions (16, 20, 0, 4)
+addsub = dcmd[20] + dcmd[4];		// si soustraction
+addsub32(a[31..0], b[31..0], addsub : sadd[31..0], dV, dC);
+oeadd = dcmd[16] + dcmd[20] + dcmd[0] + dcmd[4];
+s[31..0] = sadd[31..0] : oeadd;
+
+
+// AND logique bit a bit (17, 1)
+sand[31..0] = a[31..0]*b[31..0];
+oeand = dcmd[17] + dcmd[1];
+s[31..0] = sand[31..0] : oeand;
+
+
+//OR logique (18,2)
+sor[31..0] = a[31..0]+b[31..0];
+oeor = dcmd[18] + dcmd[2];
+s[31..0] = sor[31..0] : oeor;
+
+
+//xor logique (19,3)
+sxor[31..0] = /a[31..0]*b[31..0] + a[31..0]*/b[31..0];
+oexor = dcmd[19] + dcmd[3];
+s[31..0] = sxor[31..0] : oexor;
+
+
+// decalages (13, 14)
+rdec = dcmd[13]; // selection 
+barrelshifter32(rdec, b[4..0], a[31..0] : sdec[31..0]);
+oedec = dcmd[13] + dcmd[14];
+s[31..0] = sdec[31..0] : oedec;
+
+
+//signext13 (32)
+ssign13[31..13] = a[12]*0b1111111111111111111;
+ssign13[12..0] = a[12..0];
+s[31..0] = ssign13[31..0] : dcmd[32];
+
+
+//signext25 (33)
+ssign25[31..25] = a[24]*0b1111111;
+ssign25[24..0] = a[24..0];
+s[31..0] = ssign25[31..0] : dcmd[33];
+
+
+//SETHI (35)
+ssethi[31..8] = a[23..0];
+ssethi[7..0] = 0;
+s[31..0] = ssethi[31..0] : dcmd[35];
+
+
+//nopb(40)
+snopb[31..0] = b[31..0];
+s[31..0] = snopb[31..0] : dcmd[40];
+
+
+
+
+zero32(s[31..0] : dZ);
+
+
+dN = s[31];
+
+enN = dcmd[16] +dcmd[20] +dcmd[17] +dcmd[18] +dcmd[19];
+enZ = dcmd[16] +dcmd[20] +dcmd[26] +dcmd[17] +dcmd[18] +dcmd[19];
+enVC = dcmd[16] + dcmd[20];
+
+
+end module

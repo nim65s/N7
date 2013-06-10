@@ -1,0 +1,7 @@
+
+module eq2(a[1..0], b[1..0], eq)
+	eq1 = a[1]*b[1] + /a[1]*/b[1] ;
+	eq0 = a[0]*b[0] + /a[0]*/b[0] ;
+	eq = eq1*eq0 ;
+end module
+

@@ -1,0 +1,6 @@
+module addsub32(a[31..0], b[31..0], addsub: s[31..0], V, C)
+	bb[31..0] = /addsub*b[31..0] + addsub*/b[31..0] ;
+	adder32(a[31..0], bb[31..0],addsub : s[31..0],co) ;
+	V = /addsub*a[31]*b[31]*/s[31] + /addsub*/a[31]*/b[31]*s[31] + addsub*a[31]*/b[31]*/s[31] + addsub*/a[31]*b[31]*s[31] ;
+	C = /addsub*co+addsub*/co ;
+end module

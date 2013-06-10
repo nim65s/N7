@@ -1,0 +1,10 @@
+
+module zero32(a[31..0] : Z)
+	zero6(a[5..0], za0) ;
+	zero6(a[11..6], za1) ;
+	zero6(a[17..12], za2) ;
+	zero6(a[23..18], za3) ;
+	zero6(a[29..24], za4) ;
+	zero2(a[31..30], za5) ;
+	Z=za0*za1*za2*za3*za4*za5 ;
+end module

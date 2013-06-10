@@ -1,0 +1,444 @@
+set	rst	1
+wait	1
+set	rst	0
+wait	1
+set	oe_num[1]	1
+wait	1
+set	oe_num[0]	1
+wait	1
+set	monitor[0]	1
+wait	1
+set	dreg[0]	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	monitor[1]	1
+wait	1
+set	monitor[0]	0
+wait	1
+set	dreg[1]	1
+wait	1
+set	dreg[0]	0
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	areg[0]	1
+wait	1
+set	oe_num[1]	0
+wait	1
+set	oe_num[0]	0
+wait	1
+set	breg[1]	1
+wait	1
+set	dreg[0]	1
+wait	1
+set	oe_num[0]	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	dreg[0]	0
+wait	1
+set	dreg[1]	0
+wait	1
+set	areg[0]	0
+wait	1
+set	breg[1]	0
+wait	1
+set	breg[1]	1
+wait	1
+set	breg[0]	1
+wait	1
+set	breg[0]	0
+wait	1
+set	breg[1]	0
+wait	1
+set	oe_num[0]	0
+wait	1
+set	dreg[2]	1
+wait	1
+set	monitor[28]	1
+wait	1
+set	monitor[29]	1
+wait	1
+set	monitor[30]	1
+wait	1
+set	monitor[31]	1
+wait	1
+set	monitor[30]	0
+wait	1
+set	monitor[28]	0
+wait	1
+set	monitor[1]	0
+wait	1
+set	monitor[0]	1
+wait	1
+set	oe_num[0]	1
+wait	1
+set	oe_num[1]	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	areg[2]	1
+wait	1
+set	dreg[2]	0
+wait	1
+set	oe_num[0]	0
+wait	1
+set	oe_num[1]	0
+wait	1
+set	oe_num[0]	1
+wait	1
+set	oe_num[0]	0
+wait	1
+set	monitor[29]	0
+wait	1
+set	monitor[31]	0
+wait	1
+set	monitor[6]	1
+wait	1
+set	monitor[12]	1
+wait	1
+set	monitor[2]	1
+wait	1
+set	monitor[4]	1
+wait	1
+set	monitor[5]	1
+wait	1
+set	monitor[9]	1
+wait	1
+set	monitor[13]	1
+wait	1
+set	monitor[14]	1
+wait	1
+set	oe_num[0]	1
+wait	1
+set	oe_num[1]	1
+wait	1
+set	write	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	monitor[1]	1
+wait	1
+set	monitor[10]	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	monitor[11]	1
+wait	1
+set	monitor[15]	1
+wait	1
+set	monitor[17]	1
+wait	1
+set	monitor[19]	1
+wait	1
+set	monitor[24]	1
+wait	1
+set	clk	1
+wait	1
+set	clk	0
+wait	1
+set	monitor[7]	1
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	ssgclk	1
+wait	1
+set	ssgclk	0
+wait	1
+set	oe_num[1]	0
+wait	1

@@ -1,0 +1,7 @@
+
+module count8(clk, rst, en : s[7..0], ripple)
+
+	count4(clk, rst, en : s[3..0], rip1) ;
+	count4(clk, rst, rip1 : s[7..4], ripple) ;
+
+end module	

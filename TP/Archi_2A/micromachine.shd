@@ -1,0 +1,44 @@
+module micromachine(rst, clk, areg[4..0], breg[4..0], dreg[4..0], cmd_ual[5..0], oe_num[1..0], write, monitor[31..0], switch[7..0], swClk, ssgClk, pwmClk :
+dbus[31..0], N, Z, V, C, ir[31..0], break, leds[7..0],ssegs[7..0], anodes[3..0], pwm_out)
+
+
+
+
+registres(rst, clk, areg[4..0], breg[4..0], dreg[4..0], dbus[31..0] : abus[31..0], bbus[31..0], ir[31..0], break);
+UAL(abus[31..0], bbus[31..0], cmd_ual[5..0] : sbus[31..0], enN, enZ, enVC, dN, dZ, dV, dC);
+bascules(clk, rst, enN, enZ, enVC, dN, dZ, dV, dC : N, Z, V, C);
+
+dbus[31..0] = sbus[31..0] : oe[1];
+oeram = oe[2]*cs[0];
+dbus[31..0] = dout[31..0] : oeram;
+oesw = oe[2]*cs[9];
+dbus[31..0] = dswitch[31..0] : oesw;
+dbus[31..0] = monitor[31..0] : oe[3];
+
+
+decodeur4to16(abus[31..28] : cs[15..0]);
+decodeur2to4(oe_num[1..0] : oe[3..0]);
+
+writeram = write * cs[0];
+rams_asyn_read512x32(clk, writeram, abus[8..0], dbus[31..0] : dout[31..0]);
+
+enled = write * cs[11];
+reg8(rst, clk, enled, dbus[7..0] : leds[7..0]);
+
+enswitch = 1;
+reg8(rst, swClk, enswitch, switch[7..0] : swi[7..0]);
+dswitch[31..8] = 0;
+dswitch[7..0] = swi[7..0];
+
+selec = abus[0];
+
+enssg = write * cs[10];
+segs7(rst, clk, ssgClk, enssg, selec, dbus[15..0] : anodes[3..0], ssegs[7..0]);
+
+enpwm = write * cs[12];
+pwm_module(rst, clk, pwmClk, enpwm, selec, dbus[15..0] : pwm_out);
+
+
+
+
+end module

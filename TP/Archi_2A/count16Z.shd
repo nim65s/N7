@@ -1,0 +1,7 @@
+
+module count16Z(clk, rst, en, sclr : s[15..0], ripple)
+
+	count8Z(clk, rst, en, sclr : s[7..0], rip1) ;
+	count8Z(clk, rst, rip1, sclr : s[15..8], ripple) ;
+	
+end module	

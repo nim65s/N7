@@ -1,0 +1,6 @@
+
+module eq3(a[2..0], b[2..0], equal)
+	eq[2..0] = a[2..0]*b[2..0] + /a[2..0]*/b[2..0] ;
+	equal = eq[2]*eq[1]*eq[0] ;
+end module
+

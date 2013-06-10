@@ -1,0 +1,8 @@
+
+module eq16(a[15..0], b[15..0], equal)
+
+	eq8(a[7..0], b[7..0], eq0) ;
+	eq8(a[15..8], b[15..8], eq1) ;
+	equal = eq1*eq0 ;
+
+end module

@@ -1,0 +1,11 @@
+
+module debounce(rst, clk, swt[7..0]: swDebounced[7..0])
+
+	count32(clk, rst, 1 : clock[31..0], ripple) ;
+	clockDebounce = clock[19] ;
+
+	swDebounced[7..0] := swt[7..0] ;
+	swDebounced[7..0].clk = clockDebounce ;
+	swDebounced[7..0].rst = rst ;
+
+ end module

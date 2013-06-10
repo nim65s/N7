@@ -1,0 +1,5 @@
+
+module zero2(a[1..0], zero)
+	zero = /a[1]*/a[0] ;
+end module
+

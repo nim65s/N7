@@ -1,0 +1,6 @@
+
+module eq5(a[4..0], b[4..0], equal)
+	eq[4..0] = a[4..0]*b[4..0] + /a[4..0]*/b[4..0] ;
+	equal = eq[4]*eq[3]*eq[2]*eq[1]*eq[0] ;
+end module
+

@@ -1,0 +1,246 @@
+
+module: sequencer
+reset: rst
+clock: clk
+inputs: mon_req, mon_cmd[3..0], monitor[37..0], break, run, ir[31..0], N, Z, V, C, IT
+outputs: write, oe_num[1..0], areg[4..0], breg[4..0], dreg[4..0], cmd_ual[5..0]
+added_outputs: state[4..0], mon_ack
+
+
+//////////////    NE PAS CHANGER    ///////////////
+++	eq4(mon_cmd[3..0], 0b0000, memReadCmd) ;
+++	eq4(mon_cmd[3..0], 0b0001, regReadCmd) ;
+++	eq4(mon_cmd[3..0], 0b0010, memWriteCmd) ;
+++	eq4(mon_cmd[3..0], 0b0011, regWriteCmd) ;
+++	eq4(mon_cmd[3..0], 0b0100, stepCmd) ;
+++	wdreg[4..0] := monitor[36..32] ;
+++	wdreg[4..0].clk = clk ;
+++	wdreg[4..0].rst = rst ;
+++	wdreg[4..0].ena = wdregWr ;
+++	wdregWr = is_fetch*mon_req*regWriteCmd ;
+++	mon_ack =
+++		is_memW1St +
+++		is_memR1St*mon_req +
+++		is_regR1St*mon_req +
+++		is_regW1St*mon_req ;
+
+
+///////////////////////////     MONITEUR: MEMOIRE       ////////////////////////////////
+
+	// moniteur: écriture en mémoire
+
+	fetch -> memW1St
+            when
+                mon_req*memWriteCmd
+            outputs
+                oe_num[1..0]=0b11,
+                areg[4..0]=0,
+                breg[4..0]=0,
+                dreg[4..0]=21,
+                cmd_ual[5..0]=0b000000,
+                write=0 ;
+
+	memW1St -> memW1St
+	    when
+	        mon_req
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	memW1St -> memW2St
+	    when
+	        /mon_req
+            outputs
+                oe_num[1..0] = 0b11 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 22 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	memW2St -> fetch
+	    when 1
+            outputs
+                oe_num[1..0] = 0b01 ,
+                areg[4..0] = 21 ,
+                breg[4..0] = 22 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b101000 ,
+                write = 1 ;
+
+	// moniteur: lecture en mémoire
+
+	fetch -> memR1St
+	    when
+	        mon_req*memReadCmd
+            outputs
+                oe_num[1..0] = 0b11 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 21 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	memR1St -> memR1St
+	    when
+	        mon_req
+            outputs
+                oe_num[1..0] = 0b10 ,
+                areg[4..0] = 21 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	memR1St -> fetch
+	    when
+	        /mon_req
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+///////////////////////////     MONITEUR: REGISTRES       ////////////////////////////////
+
+	// moniteur: lecture d'un registre
+
+	fetch -> regR1St
+	    when
+	        mon_req*regReadCmd
+            outputs
+                oe_num[1..0] = 0b01 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = monitor[4..0] ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b101000 ,
+                write = 0 ;
+
+	regR1St -> regR1St
+	    when
+	        mon_req
+            outputs
+                oe_num[1..0] = 0b01 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = monitor[4..0] ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b101000 ,
+                write = 0 ;
+
+	regR1St -> fetch
+	    when
+	        /mon_req
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+
+	// moniteur: écriture d'un registre
+
+	fetch -> regW1St
+	    when
+	        mon_req*regWriteCmd
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	regW1St -> regW1St
+	    when
+	        mon_req
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	regW1St -> fetch
+	    when /mon_req
+            outputs
+                oe_num[1..0] = 0b11 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = wdreg[4..0] ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+
+///////////////////////////     RUN / STEP / BREAK       ////////////////////////////////
+
+	fetch -> fetch
+	    when
+                /mon_req*/IT*/run+/mon_req*/IT*break
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	fetch -> step
+	    when
+                mon_req*stepCmd
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	step -> step
+	    when
+                mon_req
+            outputs
+                oe_num[1..0] = 0b00 ,
+                areg[4..0] = 0 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 0 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+	step -> decode
+	    when
+                /mon_req
+            outputs
+                oe_num[1..0] = 0b10 ,
+                areg[4..0] = 30 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 31 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+
+//////////////////     FETCH       /////////////////////
+
+	fetch -> decode
+	    when
+                run*/mon_req*/break*/IT
+            outputs
+                oe_num[1..0] = 0b10 ,
+                areg[4..0] = 30 ,
+                breg[4..0] = 0 ,
+                dreg[4..0] = 31 ,
+                cmd_ual[5..0] = 0b000000 ,
+                write = 0 ;
+
+////////////////////////////////////////////////////////
+
+// continuer ici
+// ...

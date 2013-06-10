@@ -1,0 +1,15 @@
+
+module count4(clk, rst, en : s[3..0], ripple)
+
+	s[3..0].clk = clk ;
+	s[3..0].rst = rst ;
+	s[3..0].ena = en ;
+	s[3..0] := /ts[3..0]*s[3..0] + ts[3..0]*/s[3..0] ;
+	ts[0] = 1 ;
+	ts[1] = s[0] ;
+	ts[2] = s[0]*s[1] ;
+	ts[3] = s[0]*s[1]*s[2] ;
+	ripple = en*s[0]*s[1]*s[2]*s[3] ;
+	
+end module
+
