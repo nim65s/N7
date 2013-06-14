@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\begin{document}
+
+\begin{circuitikz}
+    \thispagestyle{empty}
+    \draw
+        (0,0)
+            --
+        (0.5,0.5)
+            to[Tpmos,n=p]
+        (2,0.5)
+            --
+        (2.5,0)
+            --
+        (2,-0.5)
+            to[Tnmos,n=n]
+        (0.5,-0.5)
+            --
+        (0,0)
+            to[short, -o]
+        (-0.5,0) node[anchor=east] {E}
+        (2.5,0)
+            to[short, -o]
+        (3,0) node[anchor=west] {S}
+        (p.G) node[anchor=south] {$\bar{A}$}
+        (n.G) node[anchor=north] {A}
+    ;
+\end{circuitikz}
+
+\end{document}
+

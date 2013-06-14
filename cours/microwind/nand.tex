@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\begin{document}
+
+\begin{circuitikz}
+    \thispagestyle{empty}
+    \draw
+    (1,0) node[anchor=west] {S}
+            to [short, o-]
+        (-0.5,0)
+            to[Tpmos,n=pa]
+        (-0.5,1.5)
+            --
+        (0,1.5) node[sground,yscale=-1] {}
+            --
+        (0.5,1.5)
+            to[Tpmos,n=pb]
+        (0.5,0)
+        (0,0)
+            to[Tnmos,mirror,n=na]
+        (0,-1.5)
+            to[Tnmos,mirror,n=nb]
+        (0,-3) node[ground] {}
+        (na.G) node[anchor=east] {A}
+        (pa.G) node[anchor=east] {A}
+        (nb.G) node[anchor=east] {B}
+        (pb.G) node[anchor=west] {B}
+    ;
+\end{circuitikz}
+
+\end{document}
+

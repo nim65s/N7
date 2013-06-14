@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\begin{document}
+
+\begin{circuitikz}
+    \thispagestyle{empty}
+    \draw
+        (0,0) to[short,-o]
+        (-0.5,0) node[anchor=east] {A}
+        (1,-1.5) node[ground] {} to[Tnmos,n=n1]
+        (1,0) to[Tpmos,n=p1]
+        (1,1.5) node[sground,yscale=-1] {}
+        (p1.G) --
+        (n1.G) --
+        (0,-2.5) --
+        (4,-2.5) --
+        (4,-1.5) to[Tnmos,n=n2]
+        (4,0) to[Tpmos,n=p2]
+        (4,1.5) --
+        (1.5,1.5) --
+        (1.5,0) --
+        (1,0)
+        (n2.G) --
+        (p2.G)
+        (3,0) to[short,-o]
+        (2.5,0) node[anchor=east] {B}
+        (5.5,-1.5) node[ground] {} to[Tnmos,n=n3]
+        (5.5,0) to[Tpmos,n=p3]
+        (5.5,1.5) node[sground,yscale=-1] {}
+        (n3.G) --
+        (p3.G)
+        (4,0) --
+        (4.5,0)
+        (5.5,0) to[short,-o]
+        (6,0) node[anchor=west] {S}
+    ;
+\end{circuitikz}
+
+\end{document}
+
