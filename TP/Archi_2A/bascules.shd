@@ -1,24 +1,24 @@
 module bascules(clk, rst, enN, enZ, enVC, dN, dZ, dV, dC : N, Z, V, C)
 
-	N := dN;
-	N.clk = clk;
-	N.rst = rst;
-	N.ena = enN;
-	
-	Z := dZ;
-	Z.clk = clk;
-	Z.rst = rst;
-	Z.ena = enZ;
-	
-	V := dV;
-	V.clk = clk;
-	V.rst = rst;
-	V.ena = enVC;
-	
-	C := dC;
-	C.clk = clk;
-	C.rst = rst;
-	C.ena = enVC;
+    N := dN;
+    N.clk = clk;
+    N.rst = rst;
+    N.ena = enN;
+
+    Z := dZ;
+    Z.clk = clk;
+    Z.rst = rst;
+    Z.ena = enZ;
+
+    V := dV;
+    V.clk = clk;
+    V.rst = rst;
+    V.ena = enVC;
+
+    C := dC;
+    C.clk = clk;
+    C.rst = rst;
+    C.ena = enVC;
 
 
 end module

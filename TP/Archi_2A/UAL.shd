@@ -71,8 +71,8 @@ zero32(s[31..0] : dZ);
 
 dN = s[31];
 
-enN = dcmd[16] +dcmd[20] +dcmd[17] +dcmd[18] +dcmd[19];
-enZ = dcmd[16] +dcmd[20] +dcmd[26] +dcmd[17] +dcmd[18] +dcmd[19];
+enZ = cmd[4];
+enN = enZ * /dcmd[26];
 enVC = dcmd[16] + dcmd[20];
 
 

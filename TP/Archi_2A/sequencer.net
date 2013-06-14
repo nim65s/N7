@@ -264,7 +264,7 @@ added_outputs: state[4..0], mon_ack
             cmd_ual[5..0] = 0b100000 , // SIGNEXT13
             write = 0 ;
 
-    calc_imm -> pacplus1
+    calc_imm -> pcplus1
         when
             1
         outputs
@@ -283,12 +283,15 @@ added_outputs: state[4..0], mon_ack
             areg[4..0] = 20 ,
             breg[4..0] = 30 ,
             dreg[4..0] = 30 ,
-            cmd_ual[5..0] = 0b010000 ,
+            cmd_ual[5..0] = 0,
             write = 0 ;
+
+++decodeur4to16(ir[28..25], dcond[15..0]);
+++branch_cond = dcond8 + dcond1 * Z + dcond9 * /Z + dcond14 * /N + dcond6 * N
 
     decode -> branch
         when
-            /ir31 * /ir30 * ir29
+            /ir[31] * /ir[30] * ir[29] * branch_cond
         outputs
             oe_num[1..0] = 0b01 ,
             areg[4..0] = 31 ,
@@ -297,27 +300,64 @@ added_outputs: state[4..0], mon_ack
             cmd_ual[5..0] = 0b100001 ,
             write = 0 ;
 
-++decodeur4to16(ir[24..0], dcond[15..0]);
-++branch_cond = dcond8 + dcond1 * Z + dcond9 * /Z + dcond14 * /N + dcond6 * N
-
-    branch -> fetch
+    decode -> fetch
         when
-            branch_cond
-        outputs
-            oe_num[1..0] = 0b01 ,
-            areg[4..0] = 21 ,
-            breg[4..0] = 30 ,
-            dreg[4..0] = 30 ,
-            cmd_ual[5..0] = 0b010000 ,
-            write = 0 ;
-
-    branch -> fetch
-        when
-            /branch_cond
+            /ir[31] * /ir[30] * ir[29] * /branch_cond
         outputs
             oe_num[1..0] = 0b01 ,
             areg[4..0] = 20 ,
             breg[4..0] = 30 ,
             dreg[4..0] = 30 ,
-            cmd_ual[5..0] = 0b010000 ,
+            cmd_ual[5..0] = 0,
             write = 0 ;
+
+    branch -> fetch
+        when
+            1
+        outputs
+            oe_num[1..0] = 0b01 ,
+            areg[4..0] = 21 ,
+            breg[4..0] = 30 ,
+            dreg[4..0] = 30 ,
+            cmd_ual[5..0] = 0,
+            write = 0 ;
+
+    decode -> addr_imm
+        when
+            ir[31] * ir[30] * ir[13]
+        outputs
+            oe_num[1..0] = 0b01 ,
+            areg[4..0] = 31 ,
+            breg[4..0] = 0 ,
+            dreg[4..0] = 21 ,
+            cmd_ual[5..0] = 0b100000,
+            write = 0 ;
+
+
+    addr_imm -> addr
+        when
+            1
+        outputs
+
+    decode -> addr
+        when
+            ir[31] * ir[30] * /ir[13]
+        outputs
+            oe_num[1..0] = 0b01,
+            areg[4..0] = ir[4..0],
+            breg[4..0] = 0,
+            dreg[4..0] = 21,
+            cmd_ual[5..0] = 0b000010,
+            write = 0;
+
+    addr -> pcplus1
+        when
+            ir[21]
+        outputs
+            write = 0;
+
+    addr -> pcplus1
+        when
+            /ir[21]
+        outputs
+            write = 1;
