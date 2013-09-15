@@ -44,7 +44,42 @@
 
 \clearpage
 
-\section{Présentation}
+\section{Présentation de l’entreprise}
+\subsection{Histoire et position actuelle}
+
+L’entreprise toulousaine Anyware Technologies, rachetée en février 2008 par Wave Com, a fusionné avec Sierra Wireless en avril 2009.
+
+Sierra wireless est une entreprise internationnale positionnée sur les secteurs des télécomunnications sans fil (comme son nom peut le laisser présager) et plus récement du M2M et de l’IoT.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/anyware-tech.png}
+    \caption{Anyware Technologies}
+\end{figure}
+
+~
+
+Son siège social se situe à Richmond, au Canada, mais elle dispose également de bureaux en Californie, en République Populaire de Chine (Guangdong \& HongKong), et bien sûr en France (Paris \& Labège). C’est dans ce bureau de Labège que j’ai effectué mon stage, parmis les anciens d’Anyware Technologies et de Wave Com, mais également des ingénieurs, managers et commerciaux de Sierra Wireless provenant du monde entier, régulièrement de passage ou même installés sur le site.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/swir.jpg}
+    \caption{Sierra Wireless: http://www.sierrawireless.com/}
+\end{figure}
+
+\subsection{Compétences et produits}
+
+Ce bureau Toulousain est baptisé «Solutions \& Services», et s’occupe donc principalement de développement logiciel, firmware et web, ainsi que de l’adminstration système ; mais Sierra Wireless est surtout connue pour sa conception et sa fabrication de modems sans fil 2G, 3G et 4G, de routeurs, de passerelles, et de modules M2M.
+
+~
+
+Ses produits sont disponibles soit à travers ceux de certains OEMs soit directement via des revendeurs, et visent un grand nombre d’applications telles que les automobiles et les transports, les services publics, la santée, la sécuritée, les énergies, les infrastructures industrielles, les ordinateurs et téléphones portables, et les réseaux.
+
+Parmis ces produits, on peut citer trois principales gammes:
+
+\begin{description}
+    \item[AirLink] Routeurs et passerelles embarqués,
+    \item[AirPrime] Modules programmables apportant des connectivités 2G, 3G et 4G, en PCI-Express ou SMD, à des téléphones, tablettes, et ordinateurs portables,
+    \item[AirVantage] Plateforme Cloud servant à gérer des flottes de produits AirLink et AirPrime, depuis l’interface web ou des APIs.
+\end{description}
 
 \clearpage
 
@@ -52,11 +87,43 @@
 
 \clearpage
 
-\section{Sujet du stage}
+\section{Sujet, débuts et premières impressions du stage}
+\subsection{Sujet du stage}
+
+Depuis peu, la stratégie de Sierra Wireless est passée du côté lumineux de la force en intégrant des composantes entièrement open source à son catalogue, afin d’attirer l’attention de plus de développeurs.
+
+Dans ce cadre, Benjamin Cabé, «Open Source M2M Evangelist» chez Sierra Wireless Solutions \& Services, a eu l’idée de profiter de l’incroyable notoriétée de la Raspberry Pi en proposant un shield 3G Sierra Wireless, et éventuellement un module GPS.
+
+~
+
+Lorsque je me suis présenté à la recherche d’un stage, il m’a donc proposé de développer les interfaces logicielles nécessaires à un tel matériel, ainsi que d’en faire la promotion en proposant une application utile, qui pourrait être présentée sur le blog officiel de la fondation Raspberry Pi. Quelques semaines plus tard, j’ai appris que l’idée du module GPS avait été abandonnée, et qu’il y avait des difficultées pour la conception du shield.
+
+\subsection{Débuts du stage}
+
+Enfin, mon année scolaire terminée, lorsque j’ai commencé mon stage mi-juin, j’ai appris que le shield n’était toujours pas prêt, et j’ai donc proposé mes compétences pour le faire moi-même. Disposant des plans de cartes similaires open-source, de mon expérience en routage accumulée à l’INP-ENSEEIHT, lors de mon stage à l’ULB et au club robotique de l’école, ainsi que de mes connaissances en routage d’antennes du projet Hyper-Fréquences, je pensais être capable d’y parvenir, mais je n’étais pas capable d’assurer un délai de réalisation compris dans la durée de mon stage de 9 semaines.
+
+~
+
+Après un certain moment de discussion, d’hésitation, et quelques rendez-vous, il a été décidé que l’entreprise Toulousaine Snootlab s’occuperait finalement de la conception de cette carte, vu qu’elle venait de recruter un nouvel ingénieur, et que ce serait donc sa première mission de test.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/snoot.jpg}
+    \caption{Snootlab: http://snootlab.com/}
+\end{figure}
+
+Le lancement étant prévu pour septembre, il n’était donc plus envisageable que je puisse aider à quoi que ce soit sur ce sujet ; mais heureusement, un grand nombre d’autres activités m’ont été proposées, ce qui m’a permis d’essayer diverses, dans un cadre particulièrement différent de ce que j’avais pu connaître dans une PME ou dans un laboratoire de recherche.
+
+\subsection{Premières impressions sur le stage}
+
+Parmis les choses qui m’ont vraiment plus dans cette entreprise, on peut compter les «Make-it», une journée toute les trois semaines que chaque employé peut prendre pour réaliser n’importe quel projet qui le tient à cœur (sous résèrve de le présenter aux autres lors d’une réunion), un Comité d’Entreprise donnant notamment accès à une clef illimitée pour la machine à boissons chaudes, certaines réunions où il était question de stratégie industrielle à l’échelle internationnale sur plusieurs années, le cadre agréable et la proximitée du lac de Labège alors qu’on n’est qu’à trois quarts d’heure de transports de l’école ou de chez moi, la bonne humeur, l’expertise technique et la créativité de la plupart de mes collègues, ou encore la flexibilité horaire laissée aux employés (et stagiaires).
+
+~
+
+Naturellement, on peut aussi compter certains désagréments, mais pour ma part, mon principal problème aura été d’avoir dilapidé la majorité de mon salaire, pourtant plutôt bon, dans les différents restaurants de Labège le midi, tous plus attirants les uns que les autres. Mais je ne peux bien sûr m’en prendre qu’à ma gourmandise.
 
 \clearpage
 
-\section{Création de packets}
+\section{Création de paquets pour diverses distributions logicielles et diverses architectures matérielles}
 
 \clearpage
 
@@ -109,20 +176,19 @@ Sa forme et l’emplacement des ses ports sont conçus de manière à pouvoir fa
     \caption{Un Arduino, un shield constitué simplement de connecteurs et des cateurs et actionneurs.}
 \end{figure}
 
-~
 
 \begin{figure}[h!]
     \centering\includegraphics[width=\linewidth/2]{img/gsm.jpg}
     \caption{Un arduino, le shield pour les connecteurs, et un shield GSM empillés.}
 \end{figure}
 
-~
 
 Un grand nombre de cartes différentes, proposant diverses puissances, tailles, consommations et fonctionnalités, de shields et de kits sont disponible sur le \hyperref[http://arduino.cc/en/Main/Products]{site officiel}.
 
-\begin{center}
-    \includegraphics{img/logo.png}
-\end{center}
+\begin{figure}[h!]
+    \centering\includegraphics{img/logo.png}
+    \caption{Arduino: http://arduino.cc}
+\end{figure}
 
 \clearpage
 
@@ -229,6 +295,11 @@ C’est le cas de la carte d’extension dont nous disposions:
 
 Cette carte d’extension propose un écran LCD, un joystick, un accéléromètre, un gyroscope, un thermomètre, deux potentiomètres, une LED RGB, deux jack connectés sur un convertisseur analogique/numérique et un convertisseur numérique/analogique (pour faire une sortie casque et une entrée micro), un socket XBEE, un port Ethernet et deux ports USB pouvant être configurés en hôte ou en périphérique.
 
+\begin{figure}[h!]
+    \centering\includegraphics{img/mbed_logo.png}
+    \caption{mbed: http://mbed.org}
+\end{figure}
+
 \clearpage
 
 \subsection{Freescale KL25Z}
@@ -245,6 +316,11 @@ Ces cartes ne coûtent que 13\$ pièces, mais les trois que nous avons nous ont 
 \begin{figure}[h!]
     \centering\includegraphics[width=\linewidth*2/3]{img/freescale.jpg}
     \caption{La carte FRDM-KL25Z de Freescale.}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/kl25z-pinout.jpg}
+    \caption{Les connecteurs de la carte KL25Z}
 \end{figure}
 
 \clearpage
@@ -275,14 +351,14 @@ On peut y utiliser des distributions GNU/Linux telles que Debian (Raspbian), Arc
 
 ~
 
-
-\begin{center}
-    \includegraphics{img/sprite.png}
-\end{center}
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/sprite.png}
+    \caption{Raspberry Pi: http://www.raspberrypi.org}
+\end{figure}
 
 \clearpage
 
-\subsection{xbee}
+\subsection{XBEE}
 \label{xbee}
 
 XBEE est une marque de Digi Internationnal correspondant à une famille de modems ZigBee. Généralement, ces modems ont un facteur de forme et sont compatibles pin à pin, ce qui permet facilement de les changer, voire de mettre un modem autre que ZigBee à la place (par exemple WiFi ou GSM).
@@ -315,6 +391,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
 \begin{description}
     \item[Arduino] Voir la \hyperref[arduino]{section Arduino}
     \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
+    \item[Cloud] TODO
     \item[Dev Kit] TODO
     \item[Eclo] Voir la \hyperref[eclo]{section eclo}
     \item[EAGLE] TODO
@@ -322,7 +399,8 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[IoT] TODO
     \item[mbed] Voir la \hyperref[mbed]{section mbed}
     \item[M2M] TODO
-    \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}.
+    \item[OEM] TODO
+    \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}, et \hyperref[freedom defined]{http://freedomdefined.org/OSHW}.
     \item[Open-space] TODO
     \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
