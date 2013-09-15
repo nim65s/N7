@@ -1,0 +1,335 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=2.25cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Rapport de stage de seconde année \\ ~ \\ ~ \\ \includegraphics[width=\linewidth]{img/swir.jpg} \\ ~ \\}
+\author{Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+\setcounter{page}{0}
+\thispagestyle{empty}
+
+\clearpage
+
+\section{Présentation}
+
+\clearpage
+
+\section{Équipes}
+
+\clearpage
+
+\section{Sujet du stage}
+
+\clearpage
+
+\section{Création de packets}
+
+\clearpage
+
+\section{Rédaction d’un tutoriel end-to-end pour eclo}
+
+\clearpage
+
+\section{Création d’une librairie MQTT pour MBED}
+
+\clearpage
+
+\section{Remerciements}
+
+\clearpage
+
+\appendix
+\section{Systèmes embarqués utilisés}
+
+\subsection{Arduino}
+\label{arduino}
+
+L’Arduino est une célèbre plateforme de prototypage électronique open-source, dont la carte la plus courante coute aux alentours de 20€.
+Elle embarque généralement un microcontrolleur ATmega328, et propose un certain nombre d’entrées/sorties numériques et/ou analogiques, un circuit d’alimentation (USB ou 12V) et un système simplifié pour flasher la mémoire du microcontrolleur en USB.
+
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/arduino.jpg}
+    \caption{Un des Arduino utilisé pendant mon stage.}
+\end{figure}
+
+~
+
+Ses schématiques sont fournies en PDF et au format EAGLE, et elle est livrée avec un IDE en JAVA permettant de facilement programmer dans le langage «PDE», qui est en fait une simplification et un ensemble de bibliothèques C ou C++ (il est donc également possible de la programmer directement en C ou C++).
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/arduino_ide.png}
+    \caption{Capture d’écran de l’IDE avec le programme «blink», un exemple permettante de faire clignotter une LED.}
+\end{figure}
+
+~
+
+On peut aussi trouver sur certaines cartes des boutons poussoirs et des LEDs intégrés, afin de permettre à un débutant en électronique de comprendre sans avoir à acheter et connecter des composants externes.
+
+~
+
+Sa forme et l’emplacement des ses ports sont conçus de manière à pouvoir facilement ajouter des «Shields» en les empilant sur la carte, ce qui permet d’ajouter à bas coûts des fonctionnalités à la carte de base, comme des séries de convertisseurs, des ports USB ou Ethernet, ou encore des modules WiFi ou GSM.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/arduino_shield.jpg}
+    \caption{Un Arduino, un shield constitué simplement de connecteurs et des cateurs et actionneurs.}
+\end{figure}
+
+~
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/gsm.jpg}
+    \caption{Un arduino, le shield pour les connecteurs, et un shield GSM empillés.}
+\end{figure}
+
+~
+
+Un grand nombre de cartes différentes, proposant diverses puissances, tailles, consommations et fonctionnalités, de shields et de kits sont disponible sur le \hyperref[http://arduino.cc/en/Main/Products]{site officiel}.
+
+\begin{center}
+    \includegraphics{img/logo.png}
+\end{center}
+
+\clearpage
+
+\subsection{Beagle Bone / Beagle Bone Black}
+\label{bbb}
+
+La BeagleBone est un ordinateur faible consommation et open source de Texas Instruments, qui fait la taille d’une carte de crédit. Elle coute environ 90\$, peut se connecter à des réseaux ethernet et à internet, et peut faire tourner des distributions GNU/Linux telles que Debian, Ubuntu, Android ou Angstrom.
+
+Comme l’arduino, ses ports d’entrées sortie sont disposés verticallement sur les bords longs, mais elle dispose de 2 ports de 46 connecteurs.
+
+Elle embarque un processeur ARM tournant à 720MHz, un port ethernet, un port USB host, un lecteur de carte micro-SD pour y installer un système d’exploitation, et un jeu de 4 LEDs permettant de vérifier qu’elle fonctionne, ou d’apprendre à gérer les GPIO sur un ordinateur de ce type.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/bb.jpg}
+    \caption{Une BeagleBone, identique à celle utilisée pendant mon stage}
+\end{figure}
+
+La BeagleBone Black est une évolution de la BeagleBone dont le PCB est noir plutôt que blanc.
+
+Elle embarque un processeur ARM Cortex-A8 tournant à 1GHz, un port HDMI, une accélération graphique 3D, et ne coûte que 45\$.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/2]{img/bbb.jpg}
+    \caption{La BeagleBone Black qui m’a été offerte par les employés de Texas Instruments}
+\end{figure}
+
+\clearpage
+
+\subsection{Eclo}
+\label{eclo}
+
+Eclo est un Dev Kit pour le M2M utilisant les technologies open-source de Sierra Wireless.
+
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/eclo.jpg}
+    \caption{La première version fonctionnelle d’Eclo, dans l’open-space de Labège de Sierra Wireless}
+\end{figure}
+
+Prévu pour être vendu à prix coutant (aux alentours de 100€), ce Dev Kit se compose d’une serre design en plexiglass découpé au laser, d’un Raspberry Pi, et d’un Arduino pour la partie embarquée, assisté d’un shield de connecteurs.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/arduino_shield.jpg}
+    \caption{L’arduino, le shield, les capteurs et actionneurs et la connectique fournis avec eclo}
+\end{figure}
+
+\clearpage
+
+\subsection{Shield GSM pour Arduino}
+\label{gsm}
+
+L’objectif initial du stage était de faire fonctionner logiciellement un shield GSM pour Raspberry Pi, basé sur un modem 3G Sierra Wireless. Cependant, au moment où j’ai commencé le stage, la carte n’était pas encore conçue, et j’ai proposé de me baser sur le shield GSM pour arduino afin de concevoir une carte équivalente, de manière open-hardware.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/shield_gsm.jpg}
+    \centering\includegraphics[width=\linewidth]{img/arduino-gsm-shield-schematic.pdf}
+    \caption{Le shield GSM pour Arduino, et sa schématique open-hardware.}
+\end{figure}
+
+Seuls quelques calculs RF pour l’antenne auraient pu poser problème dans le principe d’open-Hardware, vu que nous avons appris à l’n7 à utiliser les logiciels propriétaires particulièrement couteux, que je ne pouvais donc pas utiliser dans mon stage.
+
+~
+
+Finalement, la conception de cette carte a été laissée à l’entreprise SnootLab.
+
+\clearpage
+
+\subsection{mbed}
+\label{mbed}
+
+mbed est une plateforme de développement. Ceci comprend un écosystème d’application web, avec son IDE en ligne, son gestionnaire de versions, son réseau social et sa collection d’applications et de librairies ; mais aussi un regroupement industriel autour des microcontrolleurs ARM, comprenant entre autres NXP, Freescale et bien sûr ARM.
+
+Ce regroupement industriel propose un ensemble étéroclyte de cartes de développement, mais l’on désigne par abus de langage la carte «mbed LPC1768» par «mbed».
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/mbed.jpg}
+    \caption{La carte mbed utilisée pendant mon stage.}
+\end{figure}
+
+Cette carte mbed open-hardware embarque un ARM Cortex-M3 cadencé à 96MHz, un circuit d’alimentation (USB ou 9V), un système de programmation simplifié en USB (la carte apparait comme un péréphérique de stockage, et on n’a qu’à y déposer le fichier binaire compilé par l’IDE en ligne), et un grand nombre de fonctionnalités connectées sur les entrées/sorties et les 4 LEDs incluses:
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*3/4]{img/pinout.png}
+    \caption{La connectique de cette carte mbed.}
+\end{figure}
+
+\clearpage
+
+\subsection{Extension pour mbed}
+\label{mbed_ext}
+
+Contrairement aux Arduino, aux BeagleBone et au RaspberryPi, les ports d’extension de la carte mbed ne sont pas des femelles dans lesquelles on vient brancher des fils comme sur une plaquette labdec ou des shields, mais des males. On peut donc enficher cette carte directement dans un ensemble plus complet, ou bien dans une carte d’extension.
+
+~
+
+C’est le cas de la carte d’extension dont nous disposions:
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/mbed_ext.jpg}
+    \caption{La carte d’extiension pour mbed, avec la carte mbed conectée.}
+\end{figure}
+
+~
+
+Cette carte d’extension propose un écran LCD, un joystick, un accéléromètre, un gyroscope, un thermomètre, deux potentiomètres, une LED RGB, deux jack connectés sur un convertisseur analogique/numérique et un convertisseur numérique/analogique (pour faire une sortie casque et une entrée micro), un socket XBEE, un port Ethernet et deux ports USB pouvant être configurés en hôte ou en périphérique.
+
+\clearpage
+
+\subsection{Freescale KL25Z}
+\label{freescale}
+
+Nous disposons également de trois cartes de développement Freescale KL25Z (dite «Freescale Freedom Development Platform») au club robotique de l’école, que j’ai donc pu utiliser lors de mon stage. Elles comprennent entre autres particularités intéressantes une LED RGB particulièrement lumineuse, un «slider» tactile, un accéléromètre, et un microcontroleur cadencé à 48 MHz.
+
+~
+
+Ces cartes ne coûtent que 13\$ pièces, mais les trois que nous avons nous ont été offertes lors de la coupe de robotique Freescale.
+
+~
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/freescale.jpg}
+    \caption{La carte FRDM-KL25Z de Freescale.}
+\end{figure}
+
+\clearpage
+
+\subsection{Raspberry Pi}
+\label{rpi}
+
+La Raspberry Pi est un ordinateur de la taille d’une carte de crédit, conçue par Eben Upton, Rob Mullins, Jack Lang et Alan Mycroft de la faculté d’informatique de l’Université de Cambridge.
+
+L’idée de cette carte est de créer un ordinateur dédié à l’apprentissage de l’informatique aux enfants à très bas prix (deux modèles sont disponible, à 25\$ et 35\$).
+
+~
+
+Elle est open-hardware (bien que basée sur un Broadcom BCM2835, un ARM 11 propriétaire), et dispose de 26 GPIOs, de connecteurs LVDS pour un écran plat et une webcam, d’un port HDMI, d’une sortie vidéo analogique, d’un port Ethernet, de deux ports USB et d’un lecteur de carte SD pour le système d’exploitation.
+
+Cette carte a connu un très gros succès lors de son lancement (et notamment une rupture de stock pendant les quatre mois qui ont suivi), et est désormais fabriquée en angleterre. Divers programmes existent pour en offrir à des écoles ou à des enfants du tiers-monde. Même si elle a d’abord un but éducatif, elle est très appréciée dans les mondes de la domotique, de la robotique, des réseaux et de l’administration système.
+
+~
+
+On peut y utiliser des distributions GNU/Linux telles que Debian (Raspbian), ArchLinux (ArchLinuxARM), Android, Fédora (Pidora), RISC OS, FreeBSD, NetBSD ou encore RaspBMC pour une utilisation en media center.
+
+~
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/rpi.jpg}
+    \caption{Une des Raspberry Pi (modèle B rev 2) utilisées lors du stage.}
+\end{figure}
+
+~
+
+
+\begin{center}
+    \includegraphics{img/sprite.png}
+\end{center}
+
+\clearpage
+
+\subsection{xbee}
+\label{xbee}
+
+XBEE est une marque de Digi Internationnal correspondant à une famille de modems ZigBee. Généralement, ces modems ont un facteur de forme et sont compatibles pin à pin, ce qui permet facilement de les changer, voire de mettre un modem autre que ZigBee à la place (par exemple WiFi ou GSM).
+
+~
+
+Ces modems implémentent les deux types de topologies proposées par le protocole ZigBee (Mesh et point à point), et ont une portée allant d’une centaine de mètres à 80km.
+
+~
+
+Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les protocoles qu’ils implémentent ne gèrent généralement pas de sécurités cryptographiques.
+
+~
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/xbee.jpg}
+    \caption{Un module XBEE connecté sur une plaquette de développement}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/xbee_2.jpg}
+    \caption{Un module XBEE connecté sur un PCB incluant un microcontrolleur}
+\end{figure}
+
+\clearpage
+
+\section{Glossaire}
+\label{glossaire}
+
+\begin{description}
+    \item[Arduino] Voir la \hyperref[arduino]{section Arduino}
+    \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
+    \item[Dev Kit] TODO
+    \item[Eclo] Voir la \hyperref[eclo]{section eclo}
+    \item[EAGLE] TODO
+    \item[IDE] TODO
+    \item[IoT] TODO
+    \item[mbed] Voir la \hyperref[mbed]{section mbed}
+    \item[M2M] TODO
+    \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}.
+    \item[Open-space] TODO
+    \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
+    \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
+    \item[ZigBee] Protocole de communication sans fils maillé à bas prix, concurent du BlueTooth (moins cher, moins complexe et plus fiable dans un grand nombre d’applications), opérant dans la bande 868MHz.
+\end{description}
+
+\clearpage
+
+
+\end{document}
