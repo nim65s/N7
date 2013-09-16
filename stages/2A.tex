@@ -71,7 +71,7 @@ Ce bureau Toulousain est baptisé «Solutions \& Services», et s’occupe donc 
 
 ~
 
-Ses produits sont disponibles soit à travers ceux de certains OEMs soit directement via des revendeurs, et visent un grand nombre d’applications telles que les automobiles et les transports, les services publics, la santée, la sécuritée, les énergies, les infrastructures industrielles, les ordinateurs et téléphones portables, et les réseaux.
+Ses produits sont disponibles soit à travers ceux de certains OEMs soit directement via des revendeurs, et visent un grand nombre d’applications telles que les automobiles et les transports, les services publics, la santée, la sécurité, les énergies, les infrastructures industrielles, les ordinateurs et téléphones portables, et les réseaux.
 
 Parmis ces produits, on peut citer trois principales gammes:
 
@@ -107,11 +107,11 @@ Après un certain moment de discussion, d’hésitation, et quelques rendez-vous
     \caption{Snootlab: http://snootlab.com/}
 \end{figure}
 
-Le lancement étant prévu pour septembre, il n’était donc plus envisageable que je puisse aider à quoi que ce soit sur ce sujet ; mais heureusement, un grand nombre d’autres activités m’ont été proposées, ce qui m’a permis d’essayer diverses, dans un cadre particulièrement différent de ce que j’avais pu connaître dans une PME ou dans un laboratoire de recherche.
+Le lancement étant prévu pour septembre, il n’était donc plus envisageable que je puisse aider à quoi que ce soit sur ce sujet ; mais heureusement, un grand nombre d’autres activités m’ont été proposées, ce qui m’a permis d’en essayer diverses, dans un cadre particulièrement différent de ce que j’avais pu connaître dans une PME ou dans un laboratoire de recherche.
 
 \subsection{Premières impressions sur le stage}
 
-Parmis les choses qui m’ont vraiment plus dans cette entreprise, on peut compter
+Parmis les choses qui m’ont vraiment plu dans cette entreprise, on peut compter
 les «Make-it», une journée toute les trois semaines que chaque employé peut prendre pour réaliser n’importe quel projet qui le tient à cœur (sous résèrve de le présenter aux autres lors d’une réunion),
 une impressionnante collection de jouets électroniques (voir l’Annexe A pour une liste non-exhaustive),
 un Comité d’Entreprise donnant notamment accès à une clef illimitée pour la machine à boissons chaudes,
@@ -129,7 +129,7 @@ Naturellement, on peut aussi compter certains désagréments, mais pour ma part,
 \section{Création de paquets pour diverses distributions logicielles et diverses architectures matérielles}
 \subsection{Mihini}
 
-Sierra Wireless propose une architecture réseau allant de ces modems, routeurs et passerelles vers sont application Cloud: Airvantage.
+Sierra Wireless propose une architecture réseau allant de ses modems, routeurs et passerelles vers son application Cloud: Airvantage.
 Pour cela, la communication s’effectue selon un protocole de communication maison: le M3DA (http://wiki.eclipse.org/images/d/d4/M3DAProtocolSpecification.pdf).
 
 ~
@@ -153,7 +153,7 @@ Cet outil, particulièrement pratique car on peut utiliser des comptes d’essai
 
 ~
 
-J’ai ainsi réalisé des paquets à l’aide de CPack pour les distributions Debian et dérivées (.deb), celles de Red Hat (.rpm) et les autres (.tar.gz), et pour les architectures processeur i386, amd64, armhf et armel. J’ai également ajouté des scripts d’installations, de mise à jour et de désinstallation pour ces paquets, défini une place cohérente de chaque fichier de ce projet dans l’arborescence des systèmes GNU/Linux (http://www.pathname.com/fhs/pub/fhs-2.3.html), et écris des scripts d’initialisation pour SysV et Systemd, afin de faciliter au maximum l’installation et l’utilisation de Mihini pour de laisser aux développeurs voulant l’essayer la meilleure image possible en un temps minimum.
+J’ai ainsi réalisé des paquets à l’aide de CPack pour les distributions Debian et dérivées (.deb), celles de Red Hat (.rpm) et les autres (.tar.gz), et pour les architectures processeur i386, amd64, armhf et armel. J’ai également ajouté des scripts d’installations, de mise à jour et de désinstallation pour ces paquets, défini une place cohérente de chaque fichier de ce projet dans l’arborescence des systèmes GNU/Linux (http://www.pathname.com/fhs/pub/fhs-2.3.html), et écrit des scripts d’initialisation pour SysV et Systemd, afin de faciliter au maximum l’installation et l’utilisation de Mihini pour laisser aux développeurs voulant l’essayer la meilleure image possible en un temps minimum.
 
 ~
 
@@ -182,7 +182,7 @@ J’ai donc effectué quelques développements, un grand nombre de tests, et ré
 
 ~
 
-Pour le tuturiel, j’ai simplement assemblé les différents pièces du puzzle, en passant rapidement sur le montage de la serre, la connexion des différents modules électroniques, l’application Arduino, l’installation de Mihini sur la Raspberry Pi, la création de l’application pour mihini depuis l’IDE Eclipse ou en ligne de commande, l’application AirVantage, et enfin l’API REST d’AirVantage pour accéder aux données.
+Pour le tuturiel, j’ai simplement assemblé les différents pièces du puzzle, en passant rapidement sur le montage de la serre, la connexion des différents modules électroniques, l’application Arduino, l’installation de Mihini sur la Raspberry Pi à l’aide des paquets créés précédement, la création de l’application pour Mihini depuis l’IDE Eclipse ou en ligne de commande, l’application AirVantage, et enfin l’API REST d’AirVantage pour accéder aux données.
 
 Ce travail est également open-source et disponible sur https://github.com/nim65s/tutorial-eclo.
 
@@ -228,7 +228,7 @@ MQTT est un protocole de type «Message Queuing» conçu pour être particulièr
 
 ~
 
-Une librairie pour mbed existait déjà depuis un certain temps que je me suis penché sur la question, et mon objectif était initialement de l’utiliser pour trouver une application qui mette en œuvre une paire de modules XBEE, un module mbed LPC1768, sa carte d’extension, le protocole MQTT et AirVantage.
+Une librairie pour mbed existait déjà depuis un certain temps lorsque que je me suis penché sur la question, et mon objectif était initialement de l’utiliser pour trouver une application qui mette en œuvre une paire de modules XBEE, un module mbed LPC1768, sa carte d’extension, le protocole MQTT et AirVantage.
 
 Cependant, j’ai perdu deux semaines à essayer sans succès de faire fonctionner cette librairie existante, qui était basée sur une ancienne version de l’API réseau de mbed, et se contentait de reprendre le principe de fonctionnement de la librairie MQTT conçue pour Arduino.
 
@@ -238,7 +238,7 @@ J’ai donc entièrement repris la conception de cette librairie, en utilisant l
 
 ~
 
-Pour faciliter aux gens l’utilisation de cette librairie, j’ai aussi codé un petit exemple l’utilisant, qui se content de définir un callback basique, d’initialiser la librairie et l’objet (et donc le Thread), de publier le message «Hello World» sur le sujet «mbed», de souscrire au sujet «mbed», puis se lance dans une boucle qui fait clignoter une led, et envoie un message dès que l’utilisateur appuie sur un bouton.
+Pour faciliter aux gens l’utilisation de cette librairie, j’ai aussi codé un petit exemple l’utilisant, qui se contente de définir un callback basique, d’initialiser la librairie et l’objet (et donc le Thread), de publier le message «Hello World» sur le sujet «mbed», de souscrire au sujet «mbed», puis se lance dans une boucle qui fait clignoter une led, et envoie un message dès que l’utilisateur appuie sur un bouton.
 
 ~
 
@@ -246,12 +246,12 @@ Une fois cette librairie et son exemple fonctionels, je me suis penché sur le c
 
 ~
 
-Enfin, j’ai également écris un petit programme d’exemple pour cette librairie, qui reçoit un nombre depuis le serveur AirVantage, qui est correctement parsé et s’affiche en binaire sur trois des LEDs, pendant que la quatrième LED clignotte, et que cinq messages différents peuvent être postés à tout moment sur le bon topic avec la clef «bouton», suivant le bouton du joystick pressé.
+Enfin, j’ai également écrit un petit programme d’exemple pour cette librairie, qui reçoit un nombre depuis le serveur AirVantage, qui est correctement parsé et s’affiche en binaire sur trois des LEDs, pendant que la quatrième LED clignotte, et que cinq messages différents peuvent être postés à tout moment sur le bon topic avec la clef «bouton», suivant le bouton du joystick pressé.
 
 
 ~
 
-Mon travail sur cette partie est à nouveau open-source, et utilise les outils mbed, comme le gestionnaire de révisions mercurial intégré à l’interface web, et les répertoires de ce gestionnaire de versions sont liés à mon compte: http://mbed.org/users/Nim65s/. On y trouve donc ma version de la librairie MQTT, niMQTT, l’une application servant d’ exemple d’utilisation de cette librairie, niMQTT\_example, mais aussi la surcouche à cette librairie MQTT permettant d’utiliser plus faciliment AirVantage avec ce protocole: AV\_MQTT, et enfin l’application d’exemple: AV\_MQTT\_example.
+Mon travail sur cette partie est à nouveau open-source, et utilise les outils mbed, comme le gestionnaire de révisions mercurial intégré à l’interface web, et les répertoires de ce gestionnaire de versions sont liés à mon compte: http://mbed.org/users/Nim65s/. On y trouve donc ma version de la librairie MQTT, niMQTT, l’application servant d’ exemple d’utilisation de cette librairie, niMQTT\_example, mais aussi la surcouche à cette librairie MQTT permettant d’utiliser plus faciliment AirVantage avec ce protocole: AV\_MQTT, et enfin l’application d’exemple: AV\_MQTT\_example.
 
 J’ai aussi pu rédiger un peu de documentation, dans mon «Notebook», et discutter de mon travail avec trois personnes qu’y s’y sont intéressées pendant que je m’en occupais.
 
@@ -292,7 +292,7 @@ Ses schématiques sont fournies en PDF et au format EAGLE, et elle est livrée a
 
 \begin{figure}[h!]
     \centering\includegraphics[width=\linewidth/2]{img/arduino_ide.png}
-    \caption{Capture d’écran de l’IDE avec le programme «blink», un exemple permettante de faire clignotter une LED.}
+    \caption{Capture d’écran de l’IDE avec le programme «Blink», un exemple permettant de faire clignotter une LED.}
 \end{figure}
 
 ~
@@ -363,7 +363,7 @@ Elle embarque un processeur ARM Cortex-A8 tournant à 1GHz, un port HDMI, une ac
 
 \begin{figure}[h!]
     \centering\includegraphics[width=\linewidth/2]{img/bbb.jpg}
-    \caption{La BeagleBone Black qui m’a été offerte par les employés de Texas Instruments}
+    \caption{La BeagleBone Black qui m’a été offerte par les employés de Texas Instruments.}
 \end{figure}
 
 \clearpage
@@ -493,7 +493,7 @@ On peut y utiliser des distributions GNU/Linux telles que Debian (Raspbian), Arc
 \subsection{XBEE}
 \label{xbee}
 
-XBEE est une marque de Digi Internationnal correspondant à une famille de modems ZigBee. Généralement, ces modems ont un facteur de forme et sont compatibles pin à pin, ce qui permet facilement de les changer, voire de mettre un modem autre que ZigBee à la place (par exemple WiFi ou GSM).
+XBEE est une marque de Digi Internationnal correspondant à une famille de modems ZigBee. Généralement, ces modems ont un facteur de forme commun et sont compatibles pin à pin, ce qui permet facilement de les changer, voire de mettre un modem autre que ZigBee à la place (par exemple WiFi ou GSM).
 
 ~
 
@@ -526,6 +526,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
     \item[Callback] TODO
     \item[Cloud] TODO
+    \item[CMS] TODO
     \item[CPack] TODO
     \item[Dev Kit] TODO
     \item[Eclo] Voir la \hyperref[eclo]{section eclo}
@@ -547,6 +548,8 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
     \item[REST] TODO
     \item[Systemd] TODO
+    \item[Socket] TODO
+    \item[SMD] TODO
     \item[SysV] TODO
     \item[Thread] TODO
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
