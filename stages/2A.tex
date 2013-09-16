@@ -219,6 +219,45 @@ Ce kit de développement est destiné à faire connaître les produits Sierra Wi
 \clearpage
 
 \section{Création d’une librairie MQTT pour MBED}
+\subsection{Présentation}
+
+Mon dernier objectif a été de voir s’il était possible d’interfacer les cartes de développement mbed avec AirVantage, mais en utilisant un nouveau protocole disponible sur AirVantage: MQTT.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/3]{img/mqtt.png}
+    \caption{MQTT: http://mqtt.org}
+\end{figure}
+
+MQTT est un protocole de type «Message Queuing» conçu pour être particulièrement léger, et donc adapté au monde du M2M et de l’IoT. Il a été conçu en 1999 par le Dr Andy Stanford-Clark d’IBM, et Arlen Nipper d’Arcom (maintenant Eurotech). En 2011, IBM et Eurotech ont rejoint l’initiative M2M.eclipse.org et ont donné le code d’MQTT à la fondation Eclipse. En 2013, ce protocole est devenu l’objet d’une standardisation OASIS, et a été ajouté comme protocole de transport utilisable avec l’application AirVantage.
+
+~
+
+Une librairie pour mbed existait déjà depuis un certain temps que je me suis penché sur la question, et mon objectif était initialement de l’utiliser pour trouver une application qui mette en œuvre une paire de modules XBEE, un module mbed LPC1768, sa carte d’extension, le protocole MQTT et AirVantage.
+
+Cependant, j’ai perdu deux semaines à essayer sans succès de faire fonctionner cette librairie existante, qui était basée sur une ancienne version de l’API réseau de mbed, et se contentait de reprendre le principe de fonctionnement de la librairie MQTT conçue pour Arduino.
+
+\subsection{Conception}
+
+J’ai donc entièrement repris la conception de cette librairie, en utilisant la nouvelle pile réseau mbed (http://mbed.org/handbook/Ethernet-Interface), et utilisant une approche de programmation orientée objet. J’ai également ajouté un mécanisme de Threads, permettant à l’utilisateur de configurer la librairie pour lancer un callback dans un Thread dont il n’a pas besoin de se préoccuper lorsqu’un message arrive depuis le serveur, tout en pouvant lui-même faire ce qu’il souhaite et envoyer des messages dans le Thread principal.
+
+~
+
+Pour faciliter aux gens l’utilisation de cette librairie, j’ai aussi codé un petit exemple l’utilisant, qui se content de définir un callback basique, d’initialiser la librairie et l’objet (et donc le Thread), de publier le message «Hello World» sur le sujet «mbed», de souscrire au sujet «mbed», puis se lance dans une boucle qui fait clignoter une led, et envoie un message dès que l’utilisateur appuie sur un bouton.
+
+~
+
+Une fois cette librairie et son exemple fonctionels, je me suis penché sur le cas de son utilisation avec AirVantage, et ai donc créé une autre librairie qui utilise la première et permet de s’occuper du formattage des messages envoyés en JSON et de leur topic d’envoi tel que défini par AirVantage, et de parser les messages reçus afin d’appeler un callback différent permettant directement d’accéder aux clefs et aux valeurs du JSON reçu. J’en ai principalement retenu que le JSON est un formattage particulièrement adapté aux langages de haut niveau, mais que son utilisation dans le monde des systèmes embarqués n’est pas des plus facile.
+
+~
+
+Enfin, j’ai également écris un petit programme d’exemple pour cette librairie, qui reçoit un nombre depuis le serveur AirVantage, qui est correctement parsé et s’affiche en binaire sur trois des LEDs, pendant que la quatrième LED clignotte, et que cinq messages différents peuvent être postés à tout moment sur le bon topic avec la clef «bouton», suivant le bouton du joystick pressé.
+
+
+~
+
+Mon travail sur cette partie est à nouveau open-source, et utilise les outils mbed, comme le gestionnaire de révisions mercurial intégré à l’interface web, et les répertoires de ce gestionnaire de versions sont liés à mon compte: http://mbed.org/users/Nim65s/. On y trouve donc ma version de la librairie MQTT, niMQTT, l’une application servant d’ exemple d’utilisation de cette librairie, niMQTT\_example, mais aussi la surcouche à cette librairie MQTT permettant d’utiliser plus faciliment AirVantage avec ce protocole: AV\_MQTT, et enfin l’application d’exemple: AV\_MQTT\_example.
+
+J’ai aussi pu rédiger un peu de documentation, dans mon «Notebook», et discutter de mon travail avec trois personnes qu’y s’y sont intéressées pendant que je m’en occupais.
 
 \clearpage
 
@@ -483,6 +522,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[Arduino] Voir la \hyperref[arduino]{section Arduino}
     \item[API] TODO
     \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
+    \item[Callback] TODO
     \item[Cloud] TODO
     \item[CPack] TODO
     \item[Dev Kit] TODO
@@ -491,9 +531,14 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[EAGLE] TODO
     \item[IDE] TODO
     \item[IoT] TODO
+    \item[JSON] TODO
     \item[LUA] TODO
-    \item[mbed] Voir la \hyperref[mbed]{section mbed}
     \item[M2M] TODO
+    \item[M3DA] TODO
+    \item[Message Queuing] TODO
+    \item[mbed] Voir la \hyperref[mbed]{section mbed}
+    \item[MQTT] TODO
+    \item[OAISIS] TODO
     \item[OEM] TODO
     \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}, et \hyperref[freedom defined]{http://freedomdefined.org/OSHW}.
     \item[Open-space] TODO
@@ -501,6 +546,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[REST] TODO
     \item[Systemd] TODO
     \item[SysV] TODO
+    \item[Thread] TODO
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
     \item[ZigBee] Protocole de communication sans fils maillé à bas prix, concurent du BlueTooth (moins cher, moins complexe et plus fiable dans un grand nombre d’applications), opérant dans la bande 868MHz.
 \end{description}
