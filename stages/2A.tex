@@ -124,6 +124,48 @@ Naturellement, on peut aussi compter certains désagréments, mais pour ma part,
 \clearpage
 
 \section{Création de paquets pour diverses distributions logicielles et diverses architectures matérielles}
+\subsection{Mihini}
+
+Sierra Wireless propose une architecture réseau allant de ces modems, routeurs et passerelles vers sont application Cloud: Airvantage.
+Pour cela, la communication s’effectue selon un protocole de communication maison: le M3DA (http://wiki.eclipse.org/images/d/d4/M3DAProtocolSpecification.pdf).
+
+~
+
+Ce protocole étant peu répandu hors de Sierra Wireless, l’idée est apparue de créer un logiciel léger, et donc capable de fonctionner même sur des systèmes embarqués peu puissants et à faible consommation, qui utiliserait ce protocole et AirVantage, comme si c’était un produit AirLink ou AirPrime, afin d’exposer une API LUA pour permettre la création d’applications M2M.
+
+~
+
+Ainsi est né Mihini, un projet open-source hébergé par la fondation Eclipse, et donc l’un des trois piliers de la partie M2M de la fondation Eclipse
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics{img/mihini_logo.png}
+    \includegraphics[width=\linewidth/3]{img/M2M.png}
+    \includegraphics{img/eclipse.png}
+    \caption{Mihini: http://www.eclipse.org/mihini/, M2M Eclipse: http://m2m.eclipse.org/, et Eclipse.}
+\end{figure}
+
+\subsection{Empaquettage}
+Cet outil, particulièrement pratique car on peut utiliser des comptes d’essai d’AirVantage, mais aussi un serveur open source M3DA (https://github.com/SierraWireless/m3da-server), commence à être apprécié et utilisé par la communeauté, mais il était relativement difficile à installer.
+
+~
+
+J’ai ainsi réalisé des paquets pour les distributions Debian et dérivées (.deb), celles de Red Hat (.rpm) et les autres (.tar.gz), et pour les architectures processeur i386, amd64, armhf et armel. J’ai également ajouté des scripts d’installations, de mise à jour et de désinstallation pour ces paquets, défini une place cohérente de chaque fichier de ce projet dans l’arborescence des systèmes GNU/Linux (http://www.pathname.com/fhs/pub/fhs-2.3.html), et écris des scripts d’initialisation pour SysV et Systemd, afin de faciliter au maximum l’installation et l’utilisation de Mihini pour de laisser aux développeurs voulant l’essayer la meilleure image possible en un temps minimum.
+
+~
+
+J’ai également contribué à aider directement ces développeurs du monde entier en rédigeant et corrigeant de la documentation sur les pages du wiki http://wiki.eclipse.org/Mihini et en étant actif sur la mailing list http://dev.eclipse.org/mhonarc/lists/mihini-dev/, ce qui m’a notamment valu de recevoir en cadeau une BeagleBone Black de la part d’ingénieurs de Texas Instruments qui ont apprécié mon travail et mon aide.
+
+~
+
+Le travail réalisé étant open-source, il est à mon nom, en libre accès, géré à l’aide du gestionnaire de versions git et sur un répertoire github à l’adresse https://github.com/nim65s/mihini-repo
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth/3]{img/git.png}
+    \includegraphics[width=\linewidth/3]{img/github.png}
+    \caption{Git: http://git-scm.com, et github: https://github.com}
+\end{figure}
 
 \clearpage
 
@@ -136,6 +178,10 @@ Naturellement, on peut aussi compter certains désagréments, mais pour ma part,
 \clearpage
 
 \section{Remerciements}
+
+On remerciera enfin le site internet http://baconipsum.com, à qui on doit un paragraphe plein d’humour dans ce rapport trop sérieux:
+
+Bacon ipsum dolor sit amet swine venison capicola, filet mignon pork beef tenderloin tongue bacon ball tip pig. Rump shoulder corned beef chuck, bacon capicola jowl pastrami meatloaf chicken ball tip ground round filet mignon sausage. Kevin kielbasa meatloaf short ribs, strip steak corned beef meatball pork loin tri-tip andouille jowl filet mignon. Ham hock strip steak prosciutto, andouille tail corned beef ham swine kielbasa. Pork chop boudin spare ribs swine sirloin capicola pastrami meatball tenderloin jowl turkey andouille pancetta cow.
 
 \clearpage
 
@@ -192,6 +238,25 @@ Un grand nombre de cartes différentes, proposant diverses puissances, tailles, 
 
 \clearpage
 
+\subsection{Shield GSM pour Arduino}
+\label{gsm}
+
+L’objectif initial du stage était de faire fonctionner logiciellement un shield GSM pour Raspberry Pi, basé sur un modem 3G Sierra Wireless. Cependant, au moment où j’ai commencé le stage, la carte n’était pas encore conçue, et j’ai proposé de me baser sur le shield GSM pour arduino afin de concevoir une carte équivalente, de manière open-hardware.
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth*2/3]{img/shield_gsm.jpg}
+    \centering\includegraphics[width=\linewidth]{img/arduino-gsm-shield-schematic.pdf}
+    \caption{Le shield GSM pour Arduino, et sa schématique open-hardware.}
+\end{figure}
+
+Seuls quelques calculs RF pour l’antenne auraient pu poser problème dans le principe d’open-Hardware, vu que nous avons appris à l’n7 à utiliser les logiciels propriétaires particulièrement couteux, que je ne pouvais donc pas utiliser dans mon stage.
+
+~
+
+Finalement, la conception de cette carte a été laissée à l’entreprise SnootLab.
+
+\clearpage
+
 \subsection{Beagle Bone / Beagle Bone Black}
 \label{bbb}
 
@@ -234,25 +299,6 @@ Prévu pour être vendu à prix coutant (aux alentours de 100€), ce Dev Kit se
     \centering\includegraphics[width=\linewidth*2/3]{img/arduino_shield.jpg}
     \caption{L’arduino, le shield, les capteurs et actionneurs et la connectique fournis avec eclo}
 \end{figure}
-
-\clearpage
-
-\subsection{Shield GSM pour Arduino}
-\label{gsm}
-
-L’objectif initial du stage était de faire fonctionner logiciellement un shield GSM pour Raspberry Pi, basé sur un modem 3G Sierra Wireless. Cependant, au moment où j’ai commencé le stage, la carte n’était pas encore conçue, et j’ai proposé de me baser sur le shield GSM pour arduino afin de concevoir une carte équivalente, de manière open-hardware.
-
-\begin{figure}[h!]
-    \centering\includegraphics[width=\linewidth*2/3]{img/shield_gsm.jpg}
-    \centering\includegraphics[width=\linewidth]{img/arduino-gsm-shield-schematic.pdf}
-    \caption{Le shield GSM pour Arduino, et sa schématique open-hardware.}
-\end{figure}
-
-Seuls quelques calculs RF pour l’antenne auraient pu poser problème dans le principe d’open-Hardware, vu que nous avons appris à l’n7 à utiliser les logiciels propriétaires particulièrement couteux, que je ne pouvais donc pas utiliser dans mon stage.
-
-~
-
-Finalement, la conception de cette carte a été laissée à l’entreprise SnootLab.
 
 \clearpage
 
@@ -390,19 +436,24 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
 
 \begin{description}
     \item[Arduino] Voir la \hyperref[arduino]{section Arduino}
+    \item[API] TODO
     \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
     \item[Cloud] TODO
     \item[Dev Kit] TODO
     \item[Eclo] Voir la \hyperref[eclo]{section eclo}
+    \item[Eclipse (Fondation)] TODO
     \item[EAGLE] TODO
     \item[IDE] TODO
     \item[IoT] TODO
+    \item[LUA] TODO
     \item[mbed] Voir la \hyperref[mbed]{section mbed}
     \item[M2M] TODO
     \item[OEM] TODO
     \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}, et \hyperref[freedom defined]{http://freedomdefined.org/OSHW}.
     \item[Open-space] TODO
     \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
+    \item[Systemd] TODO
+    \item[SysV] TODO
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
     \item[ZigBee] Protocole de communication sans fils maillé à bas prix, concurent du BlueTooth (moins cher, moins complexe et plus fiable dans un grand nombre d’applications), opérant dans la bande 868MHz.
 \end{description}
