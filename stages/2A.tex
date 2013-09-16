@@ -115,7 +115,14 @@ Le lancement étant prévu pour septembre, il n’était donc plus envisageable 
 
 \subsection{Premières impressions sur le stage}
 
-Parmis les choses qui m’ont vraiment plus dans cette entreprise, on peut compter les «Make-it», une journée toute les trois semaines que chaque employé peut prendre pour réaliser n’importe quel projet qui le tient à cœur (sous résèrve de le présenter aux autres lors d’une réunion), un Comité d’Entreprise donnant notamment accès à une clef illimitée pour la machine à boissons chaudes, certaines réunions où il était question de stratégie industrielle à l’échelle internationnale sur plusieurs années, le cadre agréable et la proximitée du lac de Labège alors qu’on n’est qu’à trois quarts d’heure de transports de l’école ou de chez moi, la bonne humeur, l’expertise technique et la créativité de la plupart de mes collègues, ou encore la flexibilité horaire laissée aux employés (et stagiaires).
+Parmis les choses qui m’ont vraiment plus dans cette entreprise, on peut compter
+les «Make-it», une journée toute les trois semaines que chaque employé peut prendre pour réaliser n’importe quel projet qui le tient à cœur (sous résèrve de le présenter aux autres lors d’une réunion),
+une impressionnante collection de jouets électroniques (voir l’Annexe A pour une liste non-exhaustive),
+un Comité d’Entreprise donnant notamment accès à une clef illimitée pour la machine à boissons chaudes,
+certaines réunions où il était question de stratégie industrielle à l’échelle internationnale sur plusieurs années,
+le cadre agréable et la proximitée du lac de Labège alors qu’on n’est qu’à trois quarts d’heure de transports de l’école ou de chez moi,
+la bonne humeur, l’expertise technique et la créativité de la plupart de mes collègues,
+ou encore la flexibilité horaire laissée aux employés (et stagiaires).
 
 ~
 
@@ -146,11 +153,11 @@ Ainsi est né Mihini, un projet open-source hébergé par la fondation Eclipse, 
 \end{figure}
 
 \subsection{Empaquettage}
-Cet outil, particulièrement pratique car on peut utiliser des comptes d’essai d’AirVantage, mais aussi un serveur open source M3DA (https://github.com/SierraWireless/m3da-server), commence à être apprécié et utilisé par la communeauté, mais il était relativement difficile à installer.
+Cet outil, particulièrement pratique car on peut utiliser des comptes d’essai d’AirVantage, mais aussi un serveur open source M3DA (https://github.com/SierraWireless/m3da-server), commence à être apprécié et utilisé par la communeauté, mais il était relativement long et difficile à installer.
 
 ~
 
-J’ai ainsi réalisé des paquets pour les distributions Debian et dérivées (.deb), celles de Red Hat (.rpm) et les autres (.tar.gz), et pour les architectures processeur i386, amd64, armhf et armel. J’ai également ajouté des scripts d’installations, de mise à jour et de désinstallation pour ces paquets, défini une place cohérente de chaque fichier de ce projet dans l’arborescence des systèmes GNU/Linux (http://www.pathname.com/fhs/pub/fhs-2.3.html), et écris des scripts d’initialisation pour SysV et Systemd, afin de faciliter au maximum l’installation et l’utilisation de Mihini pour de laisser aux développeurs voulant l’essayer la meilleure image possible en un temps minimum.
+J’ai ainsi réalisé des paquets à l’aide de CPack pour les distributions Debian et dérivées (.deb), celles de Red Hat (.rpm) et les autres (.tar.gz), et pour les architectures processeur i386, amd64, armhf et armel. J’ai également ajouté des scripts d’installations, de mise à jour et de désinstallation pour ces paquets, défini une place cohérente de chaque fichier de ce projet dans l’arborescence des systèmes GNU/Linux (http://www.pathname.com/fhs/pub/fhs-2.3.html), et écris des scripts d’initialisation pour SysV et Systemd, afin de faciliter au maximum l’installation et l’utilisation de Mihini pour de laisser aux développeurs voulant l’essayer la meilleure image possible en un temps minimum.
 
 ~
 
@@ -170,6 +177,44 @@ Le travail réalisé étant open-source, il est à mon nom, en libre accès, gé
 \clearpage
 
 \section{Rédaction d’un tutoriel end-to-end pour eclo}
+\subsection{Developpements, tests et rédaction}
+
+Une fois ces paquets créés, Benjamin Cabé m’a proposé de travailler sur eclo, un kit de développement destiné à faire la promotion des solutions libres et propriétaires de Sierra Wireless en M2M. Ce kit est présenté sur la page http://airvantage.github.io/devkit/, qui montre ses fonctionnalités et composants, et propose de voir une démonstration live.
+Il comprend une serre en plexiglass ainsi que divers capteurs et actionneurs controllés par un microcontrolleur qui effectue des rapports à une application embarquée dans un ordinateur monocarte, qui envoie lui même ces données après les avoir traitées dans le cloud.
+
+J’ai donc effectué quelques développements, un grand nombre de tests, et rédigé un tutoriel permettant aux possesseurs de ce kit à s’en servir de bout en bout. Un fois le tutoriel fini, l’utilisateur devrait être capable d’utiliser pleinement les fonctionnalités M2M proposées par Sierra Wireless et M2M.eclipse.org.
+
+~
+
+Pour le tuturiel, j’ai simplement assemblé les différents pièces du puzzle, en passant rapidement sur le montage de la serre, la connexion des différents modules électroniques, l’application Arduino, l’installation de Mihini sur la Raspberry Pi, la création de l’application pour mihini depuis l’IDE Eclipse ou en ligne de commande, l’application AirVantage, et enfin l’API REST d’AirVantage pour accéder aux données.
+
+Ce travail est également open-source et disponible sur https://github.com/nim65s/tutorial-eclo.
+
+~
+
+En ce qui concerne les tests, je suis arrivé au final à configurer l’application pour que l’angle d’ouverture de la serre (obtenue avec le servomoteur) soit une fonction affine dépendant de la luminosité, de l’humidité et de la température. 
+Ainsi, en réglant correctement les coefficients depuis l’API REST d’AirVantage, l’ouverture de la serre était proportionnelle à l’ouverture de mon store, ce qui est tout aussi amusant qu’inutile, mais a eu l’intérêt de tester toute la chaîne un grand nombre de fois.
+
+\subsection{Promotion}
+
+Ce kit de développement est destiné à faire connaître les produits Sierra Wireless et M2M.eclipse.org, mais pour que cela soit efficace, il faut… Faire connaître ce kit. Pour cela, voici une liste non exhaustive des media utilisés:
+
+\begin{figure}[h!]
+    \centering\includegraphics[width=\linewidth/3]{img/airvantage_love_os_logo.png}
+    \caption{Site internet d’AirVantage Open Source: http://airvantage.github.io}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth/3]{img/eclipsecon.png}
+    \includegraphics[width=\linewidth/5]{img/lua.png}
+    \caption{Conférences eclipsecon: http://www.eclipsecon.org et lua workshop: http://www.lua.org/wshop13.html}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth/4]{img/twitter.jpg}
+    \includegraphics[width=\linewidth/4]{img/plus.png}
+    \caption{Réseaux sociaux Twitter: https://twitter.com et Google+: https://plus.google.com}
+\end{figure}
 
 \clearpage
 
@@ -439,6 +484,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[API] TODO
     \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
     \item[Cloud] TODO
+    \item[CPack] TODO
     \item[Dev Kit] TODO
     \item[Eclo] Voir la \hyperref[eclo]{section eclo}
     \item[Eclipse (Fondation)] TODO
@@ -452,6 +498,7 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
     \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}, et \hyperref[freedom defined]{http://freedomdefined.org/OSHW}.
     \item[Open-space] TODO
     \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
+    \item[REST] TODO
     \item[Systemd] TODO
     \item[SysV] TODO
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
