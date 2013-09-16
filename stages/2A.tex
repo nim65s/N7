@@ -257,20 +257,6 @@ J’ai aussi pu rédiger un peu de documentation, dans mon «Notebook», et disc
 
 \clearpage
 
-\section{Remerciements}
-
-Je tiens naturellement à commencer par remercier Benjamin Cabé, mon maître de stage, qui a su me proposer différents projets qui m’ont tous intéressés alors que le sujet initial du stage était tombé à l’eau.
-
-~
-
-Il me faut également remercier Fabien Fleutot, qui m’a fait découvrir cette entreprise où j’ai passé un excellent stage.
-
-~
-
-Plus généralement, j’ai passé d’excellents moments avec les équipes 
-
-\clearpage
-
 \appendix
 \section{Systèmes embarqués utilisés}
 
@@ -279,7 +265,6 @@ Plus généralement, j’ai passé d’excellents moments avec les équipes
 
 L’Arduino est une célèbre plateforme de prototypage électronique open-source, dont la carte la plus courante coute aux alentours de 20€.
 Elle embarque généralement un microcontrolleur ATmega328, et propose un certain nombre d’entrées/sorties numériques et/ou analogiques, un circuit d’alimentation (USB ou 12V) et un système simplifié pour flasher la mémoire du microcontrolleur en USB.
-
 
 \begin{figure}[h!]
     \centering\includegraphics[width=\linewidth/2]{img/arduino.jpg}
@@ -521,37 +506,39 @@ Ils sont particulièrement appréciés en M2M et pour l’IoT, bien que les prot
 \label{glossaire}
 
 \begin{description}
-    \item[Arduino] Voir la \hyperref[arduino]{section Arduino}
-    \item[API] TODO
-    \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}
-    \item[Callback] TODO
-    \item[Cloud] TODO
-    \item[CMS] TODO
-    \item[CPack] TODO
-    \item[Dev Kit] TODO
+    \item[Arduino] Voir la \hyperref[arduino]{section Arduino}.
+    \item[API] interface de programmation applicative, qui permet à un logiciel de s’interfacer facilement avec d’autres, selon un protocole documenté.
+    \item[BeagleBone / BeagleBone Black] Voir la \hyperref[bbb]{section BeagleBone}.
+    \item[Callback] fonction de rappel qui est passée en argument à une autre fonction. Cette dernière peut alors en faire usage comme de n'importe quelle autre fonction, alors qu'elle ne la connaît pas par avance.
+    \item[Cloud] ensemble de serveurs et d’applications connectés, similaires à un serveur centralisé mais répartis géographiquement et plus puissants.
+    \item[CMake] «moteur de production» multi-plateforme. Il sert principalement à simplifier et globaliser la compilation d’un logiciel hétérogène sur diverses plateforme.
+    \item[CMS] Composant Monté en Surface, par oposition à des composants électroniques traversants.
+    \item[CPack] sous-programme de CMake servant à générer des paquets d’installation pour les distributions Linux.
+    \item[Dev Kit] Kit de développement.
     \item[Eclo] Voir la \hyperref[eclo]{section eclo}
-    \item[Eclipse (Fondation)] TODO
-    \item[EAGLE] TODO
-    \item[IDE] TODO
-    \item[IoT] TODO
-    \item[JSON] TODO
-    \item[LUA] TODO
-    \item[M2M] TODO
-    \item[M3DA] TODO
-    \item[Message Queuing] TODO
+    \item[Eclipse (Fondation)] organisme à but non lucratif servant de cadre à un grand nombre de projets logiciels (et principalement l’IDE éponyme). Il fédère entre autres IBM, Oracle, Nokia, Google,…
+    \item[Eclipse (IDE)] célèbre Environnement de Développement Intégré en JAVA de la fondation Eclipse.
+    \item[EAGLE] Easily Applicable Graphical Layout Editor est un logiciel propriétaire et multi-plateforme de conception assistée par ordinateur de circuits imprimés, comprennant un éditeur de schémas, un logiciel de routage de circuit imprimé, et un éditeur de bibliothèques.
+    \item[IDE] Environnement de Développement Intégré: logiciel intégrant entre autres un éditeur de texte, des raccourcis pour utiliser un compilateur, un débugueur, un gestionnaire de versions, …
+    \item[IoT] Intenet of Things: ensemble d’objets intelligents connectés internet.
+    \item[JSON] JavaScript Object Notation: format de sérialisation en texte simple organisé par paire de clefs/valeurs, où les valeurs peuvent être des nombres, des chaînes de charactère, des listes, ou des dictionnaires.
+    \item[LUA] Langage de script libre, réflexif et impératif. Il est proche du Python dans sa syntaxe, mais présente une empreinte mémoire très petite, ce qui lui permet d’être intégré dans un grand nombre de systèmes embarqués, mais aussi de logiciels plus conséquents qui ont besoin d’être scriptable, comme des jeux vidéos.
+    \item[M2M] Mobile to Mobile: objets intelligents connectés entre eux à travers internet.
+    \item[M3DA] protocole réseau conçu pour un environnement ou le transfert de données est extrêmement couteux.
+    \item[Message Queuing] famille de protocoles réseaux fonctionnant sur un principe de messages publiés sur des sujets. Un serveur reçoit les messages publiés par les clients et les publie à son tour à tous les clients qui sont abonnés au sujet.
     \item[mbed] Voir la \hyperref[mbed]{section mbed}
-    \item[MQTT] TODO
-    \item[OAISIS] TODO
-    \item[OEM] TODO
+    \item[MQTT] Message Queuing Telemetry Transport: protocole réseau fondé sur un principe de Message Queuing, où l’accent est porté sur la légèreté des données échangées.
+    \item[OASIS] Organization for the Advancement of Structured Information Standards: un consortium mondial qui travaille pour la standardisation de formats de fichiers ouverts.
+    \item[OEM] Original Equipment Manufacturer: désigne généralement des fabricants de pièces détachées.
     \item[Open-Source / Open-Hardware] Désigne des projets logiciels et/ou matériels dont les codes sources des programmes et/ou les plans de construction du matériel sont disponible librement (et généralement gratuitement). Ce principe permet aux gens de vérifier eux-même leurs logciels/matériels afin de vérifier qu’il se comporte comme prévu, et éventuellement de le modifier si l’on a envie qu’il se comporte différement, de corriger d’éventuels bugs, etc. Pour plus d’informations, voir le site web de la \hyperref[https://www.fsf.org/]{Free Software Foundation}, et \hyperref[freedom defined]{http://freedomdefined.org/OSHW}.
-    \item[Open-space] TODO
+    \item[Open-space] organisation d’un espace de travail où les bureaux sont dans une seule grande pièce.
     \item[Raspberry Pi] Voir la \hyperref[rpi]{section Rasberry Pi}
-    \item[REST] TODO
-    \item[Systemd] TODO
-    \item[Socket] TODO
-    \item[SMD] TODO
-    \item[SysV] TODO
-    \item[Thread] TODO
+    \item[REST] style d’architecture utilisant les requettes HTTP pour exposer des API.
+    \item[Systemd] remplaçant de SysV fondé sur des programmes binaires plutôt que des scripts shell pour améliorer les performances.
+    \item[Socket] en électronique, ce terme désigne une prise femelle spécifique à une puce.
+    \item[SMD] Voir CMS
+    \item[SysV] premier programme lancé au démarrage de la plupart des distributions GNU/Linux, il s’occupe de lancer les autres.
+    \item[Thread] ensemble cohérent de commandes informatiques, pouvant par exemple être éxécuté en parallèle d’un autre Thread.
     \item[Xbee] Voir la \hyperref[xbee]{section Xbee}
     \item[ZigBee] Protocole de communication sans fils maillé à bas prix, concurent du BlueTooth (moins cher, moins complexe et plus fiable dans un grand nombre d’applications), opérant dans la bande 868MHz.
 \end{description}
