@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{/home/nim/images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ FIFO}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+
+    ~
+
+    ~
+
+    ~
+
+    ~
+
+    ~
+
+    ~
+
+    ~
+
+    \tableofcontents
+\end{titlepage}
+
+
+\section{Schéma d’ensemble de l’ASIC}
+
+\includegraphics[width=\linewidth]{/home/nim/Downloads/FIFO_N7.png}
+
+\section{DPRAM}
+
+La DPRAM est une mémoire vive qui dispose de deux ports d’entrée/sortie. Dans notre utilisation en FIFO, elle va simplement servir de buffer, et un port sera utilisé seulement en entrée et l’autre en sortie.
+
+Chaque port étant constitué dun bus d’entrée indiquant l’adresse courante et d’un bus d’entrée ou sortie indiquant le contenu de la mémoire à cette adresse, le reste du travail sera essentiellement de générer les bonnes adresses au bon moment.
+
+Aussi, chacun des ports dispose d’une clock propre, et ce sera important d’en tenir compte à d’autres endroits du design, mais ici cela ne change pas grand chose pour nous.
+
+\section{Gen Adr}
+
+Les générateurs d’adresse sont des blocs très simples qui vont se contenter de s’incrémenter à chaque front d’horloge où c’est utile (avec un modulo 256).
+
+Les adresses ainsi générées sont directement cablées sur les entrées adresse de la DPRAM, de manière à construire un buffer circulaire à deux entrées.
+
+\section{Comp Adr}
+
+Le comparateur d’adresse sert à vérifier si la FIFO est vide (auquel cas il faut arrêter de lire dedans) ou plein (dans ce cas, il faut arrêter d’y écrire). Nous avons convenu que le cas où l’émetteur arrête d’émettre ne peut arriver dans notre application ; il n’est donc pas nécessaire de se soucier du cas où le buffer est vide puisque l’émetteur fonctionne plus rapidement que le récepteur.
+
+On peut le modéliser par une machine à deux états: un état où on lit et on écrit dans la FIFO, et un état où on ne fait que lire. Dans la pratique, cela revient juste à cabler la sortie $Enable$ de l’émetteur à 1 quand on est dans l’état lecture/écriture et à 0 quand on est dans l’état lecture seule.
+
+Le passage de l’état lecture/écriture à l’état lecture seule a lieu lorsque la FIFO est sur le point d’être pleine. Nous avons calculé que cet état correspond à $Adr_A = Adr_B - 3$
+
+Le passage de l’était lecture seule à l’état lecture/écriture a lieu lorsque la FIFO n’est plus sur le point d’être pleine, ce qui corresond à $Adr_A = Adr_B - 2$.
+
+\section{Entrées / Sorties de l’ASIC}
+
+Une fois que ces blocs principaux sont câblés entre eux, il faut ensuite brancher les signaux $DATA(7:0)$ de part et d’autre de la DPRAM, un en entrée et un en sortie, ainsi que les $Clk$ à 1MHz et 20Mhz correspondants sur les ports de la DPRAM et sur chaque générateur d’adresse. Il y a également un signal $Rst$, qui peut servir à réinitialiser les adresses et/ou à vider la DPRAM, par exemple.
+
+Le signal $Clk$ à 20MHz sert également d’horloge au comparateur, mais il se pose alors le problème de la comparaison à 20MHz d’un signal à 20MHz et d’un autre à 1MHz : les adresses générées.
+
+\section{Chronogrammes}
+
+\includegraphics[width=\linewidth]{/home/nim/Downloads/chrono_arret.png}
+
+\includegraphics[width=\linewidth]{/home/nim/Downloads/redemarrage.png}
+
+\end{document}
