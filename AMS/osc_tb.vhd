@@ -10,5 +10,5 @@ architecture bench of osc_tb is
 begin
 	uut: entity oscillator(osc) 
 		generic map ( ampl => 1.0, freq => 20.0E6, phase =>0.0)
-		port map(tp => src, tm => ground);
+		port map(tout => src);
 end bench;

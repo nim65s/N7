@@ -4,7 +4,7 @@ use ieee.electrical_systems.all;
 use ieee.math_real.all;
 
 entity lp_filter is
-	generic( F : real := 10.0e3);
+	generic( F : real := 3000.0);
 	port( terminal tin, tout: electrical);
 end entity lp_filter;
 

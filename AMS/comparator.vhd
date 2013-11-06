@@ -8,11 +8,14 @@ entity comparator is
 end entity comparator;
 
 architecture comp of comparator is
+	terminal tc: electrical;
 	quantity us across ts to ground;
-	quantity ur across irtr to ground;
-	quantity uout through tout to ground;
+	quantity ur across tr to ground;
+	quantity iout through tc to ground;
+	quantity uo across io through tc to tout;
 begin
-	uout == us * ur;
-	isig == 0.0;
-	ir == 0.0;
+	iout == us * ur;
+	OA: entity work.opamp(oa)
+		port map(tip => ground, tim => tc, tout => tout);
+	uo == io;
 end architecture comp;
