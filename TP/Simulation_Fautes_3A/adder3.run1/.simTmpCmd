@@ -1,0 +1,8 @@
+$gui_register_data_type("db_execution_status");
+$gui_register_data_type("db_deposit_status");
+$gui_register_data_type("db_scope_status");
+$gui_register_data_type("shm_status");
+$shm_open("RunObject.0/shmDir/shm.db");
+$shm_save;
+$shm_probe("AS");
+$timeformat(-9, 2, " ns");
