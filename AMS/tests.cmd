@@ -3,7 +3,7 @@
 *
 
 
-.tran 30ns 0.5ms
+.tran 300ns 3.0ms
 .op
 * User minimum step definition
 .option hmin=1e-12

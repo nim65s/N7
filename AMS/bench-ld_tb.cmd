@@ -3,10 +3,11 @@
 *
 
 
-.tran 1.0ns 100ns
+.tran 0.001ns 100ns
 .op
 * User minimum step definition
 .option hmin=1e-12
+.option hmax=1e-6
 * User integration method selection
 .option trap
 * User ELDO accuracy specification

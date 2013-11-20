@@ -1,14 +1,12 @@
-* /home/saurel/telemetre/comp_tb.cmd input netlist
-* Creation Date : Fri Oct 25 10:37:52% CEST 2013 
+* /home/saurel/telemetre/clock.cmd input netlist
+* Creation Date : Wed Nov 20 14:07:35% CET 2013 
 *
 
 
-.tran 0.01ms 10ms
+.tran 0.3us 100us
 .op
 * User minimum step definition
 .option hmin=1e-12
-* User maximum step definition
-.option hmax=1e-4
 * User integration method selection
 .option trap
 * User ELDO accuracy specification

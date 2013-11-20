@@ -4,13 +4,13 @@ use ieee.math_real.all;
 use work.all;
 
 entity tests is
-	--generic( D, theta : real);
 	port( terminal tout : electrical);
 end entity tests;
 
 architecture bench of tests is
 	terminal t1, t2, t3, tlo, trf, tfin1, tfin2, tpd, ttrans, tfout1, tfout2, tcomp : electrical;
 	quantity Pld, Ppd :  real;
+	terminal tf1, tf2, tf3 : electrical;
 begin
 	oscol: entity oscillator(osc)
 		generic map( ampl => 1.0, freq => 2.0e7-5.0e3, phase => 0.0)
@@ -44,7 +44,9 @@ begin
 		port map( tin => tfin2, tout => tfout2);
 	comp: entity comparator(comp)
 		port map( ts => tfout1, tr => tfout2, tout => tcomp);
-	lp: entity lp_filter(lp)
-		port map( tin => tcomp, tout => tout);
+	lp1: entity lp_filter(lp) port map( tin => tcomp, tout => tf1);
+	lp2: entity lp_filter(lp) port map( tin => tf1, tout => tf2);
+	lp3: entity lp_filter(lp) port map( tin => tf2, tout => tf3);
+	lp4: entity lp_filter(lp) port map( tin => tf3, tout => tout);
 		
 end bench;
