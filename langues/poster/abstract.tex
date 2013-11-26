@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large Colored Title Article
+% LaTeX Template
+% Version 1.1 (25/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%PACKAGES AND OTHER DOCU    MENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl} % A4 paper and 11p   t font size
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm} % Custom font sizes - used for the initial letter in     the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+    \lettrine[lines=3,lhang=0.3,nindent=0em]{
+        \color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%TITLE SECTION
+%---------------------------------------------- ------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+    \title{Capitole du Libre} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+    \author{Guilhem Saurel, } % Your name
+
+    \postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+        INP-ENSEEIHT % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+\linespread{2}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%ABSTRACT
+%-------------------------------------------------------------- --------------------------
+
+% The first character should be within \initial{}
+\initial{T}\textbf{his week end happened the "Capitole du Libre", at the INP-ENSEEIHT. This event gathers conferences, workshops, demonstrations and initiations about Free Software.}
+
+%----------------------------------------------------------------------------------------
+%ARTICLE CONTENTS
+%-----  -----------------------------------------------------------------------------------
+~
+
+The Free Software mouvement tries to teach us that in Information Technologies, we strongly need some fundamental freedoms to guarantee that the softwares we use in a most and most important part of our lifes (messaging, websites, social networks, operating systems, smartphones, and so on...) will act as we want them to. With closed source softwares, we are exposed to bugs that we can not fix by ourselves, we can not learn how they work to improve our skills, and, last but not least, we can not be confident in them.
+This issue of confidence brings a lot of concerns, which may not appear to be very relevant, but are really fundamental. For example, you may not be pleased of beeing spied by a foreign government (like Russia, China or Iran) or even your government or an "allied" governement. Why ? Well, you might expect to live in a country where totalitarism has been bannished a long time ago (and more precisely in 1789), and the fact that a government do spies its own people without a judge consentment is a very important constant in totalitarist countries.
+
+~
+
+In the eighties, Richard Matthew Stallman, founder of the Free Software Foundation, may have been considered as a paranoiac geek, even if all he wanted was to control his machines instead of beeing controlled by them.
+Nowadays, after some disturbing revelations from Edward Snowden (who used to be a spy of the United States of America), everyone knows that he has been spied, just by using closed source softwares from Microsoft, Apple, Facebook or Google.
+It may feel comforting that, for "security" reasons, a lot of big companies and government are trying to spy everyone, but we must not forget that "Those who surrender freedom for security will not have, nor do they deserve, either one" (Benjamin Franklin, founding father of the United States).
+
+To try to keep the control of our softwares, the GNU project (leaded by Richard Matthew Stallman) defines that we need four fundamental freedoms :
+
+\begin{itemize}
+    \item The freedom to run the program, for any purpose (freedom 0).
+    \item The freedom to study how the program works, and change it so it does your computing as you wish (freedom 1). Access to the source code is a precondition for this.
+    \item The freedom to redistribute copies so you can help your neighbor (freedom 2).
+    \item The freedom to distribute copies of your modified versions to others (freedom 3). By doing this you can give the whole community a chance to benefit from your changes. Access to the source code is a precondition for this.
+\end{itemize}
+
+~
+
+
+This year, the "Capitole du Libre" prensented 70 conferences, 35 workshops, a dozen of sponsors (both compagnies and associations), and many other passionating events (like the Install Party, the LAN Party, the interactive sandbox and the 3D-Printing Party) to celebrate and share about this idea of free software.
+
+Among the main tracks, we had to choose between JavaScript, Openstack, LUA, Ubuntu, KDE (tracks animated by independant communities), and general audience or even multimedia, which were aimed at people whom may not have great computer science skills.
+
+We saw a very good team of volunteers (team that I am proud to be part of, as a General Volunteer, as a technician at the Install Party, and as a secourist), the organisation was really good and everything went as expected, and, for the first time this year, I did not spent all my time volunteering, but I also saw five conferences and went to two workshops.
+It was an excellent thing for my skills and my knowledge, and I was very glad to spent a whole week end and skip some hours of sleep for this event.
+
+~
+
+The most significant conference was of course the closing conference, led by Jeremy Zimmermann (founder of "La Quadrature du Net", a non-profit association defending the rights and freedoms of citizens on the Internet, by advocating for the adaptation of French and European legislations to respect the founding principles of the Internet, and most notably the free circulation of knowledge) and Benjamin Bayart (french most well known expert in telecommunications and president of "French Data Network", the oldest Internet Service Provider in France, and the main associative one) : "Improvisation on the Internet news, the defense of fundamental freedoms on the Internet, life, the universe and everything".
+
+During this conference, most of the spectators lost their confidence in their hardware, starting from their smartphones, their personnal computers, and up to their telecommunication and network equipments. 
+
+Because a long time ago we lost confidence in the software, we were able to write our own, by crowdsourcing, mostly thanks to Richard Matthew Stallman's GNU project, Linus Torvald's Linux project, and all the GNU/Linux distributions built on this basis. Nowadays, an GNU/Linux server well administrated may be considered as secure, but nothing about the hardware which runs this software seems safe.
+
+One more time, it may have been considered as paranoia to think that, but we now have dozens of technical proofs that some of our smartphone, some of our modems, some of our personnal computers and some ouf our main network tools (used by our Internet Service Provider) are full of volunteer backdoors and / or vicious sub-programs.
+
+Even if this has not been the most heard about privacy those days (thanks to Edward Snowden and WikiLeaks), we must find mathematical solutions to proove that every hardware we use does what we want it to ; but for now, it seems far too difficult.
+
+~
+
+~
+
+~
+
+940 words.
+
+\end{document}
