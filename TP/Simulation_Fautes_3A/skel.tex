@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ TP Simulation de fautes}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+	\tableofcontents
+    \thispagestyle{empty}
+\end{titlepage}
+
+www.aime-toulouse.fr/CAO/COURSCAO/tp_fautes/
+
+000, 111 \& 011 => couverture de 88.9\%, manque sa1 pour I{2,4}.{A,B}
+
+011, 111, 010, 001, 100
+
+1 00 00 00
+1 10 00 00
+1 11 11 00
+1 11 11 11
+0 10 10 10
+1 01 01 01
+0 01 01 01
+
+1 0 2 3 2 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 
+96.2
+manquait les RST
+
+
+0 0 0 0 1 0 0 0 1 1 1 0 91.5
+
+\end{document}
+

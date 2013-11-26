@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ BE CCMB}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+
+On veut un gain de 1000, sachant que le transistor a un gain en courant de 90 et que l’amplitude de la tension de sortie est égale au produit du courant de sortie du transistor par la résistance de collecteur. Cette dernière doit donc faire environs 10 ohms.
+
+Pour avoir un gain en courant de 90, la datasheet du transistor nous indique un courant $I_C$ de 30mA, et un $V_{CE}$ de 5V.
+Pour $I_C$ = 30 mA, la tension aux bornes de la résistance de collecteur vaut 300mV. La tension aux bornes de la résistance d’émetteur doit donc être de $12-0.3-5=6.7$V, ce qui correspond, pour un courant de 30mA, à une résistance de 220 Ohms.
+
+
+\end{document}
+
