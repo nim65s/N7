@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ MMIC Tutorial}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+
+On commence par trouver le point de polarisation. Pour cela, on se place sur la courbe IDS en fonction de VDS pour VGS = 0, ce qui donne un IDSS de 49mA, et on veut donc atteindre un IDS = IDSS/2 = 24.185 en modifiant VGS. On trouve alors un VGS de -0.26 V.
+
+Pour la bobine, à 8GHz, S11 est optimal à 6.602 nH.
+Si on ajoute la capa, S11 est minimal à 8GHz à 6.498 nH, et S13 est minimal à 8GHz pour 1.299 pF.
+Cependant, vu que la capa depasse 1 pF, il faut changer son modèle.
+idem, pour 6.497 nH et 3.525 PF.
+Après avoir rajout quelques lignes et tee, 6.134 3.289
+À ce moment là, on va voir sur le truc web, on dit qu’on a un spiral inductor de 6.134nH de 10um / 10um, et paf, la frequence de resonnance est de 8.56GHz, CEQUINEVAPASDUTOUT !
+Du coup on s’en fout, on met deux bobines de 3.067
+
+NB: c’est plus interessant de mettre les tee sur la couche IN. et OSEF si c’est marque que la couche BE fait 11 en vrai ça fait 10 à la fin du process techno.
+
+Une fois qu’on a mis deux bobines, faut re-tune: 3.198 2.654 × 2
+
+On fait alors le circuit complet. Ça se chevauche un poil.
+
+On passe alors à la stabilite. C’est pas bon du tout, du coup on essaye avec des resistances au pif, sauf que ça rajoute trop de bruit.
+
+On essaye alors plein de trucs au hasard pendant des heures.
+
+\end{document}
+
