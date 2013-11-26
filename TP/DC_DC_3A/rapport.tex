@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ TP Convertisseur DC-DC}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \vfill
+    \tableofcontents
+    \thispagestyle{empty}
+\end{titlepage}
+
+
+\section{Open Loop Study}
+
+\paragraph{Observe the currents I(L), I(D1) et I(S1). Explain the behavior of currents according to the gate signal. In what mode are you ??}
+
+%\includegraphics[width=\linewidth]{vs.png}
+%\includegraphics[width=\linewidth]{courants.png}
+
+\paragraph{Observe the control signals: Vrampe, Verreur, Vgrille and the resulting switched voltage Vk.}
+
+%\includegraphics[width=\linewidth]{commandes.png}
+
+\subparagraph{What is the value of the duty-cycle ?}
+
+~
+
+En theorie, cette valeur vaut $\cfrac{V_S}{V_{bat}} = \cfrac{5}{12} = 0.416$.
+
+En pratique, on a $0.427$.
+
+\subparagraph{Why do not you get exactly 5V for the voltage Vs by imposing D=5V/12V?}
+
+~
+
+La diode en inverse impose un abaissement de l’etat bas du rapport cyclique de $V_D$. $V_S$ a donc une tension approximativement de $5-\cfrac{V_D}{2}$.
+
+
+%\includegraphics[width=\linewidth]{vk.png}
+
+\subparagraph{Provide the expression of Vs=f(D,Vbat,Vd) avec Vd: knee voltage of the diode.}
+
+~
+
+$V_S = D V_{bat} - (1 - D)V_d$
+
+\subparagraph{Deduce the voltage value to be imposed on Verreur to get Vs=5V.}
+
+~
+
+$V_{erreur}=2.22$V
+
+\subparagraph{Check with a simulation.}
+
+~
+
+Après simulation, il semble que 2.235 corresponde mieux.
+
+%\includegraphics[width=\linewidth]{vs223.png}
+
+\paragraph{Measure the value of the current ripple and the output voltage ripple and compare with the theorical values.}
+
+~
+
+$\Delta I_L = \cfrac{D(1-D)V_{bat}}{Lf_{dec}} = 0.0899$ A
+%\includegraphics[width=\linewidth]{ripple_il.png}
+
+En pratique, en est à 97mV.
+
+$\Delta V_S = \cfrac{\Delta I_L}{8Cf_{dec}} = 0.0112$ V
+%\includegraphics[width=\linewidth]{ripple_vs.png}
+
+En pratique, on est à 12mV.
+
+Donc dans les deux cas, la pratique est assez proche de la thorie.
+
+\paragraph{By varying the load, check that the boundary separating modes is obtained for $R_{ch_{limite}} = \cfrac{2Lf}{1-D}$ with f: switching frequency (100kHz)}
+
+~
+
+La resistance limite entre les modes continu et discontinu est telle que le courant moyen de sortie est egal à la moitie du courant de ripple:
+$R_{ch_{lim}} = \cfrac{V_S}{\cfrac{\Delta I_L}{2}} = 111\Omega$.
+
+\subparagraph{Compare theory and simulation for both voltage: Vbat=12V and Vbat=20V}
+
+~
+
+On trouve que $V_D \simeq 0.9$V, donc, en thorie, on a $D = \cfrac{V_S-V_D}{V_{bat}-V_D}$.
+Ceci conduit à des valeurs theoriques des resistances de $121 \Omega$ à 12V et de $91 \Omega$ à 20V ; et nous obtenons bien $117\Omega$ dans le premier cas, et $103\Omega$ dans le second.
+
+
+\paragraph{In discontinuous mode, for Vbat=12V, Rcharge=300$\Omega$ and D=0.46, measure Vs (in steady-state) and check the expression
+    $D=\cfrac{V_s}{V_{bat}}\cdot\sqrt{\cfrac{2Lf}{R_{charge}\left(1-\cfrac{V_s}{V_{bat}}\right)}}$.}
+
+~
+
+%\includegraphics[width=\linewidth]{discontinuous.png}
+
+$V_S=7.38$V, donc $D=0.46$
+
+
+\paragraph{Observe (in simulation) the value of the overall efficiency of the circuit close to the nominal point (5V - 1A).}
+
+~
+
+La moyenne du courant consomm sur l’interrupteur est de 465mA
+La moyenne du courant consomme par la resistance de chareg est de 996mA pour une tension 4.98 V, ce qui fait à peu près 4.96W, d’où un rendement de 0.90.
+
+
+
+\end{document}
