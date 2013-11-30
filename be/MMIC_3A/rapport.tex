@@ -59,7 +59,39 @@ On fait alors le circuit complet. Ça se chevauche un poil.
 
 On passe alors à la stabilite. C’est pas bon du tout, du coup on essaye avec des resistances au pif, sauf que ça rajoute trop de bruit.
 
-On essaye alors plein de trucs au hasard pendant des heures.
+On essaye alors plein de trucs au hasard pendant des heures en essayant de concilier gain, bruit, coefficient de Rollet et coefficient de stabilite. La place prise par les composants est aussi un facteur non negligeable, mais vu les autres contraintes, ce n’est pas notre premier problème. On peut essayer de relacher un peu le cahier des charges, en essayant  d’avoir une stabilite inconditionnelle seulement jusqu’à 30GHz.
+
+Après de longues divagations, on se rend compte qu’on n’arrive pas à respecter le cahier des charges sur le gain et la stabilit à la fois. On decide alors d’essayer d’augementer le gain au detriment du facteur de bruit, en ajoutant une bobine en parallèle sur la grille. Ça marche, et nous laisse un gain superieur à 11dB, un NFmin de 1.2 et une stabilite limite, mais correcte.
+
+L’etape suivante consiste à adapter le signal en entre. Pour cela, on trace les cercles de gain et les cercles de bruit, et on s’arrange pour trouver un point qui concilie le mieux possible ces deux aspects. On choisi un gain de 10.5 dB pour un bruit de 1.43.
+On note alors l’impdance du point qui correspond, puis, grace à l’outil SmithChart, on trouve la valeur de la capacite serie et de la bobine parallèle à ajouter en entree du montage pour obtenir cette impedance et donc ce couple gain/bruit.
+
+On fait alors la même chose en sortie, et puis on regarde les paramètres S.
+
+Et là, c’est le drame.
+
+On recommence.
+
+cible           => theorique       => tune
+1.525 + 0.647 j => 1.36nH & 444 fF => 1.176 nH & 370 fF
+2.487 - 1.865 j => 4.1 nH & 233 fF
+
+
+On recommence, en repartant du circuit avec juste les machins DC pour essayer de partir avec un maxgain plus fort
+
+1.727 - 0.528 => 2.93 nH 422 fF
+
+2.16 358
+2.13 281
+
+1.43 310
+
+
+sortie
+
+1.04 394
+
+
 
 \end{document}
 
