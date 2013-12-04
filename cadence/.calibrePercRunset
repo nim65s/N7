@@ -1,0 +1,8 @@
+*percRulesFile: $AMS_DIR/calibre/c35b4/c35b4_perc.rules
+*percRunDir: CALIBRE_PERC/$AMS_DATE_CALIBRE
+*percSourceGetFromViewer: 1
+*percPercInput: SOURCENETLIST
+*percReportMaximumAll: 1
+*cmnPreTrigger: $AMS_DIR/programs/bin/rewrite_cal_netlist -perc %s
+*cmnShowOptions: 1
+*cmnRunHier: 0

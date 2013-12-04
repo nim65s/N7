@@ -1,0 +1,4 @@
+[ virtuoso6.BatchTriggers.RunLVS ]
+BatchPostTrigger ""
+BatchPreTrigger  "$AMS_DIR/programs/bin/rewrite_cal_netlist %s"
+EnableTriggers   "TRUE"

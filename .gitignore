@@ -77,3 +77,6 @@ _ngo/
 xlnx_auto_0_xdb/
 xst/
 
+# Cadence
+*.cdslck
+*.tmp*

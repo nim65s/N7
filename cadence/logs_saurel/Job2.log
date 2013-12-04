@@ -1,0 +1,87 @@
+\# Program start time UTC 2013.12.03 16:14:02.334
+\# Local time Tuesday 3 December 2013, 5:14 pm
+\o Program:		@(#)$CDS: virtuoso version 6.1.5 01/10/2011 12:16 (sjfdl225) $
+\o Hierarchy:		/soft/ic615/tools.lnx86/dfII/
+\o Sub version:		sub-version  IC6.1.5.72  (32-bit addresses)
+\# Host name (type):	fronton (x86_64)
+\# Operating system:	Linux 2.6.32-358.23.2.el6.x86_64 #1 SMP Wed Oct 16 18:37:12 UTC 2013
+\# X display name (WxH):	fronton:80 (1024x868)
+\# Available geometry:			TL(0:0) BR(1023:867)
+\# X server:			RealVNC Ltd (VNC nograph server)
+\# Depth of Visual (Root):	16 (16)
+\# Number of Planes Used:	16
+\# X version:		11.0 (vendor release 3370)
+\# X resource pool:	base 0x1c00000, mask 0x3fffff (4194303), shift 0
+\# 			current id 0x0, current max 0x3ffffa (4194298)
+\# Memory report:	maximum data size 4294967295 (0xffffffff) bytes
+\# Memory report:	maximum process size 4294967295 (0xffffffff) bytes
+\# Initial sbrk value:	356638720 (0x1541e000) bytes
+\# Available memory:	4494432 (0x449460) kilobytes
+\# System memory:	5647084 (0x562aec) kilobytes
+\# Maximum memory size:	3971989503 (0xecbfbfff) bytes
+\# Max mem available:	3971989503 (0xecbfbfff) bytes
+\# Initial memory used:	33660928 (0x201a000) bytes
+\# Qt version:		4.5.3
+\# Window Manager:	other
+\# User Name:		saurel
+\o Working Directory:	fronton:/home/saurel/N7/cadence
+\# Process Id:		10721
+\o 
+\o COPYRIGHT © 1992-2011  CADENCE DESIGN SYSTEMS INC.  ALL RIGHTS RESERVED.
+\o           © 1992-2011  UNIX SYSTEMS Laboratories INC.,
+\o                          Reproduced with permission.
+\o 
+\o This Cadence Design Systems program and online documentation are
+\o proprietary/confidential information and may be disclosed/used only
+\o as authorized in a license agreement controlling such use and disclosure.
+\o 
+\o           RESTRICTED RIGHTS NOTICE (SHORT FORM)
+\o Use/reproduction/disclosure is subject to restriction
+\o set forth at FAR 1252.227-19 or its equivalent.
+\# Available memory:	4491812 (0x448a24) kilobytes UTC 2013.12.03 16:14:02.660
+\o Loading geView.cxt 
+\o Loading menuBuilder.cxt 
+\o Loading schView.cxt 
+\o Loading selectSv.cxt 
+\o Loading LVS.cxt 
+\o Loading layerProc.cxt 
+\o Loading xlUI.cxt 
+\o Loading auCore.cxt 
+\o Loading vhdl.cxt 
+\o Loading seismic.cxt 
+\o Loading adexl.cxt 
+\o Loading oasis.cxt 
+\o Loading asimenv.cxt 
+\o Loading analog.cxt 
+\o Loading par.cxt 
+\o Loading socket.cxt 
+\o Loading alvs.cxt 
+\o *Info*    Exporting services from client ... 
+\o 
+\o Loading ci.cxt 
+\o Loading ams.cxt 
+\o ......................................................................................
+\o            ams AG HIT-Kit v.ams_4.10
+\o ......................................................................................
+\o COPYRIGHT (c) 2012 Full Service Foundry @ ams AG.  ALL RIGHTS RESERVED
+\o This HIT-Kit and attached documentation are confidential information and may 
+\o only be used as authorized by the HIT-Kit license agreement.
+\o ......................................................................................
+\o Loading simulator default settings.
+\o HitKit On-Line Documentation not enabled - does ~/data.reg exist?
+\o function ams_ResCallback redefined
+\o function ams_ResCapCallback redefined
+\o function ams_CapCallback redefined
+\o function ams_MosCallback redefined
+\o function ams_HvmosCB redefined
+\o function ams_check_DPTUB redefined
+\o function ams_isoCB redefined
+\o No mx check
+\o *Info*    Client has finished starting ... 
+\o 
+\p HIT-Kit: ams_4.10  Tech: c35b4c0  User: saurel 
+\o Loading rte.cxt 
+\# Available memory:	4902880 (0x4acfe0) kilobytes UTC 2013.12.03 16:15:22.662
+\o Job timed out after no activity in 300 seconds.
+\# Memory report: on exit 94502912 (0x5a20000) bytes, UTC 2013.12.03 16:19:05.142
+\# Memory report: peak usage 94511104 (0x5a22000) bytes

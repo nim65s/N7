@@ -1,0 +1,4 @@
+techLib "TECH_C35B4"
+userSkillFile "/soft/ams410/cds/HK_C35/skill/ams_sdl.il"
+case "preserve"
+maxVertices 1024

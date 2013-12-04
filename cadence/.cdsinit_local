@@ -1,0 +1,61 @@
+/* 
+File Name:    :    .cdsinit_local
+Author        :    austriamicrosystems Design Support
+Date          :    11-Dec-1996
+Version:      :    1.0 (for analog artist) for HIT Kit 3.xx
+Include Files :    none
+
+Owner: austriamicrosystems
+HIT-Kit: Digital
+
+----------------------------------------------------------------------
+date     | who | description
+----------------------------------------------------------------------
+11-12-96  DPA   Library customisation removed - now in cds.lib file
+----------------------------------------------------------------------
+
+*/
+
+/*
+ DESCRIPTION  
+
+This is the template file for .cdsinit_local
+
+*/
+
+if( !CDS_QUIET then printf("LOAD LOCAL CUSTOMIZATION.\n"))
+
+;#####################################################################
+;#
+;# Please add any customisations here....
+;# NOT IN THE MAIN .cdsinit file. 
+;#
+;#####################################################################
+
+
+
+let( ((MainPath "") (elem "") (LocalPath ""))
+
+foreach( elem getSkillPath() MainPath = strcat(MainPath " " elem))
+
+; add your local paths in this string
+; ex: LocalPath = "/user/abo/artist/AMS_1.2/skill"
+LocalPath = "" 
+if( LocalPath!="" printf("ADDING YOUR SKILL LOCAL PATH -> %s.\n" LocalPath))
+setSkillPath( strcat( LocalPath " " MainPath))
+
+) ; let
+
+
+
+
+
+
+;############################################################################
+;#                                           
+;# THE END! 
+;#
+;#############################################################################
+
+if( !CDS_QUIET then printf("END OF LOCAL CUSTOMIZATION.\n"))
+;END OF THE LOCAL CUSTOMIZATION FILE

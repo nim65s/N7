@@ -1,0 +1,6 @@
+*drcRulesFile: $AMS_DIR/calibre/c35b4/c35b4c0.rules
+*lvsRulesFile: $AMS_DIR/calibre/c35b4/c35b4c0.rules
+*pexRulesFile: $AMS_DIR/calibre/c35b4/c35b4c0.rules
+*drcIncludeSVRFCmds: 1
+*drcSVRFCmds: {#DEFINE NO_METRES}
+*cmnPreTrigger: $AMS_DIR/programs/bin/rewrite_cal_netlist %s
