@@ -2,7 +2,7 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{english}
-\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[a4paper,margin=3cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -37,9 +37,11 @@
     \setcounter{page}{0}
     \maketitle
     \vfill
-    \tableofcontents
     \thispagestyle{empty}
 \end{titlepage}
+
+\tableofcontents
+\newpage
 
 \section{Introduction}
 
@@ -103,7 +105,7 @@ There are many different ways how to achieve a last step – the comparison. One
 
 \begin{figure}[h]
     \begin{center}
-        %\includegraphics[width=10cm]{fin.png} TODO
+        \includegraphics[width=10cm]{todo.png}
     \end{center}
     \caption{Phase shift measurement using PLL}
 \end{figure}
@@ -118,6 +120,7 @@ On one input of the PLL the reflected 5 kHz signal is connected. The second inp
 
 This paper contains the way where the PLL is modeled using an ideal operational amplifier and 4 serial connected first order passive low-pass filters. The operational amplifier has very high gain (A = 100 000) and infinite input resistance.
 
+\newpage
 \section{Mathematical demonstration}
 \subsection{Emitted signal}
 \begin{eqnarray}
@@ -151,10 +154,234 @@ v_{meas}(t)&=&V_S\cdot\cos\left(2\pi|f_{RF}-f_{LO}|t+\varphi(D)+\theta_0-\theta_
 
 According to the equation (2) the distance limitation can be calculated. Theoretically it is 7.5 meter, however, it can be seen on the simulation results that this value is around 2.5 meter. Because the $\Delta V$ on the output above 2.5 meter is around a few $\mu V$ – so it is very hard to make a distinction between that small variations of voltage levels.
 
+\newpage
 \section{Architecture and Implementation overview}
+
+\subsection{Oscillators}
+
+For this project, we need two oscilators: an RF one at 20 MHz and an OL at 19.5 MHz.
+
+Their code are strait-forward, as we only need one output terminal and a generic frequency.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (-1,0) node[tlinestub, rotate=180] {} to[short, -o, i=i] (0,0) node[anchor=west] {tout} to[open, v=v] (0,-2) node[ground] {}
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{osc.vhd}
+
+\subsubsection{Testbench}
+\includegraphics[width=\linewidth]{osc.png}
+
+\subsection{Mixers}
+
+The mixers take to input terminals and just outputs the multiplication of these inputs.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[mixer](mix) {}
+    (mix.in 1) to[short, -o] (-1.5,0) node[left, -o] {tp1} to[open, v=Vin1] (-1.5,-3)
+    (mix.in 2) to[short, -o] (0,-1) node[below, -o, anchor=west] {tp2} to[open, v=Vin2] (0,-3) node[ground] {}
+    (mix.out) to[short, -o, i=Iout] (1.5,0) node[right, -o] {tpo} to[open, v=Vout] (1.5,-3) -- (-1.5,-3)
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{mixer.vhd}
+
+\subsubsection{Testbench}
+\includegraphics[width=\linewidth]{mix.png}
+
+\subsection{Laser Diode}
+
+With the Laser Diode, the main difference is that the input stills an electrical port, but the output becomes an optical power. We implemented this optical power as a \verb|quantity| in AMS VHDL.
+
+Then, we just have to code the basics equations of a diode
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[left] {tp} to[short, i=Ipol, o-] (1,0) to[leDo, v=Vpol] (1,-2) node[ground] {}
+    (2,-1) node {Popt}
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{laser_diode.vhd}
+
+\subsection{Lambertian target}
+
+This module basically takes one input quantity (the optical power from the laser diode), lowers its amplitude with differents constants, and mainly the Distance parameter that we want to measure, and then applies a delay, which is also a function of that Distance.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[left] {Pin} to[generic] (2,0) node[right] {Pout}
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{lambertian_target.vhd}
+
+\subsection{Photo Diode}
+
+This component outputs a current $I_{ph} = S_\lambda \cdot P_r$, where $P_r$ is the received power from the lambertian target. It is quite straightforward to implement, but as it outputs a current, we will need a transimpedance later.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (1,0) node[right] {tpd} to[short, i=Iph, o-] (0,0) to[pDo, v=V] (0,-2) node[ground] {}
+    (-2,-1) node {Popt}
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{photo_diode.vhd}
+
+\subsection{Operational amplifier}
+
+This transimpedance is modeled by an operantional amplifier and a resistor, so we firstly need an operational amplifier.
+
+As many other components, it is ideal.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[op amp] (oa) {}
+    (oa.-) -- (-2,+0.5) to[short, -o] (-2,+1) node[left] {tim}
+    (oa.+) -- (-2,-0.5) to[short, -o] (-2,-1) node[left] {tip}
+    (oa.out) to[short, -o] (1.5,0) node[right] {tout} to[open, v=uo] (1.5,-2) node[ground] {}
+    (-1.5,0.5) to[short, i=ii] (-1.5,-0.5)
+    (-2.5,0.5) to[open, v=ui](-2.5,-0.5)
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{opamp.vhd}
+
+\subsection{Transimpedance}
+
+Now, with an instanciation of the operational amplifier and a resistor, we have a transimpedance.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[op amp] (oa) {}
+    (oa.-) to[short, -o] (-2,0.5) node[left] {tin}
+    (oa.+) node[ground]{}
+    (oa.out) to[short, -o] (1.5,0) node[right] {tout}
+    (oa.-) -- ($(oa.-)+(0,1)$) to[american resistor, l=3<\kilo\ohm>, i=ir, v=ur] ($(oa.out)+(0,1.5)$) -- (oa.out)
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{transimpedance.vhd}
+
+\subsubsection{Testbench (with the Photo Diode)}
+\includegraphics[width=\linewidth]{photo-diod_and_transimpedance.png}
+
+\subsection{Band Pass filters}
+
+For the band pass filters, we also used the operational amplifier, along with two RC cells, calculated for the two needed frequencies.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[op amp] (oa) {}
+    (oa.-) to[short, -*] (-2,0.5) node[below] {n2}
+    (-8,0.5) node[left] {tin} to[short, o-] (-7.5,0.5) to[american resistor=RI, i=iri, v=uri] (-5.5,0.5)
+    to[short, -*] (-5,0.5) node[below] {n1} -- (-4.5,0.5) to[C=CI, i=ici, v=uci] (-2.5,0.5) -- (-2,0.5)
+    (oa.+) node[ground]{}
+    (oa.out) to[short, -o] (1.5,0) node[right] {tout}
+    (-2,0.5) -- (-2,1.5) to[american resistor=RF, i=irf] ($(oa.out)+(0,1.5)$)
+    (-2,1.5) -- (-2,3.5) to[C=CF, i=icf, v=uf] ($(oa.out)+(0,3.5)$) -- (oa.out)
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{filter.vhd}
+
+\subsubsection{Testbench}
+\includegraphics[width=\linewidth]{band-pass.png}
+
+\subsection{Comparator}
 
 %TODO
 
+I HAVE NO IDEA WHAT I AM DOING
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{comparator.vhd}
+
+\subsection{Low Pass filters}
+
+The result of the comparator seems good, as it oscillates around a mean which is a function of the distance, but we prefer to stop its oscillations.
+
+For this purpose, we added a few low pass filters, which are only RC cells.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[left] {tin} to[short, o-] (0.5,0) to[american resistor=R, i=ir, v=ur] (2.5,0) to[short, -o] (3,0) node[right] {tout}
+    (2.5,0) to[C=C, i=ic, v=uc] (2.5,-2) node[ground] {}
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{lp_filter.vhd}
+
+\subsection{Main circuit and results}
+
+Eventually, we just need to gather all these module in one which just instanciates them with the good generic constants.
+
+\subsubsection{Schematic}
+\begin{center}\begin{circuitikz} \draw
+    (0,0) node[mixer, rotate=180](mix2){}
+    (mix2.out)  to[short, -*] (-3,0)  node[below] {trf} node[tlinestub, rotate=90] {} -- (-4.5,0) to[leDo, mirror] (-4.5,-2) node[ground] {}
+    (mix2.in 2) to[short, -*] (0,1.5) node[right] {tlo} node[tlinestub, rotate=180] {}
+    (mix2.in 1) to[short, -*] (1,0)   node[below] {tfin2}
+    (0,3) node[mixer](mix1){}
+    (mix1.in 2) to[short, -*] (0,1.5)
+    (mix1.in 1) to[short, -*] (-1,3) node[below] {ttrans}
+    (mix1.out)  to[short, -*] (1,3)  node[above] {tfin1}
+    (-2.5,3) node[op amp] (oa) {}
+    (oa.-) -- ($(oa.-)+(0,1)$) to[american resistor] ($(oa.out)+(0,1.5)$) -- (oa.out)
+    (oa.-) to[short, -*] (-4.5,3.5) node[above] {tpd} to[pDo, mirror] (-4.5,1.5) node[ground] {}
+    (oa.+) node[ground] {}
+    (oa.out) -- (-1,3)
+    (1,0) to[generic=BP, -*] (3.5,0) node[below] {tfout2}
+    (1,3) to[generic=BPs, -*] (3.5,3) node[above] {tfout1}
+    (3.5,1.5) node[mixer, rotate=90](comp) {}
+    (comp.in 1) -- (3.5,0)
+    (comp.out)  -- (3.5,3)
+    (comp.in 2) to[short, -*] (4.5,1.5) node[above] {tcomp} to[generic=LPs, -o] (7,1.5) node[right] {tout}
+    (-5.5,-1) node[below] {Pld} to[generic=Target] (-5.5,2) node[above] {Ppd}
+
+
+; \end{circuitikz}\end{center}
+
+\subsubsection{Code}
+\inputminted[linenos]{vhdl}{tests.vhd}
+
+\subsubsection{Testbenches}
+This are the final testbenches, calculated for varios distances.
+
+
+\includegraphics[width=\linewidth]{0.5.png}
+
+$D=0.5\Rightarrow V=-1009\si{\micro\volt}$
+\newpage
+
+\includegraphics[width=\linewidth]{1.0.png}
+
+$D=1.0\Rightarrow V=-197\si{\micro\volt}$
+\newpage
+
+\includegraphics[width=\linewidth]{1.5.png}
+
+$D=1.5\Rightarrow V=-35\si{\micro\volt}$
+\newpage
+
+\includegraphics[width=\linewidth]{2.0.png}
+
+$D=2.0\Rightarrow V=26\si{\micro\volt}$
+\newpage
+
+\includegraphics[width=\linewidth]{2.5.png}
+
+$D=2.5\Rightarrow V=38\si{\micro\volt}$
+\newpage
+
+\includegraphics[width=\linewidth]{3.0.png}
+
+$D=3.0\Rightarrow V=40\si{\micro\volt}$
+\newpage
 \section{Conclusion}
 
 The described system in this paper is a model what can be used for range measuring. The system is modelled in AMS-VHDL hardware description language. The model demonstrates how to use a laser to calculate the distance from the target based on a phase-shift measurement.
@@ -166,12 +393,5 @@ As the simulation results demonstrate the model behaves according to the expecta
 ~
 
 As the system is constructed mostly with ideal elements with ideal characteristics, this project has an educational purpose to show the basic functionality. To make this model usable it is necessary to replace the ideal components by real ones.
-
-
-
-
-
-
-
 
 \end{document}
