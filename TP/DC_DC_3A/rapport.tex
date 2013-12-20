@@ -173,40 +173,73 @@ Pour finir, pour annuler l’effet ESR, on prend $C_3=\cfrac{ESR\cdot C}{R2}=55$
 
 ~
 
-On obtient donc le circuit suivant:
-
-%\includegraphics[width=\linewidth]{circuit_freq.png}
+\newpage
 
 \paragraph{Faire un schéma équivalent pour obtenir le diagramme de Bode}
 
 ~
 
+On obtient donc le circuit suivant:
+
+\includegraphics[width=\linewidth]{circuit_freq.png}
+
 ~
 
-%\includegraphics[width=\linewidth]{discontinuous.png}
+Ce qui nous permet de tracer un diagramme de Bode:
+
+\includegraphics[width=\linewidth]{MP_Vbat_6V.png}
 
 ~
 
 \paragraph{Simulez (en fréquentiel et en temporel) et montrez que le système obtenu est stable dans les cas suivants: Vbat de 6V à 20V et Rcharge de 6 $\Omega$ à 100 $\Omega$.}
 
+~
+
+~
+
+En temporel, on commence par vérifier que pour différentes tensions de batterie, le système converge toujours vers la même valeur:
+
+\includegraphics[width=\linewidth]{demarage_temporelle.png}
+
+~
+
+\newpage
+Puis on peut vérifier que le système reste stable même si on change brutalement la valeur de cette tension en cours de route:
+
+\includegraphics[width=\linewidth]{grand_coup_dans_la_batterie.png}
+
+~
+
+Et enfin on peut vérifier que l’impact de la résistance de charge ne pose pas de problèmes:
+
+\includegraphics[width=\linewidth]{simu_temporelle_param_Rch.png}
+
+~
+
+Après cela, dans le domaine fréquentiel, on peut aussi étudier l’influence de la tension de la batterie sur le diagramme de Bode:
+
+\includegraphics[width=\linewidth]{MP_param_Vbat.png}
+
+~
+
+Ainsi que l’influence de la résistance de charge:
+
+\includegraphics[width=\linewidth]{MP_param_Rch.png}
+
+~
+
 \paragraph{Donner deux tableaux donnant la marge de phase et l’atténuation à fs obtenus dans les 4 cas (Vbat, Rcharge).}
 
-+================+=============+===============+
-| Marge de phase | Rcharge = 6 | Rcharge = 100 |
-+================+=============+===============+
-| Vbat = 6V      |
-+----------------+-------------+---------------+
-| Vbat = 20V     |
-+----------------+-------------+---------------+
+~
 
-+================+=============+===============+
-| Atténuation    | Rcharge = 6 | Rcharge = 100 |
-+================+=============+===============+
-| Vbat = 6V      |
-+----------------+-------------+---------------+
-| Vbat = 20V     |
-+----------------+-------------+---------------+
-
-
+\begin{tabular}{|l|c|c|}
+    \hline
+    Marge de phase & Rcharge = 6 & Rcharge = 100 \\
+    \hline
+    Vbat = 6V      & 55° & 32° \\
+    \hline
+    Vbat = 20V     & 62° & 55° \\
+    \hline
+\end{tabular}
 
 \end{document}
