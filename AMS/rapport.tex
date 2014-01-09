@@ -159,9 +159,9 @@ According to the equation (2) the distance limitation can be calculated. Theoret
 
 \subsection{Oscillators}
 
-For this project, we need two oscilators: an RF one at 20 MHz and an OL at 19.5 MHz.
+For this project two oscilators are needed: an RF one at 20 MHz and an OL at 19.5 MHz.
 
-Their code are strait-forward, as we only need one output terminal and a generic frequency.
+Their code are strait-forward, because only one output terminal and a generic frequency are sufficient.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -176,7 +176,7 @@ Their code are strait-forward, as we only need one output terminal and a generic
 
 \subsection{Mixers}
 
-The mixers take to input terminals and just outputs the multiplication of these inputs.
+The mixers generates one output signal like a multiplication product of the two input signals.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -194,9 +194,12 @@ The mixers take to input terminals and just outputs the multiplication of these 
 
 \subsection{Laser Diode}
 
-With the Laser Diode, the main difference is that the input stills an electrical port, but the output becomes an optical power. We implemented this optical power as a \verb|quantity| in AMS VHDL.
+The main difference in the laser diode model lies in a fact that a laser diode converts the electrical signal to optical power - photon density.
 
-Then, we just have to code the basics equations of a diode
+This optical power is implemented as a \verb|quantity| in AMS VHDL.
+
+Afterwards the basic equations of the diode are written in the code.
+
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -209,7 +212,7 @@ Then, we just have to code the basics equations of a diode
 
 \subsection{Lambertian target}
 
-This module basically takes one input quantity (the optical power from the laser diode), lowers its amplitude with differents constants, and mainly the Distance parameter that we want to measure, and then applies a delay, which is also a function of that Distance.
+This module basically contains one input quantity (the optical power from the laser diode), decreases its amplitude with differents constants, and mainly the \verb|Distance| parameter which is going to be measured, and then applies a delay, which is also a function of that Distance.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -221,7 +224,9 @@ This module basically takes one input quantity (the optical power from the laser
 
 \subsection{Photo Diode}
 
-This component outputs a current $I_{ph} = S_\lambda \cdot P_r$, where $P_r$ is the received power from the lambertian target. It is quite straightforward to implement, but as it outputs a current, we will need a transimpedance later.
+This component generates an output current 
+$I_{ph} = S_\lambda \cdot P_r$, where $P_r$ is the received power from the lambertian target. It is quite straightforward to implement, but as it provoke
+a current, the transimpedance will be employed.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -234,7 +239,7 @@ This component outputs a current $I_{ph} = S_\lambda \cdot P_r$, where $P_r$ is 
 
 \subsection{Operational amplifier}
 
-This transimpedance is modeled by an operantional amplifier and a resistor, so we firstly need an operational amplifier.
+This transimpedance is modeled by an operantional amplifier and a resistor, so first the operational amplifier must be developed.
 
 As many other components, it is ideal.
 
@@ -253,7 +258,7 @@ As many other components, it is ideal.
 
 \subsection{Transimpedance}
 
-Now, with an instanciation of the operational amplifier and a resistor, we have a transimpedance.
+Now, with an instanciation of the operational amplifier and a resistor, a block with a transimpedance properties is obtained.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -272,7 +277,7 @@ Now, with an instanciation of the operational amplifier and a resistor, we have 
 
 \subsection{Band Pass filters}
 
-For the band pass filters, we also used the operational amplifier, along with two RC cells, calculated for the two needed frequencies.
+The bandpass filter is constructed using a previously developed op-amp and RC components. The values of the passive components are taken to accomplish the desired two frequencies.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -303,9 +308,12 @@ I HAVE NO IDEA WHAT I AM DOING
 
 \subsection{Low Pass filters}
 
-The result of the comparator seems good, as it oscillates around a mean which is a function of the distance, but we prefer to stop its oscillations.
+The result of the comparator is in the predicted range, as the outpus signal has an oscillations around the middle frequency.
+This frequency is a function of the distance between the target and a photo diode.
 
-For this purpose, we added a few low pass filters, which are only RC cells.
+However, to be able to read data according to the distance, the system must get rid of that oscillations.
+
+To avoid the oscillations passive RC components are employed in a passive low pass filter structure.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
@@ -318,7 +326,7 @@ For this purpose, we added a few low pass filters, which are only RC cells.
 
 \subsection{Main circuit and results}
 
-Eventually, we just need to gather all these module in one which just instanciates them with the good generic constants.
+To simulate the whole system it is necessary to connect all the above defined components together.
 
 \subsubsection{Schematic}
 \begin{center}\begin{circuitikz} \draw
