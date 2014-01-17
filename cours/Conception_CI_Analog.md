@@ -21,6 +21,38 @@ RF architecture
 Phase Lock Loop
 ===============
 
+exemple: radio
+
+quartz 10MHz -> X -> LP -> VCO -+-> 88-108MHz
+                ↑               ↓
+                +<---- ÷N <---- +
+
+X => XOR, mais il faut des signaux digitaux, du coup on met un comparateur avec la tension moyenne.
+
+
+LC VCO:
+
+      Vdd
++------+-------+
+|              |
+L              L
+|     Vin      |
++- C --+--- C -+--> buffer -> out
+|              |
++-----\  /-----+
+|      \/      |
+|-|    /\    |-|
+  |---/  \---|
+|-|          |-|
+|              |
++------+-------+
+       |
+       |-|
+         |---- miroir de courant
+       |-|
+       |
+      GND
+
 Low Nose amplifier
 ==================
 

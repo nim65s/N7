@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Conception of Analog Circuits}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \vfill
+    \tableofcontents
+    \thispagestyle{empty}
+\end{titlepage}
+
+VCO
+===
+On choisi une architecture avec deux opamps, parce qu’on travaille à basse fréquence (<500Hz)
+
+Du coup, il faut un 
+
+OPAMP
+-----
+
+Source de courant: 20mA. la tension de bias est amenée par le niveau hiérarchique supérieur, vu qu’elle sera partagée entre tous les 
+    opamp de la PLL. Pour améliorer la qualité de la recopie de courant, il faut que les transistors de recopie aient des L assez grands,
+    vu que c’est le L qui drive la pente de la caractéristique.
+plage de sortie: quelque chose de plus grand que 2.5V, pour pouvoir réduire après. On met donc plus de courant dans la source, via un 
+    second transistor
+on tune les W & L des transistors pour tenter d’avoir une tension de sortie moyenne d’environs 2.5V
+    et que lorsqu’on reboucle, la tension sur les drains de la charge active soient proches
+La première fréquence de coupure est liée à la capa, donc il faut qu’elle soit suffisament faible pour que cette fréquence soit >400Hz. Non, en fait, on veut que le produit gain-bande soit suffisant., parce que peut être qu’on travaillera à un autre gain que le gain max. Par contre, faut faire un compromis pour garder une marge de phase >60°
+
+MaxGain: 91
+MargePhase: 69
+MargeGain 10
+GainBande: 7.5MHz
+Offset : 0.4uA
+
+Reste du VCO
+------------
+
+ben, ça juste marche. juste pour la simu, c’est un peu tendu, faut faire un paramétrique sur la tension d’entrée, ploter en fonction de ça, et afficher 1/Period.
+Du coup on se rend compte que la tension d’entrée correspondant à une fréquence de sortie de 400Hz est de 1.6, donc on augmente la capa juqu’à 10n pour avoir 400Hz @ 2.5V
+
+Diviseur
+========
+
+on met 3 bascules D
+
+Bascule D
+---------
+
+On met deux NAND pour faire une RS, et en entrée il faut deux OR dont une a une entrée inversée.
+
+bascule inverseuse
+------------------
+le P a un W/L trois fois plus gros
+
+
+
+\end{document}
