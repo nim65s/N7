@@ -1,7 +1,4 @@
-// <- débute un commentaire
- 
-// Modèle de vecteur, ordre des entrées : a, b, c
-
+// Modele de vecteur, ordre des entrees : a, b, c
 `v 011
 `v 111
 `v 010

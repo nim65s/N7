@@ -1,8 +1,8 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
-\usepackage[a4paper,margin=1cm]{geometry}
+\usepackage[a4paper,margin=2cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -64,6 +64,10 @@ Suivant les applications, la sortie utile de cette PLL peut se situer soit sur l
 
 Analyser les performances d’une PLL seule n’est pas facile ; nous avons donc décidé de l’utiliser dans deux applications, une utilisant chaque sortie, et de vérifier le bon fonctionnement de ces applications.
 
+~
+
+Cependant, il est possible de mettre une tension carrée en entrée et d’observer que lorsque sa phase ou sa fréquence varie, la sortie du VCO se synchronise après un léger délai.
+
 \section{MODEM}
 
 \subsection{Principe}
@@ -80,6 +84,12 @@ Pour la partie modulation, un VCO suffit ; et pour la démodulation nous utiliso
 
 \includegraphics[width=\linewidth]{modem_sim.png}
 
+~
+
+On observe sur cette simulation le signal modulant et le signal modulé (V(modulant) en violet et V(in) en vert), puis les sorties du VCO et du multiplieur, en rouge et bleu, et enfin la sortie du filtre du VCO, qui est à nouveau filtrée pour obtenir un signal très proche du modulant, bien que légèrement déphasé.
+
+Notre modulation et la démodulation fonctionnent bien, en tout cas lorsque le signal d’entrée est de l’ordre de 10kHZ, et que la porteuse est aux alentours de 300kHz.
+
 \section{Multiplieur de fréquence}
 
 \subsection{Principe}
@@ -95,6 +105,12 @@ Modéliser comportementalement une bascule D n’est pas évident, et les diffé
 \subsection{Résultats}
 
 \includegraphics[width=\linewidth]{multi_sim.png}
+
+~
+
+Sur cette simulation, on vérifie d’abord que le VCO se vérouille correctement sur le signal d’entrée dont la fréquence est constante en observant la sortie du filtre, qui est censée rester constante.
+
+Ensuite, on peut vérifier que la fréquence du signal en sortie du VCO est bien quatre fois supérieure à celle de la fréquence d’entrée.
 
 
 \end{document}

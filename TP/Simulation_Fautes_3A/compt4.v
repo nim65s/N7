@@ -1,5 +1,4 @@
-// Ordre des entrées : RSTb, EN
-
+// Ordre des entrees : RSTb, EN
 `v 01
 `v 00
 `v 10

@@ -1,7 +1,4 @@
-// <- débute un commentaire
- 
-// Modèle de vecteur, ordre des entrées : R0, A1, B1, A2, B2, A3, B3
-
+// Modele de vecteur, ordre des entrees : R0, A1, B1, A2, B2, A3, B3
 `v 1_00_00_00
 `v 1_10_00_00
 `v 1_11_11_00

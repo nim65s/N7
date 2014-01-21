@@ -1,8 +1,8 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
-\usepackage[a4paper,margin=1cm]{geometry}
+\usepackage[a4paper,margin=3cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -29,37 +29,52 @@
 
 \title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ TP Simulation de fautes}
 \author{François Pierron \& Guilhem Saurel}
-\date{\oldstylenums{\today}}
+\date{\oldstylenums{15 novembre 2013}}
 
 \begin{document}
 
 \begin{titlepage}
     \setcounter{page}{0}
     \maketitle
-	\tableofcontents
+    ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\
+    ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\
+    ~ \\ ~ \\ ~ \\ ~ \\ ~ \\
+    \tableofcontents
     \thispagestyle{empty}
 \end{titlepage}
 
-www.aime-toulouse.fr/CAO/COURSCAO/tp_fautes/
+\section{Étude du 1er circuit: full adder}
 
-000, 111 \& 011 => couverture de 88.9\%, manque sa1 pour I{2,4}.{A,B}
+Si l’on applique la séquence \verb|<000, 011, 111>|, on remarque que chaque ligne est placée à 0 et à 1, mais que la couverture n’est que de 88.9\%, puisqu’il manque sa1 pour I2.A, I2.B, I4.A et I4.B.
 
-011, 111, 010, 001, 100
+On peut obtenir une couverture de 100\% avec la séquence:
+\inputminted[linenos]{verilog}{full_adder.v}
 
-1 00 00 00
-1 10 00 00
-1 11 11 00
-1 11 11 11
-0 10 10 10
-1 01 01 01
-0 01 01 01
+\section{Test de 3 additionneurs cascadés: adder3}
 
-1 0 2 3 2 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 
-96.2
-manquait les RST
+Pour détecter toutes les pannes, il nous faut utiliser la séquence:
+\inputminted[linenos]{verilog}{adder3.v}
 
 
-0 0 0 0 1 0 0 0 1 1 1 0 91.5
+\section{Test d’un compteur synchrone: compt4}
+
+Voici une séquence de test qui détermine 96.2\% des pannes :
+\inputminted[linenos]{verilog}{compt4.v}
+
+\section{Test d’un automate au niveau graphe d’états: MEF}
+
+Pour passer une fois par chacun des états internes, on peut appliquer à l’entrée la séquence:
+\inputminted[linenos]{verilog}{MEF.v}
+
+(en commentaires, il y a l’état courant)
+
+Cette séquence a une couverture de 91.5\%.
+
+\section{Simulation de la mémoire}
+
+Obtenir une couverture de 100\% est relativement simple ; mais l’obtenir en un minimum de lignes ne l’est pas.
+Notre score est de 48:
+\inputminted[linenos]{verilog}{ram100.v}
 
 \end{document}
 
