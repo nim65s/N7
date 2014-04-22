@@ -1,0 +1,109 @@
+#
+line x loc=0.00 spac=0.50
+line x loc=1.50 spac=0.50
+line x loc=2.00 spac=0.10
+line x loc=5.00 spac=0.10
+line x loc=6.00 spac=0.50
+line x loc=7.00 spac=1.00
+line x loc=22.00 spac=1.00
+line x loc=23.00 spac=0.40
+line x loc=25.00 spac=0.20
+line x loc=30.00 spac=0.40
+#
+line y loc=000 spac=0.02
+line y loc=0.80 spac=0.02
+line y loc=2.00 spac=0.1
+line y loc=3.00 spac=0.5
+line y loc=10.00 spac=2
+#
+init silicon c.boron=1.0e16 orientation=100
+#
+diffus time=25 temp=800 t.final=1100 f.n2=1
+#
+diffus time=40 temp=1100 f.h2=2.7 f.o2=2.2
+#
+diffus time=30 temp=1100 f.o2=2.2
+#
+diffus time=10 temp=1100 f.n2=1.5
+#
+diffus time=60 temp=1100 t.final=800 f.n2=1
+#
+#
+extract name="epaisseur_oxide" thickness material="SiO~2" mat.occno=1 x.val=0
+struct outfile="2.str"
+#
+etch oxide left p1.x=25
+struct outfile="3.str"
+#
+diffus time=20 temp=1100 f.o2=2
+#
+diffus time=10 temp=1100 f.n2=2
+#
+
+#
+extract name="epaisseur_oxide2" thickness material="SiO~2" mat.occno=1 x.val=0
+
+struct outfile="4.str"
+
+#
+deposit polysilicon thick=0.3
+struct outfile="5_depot_poly.str"
+#
+etch polysilicon right p1.x=3
+#
+etch oxide start x=3.00 y=1
+etch cont x=3.00 y=0
+etch cont x=25.00 y=0
+etch done x=25.00 y=1
+
+struct outfile="6_eching_gate.str"
+#
+#
+diffus time=5 temp=1050 f.n2=2 f.o2=0.1
+#
+diffus time=5 temp=1050 f.n2=2 f.o2=0.1 c.phosphor=1.0e23
+#
+diffus time=5 temp=1050 f.n2=2 f.o2=0.1
+
+struct outfile="7_phosphorus.str"
+
+#
+diffus time=10 temp=1100 f.n2=1
+struct outfile="7_distribution.str"
+
+#
+#
+deposit oxide thick=0.3
+
+struct outfile="8_oxide_lto.str"
+
+#
+etch oxide start x=12.00 y=1
+etch cont x=12.00 y=-1
+etch cont x=16.00 y=-1
+etch done x=16.00 y=1
+
+struct outfile="9_contact.str"
+#
+deposit aluminum thick=0.5
+struct outfile="10_metal.str"
+#
+etch aluminum left p1.x=11
+#
+etch aluminum right p1.x=17
+
+
+struct outfile="10_plot.str"
+
+#
+struct mirror left
+#
+electrode name=gate x=0.00
+#
+electrode name=source x=14.00
+#
+electrode name=drain x=-14.00
+#
+electrode name=bulk backside
+
+struct outfile="11_end_named.str"

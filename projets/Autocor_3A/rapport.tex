@@ -22,13 +22,13 @@
 \usepackage{siunitx}
 \usepackage{soul}
 \usepackage{tikz}
-\usepackage[european,cuteinductors,siunitx,arrowmos]{circuitikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
 \usepackage{url,hyperref}
 \usepackage{verbatim}
 \usepackage{xunicode,xltxtra}
 
-\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ SKELETE XeTeX}
-\author{Guilhem Saurel}
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ Calcul d’une autocorrélation en VHDL}
+\author{François Pierron \& Guilhem Saurel}
 \date{\oldstylenums{\today}}
 
 \begin{document}
@@ -41,6 +41,20 @@
     \thispagestyle{empty}
 \end{titlepage}
 
+\section{Introduction}
+
+L’objectif de cette étude est de réaliser une fonction d’autocorrélation sur 16 bits en VHDL, sur des nombres signés, à une fréquence de 200MHz et sur un SPARTAN 6.
+
+\section{Principe}
+
+Au vu du cahier des charges, il est clairement indispensable de paralléliser massivement notre circuit.
+
+* 4x4x4 pour fanout => 4 de retard pour l’autre
+* signe géré à la fin (le multiplieur Ca2 est deux fois plus gros)
+
+\section{Resultats}
+
+\section{Conclusion}
 
 
 \end{document}

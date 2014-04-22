@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage[a4paper,margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{auto-pst-pdf}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{schemabloc}
+\usepackage{siunitx}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[european,cuteinductors,siunitx]{circuitikz}
+\usepackage{url,hyperref}
+\usepackage{verbatim}
+\usepackage{xunicode,xltxtra}
+
+\title{\includegraphics{../../../images/inp-enseeiht} \\ ~ \\ ~ \\ ~ \\ ~ \\ TP System on Chip}
+\author{François Pierron \& Guilhem Saurel}
+\date{\oldstylenums{\today}}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{page}{0}
+    \maketitle
+    \vfill
+    \tableofcontents
+    \thispagestyle{empty}
+\end{titlepage}
+
+\section*{Introduction}
+
+Pour cette séance de travaux pratiques, nous utiliserons la suite logicielle de Xilinx, avec Xilinx Development Studio et Xilinx Software Development Kit.
+
+Le premier sert à générer une architecture matérielle sur le FPGA, et le second va servir à faire tourner du code C compilé sur cette architecture.
+
+\section{Génération de l’architecture matérielle}
+
+L’interface est assez intuitive, et pour peu qu’on ne lui demande pas de mettre trop de ressources sur un FPGA trop petit, on peut facilement allumer les leds de la carte de developpement à l’aide des différents boutons.
+
+Néanmoins, le temps de synthétisation est assez long, donc il vaut mieux éviter de répéter les erreurs.
+
+\section{Chenillard en C}
+
+L’intérêt de cette étape est de montrer qu’une fois que l’on a synthétisé notre System on Chip, on va pouvoir compiler du C pour cette architecture, puis envoyer le binaire sur le FPGA et l’éxécuter.
+
+\section*{Conclusion}
+
+\end{document}
